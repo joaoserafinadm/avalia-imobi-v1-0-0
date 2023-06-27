@@ -2,10 +2,18 @@
 import Head from 'next/head'
 import styles from './Login.module.scss'
 import Link from 'next/link'
+import { useEffect, useState } from 'react'
 
 
 
 export default function Login(props) {
+
+
+    const [loadedImages, setLoadedImages] = useState(0)
+
+    useEffect(() => {
+        console.log(window.innerWidth)
+    }, [window.innerWidth])
 
 
 
@@ -13,23 +21,28 @@ export default function Login(props) {
     return (
         <>
 
-            <div className="row fadeItem1s" style={{ height: '100%' }}>
+            <div className="row fadeItem1s d-flex justify-content-center" style={{ height: '100%' }}>
+                {window.innerWidth > 990 && (
 
-                <div className="col-6 d-flex justify-content-center align-items-center">
-                    <img src="/LOGO_LIGHT.png" alt="" className={`${styles.logoImg}`} />
-                </div>
+                    <div className="col-6 d-flex justify-content-center align-items-center">
+                        <img src="/LOGO_LIGHT.png" alt="" className={`${styles.logoImg}`} onLoad={() => setLoadedImages(loadedImages + 1)} />
+                    </div>
+                )}
 
-                <div className="col-6 d-flex justify-content-center align-items-center">
+                <div className="col-12 col-lg-6 d-flex justify-content-center align-items-center">
                     <div class={`card ${styles.cardSize}`}>
                         <div class="card-body">
                             <div className="row mb-3">
                                 <h1 className={`${styles.title} title-dark`}>Login</h1>
                             </div>
                             <div className="row">
-                                <div className=" d-flex justify-content-start">
+                                <div className="col-12 col-xl-6 d-flex justify-content-start">
+
 
                                     <span>Não possui uma conta? </span>
-                                    <span className='span ms-2' type='button' onClick={() => { props.setSection('signIn') }}>Cadastre-se</span>
+                                </div>
+                                <div className="col-12 col-xl-6 d-flex justify-content-start">
+                                    <span className='span' type='button' onClick={() => { props.setSection('signIn') }}>Cadastre-se</span>
                                 </div>
                             </div>
                             <hr />

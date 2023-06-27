@@ -14,12 +14,12 @@ export default function SignIn(props) {
         <div className="row fadeItem1s" style={{ height: '100%' }}>
             <div className="d-flex justify-content-center align-items-center">
                 <div className={`card ${styles.cardSignIn} p-2`} >
-                    <div className={`card-body  d-flex`} style={{ height: '100%' }}>
+                    <div className={`card-body  d-flex justify-content-center`} style={{ height: '100%' }}>
 
 
 
 
-                        <div className="col-6 d-flex justify-content-center align-items-center px-5">
+                        <div className="col-12 col-lg-6 d-flex justify-content-center align-items-center px-5">
                             <div>
 
                                 <div className="row mb-1">
@@ -55,7 +55,7 @@ export default function SignIn(props) {
                                     <button className='btn btn-outline-oceanBlue px-5'>Cadastre-se</button>
                                 </div>
                                 <div className="col-12 d-flex justify-content-center mt-3">
-                                    
+
                                     <span className='span' type='button' onClick={() => { props.setSection('login') }}>Já possui uma conta?</span>
                                 </div>
 
@@ -63,28 +63,32 @@ export default function SignIn(props) {
 
                         </div>
 
-                        <div className="col-6 d-flex justify-content-center align-items-center p-5">
-                            <div>
+                        {window.innerWidth > 990 && (
 
-                                <div id="carouselExampleFade" class="carousel slide" data-bs-ride="carousel">
-                                    <div class="carousel-inner">
-                                        <div class="carousel-item active">
-                                            <img src="/LOGO_NAME.png" alt="" height={200} />
 
-                                        </div>
-                                        <div class="carousel-item">
-                                            <img src="/LOGO_LIGHT.png" alt="" height={200} />
+                            <div className="col-6 d-flex justify-content-center align-items-center p-5">
+                                <div>
 
-                                        </div>
-                                        <div class="carousel-item">
-                                            <img src="/LOGO_TITLE.png" alt="" height={200} />
+                                    <div id="carouselExampleFade" class="carousel slide" data-bs-ride="carousel">
+                                        <div class="carousel-inner">
+                                            <div class="carousel-item active">
+                                                <img src="/LOGO_NAME.png" alt="" height={200} />
 
+                                            </div>
+                                            <div class="carousel-item">
+                                                <img src="/LOGO_LIGHT.png" alt="" height={200} />
+
+                                            </div>
+                                            <div class="carousel-item">
+                                                <img src="/LOGO_TITLE.png" alt="" height={200} />
+
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
+                        )}
 
                     </div>
                     <div className="row mt-3">
