@@ -55,7 +55,7 @@
 
 
   --cv-primary: #182538;
-  --cv-primary-hover:  #253855;
+  --cv-primary-hover: #253855;
   --cv-secondary: #4D88BB;
   --cv-dark: #5a5a5a;
   --cv-light: #cacaca;
@@ -2979,4 +2979,13 @@ h1 {
 
 .span:hover {
   border-bottom: 1px solid var(--cv-secondary);
+}
+
+.inputError {
+  border-color: #e64514;
+  transition: .3s ease;
+}
+
+.small {
+  font-size: 12px;
 }

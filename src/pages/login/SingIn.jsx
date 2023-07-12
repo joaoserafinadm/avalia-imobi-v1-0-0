@@ -1,11 +1,78 @@
 import Link from 'next/link'
 import styles from './Login.module.scss'
 import { AiOutlineLeft } from "@react-icons/all-files/ai/AiOutlineLeft";
+import { useState } from 'react';
+import removeInputError from '../../../utils/removeInputError';
+// import CVanimation from '../../components/CVanimation';
 
 
 
 
 export default function SignIn(props) {
+
+    const [firstName, setFirstName] = useState('')
+    const [lastName, setLastName] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [authCode, setAuthCode] = useState('')
+
+    //ERROR STATES
+    const [firstNameError, setFirstNameError] = useState('')
+    const [lastNameError, setLastNameError] = useState('')
+    const [emailError, setEmailError] = useState('')
+    const [passwordError, setPasswordError] = useState('')
+
+    const validate = (firstNameValue, LastNameValue, emailValue, passwordValue) => {
+
+        removeInputError()
+        clearErrors()
+
+        let firstNameError = ''
+        let lastNameError = ''
+        let emailError = ''
+        let passwordError = ''
+
+        if (!firstNameValue) firstNameError = 'Insira seu nome'
+        if (!LastNameValue) lastNameError = 'Insira seu sobrenome'
+        if (!emailValue || !emailValue.includes('@')) emailError = 'Insira um e-mail válido'
+        if (passwordValue.length < 6 || !passwordValue) passwordError = 'Insira no mínimo 6 caracteres'
+
+        if (firstNameError || lastNameError || emailError || passwordError) {
+            if (firstNameError) document.getElementById('firstNameInput').classList.add('inputError')
+            if (lastNameError) document.getElementById('lastNameInput').classList.add('inputError')
+            if (emailError) { document.getElementById('emailInput').classList.add('inputError'); setEmailError(emailError) }
+            if (passwordError) { document.getElementById('passwordInput').classList.add('inputError'); setPasswordError(passwordError) }
+
+            return false
+
+        } else {
+            return true
+        }
+
+    }
+
+    const clearErrors = () => {
+        setFirstNameError('')
+        setLastNameError('')
+        setEmailError('')
+        setPasswordError('')
+    }
+
+
+    const handleSignIn = async () => {
+
+        const isValid = validate(firstName, lastName, email, password)
+
+        if (isValid) {
+
+            console.log('foi')
+        }
+
+        // console.log(process.env.BASE_URL)
+
+        // await axios.get(`http://localhost:3000/api/login/signUp`)
+
+    }
 
 
 
@@ -33,26 +100,55 @@ export default function SignIn(props) {
                                 <div className='d-flex mb-2'>
 
                                     <div className="col-6 pe-2">
-                                        {/* <label for="exampleFormControlInput1" class="form-label">Email address</label> */}
-                                        <input type="text" class="form-control" id="firstNameInput" placeholder="Nome" />
+                                        {/* <label for="exampleFormControlInput1" className="form-label">Email address</label> */}
+                                        <input
+                                            type="text"
+                                            className="form-control"
+                                            id="firstNameInput"
+                                            placeholder="Nome"
+                                            value={firstName}
+                                            onChange={e => setFirstName(e.target.value)} />
                                     </div>
                                     <div className="col-6 ps-2">
-                                        <input type="text" class="form-control" id="lastNameInput" placeholder="Sobrenome" />
+                                        <input
+                                            type="text"
+                                            className="form-control "
+                                            id="lastNameInput"
+                                            placeholder="Sobrenome"
+                                            value={lastName}
+                                            onChange={e => setLastName(e.target.value)} />
                                     </div>
                                 </div>
                                 <div className="col-12  mb-2">
-                                    <input type="email" class="form-control" id="emailInput" placeholder="E-mail" />
+                                    <input
+                                        type="email"
+                                        className="form-control"
+                                        id="emailInput"
+                                        placeholder="E-mail"
+                                        value={email}
+                                        onChange={e => setEmail(e.target.value)} />
+                                    <span className='small text-danger fadeItem'>{emailError}</span>
+
 
                                 </div>
                                 <div className="col-12  mb-2">
-                                    <input type="password" class="form-control" id="passwordInput" placeholder="Senha" />
+                                    <input
+                                        type="password"
+                                        className="form-control"
+                                        id="passwordInput"
+                                        placeholder="Senha"
+                                        value={password}
+                                        onChange={e => setPassword(e.target.value)} />
+                                    <span className='small text-danger fadeItem'>{passwordError}</span>
 
                                 </div>
                                 <div className="col-12  mb-2">
-                                    <span style={{ fontSize: '10px' }}>Ao clicar em Cadastre-se, você concorda com nossos <span className='span' type='button'>Termos, Política de Privacidade e Política de Cookies</span>. Você poderá receber notificações por SMS e cancelar isso quando quiser.</span>
+                                    <span style={{ fontSize: '10px' }}>Ao clicar em Cadastre-se, você concorda com nossos <p className='span' type='button'>Termos, Política de Privacidade e Política de Cookies</p>. Você poderá receber notificações por SMS e cancelar isso quando quiser.</span>
                                 </div>
                                 <div className="col-12 d-flex justify-content-center my-3">
-                                    <button className='btn btn-outline-oceanBlue px-5'>Cadastre-se</button>
+                                    <button
+                                        className='btn btn-outline-oceanBlue px-5'
+                                        onClick={() => handleSignIn()}>Cadastre-se</button>
                                 </div>
                                 <div className="col-12 d-flex justify-content-center mt-3">
 
@@ -69,17 +165,15 @@ export default function SignIn(props) {
                             <div className="col-6 d-flex justify-content-center align-items-center p-5">
                                 <div>
 
-                                    <div id="carouselExampleFade" class="carousel slide" data-bs-ride="carousel">
-                                        <div class="carousel-inner">
-                                            <div class="carousel-item active">
+                                    <div id="carouselExampleFade" className="carousel slide" data-bs-ride="carousel">
+                                        <div className="carousel-inner">
+                                            <div className="carousel-item active">
                                                 <img src="/LOGO_NAME.png" alt="" height={200} />
-
                                             </div>
-                                            <div class="carousel-item">
+                                            <div className="carousel-item">
                                                 <img src="/LOGO_LIGHT.png" alt="" height={200} />
-
                                             </div>
-                                            <div class="carousel-item">
+                                            <div className="carousel-item">
                                                 <img src="/LOGO_TITLE.png" alt="" height={200} />
 
                                             </div>

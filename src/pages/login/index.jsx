@@ -1,7 +1,7 @@
 import styles from './Login.module.scss'
 
 import { useState } from 'react'
-import Login from './Login_02'
+import Login from './Login'
 import RescuePassword from './RescuePassword'
 import Head from 'next/head'
 import SignIn from './SingIn'

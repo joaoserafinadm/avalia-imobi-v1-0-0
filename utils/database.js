@@ -1,3 +1,6 @@
+//NAO USAR ESSE, USAR O db.JS
+
+
 import { MongoClient } from 'mongodb'
 
 export default async function connect() {
