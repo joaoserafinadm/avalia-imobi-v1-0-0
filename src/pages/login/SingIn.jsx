@@ -3,12 +3,18 @@ import styles from './Login.module.scss'
 import { AiOutlineLeft } from "@react-icons/all-files/ai/AiOutlineLeft";
 import { useState } from 'react';
 import removeInputError from '../../../utils/removeInputError';
+import axios from 'axios';
 // import CVanimation from '../../components/CVanimation';
+import baseUrl from '../../../utils/baseUrl'
+import { useRouter } from 'next/router';
+import PolicyModal from './PolicyModal';
 
 
 
 
 export default function SignIn(props) {
+
+    const router = useRouter()
 
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
@@ -21,6 +27,10 @@ export default function SignIn(props) {
     const [lastNameError, setLastNameError] = useState('')
     const [emailError, setEmailError] = useState('')
     const [passwordError, setPasswordError] = useState('')
+    const [signUpError, setSignUpError] = useState('')
+
+    //LOADING
+    const [singUpLoading, setSignUpLoading] = useState(false)
 
     const validate = (firstNameValue, LastNameValue, emailValue, passwordValue) => {
 
@@ -61,16 +71,26 @@ export default function SignIn(props) {
 
     const handleSignIn = async () => {
 
+        setSignUpLoading(true)
+
         const isValid = validate(firstName, lastName, email, password)
 
         if (isValid) {
 
-            console.log('foi')
+            const data = {
+                firstName,
+                lastName,
+                email,
+                password
+            }
+
+            await axios.post(`${baseUrl()}/api/login/signUp`, data)
+                .then(res => {
+                    router.push('/')
+                }).catch(e => {
+                    setSignUpError('Houve um problema no cadastro. Por favor, tente novamente mais tarde!')
+                })
         }
-
-        // console.log(process.env.BASE_URL)
-
-        // await axios.get(`http://localhost:3000/api/login/signUp`)
 
     }
 
@@ -128,12 +148,9 @@ export default function SignIn(props) {
                                         value={email}
                                         onChange={e => setEmail(e.target.value)} />
                                     <span className='small text-danger fadeItem'>{emailError}</span>
-
-
                                 </div>
                                 <div className="col-12  mb-2">
-                                    <input
-                                        type="password"
+                                    <input type="password"
                                         className="form-control"
                                         id="passwordInput"
                                         placeholder="Senha"
@@ -142,8 +159,10 @@ export default function SignIn(props) {
                                     <span className='small text-danger fadeItem'>{passwordError}</span>
 
                                 </div>
-                                <div className="col-12  mb-2">
-                                    <span style={{ fontSize: '10px' }}>Ao clicar em Cadastre-se, você concorda com nossos <p className='span' type='button'>Termos, Política de Privacidade e Política de Cookies</p>. Você poderá receber notificações por SMS e cancelar isso quando quiser.</span>
+                                <div className="col-12  mb-2" style={{ fontSize: '10px' }}>
+                                    <span >Ao clicar em Cadastre-se, você concorda com nossos</span>
+                                    <span className='span ms-1' type='button' data-bs-toggle="modal" data-bs-target="#policyModal">Termos, Política de Privacidade e Política de Cookies.</span>
+                                    <span className='ms-1'> Você poderá receber notificações por SMS e cancelar isso quando quiser.</span>
                                 </div>
                                 <div className="col-12 d-flex justify-content-center my-3">
                                     <button
@@ -151,20 +170,15 @@ export default function SignIn(props) {
                                         onClick={() => handleSignIn()}>Cadastre-se</button>
                                 </div>
                                 <div className="col-12 d-flex justify-content-center mt-3">
-
                                     <span className='span' type='button' onClick={() => { props.setSection('login') }}>Já possui uma conta?</span>
                                 </div>
-
                             </div>
-
                         </div>
 
                         {window.innerWidth > 990 && (
 
-
                             <div className="col-6 d-flex justify-content-center align-items-center p-5">
                                 <div>
-
                                     <div id="carouselExampleFade" className="carousel slide" data-bs-ride="carousel">
                                         <div className="carousel-inner">
                                             <div className="carousel-item active">
@@ -175,7 +189,6 @@ export default function SignIn(props) {
                                             </div>
                                             <div className="carousel-item">
                                                 <img src="/LOGO_TITLE.png" alt="" height={200} />
-
                                             </div>
                                         </div>
                                     </div>
@@ -193,6 +206,7 @@ export default function SignIn(props) {
 
                 </div>
             </div>
+            <PolicyModal />
         </div>
     )
 }
