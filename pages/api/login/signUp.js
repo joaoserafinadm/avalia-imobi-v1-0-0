@@ -98,11 +98,7 @@ export default async function (req, res) {
 
 
 
-        const response = await db.collection('users').insertOne({
-            firstName: 'lala'
-        })
 
-        console.log(response)
 
         res.status(200).json(response)
 
