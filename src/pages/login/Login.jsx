@@ -49,6 +49,20 @@ export default function Login(props) {
         setPasswordError('')
     }
 
+    const handleEmailAuth = () => {
+
+        const isValid = validate()
+
+        if (isValid) {
+
+            const data = {
+                
+            }
+        }
+
+
+    }
+
     const handleSignIn = async () => {
 
         const isValid = validate()
@@ -66,10 +80,7 @@ export default function Login(props) {
                 }).catch(e => {
                     setPasswordError('E-mail ou senha incorretos')
                 })
-
-
         }
-
     }
 
 
