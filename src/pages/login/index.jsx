@@ -1,10 +1,10 @@
 import styles from './Login.module.scss'
 
 import { useState } from 'react'
-import Login from './Login'
+import Login from './SignIn'
 import RescuePassword from './RescuePassword'
 import Head from 'next/head'
-import SignIn from './SingIn'
+import SignUp from './SignUp'
 
 
 
@@ -42,7 +42,7 @@ export default function SetUp() {
                 )}
 
                 {section === 'signIn' && (
-                    <SignIn section={section} setSection={(value) => setSection(value)} />
+                    <SignUp section={section} setSection={(value) => setSection(value)} />
                 )}
 
 

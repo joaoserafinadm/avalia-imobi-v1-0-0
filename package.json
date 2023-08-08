@@ -69,7 +69,6 @@
     "react-dropzone": "^14.2.3",
     "react-email": "1.9.4",
     "react-google-charts": "^4.0.0",
-    "react-google-invisible-recaptcha": "^1.0.0-rc.2",
     "react-google-recaptcha": "^2.1.0",
     "react-icons": "^4.9.0",
     "react-image-crop": "^8.6.6",
