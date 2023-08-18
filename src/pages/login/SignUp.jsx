@@ -75,6 +75,8 @@ export default function SignIn(props) {
 
         const isValid = validate(firstName, lastName, email, password)
 
+        await axios.post(`${baseUrl()}/api/login/authMail`, {} )
+
         if (isValid) {
 
             const data = {

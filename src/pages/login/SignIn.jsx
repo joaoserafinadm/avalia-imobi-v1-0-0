@@ -107,7 +107,7 @@ export default function Login(props) {
                                 <div className="col-12 col-xl-6 d-flex justify-content-start">
 
 
-                                    <span>Não possui uma conta? teste</span>
+                                    <span>Não possui uma conta?</span>
                                 </div>
                                 <div className="col-12 col-xl-6 d-flex justify-content-start">
                                     <span className='span' type='button' onClick={() => { props.setSection('signIn') }}>Cadastre-se</span>
