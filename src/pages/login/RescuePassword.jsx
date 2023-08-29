@@ -36,7 +36,7 @@ export default function RescuePassword(props) {
                         </div>
                         <div className="row mt-3">
                             <div className="col-12 d-flex justify-content-start">
-                                <span className="span" type='button' onClick={() => { props.setSection('login') }}><AiOutlineLeft className="me-2"/>  Voltar</span>
+                                <span className="span" type='button' onClick={() => { props.setSection('signIn') }}><AiOutlineLeft className="me-2"/>  Voltar</span>
                             </div>
                         </div>
                     </div>

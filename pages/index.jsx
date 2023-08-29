@@ -25,7 +25,7 @@
 
 export default function Home() {
 
-    const token = jwt.decode(Cookie.get('auth'))
+    // const token = jwt.decode(Cookie.get('auth'))
 
     return (
 
@@ -45,6 +45,9 @@ export default function Home() {
             {/* <IndexCardsTools />
 
             <IndexNotifications /> */}
+
+
+            childre
 
 
 

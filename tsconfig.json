@@ -23,7 +23,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-, "pages/api/uploadFiles.js"  ],
+, "pages/api/uploadFiles.js", "pages/api/email/email.js", "src/emails/auth.jsx"  ],
   "exclude": [
     "node_modules"
   ]

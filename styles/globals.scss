@@ -4,58 +4,19 @@
 :root {
   --bg-dark: #1a2f3a;
   --bg-light: rgb(224, 224, 224);
-  --header-height: 60px;
-  --aside-fixed-width: 250px;
-  --shoppingCart-width: 190px;
-  --shoppingCart-position: var(--shoppingCart-width);
 
+  --header-height: 50px;
+  --aside-fixed-width: 250px;
   --aside-width: var(--aside-fixed-width);
 
   --shadow: 0 2px 23px 0 rgba(0, 0, 0, 0.1), 0 2px 49px 0 rgba(0, 0, 0, 0.06);
 
-  --header-color: rgb(10, 70, 70);
 
-  --primary-color: rgb(10, 70, 70);
-
-  --shoppingCart-color: rgb(119, 168, 179);
-
-  --akvo-btn-primary: rgb(10, 70, 70);
-  --akvo-btn-primary-hover: rgb(15, 109, 109);
-  --akvo-btn-primary-disabled: rgba(10, 70, 70, 0.7);
-  --akvo-btn-secondary: #6c757d;
-  --akvo-btn-secondary-hover: #4f555a;
-  --akvo-success: #33c280;
-  --akvo-success-hover: rgb(42, 160, 105);
-  --akvo-success-disabled: rgba(42, 160, 105, 0.515);
-  --akvo-danger: #dc3545;
-  --akvo-danger-hover: #c43241;
-  --akvo-danger-disabled: #dc35468c;
-
-
-  --escopo1_color: rgb(69, 133, 140);
-  --escopo1_color_hover: rgb(55, 105, 110);
-  --escopo2_color: #5d9e7e;
-  --escopo2_color_hover: #4d8167;
-  --escopo3_color: rgb(42, 60, 77);
-  --escopo3_color_hover: rgb(32, 45, 58);
-
-  --reportColor_padrao: #2473bd;
-  --reportColor_padrao_hover: #1a5185;
-  --reportColor_customizado: #DCA10B;
-  --reportColor_customizado_hover: #815f08;
-  --reportColor_personalizado: #27AF5B;
-  --reportColor_personalizado_hover: #165e31;
-
-  --envColor: #83C320;
-  --envColorHover: #496e12;
-  --socialColor: #62BA6E;
-  --socialColorHover: #37683e;
-  --govColor: #339188;
-  --govColorHover: #194641;
 
 
   --cv-primary: #182538;
   --cv-primary-hover: #253855;
+  --cv-primary-disabled: #254471;
   --cv-secondary: #4D88BB;
   --cv-dark: #5a5a5a;
   --cv-light: #cacaca;
@@ -112,10 +73,6 @@
   scroll-behavior: smooth;
 }
 
-html {
-  scrollbar-width: thin !important;
-  scrollbar-color: red !important;
-}
 
 body {
   margin: 0;
@@ -2948,11 +2905,14 @@ h1 {
   color: var(--cv-light) !important;
   background-color: var(--cv-primary) !important;
   border-radius: 5px !important;
-  transition: .5 ease;
+  transition: .5s ease;
 }
 
 .btn-oceanBlue:hover {
   background-color: var(--cv-primary-hover) !important;
+}
+.btn-oceanBlue:disabled {
+  background-color: var(--cv-primary-disabled) !important;
 }
 
 .btn-outline-oceanBlue {

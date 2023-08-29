@@ -1,126 +1,162 @@
-import Link from 'next/link'
-import styles from './Login.module.scss'
+import Link from "next/link";
+import styles from "./Login.module.scss";
 import { AiOutlineLeft } from "@react-icons/all-files/ai/AiOutlineLeft";
-import { useState } from 'react';
-import removeInputError from '../../../utils/removeInputError';
-import axios from 'axios';
+import { useState } from "react";
+import removeInputError from "../../../utils/removeInputError";
+import axios from "axios";
 // import CVanimation from '../../components/CVanimation';
-import baseUrl from '../../../utils/baseUrl'
-import { useRouter } from 'next/router';
-import PolicyModal from './PolicyModal';
+import baseUrl from "../../../utils/baseUrl";
+import { useRouter } from "next/router";
+import PolicyModal from "./PolicyModal";
+import AuthModal from "./AuthModal";
+import { SpinnerSM } from "../../components/loading/Spinners";
 
+export default function SignUp(props) {
+    const router = useRouter();
 
-
-
-export default function SignIn(props) {
-
-    const router = useRouter()
-
-    const [firstName, setFirstName] = useState('')
-    const [lastName, setLastName] = useState('')
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [authCode, setAuthCode] = useState('')
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [authCode, setAuthCode] = useState("");
 
     //ERROR STATES
-    const [firstNameError, setFirstNameError] = useState('')
-    const [lastNameError, setLastNameError] = useState('')
-    const [emailError, setEmailError] = useState('')
-    const [passwordError, setPasswordError] = useState('')
-    const [signUpError, setSignUpError] = useState('')
+    const [firstNameError, setFirstNameError] = useState("");
+    const [lastNameError, setLastNameError] = useState("");
+    const [emailError, setEmailError] = useState("");
+    const [passwordError, setPasswordError] = useState("");
+    const [authError, setAuthError] = useState("");
+    const [signUpError, setSignUpError] = useState("");
 
     //LOADING
-    const [singUpLoading, setSignUpLoading] = useState(false)
+    const [singUpLoading, setSignUpLoading] = useState(false);
 
-    const validate = (firstNameValue, LastNameValue, emailValue, passwordValue) => {
+    const validate = (
+        firstNameValue,
+        LastNameValue,
+        emailValue,
+        passwordValue
+    ) => {
+        removeInputError();
+        clearErrors();
 
-        removeInputError()
-        clearErrors()
+        let firstNameError = "";
+        let lastNameError = "";
+        let emailError = "";
+        let passwordError = "";
 
-        let firstNameError = ''
-        let lastNameError = ''
-        let emailError = ''
-        let passwordError = ''
-
-        if (!firstNameValue) firstNameError = 'Insira seu nome'
-        if (!LastNameValue) lastNameError = 'Insira seu sobrenome'
-        if (!emailValue || !emailValue.includes('@')) emailError = 'Insira um e-mail válido'
-        if (passwordValue.length < 6 || !passwordValue) passwordError = 'Insira no mínimo 6 caracteres'
+        if (!firstNameValue) firstNameError = "Insira seu nome";
+        if (!LastNameValue) lastNameError = "Insira seu sobrenome";
+        if (!emailValue || !emailValue.includes("@"))
+            emailError = "Insira um e-mail válido";
+        if (passwordValue.length < 6 || !passwordValue)
+            passwordError = "Insira no mínimo 6 caracteres";
 
         if (firstNameError || lastNameError || emailError || passwordError) {
-            if (firstNameError) document.getElementById('firstNameInput').classList.add('inputError')
-            if (lastNameError) document.getElementById('lastNameInput').classList.add('inputError')
-            if (emailError) { document.getElementById('emailInput').classList.add('inputError'); setEmailError(emailError) }
-            if (passwordError) { document.getElementById('passwordInput').classList.add('inputError'); setPasswordError(passwordError) }
+            if (firstNameError)
+                document.getElementById("firstNameInput").classList.add("inputError");
+            if (lastNameError)
+                document.getElementById("lastNameInput").classList.add("inputError");
+            if (emailError) {
+                document.getElementById("emailInput").classList.add("inputError");
+                setEmailError(emailError);
+            }
+            if (passwordError) {
+                document.getElementById("passwordInput").classList.add("inputError");
+                setPasswordError(passwordError);
+            }
 
-            return false
-
+            return false;
         } else {
-            return true
+            return true;
         }
-
-    }
+    };
 
     const clearErrors = () => {
-        setFirstNameError('')
-        setLastNameError('')
-        setEmailError('')
-        setPasswordError('')
-    }
+        setFirstNameError("");
+        setLastNameError("");
+        setEmailError("");
+        setPasswordError("");
+    };
 
+    const handleSignUp = async () => {
+        setSignUpLoading(true);
 
-    const handleSignIn = async () => {
+        const isValid = validate(firstName, lastName, email, password);
 
-        setSignUpLoading(true)
-
-        const isValid = validate(firstName, lastName, email, password)
-
-        await axios.post(`${baseUrl()}/api/login/authMail`, {} )
+        // await axios.post(`${baseUrl()}/api/login/authMail`, {} )
 
         if (isValid) {
-
             const data = {
                 firstName,
                 lastName,
                 email,
-                password
+                password,
+            };
+
+            await axios
+                .post(`${baseUrl()}/api/login/signUp`, data)
+                .then((res) => {
+                    props.setSection('signIn')
+                })
+                .catch((e) => {
+                    setSignUpError(
+                        "Houve um problema no cadastro. Por favor, tente novamente mais tarde!"
+                    );
+                });
+        }
+    };
+
+
+    const handleAuth = async () => {
+
+        setSignUpLoading(true)
+
+        const isValid = validate(firstName, lastName, email, password);
+
+        if (isValid) {
+
+            const data = {
+                email: email,
+                firstName: firstName
             }
 
-            await axios.post(`${baseUrl()}/api/login/signUp`, data)
+            await axios.post(`${baseUrl()}/api/login/authMail`, data)
                 .then(res => {
-                    router.push('/')
+                    setAuthCode(res.data.secureCode)
+                    var myModal = new bootstrap.Modal(document.getElementById('authModal'))
+                    myModal.show()
                 }).catch(e => {
-                    setSignUpError('Houve um problema no cadastro. Por favor, tente novamente mais tarde!')
+                    setSignUpLoading(false)
+                    setEmailError('E-mail já cadastrado.')
                 })
+        } else {
+            return
         }
+
+
+
 
     }
 
-
-
-
     return (
-        <div className="row fadeItem1s" style={{ height: '100%' }}>
+        <div className="row fadeItem1s" style={{ height: "100%" }}>
             <div className="d-flex justify-content-center align-items-center">
-                <div className={`card ${styles.cardSignIn} p-2`} >
-                    <div className={`card-body  d-flex justify-content-center`} style={{ height: '100%' }}>
-
-
-
-
+                <div className={`card ${styles.cardSignIn} p-2`}>
+                    <div
+                        className={`card-body  d-flex justify-content-center`}
+                        style={{ height: "100%" }}
+                    >
                         <div className="col-12 col-lg-6 d-flex justify-content-center align-items-center px-5">
                             <div>
-
                                 <div className="row mb-1">
                                     <h1 className={`${styles.title} title-dark`}>Cadastre-se</h1>
                                 </div>
                                 <div className="row mb-3">
-                                    <span style={{ fontSize: '15px' }}>É rápido e fácil.</span>
+                                    <span style={{ fontSize: "15px" }}>É rápido e fácil.</span>
                                 </div>
 
-
-                                <div className='d-flex mb-2'>
-
+                                <div className="d-flex mb-2">
                                     <div className="col-6 pe-2">
                                         {/* <label for="exampleFormControlInput1" className="form-label">Email address</label> */}
                                         <input
@@ -129,7 +165,8 @@ export default function SignIn(props) {
                                             id="firstNameInput"
                                             placeholder="Nome"
                                             value={firstName}
-                                            onChange={e => setFirstName(e.target.value)} />
+                                            onChange={(e) => setFirstName(e.target.value)}
+                                        />
                                     </div>
                                     <div className="col-6 ps-2">
                                         <input
@@ -138,7 +175,8 @@ export default function SignIn(props) {
                                             id="lastNameInput"
                                             placeholder="Sobrenome"
                                             value={lastName}
-                                            onChange={e => setLastName(e.target.value)} />
+                                            onChange={(e) => setLastName(e.target.value)}
+                                        />
                                     </div>
                                 </div>
                                 <div className="col-12  mb-2">
@@ -148,40 +186,82 @@ export default function SignIn(props) {
                                         id="emailInput"
                                         placeholder="E-mail"
                                         value={email}
-                                        onChange={e => setEmail(e.target.value)} />
-                                    <span className='small text-danger fadeItem'>{emailError}</span>
+                                        onChange={(e) => setEmail(e.target.value)}
+                                    />
+                                    <span className="small text-danger fadeItem">
+                                        {emailError}
+                                    </span>
                                 </div>
                                 <div className="col-12  mb-2">
-                                    <input type="password"
+                                    <input
+                                        type="password"
                                         className="form-control"
                                         id="passwordInput"
                                         placeholder="Senha"
                                         value={password}
-                                        onChange={e => setPassword(e.target.value)} />
-                                    <span className='small text-danger fadeItem'>{passwordError}</span>
-
+                                        onChange={(e) => setPassword(e.target.value)}
+                                    />
+                                    <span className="small text-danger fadeItem">
+                                        {passwordError}
+                                    </span>
                                 </div>
-                                <div className="col-12  mb-2" style={{ fontSize: '10px' }}>
-                                    <span >Ao clicar em Cadastre-se, você concorda com nossos</span>
-                                    <span className='span ms-1' type='button' data-bs-toggle="modal" data-bs-target="#policyModal">Termos, Política de Privacidade e Política de Cookies.</span>
-                                    <span className='ms-1'> Você poderá receber notificações por SMS e cancelar isso quando quiser.</span>
+                                <div className="col-12  mb-2" style={{ fontSize: "10px" }}>
+                                    <span>
+                                        Ao clicar em Cadastre-se, você concorda com nossos
+                                    </span>
+                                    <span
+                                        className="span ms-1"
+                                        type="button"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#policyModal"
+                                    >
+                                        Termos, Política de Privacidade e Política de Cookies.
+                                    </span>
+                                    <span className="ms-1">
+                                        {" "}
+                                        Você poderá receber notificações por SMS e cancelar isso
+                                        quando quiser.
+                                    </span>
                                 </div>
                                 <div className="col-12 d-flex justify-content-center my-3">
-                                    <button
-                                        className='btn btn-outline-oceanBlue px-5'
-                                        onClick={() => handleSignIn()}>Cadastre-se</button>
+                                    {singUpLoading ?
+                                        <button
+                                            className="btn btn-outline-oceanBlue px-5"
+                                            disabled
+                                        >
+                                            <SpinnerSM />
+                                        </button>
+                                        :
+                                        <button
+                                            className="btn btn-outline-oceanBlue px-5"
+                                            onClick={() => handleAuth()}
+                                        >
+                                            Cadastre-se
+                                        </button>
+                                    }
                                 </div>
                                 <div className="col-12 d-flex justify-content-center mt-3">
-                                    <span className='span' type='button' onClick={() => { props.setSection('login') }}>Já possui uma conta?</span>
+                                    <span
+                                        className="span"
+                                        type="button"
+                                        onClick={() => {
+                                            props.setSection("signIn");
+                                        }}
+                                    >
+                                        Já possui uma conta?
+                                    </span>
                                 </div>
                             </div>
                         </div>
 
                         {window.innerWidth > 990 && (
-
                             <div className="col-6 d-flex justify-content-center align-items-center p-5">
                                 <div>
-                                    <div id="carouselExampleFade" className="carousel slide" data-bs-ride="carousel">
+                                    <div
+                                        id="carouselExampleFade"
+                                        className="carousel slide"
+                                        data-bs-ride="carousel"
+                                    >
                                         <div className="carousel-inner">
                                             <div className="carousel-item active">
                                                 <img src="/LOGO_NAME.png" alt="" height={200} />
@@ -196,19 +276,37 @@ export default function SignIn(props) {
                                     </div>
                                 </div>
                             </div>
-
                         )}
-
                     </div>
                     <div className="row mt-3">
                         <div className="col-12 d-flex justify-content-start">
-                            <span className="span" type='button' onClick={() => { props.setSection('login') }}><AiOutlineLeft className="me-2" />  Voltar</span>
+                            <span
+                                className="span"
+                                type="button"
+                                onClick={() => {
+                                    props.setSection("signIn");
+                                }}
+                            >
+                                <AiOutlineLeft className="me-2" /> Voltar
+                            </span>
                         </div>
                     </div>
-
                 </div>
             </div>
+
             <PolicyModal />
+
+            <AuthModal
+                authCode={authCode}
+                firstName={firstName}
+                lastName={lastName}
+                email={email}
+                password={password}
+                setAuthCode={value => setAuthCode(value)}
+                setSignUpLoading={(value) => setSignUpLoading(value)}
+                handleSignUp={() => handleSignUp()}
+                singUpLoading={singUpLoading}
+            />
         </div>
-    )
+    );
 }
