@@ -15,6 +15,8 @@ export default async (req, res) => {
 
         const { email, firstName } = req.body
 
+        console.log( email, firstName)
+
         if (!email || !firstName) {
 
             res.status(400).json({ error: "Missing parameters on request body" })

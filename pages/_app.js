@@ -7,7 +7,9 @@ import { useSelector } from "react-redux";
 import baseUrl from "../utils/baseUrl";
 
 import "../styles/globals.scss";
-import "font-awesome/css/font-awesome.min.css";
+import 'font-awesome/css/font-awesome.min.css'
+
+
 if (typeof window !== "undefined") {
   window.bootstrap = require("bootstrap/dist/js/bootstrap.bundle.js");
   require("apexcharts/dist/apexcharts.common.js");

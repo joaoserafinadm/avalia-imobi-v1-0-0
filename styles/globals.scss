@@ -455,9 +455,6 @@ textarea:focus {
   }
 }
 
-.icon {
-  color: var(--header-color);
-}
 
 /* SPARK */
 
@@ -2948,4 +2945,19 @@ h1 {
 
 .small {
   font-size: 12px;
+}
+
+.title {
+  font-size: 50px;
+}
+
+@media screen and (max-width: 600px) {
+  .title {
+      font-size: 35px;
+
+  }
+}
+
+.icon {
+  height: 17px !important;
 }

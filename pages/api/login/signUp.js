@@ -60,10 +60,7 @@ export default async function (req, res) {
                 })
 
 
-                //PESQUISAR COMO TIRA O ID DA COMPANY
-                const compani_id = newCompany.data
-
-                await db.collection('users').insertOne({
+                const newUser = await db.collection('users').insertOne({
                     firstName: firstName,
                     lastName: lastName,
                     cpf: '',
@@ -74,7 +71,7 @@ export default async function (req, res) {
                     numero: '',
                     cidade: '',
                     estado: '',
-                    company_id: '',
+                    company_id: newCompany.insertedId.toString(),
                     userStatus: 'admGlobal',
                     profileImageUrl: '',
                     password: securePassword,
@@ -88,6 +85,15 @@ export default async function (req, res) {
                     active: true,
                     deleted: false
                 })
+
+                if (newCompany.insertedId && newUser.insertedId) {
+                    res.status(200).json({message: "User registered"})
+                } else {
+                    res.status(400).json({error: "Trouble in connect to database"})
+
+                }
+
+
 
             }
 

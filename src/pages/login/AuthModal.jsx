@@ -5,27 +5,14 @@ import baseUrl from "../../../utils/baseUrl";
 
 export default function AuthModal(props) {
 
+    console.log("props", props)
+
     const [code, setCode] = useState('')
-    const [codeLoading, setCodeLoading] = useState(false)
     const [resendEmailError, setResendEmailError] = useState('')
     const [resendEmailCheck, setResendEmailCheck] = useState('')
 
-    const validate = async (code) => {
-
-
-    }
-
-    const handleSignUp = (authCode, code, firstName, lastName, email, password) => {
-
-        setCodeLoading(true)
-
-        const isValid = validate(code)
-
-    }
-
     const resendEmail = async (email, firstName) => {
-
-
+        cleanStatus()
         setResendEmailCheck('')
         setResendEmailError('')
         const data = {
@@ -44,6 +31,14 @@ export default function AuthModal(props) {
             })
     }
 
+    const cleanStatus = () => {
+        setCode('')
+        setResendEmailError('')
+        setResendEmailCheck('')
+        props.setAuthError('')
+        props.setSignUpLoading(false)
+    }
+
 
     return (
         <div
@@ -51,10 +46,11 @@ export default function AuthModal(props) {
             id="authModal"
             tabindex="-1"
             aria-labelledby="authModalLabel"
-            aria-hidden="true"
+            aria-hidden="true"data-bs-backdrop="static" 
+            data-bs-keyboard="false"
         >
 
-            <div className="modal-dialog">
+            <div className="modal-dialog modal-dialog-centered" >
                 <div className="modal-content">
                     <div className="modal-header">
                         <h5 className="modal-title title-dark" id="authModalLabel">
@@ -65,6 +61,7 @@ export default function AuthModal(props) {
                             className="btn-close"
                             data-bs-dismiss="modal"
                             aria-label="Close"
+                            onClick={() => cleanStatus()}
                         ></button>
                     </div>
                     <div className="modal-body">
@@ -96,8 +93,14 @@ export default function AuthModal(props) {
                         </div>
                         <div className="row">
                             <div className="col-12 d-flex justify-content-center">
-                                <small className="small text-danger fadeItem">{resendEmailError}</small>
-                                <small className="small text-success fadeItem">{resendEmailCheck}</small>
+                                {resendEmailError ?
+                                    <small className="small text-danger fadeItem">{resendEmailError}</small>
+                                    :
+                                    props.authError ?
+                                        <small className="small text-danger fadeItem">{props.authError}</small>
+                                        :
+                                        <small className="small text-success fadeItem">{resendEmailCheck}</small>
+                                }
                             </div>
                         </div>
                     </div>
@@ -106,28 +109,18 @@ export default function AuthModal(props) {
                             type="button"
                             className="btn btn-secondary btn-sm"
                             data-bs-dismiss="modal"
-                            onClick={() => props.setSignUpLoading(false)}
+                            onClick={() => cleanStatus()}
                         >
                             Cancelar
                         </button>
-                        {!props.signUpLoading ? (
-                            <button
-                                type="button"
-                                className="btn btn-oceanBlue btn-sm"
-                                onClick={() => handleSignUp(props.authCode, code, props.firstName, props.lastName, props.email, props.password)}
-                            >
-                                Continuar
-                            </button>
-                        ) : (
-                            <button
-                                type="button"
-                                disabled
-                                className="btn btn-oceanBlue btn-sm px-3"
-                                onClick={() => props.handleSignUp()}
-                            >
-                                <SpinnerSM />
-                            </button>
-                        )}
+                        <button
+                            type="button" disabled={code ? false : true}
+                            className="btn btn-oceanBlue btn-sm"
+                            data-bs-dismiss="modal"
+                            onClick={() => props.handleSignUp(code)}
+                        >
+                            Continuar
+                        </button>
                     </div>
                 </div>
             </div>

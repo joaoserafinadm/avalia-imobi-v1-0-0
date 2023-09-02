@@ -10,6 +10,7 @@ import { useRouter } from "next/router";
 import PolicyModal from "./PolicyModal";
 import AuthModal from "./AuthModal";
 import { SpinnerSM } from "../../components/loading/Spinners";
+import SignUpSuccessModal from "./SignUpSuccessModal";
 
 export default function SignUp(props) {
     const router = useRouter();
@@ -79,12 +80,48 @@ export default function SignUp(props) {
         setPasswordError("");
     };
 
-    const handleSignUp = async () => {
+    const validateCode = async (authCode, code) => {
+
+        return new Promise(async resolve => {
+
+
+            setAuthError('')
+
+            if (!authCode || !code) {
+                setAuthError('Insira o código de autenticação')
+                resolve(false)
+            }
+
+
+            const data = {
+                authCode,
+                code
+            }
+
+            const response = await axios.post(`${baseUrl()}/api/login/authCode`, data)
+                .then(res => {
+
+                    setAuthError('')
+
+                    resolve(true)
+                }).catch(e => {
+                    setAuthError('Código de autenticação errado')
+
+                    resolve(false)
+
+                })
+
+        }
+        )
+
+
+    }
+
+    const handleSignUp = async (code) => {
+
         setSignUpLoading(true);
 
-        const isValid = validate(firstName, lastName, email, password);
-
-        // await axios.post(`${baseUrl()}/api/login/authMail`, {} )
+        const isValid = await validateCode(authCode, code)
 
         if (isValid) {
             const data = {
@@ -97,24 +134,34 @@ export default function SignUp(props) {
             await axios
                 .post(`${baseUrl()}/api/login/signUp`, data)
                 .then((res) => {
-                    props.setSection('signIn')
+                    var myModal = new bootstrap.Modal(document.getElementById('signUpSuccessModal'))
+                    myModal.show()
                 })
                 .catch((e) => {
                     setSignUpError(
                         "Houve um problema no cadastro. Por favor, tente novamente mais tarde!"
                     );
                 });
+        } else {
+
+            var myModal = new bootstrap.Modal(document.getElementById('authModal'))
+            myModal.show()
+
         }
     };
 
 
-    const handleAuth = async () => {
+    const handleAuth = async (e) => {
 
+        e.preventDefault()
+
+        console.log("isvalid")
         setSignUpLoading(true)
 
         const isValid = validate(firstName, lastName, email, password);
 
         if (isValid) {
+
 
             const data = {
                 email: email,
@@ -131,6 +178,8 @@ export default function SignUp(props) {
                     setEmailError('E-mail já cadastrado.')
                 })
         } else {
+            setSignUpLoading(false)
+
             return
         }
 
@@ -144,11 +193,10 @@ export default function SignUp(props) {
             <div className="d-flex justify-content-center align-items-center">
                 <div className={`card ${styles.cardSignIn} p-2`}>
                     <div
-                        className={`card-body  d-flex justify-content-center`}
-                        style={{ height: "100%" }}
+                        className={`card-body ${styles.cardSize} d-flex justify-content-center`}
                     >
-                        <div className="col-12 col-lg-6 d-flex justify-content-center align-items-center px-5">
-                            <div>
+                        <div className={`col-12 col-lg-6 d-flex justify-content-center align-items-center`}>
+                            <form onSubmit={e => handleAuth(e)} >
                                 <div className="row mb-1">
                                     <h1 className={`${styles.title} title-dark`}>Cadastre-se</h1>
                                 </div>
@@ -232,15 +280,12 @@ export default function SignUp(props) {
                                             <SpinnerSM />
                                         </button>
                                         :
-                                        <button
-                                            className="btn btn-outline-oceanBlue px-5"
-                                            onClick={() => handleAuth()}
-                                        >
-                                            Cadastre-se
-                                        </button>
+                                        <input type="submit"
+                                            className="btn btn-outline-oceanBlue px-5" value={'Cadastre-se'} />
+
                                     }
                                 </div>
-                                <div className="col-12 d-flex justify-content-center mt-3">
+                                {/* <div className="col-12 d-flex justify-content-center mt-3">
                                     <span
                                         className="span"
                                         type="button"
@@ -250,8 +295,44 @@ export default function SignUp(props) {
                                     >
                                         Já possui uma conta?
                                     </span>
+                                </div> */}
+
+                                <div className="row d-flex">
+                                    <div className="col">
+                                        <hr />
+                                    </div>
+                                    <div className="col-1 d-flex justify-content-center align-items-center">
+                                        <span>
+                                            <small>Ou</small>
+                                        </span>
+                                    </div>
+                                    <div className="col">
+                                        <hr />
+                                    </div>
                                 </div>
-                            </div>
+                                <div className="row">
+                                    <div className="col d-flex justify-content-center">
+
+                                        <div>
+
+                                            <span className="card py-2  my-2 cardAnimation" type="button" >
+                                                <div className="row ">
+                                                    <div className="col-12 d-flex align-items-center px-5">
+                                                        <img
+                                                            src="/ICON-GOOGLE.png"
+                                                            alt=""
+                                                            className="socialIcon me-2"
+                                                        />
+                                                        <div>
+                                                            <span>Cadastre-se com o Google</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
 
                         {window.innerWidth > 990 && (
@@ -302,11 +383,17 @@ export default function SignUp(props) {
                 lastName={lastName}
                 email={email}
                 password={password}
+                authError={authError}
+                setAuthError={value => setAuthError(value)}
                 setAuthCode={value => setAuthCode(value)}
                 setSignUpLoading={(value) => setSignUpLoading(value)}
-                handleSignUp={() => handleSignUp()}
+                handleSignUp={(code) => handleSignUp(code)}
                 singUpLoading={singUpLoading}
             />
-        </div>
+
+            <SignUpSuccessModal setSection={value => props.setSection(value)} />
+
+
+        </div >
     );
 }

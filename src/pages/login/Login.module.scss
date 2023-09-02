@@ -196,16 +196,18 @@ $akvo-color-hover: #4f5459;
 }
 
 .cardSize {
-    min-height: 550px;
-    min-width: 85%;
-    height: 90%;
-    margin-top: 50px;
-    margin-bottom: 50px;
-    padding: 7vh 5vw 7vh 5vw;
+    margin: 5vh 3vw 5vh 3vw;
 }
 
 .title {
     font-size: 50px;
+}
+
+@media screen and (max-width: 600px) {
+    .title {
+        font-size: 35px;
+
+    }
 }
 
 .cardSignIn {

@@ -9,232 +9,219 @@ import router from "next/router";
 import { SpinnerSM } from "../../components/loading/Spinners";
 
 export default function signIn(props) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
 
-  //RENDER
-  const [loadedImages, setLoadedImages] = useState(0);
-  const [singInLoading, setSignInLoading] = useState(false);
+    //RENDER
+    const [loadedImages, setLoadedImages] = useState(0);
+    const [singInLoading, setSignInLoading] = useState(false);
 
-  //ERROR
-  const [emailError, setEmailError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
+    //ERROR
+    const [emailError, setEmailError] = useState("");
+    const [passwordError, setPasswordError] = useState("");
 
-  const validate = () => {
-    removeInputError();
-    clearErrors();
+    const validate = () => {
+        removeInputError();
+        clearErrors();
 
-    let emailError = "";
-    let passwordError = "";
+        let emailError = "";
+        let passwordError = "";
 
-    if (!email || !email.includes("@")) emailError = "Insira um e-mail válido";
-    if (!password) passwordError = "Insira sua senha";
+        if (!email || !email.includes("@")) emailError = "Insira um e-mail válido";
+        if (!password) passwordError = "Insira sua senha";
 
-    if (emailError || passwordError) {
-      if (emailError) {
-        document.getElementById("emailInput").classList.add("inputError");
-        setEmailError(emailError);
-      }
-      if (passwordError) {
-        document.getElementById("passwordInput").classList.add("inputError");
-        setPasswordError(passwordError);
-      }
-      return false;
-    } else {
-      setEmailError("");
-      setPasswordError("");
-      return true;
-    }
-  };
+        if (emailError || passwordError) {
+            if (emailError) {
+                document.getElementById("emailInput").classList.add("inputError");
+                setEmailError(emailError);
+            }
+            if (passwordError) {
+                document.getElementById("passwordInput").classList.add("inputError");
+                setPasswordError(passwordError);
+            }
+            return false;
+        } else {
+            setEmailError("");
+            setPasswordError("");
+            return true;
+        }
+    };
 
-  const clearErrors = () => {
-    setEmailError("");
-    setPasswordError("");
-  };
+    const clearErrors = () => {
+        setEmailError("");
+        setPasswordError("");
+    };
 
-  const handleEmailAuth = () => {
-    const isValid = validate();
+    const handleEmailAuth = () => {
+        const isValid = validate();
 
-    if (isValid) {
-      const data = {};
-    }
-  };
+        if (isValid) {
+            const data = {};
+        }
+    };
 
-  const handleSignIn = async () => {
+    const handleSignIn = async (e) => {
 
-    await axios.post(`${baseUrl()}/api/email/email`)
-    // setSignInLoading(true);
+        e.preventDefault()
 
-    // const isValid = validate();
+        setSignInLoading(true);
 
-    // if (isValid) {
-    //   const data = {
-    //     email,
-    //     password,
-    //   };
+        const isValid = validate();
 
-    //   await axios
-    //     .post(`${baseUrl()}/api/login/signIn`, data)
-    //     .then((res) => {
-    //       setSignInLoading(false);
-    //       router.reload();
-    //       console.log(res);
-    //     })
-    //     .catch((e) => {
-    //       setPasswordError("E-mail ou senha incorretos");
-    //       console.log(`foi`);
-    //     });
-    // }
-  };
+        if (isValid) {
+            const data = {
+                email,
+                password,
+            };
 
-  return (
-    <>
-      <div
-        className="row fadeItem1s d-flex justify-content-center"
-        style={{ height: "100%" }}
-      >
-        {window.innerWidth > 990 && (
-          <div className="col-6 d-flex justify-content-center align-items-center">
-            <img
-              src="/LOGO_LIGHT.png"
-              alt=""
-              className={`${styles.logoImg}`}
-              onLoad={() => setLoadedImages(loadedImages + 1)}
-            />
-          </div>
-        )}
+            await axios
+                .post(`${baseUrl()}/api/login/signIn`, data)
+                .then((res) => {
+                    setSignInLoading(false);
+                    router.reload();
+                    setSignInLoading(false);
 
-        <div className="col-12 col-lg-6 d-flex justify-content-center align-items-center">
-          <div class={`card ${styles.cardSize}`}>
-            <div class="card-body">
-              <div className="row mb-3">
-                <h1 className={`${styles.title} title-dark`}>Login</h1>
-              </div>
-              <div className="row">
-                <div className="col-12 col-xl-6 d-flex justify-content-start">
-                  <span>Não possui uma conta?</span>
-                </div>
-                <div className="col-12 col-xl-6 d-flex justify-content-start">
-                  <span
-                    className="span"
-                    type="button"
-                    onClick={() => {
-                      props.setSection("signUp");
-                    }}
-                  >
-                    Cadastre-se
-                  </span>
-                </div>
-              </div>
-              <hr />
+                })
+                .catch((e) => {
+                    setPasswordError("E-mail ou senha incorretos");
+                    setSignInLoading(false);
 
-              <div className="row mt-3 mb-3">
-                <input
-                  type="email"
-                  id="emailInput"
-                  class="form-control"
-                  placeholder="E-mail"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-                <span className="small text-danger fadeItem">{emailError}</span>
-              </div>
-              <div className="row mb-3">
-                <input
-                  type="password"
-                  id="passwordInput"
-                  class="form-control"
-                  placeholder="Senha"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-                <span className="small text-danger fadeItem">
-                  {passwordError}
-                </span>
-              </div>
-              <div className="row mb-3">
-                {singInLoading ? (
-                  <button
-                    disabled
-                    className="btn btn-oceanBlue"
-                    onClick={() => handleSignIn()}
-                  >
-                    <SpinnerSM />
-                  </button>
-                ) : (
-                  <button className="btn btn-outline-oceanBlue" onClick={() => handleSignIn()}>
-                    Entrar
-                  </button>
+                });
+        } else {
+            setSignInLoading(false);
+        }
+    };
+
+    return (
+        <>
+            <div
+                className="row fadeItem1s d-flex justify-content-center"
+                style={{ height: "100%" }}
+            >
+                {window.innerWidth > 990 && (
+                    <div className="col-6 d-flex justify-content-center align-items-center">
+                        <img
+                            src="/LOGO_LIGHT.png"
+                            alt=""
+                            className={`${styles.logoImg}`}
+                            onLoad={() => setLoadedImages(loadedImages + 1)}
+                        />
+                    </div>
                 )}
-              </div>
-              <div className="row mb-1">
-                <small>
-                  <span
-                    className="span"
-                    type="button"
-                    onClick={() => props.setSection("rescuePassword")}
-                  >
-                    Esqueceu a senha?
-                  </span>
-                </small>
-              </div>
-              <div className="row d-flex">
-                <div className="col">
-                  <hr />
+
+                <div className="col-12 col-lg-6 d-flex justify-content-center align-items-center">
+                    <form onSubmit={e => handleSignIn(e)}>
+
+                        <div class={`card `}>
+                            <div class={`card-body ${styles.cardSize} `}>
+                                <div className="row mb-3">
+                                    <h1 className={`${styles.title} title-dark`}>Login</h1>
+                                </div>
+                                <div className="row">
+                                    <div className="col-12  d-flex justify-content-start">
+                                        <span>Não possui uma conta?</span>
+                                    </div>
+                                    <div className="col-12  d-flex justify-content-start">
+                                        <span
+                                            className="span"
+                                            type="button"
+                                            onClick={() => {
+                                                props.setSection("signUp");
+                                            }}
+                                        >
+                                            Cadastre-se
+                                        </span>
+                                    </div>
+                                </div>
+                                <hr />
+
+                                <div className="row mt-3 mb-3">
+                                    <input
+                                        type="email"
+                                        id="emailInput"
+                                        class="form-control"
+                                        placeholder="E-mail"
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
+                                    />
+                                    <span className="small text-danger fadeItem">{emailError}</span>
+                                </div>
+                                <div className="row mb-3">
+                                    <input
+                                        type="password"
+                                        id="passwordInput"
+                                        class="form-control"
+                                        placeholder="Senha"
+                                        value={password}
+                                        onChange={(e) => setPassword(e.target.value)}
+                                    />
+                                    <span className="small text-danger fadeItem">
+                                        {passwordError}
+                                    </span>
+                                </div>
+                                <div className="row mb-3">
+                                    {singInLoading ? (
+                                        <button
+                                            disabled
+                                            className="btn btn-oceanBlue"
+                                            onClick={() => handleSignIn()}
+                                        >
+                                            <SpinnerSM />
+                                        </button>
+                                    ) : (
+                                        <button className="btn btn-outline-oceanBlue" type="submit">
+                                            Entrar
+                                        </button>
+                                    )}
+                                </div>
+                                <div className="row mb-1">
+                                    <small>
+                                        <span
+                                            className="span"
+                                            type="button"
+                                            onClick={() => props.setSection("rescuePassword")}
+                                        >
+                                            Esqueceu a senha?
+                                        </span>
+                                    </small>
+                                </div>
+                                <div className="row d-flex">
+                                    <div className="col">
+                                        <hr />
+                                    </div>
+                                    <div className="col-1 d-flex justify-content-center align-items-center">
+                                        <span>
+                                            <small>Ou</small>
+                                        </span>
+                                    </div>
+                                    <div className="col">
+                                        <hr />
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <span className="card py-2 px-1 my-2 cardAnimation" type="button" >
+                                        <div className="row ">
+                                            <div className="col-12 d-flex justify-content-center">
+                                                <div className="icon-start">
+                                                    <img
+                                                        src="/ICON-GOOGLE.png"
+                                                        alt=""
+                                                        className="socialIcon"
+                                                    />
+                                                </div>
+                                                <div>
+                                                    <span >Continuar com o Google</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
                 </div>
-                <div className="col-1 d-flex justify-content-center align-items-center">
-                  <span>
-                    <small>Ou</small>
-                  </span>
-                </div>
-                <div className="col">
-                  <hr />
-                </div>
-              </div>
-              <div className="row">
-                <span
-                  className="card py-2 px-1 my-2 cardAnimation"
-                  type="button"
-                >
-                  <div className="row ">
-                    <div className="col-12 d-flex justify-content-center">
-                      <div className="icon-start">
-                        <img
-                          src="/ICON-GOOGLE.png"
-                          alt=""
-                          className="socialIcon"
-                        />
-                      </div>
-                      <div>
-                        <span>Continuar com o Google</span>
-                      </div>
-                    </div>
-                  </div>
-                </span>
-                <span
-                  className="card py-2 px-1 my-2 cardAnimation"
-                  type="button"
-                >
-                  <div className="row ">
-                    <div className="col-12 d-flex justify-content-center">
-                      <div className="icon-start">
-                        <img
-                          src="/ICON-FACEBOOK.png"
-                          alt=""
-                          className="socialIcon"
-                        />
-                      </div>
-                      <div>
-                        <span>Continuar com o Facebook</span>
-                      </div>
-                    </div>
-                  </div>
-                </span>
-              </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </>
-  );
+        </>
+    );
 }
