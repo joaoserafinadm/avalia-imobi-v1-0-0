@@ -8,7 +8,7 @@ import RescuePassword from "./RescuePassword";
 import SignUp from "./SignUp";
 import AuthModal from "./AuthModal";
 
-export default function SetUp() {
+export default function Login() {
   const [section, setSection] = useState("signIn");
 
   return (

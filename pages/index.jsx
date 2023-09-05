@@ -2,8 +2,8 @@
 // import Image from 'next/image'
 // import { useState, useEffect } from 'react'
 // import Title from '../src/components/title/Title2'
-// import Cookie from 'js-cookie'
-// import jwt from 'jsonwebtoken'
+import Cookie from 'js-cookie'
+import jwt from 'jsonwebtoken'
 // import Link from 'next/link'
 // import $ from 'jquery'
 // import axios from 'axios'
@@ -25,7 +25,7 @@
 
 export default function Home() {
 
-    // const token = jwt.decode(Cookie.get('auth'))
+    const token = jwt.decode(Cookie.get('auth'))
 
     return (
 

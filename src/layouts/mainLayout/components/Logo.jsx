@@ -5,9 +5,9 @@ export default function Logo() {
     return (
         <aside className={`${styles.logo}`}>
             <Link href="/">
-                <a>
+                <span typeof='button'>
                     <img src="/LOGO_LIGHT.png" alt="logo" className='' />
-                </a>
+                </span>
             </Link>
         </aside>
     )

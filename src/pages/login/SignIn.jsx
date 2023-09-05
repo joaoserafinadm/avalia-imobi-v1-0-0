@@ -7,6 +7,7 @@ import removeInputError from "../../../utils/removeInputError";
 import baseUrl from "../../../utils/baseUrl";
 import router from "next/router";
 import { SpinnerSM } from "../../components/loading/Spinners";
+import Cookies from "js-cookie";
 
 export default function signIn(props) {
     const [email, setEmail] = useState("");
@@ -77,9 +78,11 @@ export default function signIn(props) {
             await axios
                 .post(`${baseUrl()}/api/login/signIn`, data)
                 .then((res) => {
-                    setSignInLoading(false);
+
+                    localStorage.setItem("auth", Cookies.get("auth"));
+                    const localToken = localStorage.getItem("auth");
+
                     router.reload();
-                    setSignInLoading(false);
 
                 })
                 .catch((e) => {
