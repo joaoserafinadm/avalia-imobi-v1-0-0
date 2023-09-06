@@ -1,6 +1,6 @@
 import { connect } from '../../../utils/db'
 import bcrypt from 'bcrypt'
-
+import { ObjectId } from 'bson'
 
 export default async function (req, res) {
 
@@ -42,6 +42,19 @@ export default async function (req, res) {
                     logo: ''
                 }
 
+
+                const notifications = [
+                    {
+                        _id: ObjectId(),
+                        user_id: '',
+                        dateAdded: new Date(),
+                        subject: 'star',
+                        text: "Bem vindo ao Avalia Imobi! Clique aqui para fazer um tour pela plataforma!",
+                        link: 'http://localhost:3000',
+                        imageUrl: 'https://res.cloudinary.com/dywdcjj76/image/upload/v1693963692/PUBLIC/TEMPLATE_IMG_shcaor.png'
+                    }
+                ]
+
                 const newCompany = await db.collection('companies').insertOne({
                     companyName: '',
                     email: email,
@@ -55,7 +68,7 @@ export default async function (req, res) {
                     active: true,
                     dateAdded: new Date(),
                     dateUpdate: '',
-                    notifications: [],
+                    notifications: notifications,
                     styles: styles
                 })
 
@@ -73,7 +86,7 @@ export default async function (req, res) {
                     estado: '',
                     company_id: newCompany.insertedId.toString(),
                     userStatus: 'admGlobal',
-                    profileImageUrl: '',
+                    profileImageUrl: 'https://res.cloudinary.com/dywdcjj76/image/upload/v1692760589/PUBLIC/user_template_ocrbrg.png',
                     password: securePassword,
                     permissions: false,
                     dateAdd: new Date(),
@@ -87,9 +100,9 @@ export default async function (req, res) {
                 })
 
                 if (newCompany.insertedId && newUser.insertedId) {
-                    res.status(200).json({message: "User registered"})
+                    res.status(200).json({ message: "User registered" })
                 } else {
-                    res.status(400).json({error: "Trouble in connect to database"})
+                    res.status(400).json({ error: "Trouble in connect to database" })
 
                 }
 

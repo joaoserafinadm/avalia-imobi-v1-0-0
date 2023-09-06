@@ -5,7 +5,7 @@ export default function Logo() {
     return (
         <aside className={`${styles.logo}`}>
             <Link href="/">
-                <span typeof='button'>
+                <span type='button'>
                     <img src="/LOGO_LIGHT.png" alt="logo" className='' />
                 </span>
             </Link>
