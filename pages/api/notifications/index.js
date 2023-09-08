@@ -13,32 +13,30 @@ const authenticated = fn => async (req, res) => {
 
 export default authenticated(async (req, res) => {
 
-    if (req.method === "GET") {
-
+    if (req.method === 'GET') {
         const { user_id } = req.query
 
         if (!user_id) {
-            res.status(400).json({ error: "Missing parameters on request body" })
-        } else {
+            return res.status(400).json({ error: 'Missing parameters on request body' })
+        }
 
+        try {
             const { db } = await connect()
-
             const userExist = await db.collection('users').findOne({ _id: ObjectId(user_id) })
 
             if (!userExist) {
-                res.status(400).json({ error: "Company does not exist" })
-            } else {
-
-                const data = userExist.notifications
-
-                res.status(200).json({ data })
+                return res.status(400).json({ error: 'Company does not exist' })
             }
+
+            const data = userExist.notifications
+            return res.status(200).json({ data })
+        } catch (error) {
+            console.error(error)
+            return res.status(500).json({ error: 'Internal server error' })
         }
+    }
 
-
-
-
-    } if (req.method === "POST") {
+    if (req.method === "POST") {
 
         const { company_id, user_id, text, link, } = req.body
 
