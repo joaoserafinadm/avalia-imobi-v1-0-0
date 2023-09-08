@@ -15,21 +15,23 @@ export default authenticated(async (req, res) => {
 
     if (req.method === "GET") {
 
-        const { company_id } = req.query
+        const { user_id } = req.query
 
-        if (!company_id) {
+        if (!user_id) {
             res.status(400).json({ error: "Missing parameters on request body" })
         } else {
 
             const { db } = await connect()
 
-            const companyExists = await db.collection('companies').findOne({ _id: ObjectId(company_id) })
+            const userExist = await db.collection('users').findOne({ _id: ObjectId(user_id) })
 
-            if (!companyExists) {
+            if (!userExist) {
                 res.status(400).json({ error: "Company does not exist" })
             } else {
 
-                res.status(200).json({ data: companyExists.notifications })
+                const data = userExist.notifications
+
+                res.status(200).json({ data })
             }
         }
 

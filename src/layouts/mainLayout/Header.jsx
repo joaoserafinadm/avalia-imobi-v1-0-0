@@ -5,15 +5,23 @@ import Cookies from "js-cookie";
 import jwt from "jsonwebtoken";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import tippy from "tippy.js";
 import Notifications from "./components/Notifications";
+import axios from "axios";
+import baseUrl from "../../../utils/baseUrl";
 
 export default function Header() {
 
     const token = jwt.decode(Cookies.get('auth'))
 
     const router = useRouter();
+
+    const [notifications, setNotifications] = useState([])
+
+    useEffect(() => {
+        dataFunction(token.sub)
+    }, [])
 
 
     const hendleSession = async () => {
@@ -22,6 +30,22 @@ export default function Header() {
         localStorage.removeItem('auth')
         await router.replace('/')
         router.reload()
+    }
+
+
+    const dataFunction = async (user_id) => {
+
+        await axios.get(`${baseUrl()}/api/notifications`, {
+            params: {
+                user_id: user_id
+            }
+        })
+            .then(res => {
+                setNotifications(res.data.data)
+            }).catch(e => {
+                console.log(e)
+            })
+
     }
 
 
@@ -40,7 +64,7 @@ export default function Header() {
                     </span>
 
                     <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownNotification">
-                        <Notifications />
+                        <Notifications notifications={notifications} />
                     </ul>
                 </div>
 

@@ -45,8 +45,7 @@ export default async function (req, res) {
 
                 const notifications = [
                     {
-                        _id: ObjectId(),
-                        user_id: '',
+                        // _id: ObjectId(),
                         dateAdded: new Date(),
                         subject: 'star',
                         text: "Bem vindo ao Avalia Imobi! Clique aqui para fazer um tour pela plataforma!",
@@ -68,7 +67,6 @@ export default async function (req, res) {
                     active: true,
                     dateAdded: new Date(),
                     dateUpdate: '',
-                    notifications: notifications,
                     styles: styles
                 })
 
@@ -96,7 +94,8 @@ export default async function (req, res) {
                     passwordResetExpires: '',
                     accessCount: 0,
                     active: true,
-                    deleted: false
+                    deleted: false,
+                    notifications: notifications
                 })
 
                 if (newCompany.insertedId && newUser.insertedId) {
