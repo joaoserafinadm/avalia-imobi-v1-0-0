@@ -6,8 +6,9 @@ import Navbar from "./Navbar";
 import { useEffect, useState } from "react";
 
 export default function MainLayout({ children }) {
-  const [navbarStatus, setNavbarStatus] = useState(true)
 
+
+  const [navbarStatus, setNavbarStatus] = useState(true)
 
   useEffect(() => {
     handleSidebarToggle()

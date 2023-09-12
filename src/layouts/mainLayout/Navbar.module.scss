@@ -27,10 +27,10 @@
     box-sizing: border-box;
     text-decoration: none;
     color: var(--gray);
-    transition: ease-in-out 0.4s;
+    transition: ease-in-out 0.2s;
 }
 .menuArea ul li:hover span {
-    color: var(--dark);
+    color: var(--cv-primary);
     font-weight: 525;
 }
 
@@ -47,7 +47,7 @@
     box-sizing: border-box;
     text-decoration: none;
     color: var(--gray);
-    transition: ease-in-out .4s;
+    transition: ease-in-out .2s;
     
 }
 
