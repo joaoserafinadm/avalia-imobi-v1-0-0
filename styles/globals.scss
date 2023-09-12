@@ -115,11 +115,28 @@ body {
 .pages {
   grid-area: content;
   position: absolute;
-  top: var(--header-height);
+  top: 0;
   left: var(--aside-width);
-  width: calc(99vw - var(--aside-width));
+  height: 100%;
+  width: calc(100vw - var(--aside-width));
   overflow: hidden;
   transition: ease-in-out .4s;
+}
+
+
+@media (max-width: 768px) {
+
+  .pages {
+    grid-area: content;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    height: 100%;
+
+    transition: ease-in-out .4s;
+  }
 }
 
 .pagesMobile {
@@ -229,6 +246,7 @@ body {
 
 .fadeItem {
   animation: fade 0.5s;
+  transition: ease .5s;
 }
 
 .fadeItem1s {
@@ -2939,6 +2957,6 @@ h1 {
   font-weight: 500;
 }
 
-.p{
+.p {
   font-size: 14px;
 }

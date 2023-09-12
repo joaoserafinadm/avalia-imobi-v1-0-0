@@ -2,10 +2,9 @@
     background-color: var(--cv-primary);
     position: fixed !important;
     top: 0;
-    left: var(--aside-width);
+    left: 0;
     height: var(--header-height);
-    width: calc(100vw - var(--aside-width));
-    z-index: 1001;
+    // z-index: 1001;
     transition: all .5s;
 }
 
@@ -23,4 +22,17 @@
 .logo{
     padding: 0px 15px;
     height: calc(var(--header-height) * 0.5);
+}
+
+
+.header {
+    height: var(--header-height);
+    background-color: var(--cv-primary);
+
+}
+
+.configIcons{
+    position: fixed;
+    right: 0;
+
 }

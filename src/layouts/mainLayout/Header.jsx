@@ -11,7 +11,7 @@ import Notifications from "./components/Notifications";
 import axios from "axios";
 import baseUrl from "../../../utils/baseUrl";
 
-export default function Header() {
+export default function Header(props) {
 
     const token = jwt.decode(Cookies.get('auth'))
 
@@ -51,14 +51,24 @@ export default function Header() {
 
 
     return (
-        <div
-            className={`${styles.headerPosition} d-flex justify-content-end align-items-center text-light`}
-        >
-            <div className="d-flex">
+        <div className={`d-flex justify-content-center align-items-center ${styles.header}`}>
+            {!props.navbarStatus && (
+                <div className="fadeItem">
+                    <Link href="/">
+                        <div className='d-flex justify-content-center align-items-center ' >
+                            <span type='button'>
+                                <img src="/LOGO_LIGHT.png" alt="logo" className='' height={50} />
+                            </span>
+                        </div>
+                    </Link>
+                </div>
+            )}
 
 
+            <div className={`d-flex ${styles.configIcons}`}>
 
-                <div className={` dropdown `}>
+
+                <div className={` dropdown`}>
                     <span type="button" className="" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <FontAwesomeIcon icon={faBell} className="text-light icon px-3 " />
                     </span>
