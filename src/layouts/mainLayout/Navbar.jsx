@@ -11,10 +11,15 @@ import { useAccordionButton } from "react-bootstrap/AccordionButton";
 import { AccordionContext } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome } from "@fortawesome/free-solid-svg-icons";
+import { useEffect } from "react";
 
 export default function Nav(props) {
 
     const token = jwt.decode(Cookies.get("auth"));
+
+    useEffect(() => {
+        if (window.innerWidth < 800) props.setNavbarStatus(false)
+    }, [])
 
     function ContextAwareToggle({ children, eventKey, callback }) {
         const { activeEventKey } = useContext(AccordionContext);
