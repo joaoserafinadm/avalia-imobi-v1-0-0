@@ -1,14 +1,15 @@
 .headerBox {
     font-family: "Open Sans", sans-serif !important;
     position: relative;
-    height: 150px;
+    height: 130px;
     background-color: var(--header-color);
 }
 
 .headerBackground {
 //       width: 100vw;
 //   height: 100vh;
-  background-image: url(../../../public/bg2.jpg);
+//   background-image: url(../../../public/bg2.jpg);
+background-color: var(--cv-primary);
   opacity: 0.9;
   background-size: cover;
   background-position: center;
@@ -52,14 +53,14 @@
     .headerBox {
         font-family: "Open Sans", sans-serif !important;
         position: relative;
-        height: 150px;
-        background-color: var(--header-color);
+        height: 100px;
+        background-color: var(--cv-primary);
         margin-bottom: 3rem;
     }
     
     .headerContent {
         position: relative;
-        top: 45px;
+        top: 15px;
         left: 45px;
     }
     

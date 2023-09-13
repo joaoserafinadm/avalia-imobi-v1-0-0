@@ -39,8 +39,8 @@ export default function Title(props) {
                 </div>
                 <div className={styles.headerSubtitle}>{props.subtitle}</div>
                 {props.backButton && (
-                    <Link href={"/" + props.backButton}>
-                        <span type="button" className={styles.backButton}><FontAwesomeIcon icon={faArrowLeft} className="me-2" />Voltar</span>
+                    <Link href={props.backButton}>
+                        <span type="button" className={styles.backButton}><FontAwesomeIcon icon={faArrowLeft} className="me-2 icon" />Voltar</span>
                     </Link>
                 )}
             </div>

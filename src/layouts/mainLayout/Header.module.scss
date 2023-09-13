@@ -1,11 +1,11 @@
 .headerPosition {
-    background-color: var(--cv-primary);
+    background-color: var(--ai-bg-primary);
     position: fixed !important;
     top: 0;
     left: 0;
     height: var(--header-height);
     // z-index: 1001;
-    transition: all .5s;
+    transition: all .2s;
 }
 
 .sidebarToggle {
@@ -27,7 +27,7 @@
 
 .header {
     height: var(--header-height);
-    background-color: var(--cv-primary);
+    background-color: var(--ai-bg-primary);
 
 }
 

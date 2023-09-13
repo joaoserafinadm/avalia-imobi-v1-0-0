@@ -274,14 +274,14 @@ export default function SignUp(props) {
                                 <div className="col-12 d-flex justify-content-center my-3">
                                     {singUpLoading ?
                                         <button
-                                            className="btn btn-outline-oceanBlue px-5"
+                                            className="btn btn-outline-orange px-5"
                                             disabled
                                         >
                                             <SpinnerSM />
                                         </button>
                                         :
                                         <input type="submit"
-                                            className="btn btn-outline-oceanBlue px-5" value={'Cadastre-se'} />
+                                            className="btn btn-outline-orange px-5" value={'Cadastre-se'} />
 
                                     }
                                 </div>
@@ -337,25 +337,26 @@ export default function SignUp(props) {
 
                         {window.innerWidth > 990 && (
                             <div className="col-6 d-flex justify-content-center align-items-center p-5">
-                                <div>
-                                    <div
-                                        id="carouselExampleFade"
-                                        className="carousel slide"
-                                        data-bs-ride="carousel"
-                                    >
-                                        <div className="carousel-inner">
-                                            <div className="carousel-item active">
-                                                <img src="/LOGO_NAME.png" alt="" height={200} />
+                                    <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+                                        <div class="carousel-inner">
+                                            <div class="carousel-item active" data-bs-interval="10000">
+                                                    <img src="LOGO_01.png" class="d-block" alt="..." height={200} />
                                             </div>
-                                            <div className="carousel-item">
-                                                <img src="/LOGO_LIGHT.png" alt="" height={200} />
-                                            </div>
-                                            <div className="carousel-item">
-                                                <img src="/LOGO_TITLE.png" alt="" height={200} />
+                                            <div class="carousel-item" data-bs-interval="10000">
+                                                    <img src="LOGO_02.png" class="d-block" alt="..." height={200} />
                                             </div>
                                         </div>
+                                        <div style={{ display: 'none' }}>
+                                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+                                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                <span class="visually-hidden">Previous</span>
+                                            </button>
+                                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+                                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                <span class="visually-hidden">Next</span>
+                                            </button>
+                                        </div>
                                     </div>
-                                </div>
                             </div>
                         )}
                     </div>

@@ -19,7 +19,7 @@ export default function Login() {
           name="viewport"
           content="width=device-width, initial-scale=1, shrink-to-fit=no"
         />
-        <link rel="icon" href="CV_ICON.ico" />
+        <link rel="icon" href="favicon.ico" />
       </Head>
       <div className={`${styles.container} container-fluid`}>
         <Head>
@@ -28,7 +28,7 @@ export default function Login() {
             name="viewport"
             content="width=device-width, initial-scale=1, shrink-to-fit=no"
           />
-          <link rel="icon" href="CV_ICON.ico" />
+          <link rel="icon" href="favicon.ico" />
         </Head>
 
         {section === "signIn" && (

@@ -109,7 +109,7 @@ export default function MyApp({ Component, pageProps }) {
                                     name="viewport"
                                     content="width=device-width, initial-scale=1, shrink-to-fit=no"
                                 />
-                                <link rel="icon" href="CV_ICON.ico" />
+                                <link rel="icon" href="favicon.ico" />
                                 <link
                                     rel="stylesheet"
                                     href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"

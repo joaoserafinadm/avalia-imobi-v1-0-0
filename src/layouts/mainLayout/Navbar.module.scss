@@ -8,7 +8,7 @@
     width: var(--aside-fixed-width);
     z-index: 1000;
     background-color: #fff;
-    transition: ease-in-out .4s;
+    transition: ease-in-out .3s;
 }
 
 .menuArea ul {
@@ -27,7 +27,7 @@
     box-sizing: border-box;
     text-decoration: none;
     color: var(--gray);
-    transition: ease-in-out 0.2s;
+    transition: ease-in-out 0.3s;
 }
 .menuArea ul li:hover span {
     color: var(--cv-primary);
@@ -47,7 +47,7 @@
     box-sizing: border-box;
     text-decoration: none;
     color: var(--gray);
-    transition: ease-in-out .2s;
+    transition: ease-in-out .3s;
     
 }
 

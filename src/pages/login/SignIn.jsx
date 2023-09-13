@@ -104,7 +104,7 @@ export default function signIn(props) {
                 {window.innerWidth > 990 && (
                     <div className="col-6 d-flex justify-content-center align-items-center">
                         <img
-                            src="/LOGO_LIGHT.png"
+                            src="/LOGO_02.png"
                             alt=""
                             className={`${styles.logoImg}`}
                             onLoad={() => setLoadedImages(loadedImages + 1)}
@@ -166,13 +166,13 @@ export default function signIn(props) {
                                     {singInLoading ? (
                                         <button
                                             disabled
-                                            className="btn btn-oceanBlue"
+                                            className="btn btn-orange"
                                             onClick={() => handleSignIn()}
                                         >
                                             <SpinnerSM />
                                         </button>
                                     ) : (
-                                        <button className="btn btn-outline-oceanBlue" type="submit">
+                                        <button className="btn btn-outline-orange" type="submit">
                                             Entrar
                                         </button>
                                     )}

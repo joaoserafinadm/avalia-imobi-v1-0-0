@@ -10,7 +10,7 @@ import { Accordion } from "react-bootstrap";
 import { useAccordionButton } from "react-bootstrap/AccordionButton";
 import { AccordionContext } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHome } from "@fortawesome/free-solid-svg-icons";
+import { faAngleRight, faGear, faHome } from "@fortawesome/free-solid-svg-icons";
 import { useEffect } from "react";
 
 export default function Nav(props) {
@@ -54,7 +54,7 @@ export default function Nav(props) {
                 <div className="col">
 
                     <div className="row align-items-center">
-                        <Link href={`/editProfile/${token.sub}`}>
+                        <Link href={`/editProfile`}>
                             <div className="d-flex justify-content-center">
                                 <span type="button">
                                     <img
@@ -118,6 +118,39 @@ export default function Nav(props) {
                                             </div>
                                         </Link>
                                     </ContextAwareToggle>
+                                </li>
+
+                                <li>
+                                    <ContextAwareToggle eventKey="5" collapse="configuracoesCollapse">
+                                        <div className="d-flex">
+                                            <div className="col-1 me-2">
+                                                <FontAwesomeIcon icon={faGear} className="me-2 icon" />
+                                            </div>
+                                            <div className="col-9">Configurações</div>
+                                            <div className="col-1 toggleIcon text-end">
+                                                <FontAwesomeIcon icon={faAngleRight} className=" icon" />
+                                            </div>
+                                        </div>
+                                    </ContextAwareToggle>
+                                    <Accordion.Collapse eventKey="5">
+                                        <ul>
+                                            <li>
+                                                <Link href={`/editProfile`}>
+                                                    <a>Editar Perfil</a>
+                                                </Link>
+                                            </li>
+                                            <li>
+                                                <Link href="/passwordChange">
+                                                    <a>Alterar Senha</a>
+                                                </Link>
+                                            </li>
+                                            <li>
+                                                <Link href="/accountSetup">
+                                                    <a>Configuração da Conta</a>
+                                                </Link>
+                                            </li>
+                                        </ul>
+                                    </Accordion.Collapse>
                                 </li>
                             </Accordion>
                         </ul>
