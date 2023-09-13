@@ -2,14 +2,14 @@
     font-family: "Open Sans", sans-serif !important;
     position: relative;
     height: 130px;
-    background-color: var(--header-color);
+    background-color: var(--ai-bg-primary);
 }
 
 .headerBackground {
 //       width: 100vw;
 //   height: 100vh;
 //   background-image: url(../../../public/bg2.jpg);
-background-color: var(--cv-primary);
+background-color:  var(--ai-bg-primary);
   opacity: 0.9;
   background-size: cover;
   background-position: center;
