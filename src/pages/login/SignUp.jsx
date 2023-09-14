@@ -311,52 +311,48 @@ export default function SignUp(props) {
                                     </div>
                                 </div>
                                 <div className="row">
-                                    <div className="col d-flex justify-content-center">
-
-                                        <div>
-
-                                            <span className="card py-2  my-2 cardAnimation" type="button" >
-                                                <div className="row ">
-                                                    <div className="col-12 d-flex align-items-center px-5">
-                                                        <img
-                                                            src="/ICON-GOOGLE.png"
-                                                            alt=""
-                                                            className="socialIcon me-2"
-                                                        />
-                                                        <div>
-                                                            <span>Cadastre-se com o Google</span>
-                                                        </div>
-                                                    </div>
+                                    <span className="card py-2 px-1 my-2 cardAnimation" type="button" >
+                                        <div className="row ">
+                                            <div className="col-12 d-flex justify-content-center">
+                                                <div className="icon-start">
+                                                    <img
+                                                        src="/ICON-GOOGLE.png"
+                                                        alt=""
+                                                        className="socialIcon"
+                                                    />
                                                 </div>
-                                            </span>
+                                                <div>
+                                                    <span >Cadastre-se com o Google</span>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </span>
                                 </div>
                             </form>
                         </div>
 
                         {window.innerWidth > 990 && (
                             <div className="col-6 d-flex justify-content-center align-items-center p-5">
-                                    <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
-                                        <div class="carousel-inner">
-                                            <div class="carousel-item active" data-bs-interval="10000">
-                                                    <img src="LOGO_01.png" class="d-block" alt="..." height={200} />
-                                            </div>
-                                            <div class="carousel-item" data-bs-interval="10000">
-                                                    <img src="LOGO_02.png" class="d-block" alt="..." height={200} />
-                                            </div>
+                                <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+                                    <div class="carousel-inner">
+                                        <div class="carousel-item active" data-bs-interval="10000">
+                                            <img src="LOGO_01.png" class="d-block" alt="..." height={200} />
                                         </div>
-                                        <div style={{ display: 'none' }}>
-                                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
-                                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                                <span class="visually-hidden">Previous</span>
-                                            </button>
-                                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
-                                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                                <span class="visually-hidden">Next</span>
-                                            </button>
+                                        <div class="carousel-item" data-bs-interval="10000">
+                                            <img src="LOGO_02.png" class="d-block" alt="..." height={200} />
                                         </div>
                                     </div>
+                                    <div style={{ display: 'none' }}>
+                                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                            <span class="visually-hidden">Previous</span>
+                                        </button>
+                                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                            <span class="visually-hidden">Next</span>
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         )}
                     </div>
