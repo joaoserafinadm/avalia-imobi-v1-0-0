@@ -10,8 +10,46 @@ export default function EditProfile() {
     return (
         <div>
             <Title title={'Editar Perfil'} backButton='/' />
-            <div className="pagesContent-sm shadow">
-                dsads
+            <div className="pagesContent shadow">
+                dsads <br />
+                dsads <br />
+                dsads <br />
+                dsads <br />
+                dsads <br />
+                dsads <br />
+                dsads <br />
+                dsads <br />
+                dsads <br />
+                dsads <br />
+                dsads <br />
+                dsads <br />
+                dsads <br />
+                dsads <br />
+                dsads <br />
+                dsads <br />
+                dsads <br />
+                dsads <br />
+                dsads <br />
+                dsads <br />
+                dsads <br />
+                dsads <br />
+                dsads <br />
+                dsads <br />
+                dsads <br />
+                dsads <br />
+                dsads <br />
+                dsads <br />
+                dsads <br />
+                dsads <br />
+                dsads <br />
+                dsads <br />
+                dsads <br />
+                dsads <br />
+                dsads <br />
+                dsads <br />
+                dsads <br />
+                dsads <br />
+                dsads <br />
             </div>
         </div>
     )

@@ -122,8 +122,7 @@ export default function MyApp({ Component, pageProps }) {
                                     content="width=device-width, initial-scale=1, shrink-to-fit=no"
                                 />
                                 <link rel="icon" href="favicon.ico" />
-                                <link rel="preconnect" href="https://fonts.googleapis.com" />
-                                <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+                                
                                 <link rel="manifest" href="/manifest.json" />
                                 <link rel="apple-touch-icon" href="/icon.png" />
                                 <meta name="theme-color" content="#fff" />
