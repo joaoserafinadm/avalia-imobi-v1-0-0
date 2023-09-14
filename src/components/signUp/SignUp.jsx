@@ -184,11 +184,6 @@ export default function SignUp() {
     return (
 
         <div className={`${styles.container} container-fluid`}>
-            <Head>
-                <title>AKVO</title>
-                <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-                <link rel="icon" href="favicon.ico" />
-            </Head>
 
             <div className={`row justify-content-center align-items-center ${styles.login_modal} `} >
                 <div className={`${styles.login_modal_width} ${styles.fadeItem} text-center`}>

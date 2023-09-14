@@ -91,23 +91,23 @@ export default function Header(props) {
                         <small >
                             <li className='mb-1 '>
                                 <Link href={`/editProfile/${token.sub}`}>
-                                    <a className="dropdown-item text-gray-dark" >
+                                    <span className="dropdown-item text-gray-dark" >
                                         <FontAwesomeIcon icon={faUser} className="me-1 icon" /> Editar perfil
-                                    </a>
+                                    </span>
                                 </Link>
                             </li>
                             <li className='my-1'>
                                 <Link href="/passwordChange">
-                                    <a className="dropdown-item text-gray-dark" >
+                                    <span className="dropdown-item text-gray-dark" >
                                         <FontAwesomeIcon icon={faKey} className="me-1 icon" /> Alterar senha
-                                    </a>
+                                    </span>
                                 </Link>
                             </li>
                             <li className='my-1'>
                                 <Link href="/companyEdit">
-                                    <a className="dropdown-item text-gray-dark" >
+                                    <span className="dropdown-item text-gray-dark" >
                                         <FontAwesomeIcon icon={faBuilding} className="me-1 icon" /> Editar instituição
-                                    </a>
+                                    </span>
                                 </Link>
                             </li>
                             <li className='my-1'><hr className='dropdown-divider' /></li>

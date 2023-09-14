@@ -136,17 +136,17 @@ export default function Nav(props) {
                                         <ul>
                                             <li>
                                                 <Link href={`/editProfile`}>
-                                                    <a>Editar Perfil</a>
+                                                    <span>Editar Perfil</span>
                                                 </Link>
                                             </li>
                                             <li>
                                                 <Link href="/passwordChange">
-                                                    <a>Alterar Senha</a>
+                                                    <span>Alterar Senha</span>
                                                 </Link>
                                             </li>
                                             <li>
                                                 <Link href="/accountSetup">
-                                                    <a>Configuração da Conta</a>
+                                                    <span>Configuração da Conta</span>
                                                 </Link>
                                             </li>
                                         </ul>
