@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-// import Document, { Html, Head, Main, NextScript } from "next/document";
 import Head from "next/head";
 import Router, { useRouter } from "next/router";
 import { Provider, useDispatch } from "react-redux";
@@ -7,12 +6,6 @@ import Cookie from "js-cookie";
 import { PersistGate } from "redux-persist/integration/react";
 import { createGlobalStyle } from "styled-components";
 
-import { Montserrat } from 'next/font/google'
-
-const montserrat = Montserrat({
-    weight: ['400', '500', '700'],
-    subsets: ['latin'],
-})
 
 if (typeof window !== "undefined") {
     window.bootstrap = require("bootstrap/dist/js/bootstrap.bundle.js");
@@ -96,10 +89,8 @@ export default function MyApp({ Component, pageProps }) {
             return (
                 <Provider store={store}>
                     <PersistGate persistor={persistedStore}>
-                        <main className={montserrat.className}>
 
                             <Login onChange={(token) => setToken(token)} />
-                        </main>
 
                     </PersistGate>
                 </Provider>
@@ -122,15 +113,13 @@ export default function MyApp({ Component, pageProps }) {
                                     content="width=device-width, initial-scale=1, shrink-to-fit=no"
                                 />
                                 <link rel="icon" href="favicon.ico" />
-                                
+
                                 <link rel="manifest" href="/manifest.json" />
                                 <link rel="apple-touch-icon" href="/icon.png" />
                                 <meta name="theme-color" content="#fff" />
                             </Head>
                             <MainLayout>
-                                <main className={montserrat.className}>
-                                    <Component {...pageProps} />
-                                </main>
+                                    <Component  {...pageProps} />
                             </MainLayout>
                         </PersistGate>
                     </Provider>

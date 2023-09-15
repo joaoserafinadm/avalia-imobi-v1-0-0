@@ -12,14 +12,11 @@ import { AccordionContext } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight, faGear, faHome } from "@fortawesome/free-solid-svg-icons";
 import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 export default function Nav(props) {
 
     const token = jwt.decode(Cookies.get("auth"));
-
-    useEffect(() => {
-        if (window.innerWidth < 800) props.setNavbarStatus(false)
-    }, [])
 
     function ContextAwareToggle({ children, eventKey, callback }) {
         const { activeEventKey } = useContext(AccordionContext);
@@ -48,7 +45,7 @@ export default function Nav(props) {
     return (
         <div
             className={`${styles.menuArea} shadow`}>
-            <Toggle navbarStatus={props.navbarStatus} setNavbarStatus={() => props.setNavbarStatus()} />
+            <Toggle/>
             <Logo />
             <div className=" row align-items-center mt-4 mb-2 fadeItem">
                 <div className="col">

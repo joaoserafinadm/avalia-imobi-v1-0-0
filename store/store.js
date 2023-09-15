@@ -11,6 +11,7 @@ import inventoryManagement from '../store/InventoryManagement/InventoryManagemen
 import reportLoading from './ReportLoading/ReportLoading.reducer'
 import { unidList, unidSelect } from './UnidSelect/UnidSelect.reducer'
 import akvoToolReducer from './AkvoTools/AkvoTools.reducer'
+import toggleBarStatus from './ToggleBarStatus/ToggleBarStatus.reducer'
 
 const rootReducer = combineReducers({
     inventoryList: inventoryList,
@@ -22,7 +23,8 @@ const rootReducer = combineReducers({
     reportLoading: reportLoading,
     unidList: unidList,
     unidSelect: unidSelect,
-    tool: akvoToolReducer
+    tool: akvoToolReducer,
+    toggleStatus: toggleBarStatus
 })
 
 const persistedReducer = persistReducer({

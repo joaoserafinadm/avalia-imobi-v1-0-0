@@ -4,6 +4,9 @@
 // import Title from '../src/components/title/Title2'
 import Cookie from 'js-cookie'
 import jwt from 'jsonwebtoken'
+import { useEffect } from 'react'
+import navbarHide from '../utils/navbarHide.js'
+import { useDispatch } from 'react-redux'
 // import Link from 'next/link'
 // import $ from 'jquery'
 // import axios from 'axios'
@@ -26,6 +29,14 @@ import jwt from 'jsonwebtoken'
 export default function Home() {
 
     const token = jwt.decode(Cookie.get('auth'))
+
+    const dispatch = useDispatch()
+    
+
+    useEffect(() => {
+        navbarHide(dispatch)        
+
+    }, [])
 
     return (
 

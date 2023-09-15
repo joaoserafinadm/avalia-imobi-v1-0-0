@@ -10,12 +10,13 @@ import tippy from "tippy.js";
 import Notifications from "./components/Notifications";
 import axios from "axios";
 import baseUrl from "../../../utils/baseUrl";
+import { useSelector } from "react-redux";
 
 export default function Header(props) {
 
-    const token = jwt.decode(Cookies.get('auth'))
-
     const router = useRouter();
+    const token = jwt.decode(Cookies.get('auth'))
+    const toggleStatus = useSelector(state => state.toggleStatus)
 
     const [notifications, setNotifications] = useState([])
 
@@ -52,7 +53,7 @@ export default function Header(props) {
 
     return (
         <div className={`d-flex justify-content-center align-items-center ${styles.header}`}>
-            {!props.navbarStatus && (
+            {!toggleStatus && (
                 <div className="fadeItem">
                     <Link href="/">
                         <div className='d-flex justify-content-center align-items-center ' >
