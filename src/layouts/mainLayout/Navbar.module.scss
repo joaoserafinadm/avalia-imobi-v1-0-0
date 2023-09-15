@@ -16,34 +16,34 @@
 }
 
 .menuArea ul span {
-    font-weight: 500;
-    display: block;
-    height: 100%;
-    width: 100%;
-    line-height: 50px;
-    font-size: 15px;
-    color: var(--bg-dark);
-    padding-left: 20px;
-    box-sizing: border-box;
-    text-decoration: none;
-    color: var(--gray);
-    transition: ease-in-out 0.3s;
-}
-.menuArea ul li:hover span {
-    color: var(--cv-primary);
-    font-weight: 525;
-}
-
-
-.menuArea ul a {
-    font-weight: 475;
+    font-weight: 400;
     display: block;
     height: 100%;
     width: 100%;
     line-height: 50px;
     font-size: 14px;
     color: var(--bg-dark);
-    padding-left: 55px;
+    padding-left: 20px;
+    box-sizing: border-box;
+    text-decoration: none;
+    color: var(--gray);
+    transition: ease-in-out 0.2s;
+}
+.menuArea ul li:hover  {
+    color: var(--cv-primary);
+    font-weight: 410;
+}
+
+
+.menuArea ul a {
+    font-weight: 400;
+    display: block;
+    height: 100%;
+    width: 100%;
+    line-height: 50px;
+    font-size: 14px;
+    color: var(--bg-dark);
+    padding-left: 30px;
     box-sizing: border-box;
     text-decoration: none;
     color: var(--gray);
@@ -51,9 +51,9 @@
     
 }
 
-.menuArea ul li a:hover {
+.menuArea ul li span:hover {
     color: var(--dark);
-    font-weight: 510;
+    font-weight: 410;
 }
 
 .img {

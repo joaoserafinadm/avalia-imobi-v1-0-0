@@ -13,10 +13,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight, faGear, faHome } from "@fortawesome/free-solid-svg-icons";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
+import { useRouter } from "next/router";
 
 export default function Nav(props) {
 
     const token = jwt.decode(Cookies.get("auth"));
+
+    const router = useRouter()
+
+
+
 
     function ContextAwareToggle({ children, eventKey, callback }) {
         const { activeEventKey } = useContext(AccordionContext);
@@ -45,7 +51,7 @@ export default function Nav(props) {
     return (
         <div
             className={`${styles.menuArea} shadow`}>
-            <Toggle/>
+            <Toggle />
             <Logo />
             <div className=" row align-items-center mt-4 mb-2 fadeItem">
                 <div className="col">
@@ -106,21 +112,19 @@ export default function Nav(props) {
                             <Accordion defaultActiveKey="0">
                                 <li>
                                     <ContextAwareToggle eventKey="0" collapse="InicioItem">
-                                        <Link href="/">
-                                            <div className="d-flex justify-content-start ">
-                                                <div className="col-1 me-2">
-                                                    <FontAwesomeIcon icon={faHome} className="me-2 icon" />
-                                                </div>
-                                                <div className="col-9">Início</div>
+                                        <div className="d-flex justify-content-start " type='button' onClick={() => router.push('/')}>
+                                            <div className="col-1 text-center me-3">
+                                                <FontAwesomeIcon icon={faHome} className="me-2 icon" />
                                             </div>
-                                        </Link>
+                                            <div className="col-9">Início</div>
+                                        </div>
                                     </ContextAwareToggle>
                                 </li>
 
                                 <li>
                                     <ContextAwareToggle eventKey="5" collapse="configuracoesCollapse">
                                         <div className="d-flex">
-                                            <div className="col-1 me-2">
+                                            <div className="col-1 text-center me-3">
                                                 <FontAwesomeIcon icon={faGear} className="me-2 icon" />
                                             </div>
                                             <div className="col-9">Configurações</div>
