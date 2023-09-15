@@ -13,6 +13,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import baseUrl from '../../../utils/baseUrl'
 import { useEffect, useState } from 'react'
+import { AiOutlineLeft } from '@react-icons/all-files/ai/AiOutlineLeft'
 
 
 export default function Title(props) {
@@ -40,7 +41,7 @@ export default function Title(props) {
                 <div className={styles.headerSubtitle}>{props.subtitle}</div>
                 {props.backButton && (
                     <Link href={props.backButton}>
-                        <span type="button" className={styles.backButton}><FontAwesomeIcon icon={faArrowLeft} className="me-2 icon" />Voltar</span>
+                        <span type="button" className={styles.backButton}><AiOutlineLeft className="me-2" />Voltar</span>
                     </Link>
                 )}
             </div>

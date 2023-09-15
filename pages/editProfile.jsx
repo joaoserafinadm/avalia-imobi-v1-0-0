@@ -17,9 +17,9 @@ export default function EditProfile() {
 
 
     return (
-        <div>
+        <div >
             <Title title={'Editar Perfil'} backButton='/' />
-            <div className="pagesContent shadow">
+            <div className="pagesContent shadow fadeItem">
                 dsads <br />
                 dsads <br />
                 dsads <br />
