@@ -77,7 +77,7 @@ export default function Nav(props) {
                     <div className="row align-items-center">
                         <div className="d-flex justify-content-center">
                             <small className={styles.userStatus}>
-                                {token.userStatus === 'adm' ? 'Administrador' : ''}
+                                {token.userStatus === 'admGlobal' ? 'Administrador' : ''}
                             </small>
                         </div>
                     </div>
@@ -137,7 +137,7 @@ export default function Nav(props) {
                                         <ul>
                                             <li>
                                                 <Link href={`/editProfile`}>
-                                                    <span>Editar Perfil</span>
+                                                    <span>Editar Cartão</span>
                                                 </Link>
                                             </li>
                                             <li>

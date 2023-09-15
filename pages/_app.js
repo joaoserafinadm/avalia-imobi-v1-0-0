@@ -103,7 +103,6 @@ export default function MyApp({ Component, pageProps }) {
 
         if (token) {
             return (
-                <div className="fadeItem2s customScroll">
                     <Provider store={store}>
                         <PersistGate persistor={persistedStore}>
                             <Head>
@@ -123,7 +122,6 @@ export default function MyApp({ Component, pageProps }) {
                             </MainLayout>
                         </PersistGate>
                     </Provider>
-                </div>
             );
         }
     };
