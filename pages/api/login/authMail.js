@@ -37,9 +37,9 @@ export default async (req, res) => {
                 const secureCode = await bcrypt.hash(code, saltCode)
 
                 const data = await resend.emails.send({
-                    from: 'Bem Vindo! <autenticacao@avaliaimobi.com.br>',
+                    from: 'Autenticação <autenticacao@avaliaimobi.com.br>',
                     to: [email],
-                    subject: 'Avalia Imobi - Autenticação',
+                    subject: 'Avalia Imobi',
                     react: AuthEmail({ firstName: firstName, code }),
                 });
 

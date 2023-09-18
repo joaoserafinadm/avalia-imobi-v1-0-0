@@ -7,6 +7,7 @@ import jwt from 'jsonwebtoken'
 import { useEffect } from 'react'
 import navbarHide from '../utils/navbarHide.js'
 import { useDispatch } from 'react-redux'
+import { useState } from 'react'
 // import Link from 'next/link'
 // import $ from 'jquery'
 // import axios from 'axios'
@@ -56,6 +57,7 @@ export default function Home() {
             {/* <IndexCardsTools />
 
             <IndexNotifications /> */}
+
 
 
             childrennnnn

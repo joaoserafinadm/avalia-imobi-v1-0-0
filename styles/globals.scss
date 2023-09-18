@@ -22,7 +22,7 @@
   --cv-light: #cacaca;
 
 
-  --ai-primary: #182538;
+  --ai-primary: #f5874f;
   --ai-primary-hover: #253855;
   --ai-primary-disabled: #254471;
   --ai-secondary: #4D88BB;
@@ -2993,4 +2993,6 @@ h1 {
   font-size: 14px;
 }
 
-
+.title-color {
+  color: var(--ai-primary);
+}

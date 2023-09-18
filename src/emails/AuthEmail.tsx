@@ -38,7 +38,7 @@ export const AuthEmail: React.FC<Readonly<EmailTemplateProps>> = ({
                         <Img
                             height="80"
                             alt="Avalia Imboi"
-                            src='https://res.cloudinary.com/dywdcjj76/image/upload/v1693277701/AVALIA%20IMOBI/EMAIL/LOGO_NAME_fzdpow.png'
+                            src='https://res.cloudinary.com/dywdcjj76/image/upload/v1694998829/AVALIA%20IMOBI/LOGOS/LOGO_02_wkzqga.png'
                             className="my-0 mx-auto"
                         />
                     </Section>
@@ -55,7 +55,7 @@ export const AuthEmail: React.FC<Readonly<EmailTemplateProps>> = ({
                         <Button
                             pX={20}
                             pY={12}
-                            className="bg-[#000000] rounded text-white text-[24px] font-semibold no-underline text-center"
+                            className="bg-[#f5874f] rounded text-white text-[24px] font-semibold no-underline text-center"
                         >
                             {code}
                         </Button>

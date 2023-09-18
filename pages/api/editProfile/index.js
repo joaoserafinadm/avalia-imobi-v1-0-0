@@ -1,4 +1,4 @@
-import connect from '../../../utils/database'
+import {connect} from '../../../utils/db'
 import { verify } from 'jsonwebtoken'
 import { ObjectId, ObjectID } from 'bson'
 
@@ -14,21 +14,35 @@ const authenticated = fn => async (req, res) => {
 export default authenticated(async (req, res) => {
     // export default async function (req, res) {
 
-    const user_id = req.query._id
 
     if (req.method === 'GET') {
 
-        const { db } = await connect()
+        const { user_id } = req.query
 
-        const response = await db.collection('users').findOne(
-            { _id: ObjectID(user_id) },
-            { _id: 0, password: 0, permissions: 0, adm: 0, company_id: 0 }
-        )
 
-        if (!response) {
-            res.status(400).json({ error: 'User do not exists.' })
+        if (!user_id) {
+            res.status(400).json({ error: 'Missing parameters on request body.' })
         } else {
-            res.status(200).json(response)
+
+            const { db } = await connect()
+
+            const response = await db.collection('users').findOne({ _id: ObjectId(user_id) })
+
+            const data = {
+                firstName: response.firstName,
+                lastName: response.lastName,
+                email: response.email,
+                workEmail: response.workEmail,
+                celular: response.celular,
+                telefone: response.telefone,
+                
+            }
+
+            if (!response) {
+                res.status(400).json({ error: 'User do not exists.' })
+            } else {
+                res.status(200).json(response)
+            }
         }
     }
 

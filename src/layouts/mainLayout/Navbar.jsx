@@ -136,6 +136,11 @@ export default function Nav(props) {
                                     <Accordion.Collapse eventKey="5">
                                         <ul>
                                             <li>
+                                                <Link href={`/companyEdit`}>
+                                                    <span>Imobiliária</span>
+                                                </Link>
+                                            </li>
+                                            <li>
                                                 <Link href={`/editProfile`}>
                                                     <span>Editar Cartão</span>
                                                 </Link>
