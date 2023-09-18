@@ -7,6 +7,8 @@ import Title from "../src/components/title/Title2";
 import window2Mobile from "../utils/window2Mobile";
 import VerticalLine from "../utils/VerticalLine";
 import Link from "next/link";
+import { useDispatch } from "react-redux";
+import navbarHide from "../utils/navbarHide";
 
 
 
@@ -14,6 +16,9 @@ import Link from "next/link";
 export default function companyEdit() {
 
     const token = jwt.decode(Cookies.get("auth"));
+
+    const dispatch = useDispatch()
+
 
     //States
     const [companyName, setCompanyName] = useState('')
@@ -34,6 +39,7 @@ export default function companyEdit() {
     useEffect(() => {
 
         dataFunction(token.company_id)
+        navbarHide(dispatch)
 
     }, [])
 
