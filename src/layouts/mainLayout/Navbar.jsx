@@ -19,6 +19,8 @@ export default function Nav(props) {
 
     const token = jwt.decode(Cookies.get("auth"));
 
+    console.log("token", token)
+
     const router = useRouter()
 
 
@@ -61,7 +63,7 @@ export default function Nav(props) {
                             <div className="d-flex justify-content-center">
                                 <span type="button">
                                     <img
-                                        src={token.profilePicture}
+                                        src={token.profileImageUrl}
                                         alt="User profile picture"
                                         className={`${styles.img} `}
                                     />
@@ -81,15 +83,21 @@ export default function Nav(props) {
                             </small>
                         </div>
                     </div>
-                    <div style={{ height: "25px" }} className="mt-3 slideDown">
-                        {token.companyLogo && (
-                            <Link href={"/companyEdit"}>
-                                <span type="button" className="row align-items-center">
+                    <div style={{ height: "30px" }} className="mt-3 slideDown">
+                        {(token.logo || token.companyName) && (
+                            <Link href="/companyEdit" >
+                                <span type="button" className="row align-items-center" >
                                     <div className="d-flex justify-content-center">
+                                        {token.logo ? 
                                         <img
                                             src={`${token.companyLogo}`}
                                             className={`${styles.companyLogo} fadeItem1s`}
                                         />
+                                            :
+                                            <span className={`${styles.userName}`}>
+                                                {token.companyName}
+                                            </span>
+                                            }
                                     </div>
                                 </span>
                             </Link>

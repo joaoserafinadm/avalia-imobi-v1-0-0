@@ -49,7 +49,7 @@ export const AuthEmail: React.FC<Readonly<EmailTemplateProps>> = ({
                         Olá {firstName},
                     </Text>
                     <Text className="text-black text-[16px] leading-[24px]">
-                        Para validarmos o acesso à ferramenta com segurança, use o código abaixo:
+                        Para validarmos seu acesso à ferramenta com segurança, use o código abaixo:
                     </Text>
                     <Section className="text-center mt-[32px] mb-[32px]">
                         <Button

@@ -9,7 +9,10 @@ import VerticalLine from "../utils/VerticalLine";
 import Link from "next/link";
 import { useDispatch } from "react-redux";
 import navbarHide from "../utils/navbarHide";
-
+import { SpinnerLG, SpinnerSM } from "../src/components/loading/Spinners";
+import scrollTo from "../utils/scrollTo";
+import EstadosList from "../src/components/estadosList";
+import { useRouter } from "next/router";
 
 
 
@@ -18,11 +21,13 @@ export default function companyEdit() {
     const token = jwt.decode(Cookies.get("auth"));
 
     const dispatch = useDispatch()
+    const router = useRouter()
 
 
     //States
     const [companyName, setCompanyName] = useState('')
     const [companyCreci, setCompanyCreci] = useState('')
+    const [email, setEmail] = useState('')
     const [telefone, setTelefone] = useState('')
     const [celular, setCelular] = useState('')
     const [cep, setCep] = useState('')
@@ -35,6 +40,7 @@ export default function companyEdit() {
 
     //Loading
     const [loadingPage, setLoadingPage] = useState(true)
+    const [loadingSave, setLoadingSave] = useState(false)
 
     useEffect(() => {
 
@@ -45,26 +51,28 @@ export default function companyEdit() {
 
     const dataFunction = async (company_id) => {
 
-        // await axios.get(`${baseUrl()}/api/companyEdit`, {
-        //     params: {
-        //         company_id: company_id
-        //     }
-        // }).then(res => {
-        //     setCompanyName(res.data.companyName)
-        //     setCompanyCreci(res.data.companyCreci)
-        //     setTelefone(res.data.telefone)
-
-        //     setCep(res.data.cep)
-        //     setLogradouro(res.data.logradouro)
-        //     setNumero(res.data.numero)
-        //     setCidade(res.data.cidade)
-        //     setEstado(res.data.estado)
-        //     setHeaderImg(res.data.headerImg)
-        //     setLogo(res.data.logo)
-        //     setLoadingPage(false)
-        // }).catch(e => {
-        //     console.log(e)
-        // })
+        await axios.get(`${baseUrl()}/api/companyEdit`, {
+            params: {
+                company_id: company_id
+            }
+        }).then(res => {
+            const data = res.data.response
+            setCompanyName(data.companyName)
+            setCompanyCreci(data.companyCreci)
+            setEmail(data.email)
+            setTelefone(data.telefone)
+            setCelular(data.celular)
+            setCep(data.cep)
+            setLogradouro(data.logradouro)
+            setNumero(data.numero)
+            setCidade(data.cidade)
+            setEstado(data.estado)
+            setHeaderImg(data.headerImg)
+            setLogo(data.logo)
+            setLoadingPage(false)
+        }).catch(e => {
+            console.log(e)
+        })
     }
 
     const maskCep = (value) => {
@@ -72,6 +80,24 @@ export default function companyEdit() {
             .replace(/\D/g, '')
             .replace(/(\d{5})(\d)/, '$1-$2')
             .replace(/(-\d{3})\d+?$/, '$1'))
+    }
+
+    const maskTelefone = (value) => {
+        return setTelefone(value
+            .replace(/\D/g, '')
+            .replace(/(\d{2})(\d)/, '($1) $2')
+            .replace(/(\d{4})(\d)/, '$1-$2')
+            .replace(/(\d{4})-(\d)(\d{4})/, '$1$2-$3')
+            .replace(/(-\d{4})\d+?$/, '$1'))
+    }
+
+    const maskCelular = (value) => {
+        return setCelular(value
+            .replace(/\D/g, '')
+            .replace(/(\d{2})(\d)/, '($1) $2')
+            .replace(/(\d{4})(\d)/, '$1-$2')
+            .replace(/(\d{4})-(\d)(\d{4})/, '$1$2-$3')
+            .replace(/(-\d{4})\d+?$/, '$1'))
     }
 
     const onBlurCep = (event) => {
@@ -95,116 +121,188 @@ export default function companyEdit() {
             })
     }
 
+    const validate = () => {
+
+
+
+        if (!companyName || !telefone || !cidade || !email) {
+            if (!companyName) document.getElementById("companyNameItem").classList.add('inputError')
+            if (!telefone) document.getElementById("telefoneItem").classList.add('inputError')
+            if (!cidade) document.getElementById("cidadeItem").classList.add('inputError')
+            if (!email) document.getElementById("emailItem").classList.add('inputError')
+            scrollTo('pageTop')
+            return false
+        }
+        else return true
+
+    }
+
+    const handleSave = async (company_id) => {
+
+        setLoadingSave(true)
+
+        const isValid = validate()
+
+        if (isValid) {
+
+            const data = {
+                token,
+                company_id,
+                user_id: token.sub,
+                companyName,
+                companyCreci,
+                telefone,
+                celular,
+                email,
+                cep,
+                logradouro,
+                numero,
+                cidade,
+                estado,
+                logo,
+                headerImg
+            }
+
+            await axios.post(`${baseUrl()}/api/companyEdit`, data)
+                .then(res => {
+                    localStorage.setItem('auth', (Cookies.get('auth')))
+                    router.push('/')
+                    setLoadingSave(false)
+
+                }).catch(e => {
+                    setLoadingSave(false)
+
+                })
+
+        } else {
+            setLoadingSave(false)
+            return
+        }
+    }
+
 
 
     return (
         <div >
             <Title title={'Editar Imobiliária'} backButton='/' />
-            <div className="pagesContent shadow fadeItem">
-                <div className="row d-flex justify-content-center">
-                    <div className="col-12 col-sm-5 d-flex">
-                        <div className="col-12">
-                            <div className="row">
+            {loadingPage ?
+                <SpinnerLG />
+                :
 
-                                <div className="d-flex justify-content-between">
-                                    <label htmlFor="logoItem" className=" fw-bold">Logo</label>
-                                    <span className="span" type='button'>Editar</span>
+                <div className="pagesContent shadow fadeItem" id="pageTop">
+                    <div className="row d-flex justify-content-center">
+                        <div className="col-12 col-sm-5 d-flex">
+                            <div className="col-12">
+                                <div className="row">
+
+                                    <div className="d-flex justify-content-between">
+                                        <label htmlFor="logoItem" className=" fw-bold">Logo</label>
+                                        <span className="span" type='button'>Editar</span>
+                                    </div>
+                                    <div className="row mt-3 ">
+                                        <div className="col-12 d-flex justify-content-center">
+                                            {logo ?
+                                                <img className="" src={logo} alt="logo" id="logoItem" />
+                                                :
+                                                <img src="https://res.cloudinary.com/dywdcjj76/image/upload/v1695002991/PUBLIC/companyLogoTemplate_xoeyar.png"
+                                                    alt="" style={{ height: '150px' }}
+                                                    type="button" />
+                                            }
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className="row mt-3 ">
-                                    <div className="col-12 d-flex justify-content-center">
-                                        {logo ?
-                                            <img className="" src={logo} alt="logo" />
-                                            :
-                                            <img src="https://res.cloudinary.com/dywdcjj76/image/upload/v1695002991/PUBLIC/companyLogoTemplate_xoeyar.png"
-                                                alt="" style={{ height: '150px' }}
-                                                type="button" />
-                                        }
+                                <hr />
+                                <div className="row">
+
+                                    <div className="d-flex justify-content-between">
+                                        <label htmlFor="headerImgItem" className=" fw-bold">Imagem de capa</label>
+                                        <span className="span" type='button'>Editar</span>
+                                    </div>
+                                    <div className="row mt-3 ">
+                                        <div className="col-12 d-flex justify-content-center">
+                                            {logo ?
+                                                <img className="" src={headerImg} alt="header image" id="headerImgItem" />
+                                                :
+                                                <img src="https://res.cloudinary.com/dywdcjj76/image/upload/v1695002991/PUBLIC/headerImgTemplate_dndggp.png"
+                                                    alt="" style={{ height: '150px' }}
+                                                    type="button" />
+                                            }
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <hr />
-                            <div className="row">
-
-                                <div className="d-flex justify-content-between">
-                                    <label htmlFor="logoItem" className=" fw-bold">Imagem de capa</label>
-                                    <span className="span" type='button'>Editar</span>
+                        </div>
+                        {window2Mobile() && (
+                            <VerticalLine />
+                        )}
+                        <div className="col-12 col-sm-6 d-flex">
+                            <div className="col-12">
+                                {!window2Mobile() && (<hr />)}
+                                <div className="row">
+                                    <label for="companyNameItem" class="form-label fw-bold">Imobiliária</label>
+                                    <div className="col-12 col-lg-8 my-2">
+                                        <input type="text" class="form-control form-control-sm" id="companyNameItem" value={companyName} onChange={e => setCompanyName(e.target.value)} placeholder="Nome da Imobiliária *" />
+                                    </div>
+                                    <div className="col-12 col-lg-4 my-2">
+                                        <input type="text" class="form-control form-control-sm" id="companyCreciItem" value={companyCreci} onChange={e => setCompanyCreci(e.target.value)} placeholder="Creci" />
+                                    </div>
                                 </div>
-                                <div className="row mt-3 ">
-                                    <div className="col-12 d-flex justify-content-center">
-                                        {logo ?
-                                            <img className="" src={headerImg} alt="logo" />
-                                            :
-                                            <img src="https://res.cloudinary.com/dywdcjj76/image/upload/v1695002991/PUBLIC/headerImgTemplate_dndggp.png"
-                                                alt="" style={{ height: '150px' }}
-                                                type="button" />
-                                        }
+                                {!window2Mobile() && (<hr />)}
+
+                                <div className="row mt-3">
+                                    <label for="cepItem" class="form-label fw-bold">Endereço</label>
+                                    <div className="col-12 col-lg-4 my-2">
+                                        <input type="text" class="form-control form-control-sm" id="cepItem" value={cep} onChange={e => maskCep(e.target.value)} onBlur={e => onBlurCep(e)} placeholder="CEP" />
+                                    </div>
+                                    <div className="col-12 col-lg-8 my-2">
+                                        <input type="text" class="form-control form-control-sm" id="logradouroItem" value={logradouro} onChange={e => setLogradouro(e.target.value)} placeholder="Logradouro" />
+                                    </div>
+                                    <div className="col-12 col-lg-4 my-2">
+                                        <input type="text" class="form-control form-control-sm" id="numeroItem" value={numero} onChange={e => setNumero(e.target.value)} placeholder="Número" />
+                                    </div>
+                                    <div className="col-12 col-lg-6 my-2">
+                                        <input type="text" class="form-control form-control-sm" id="cidadeItem" value={cidade} onChange={e => setCidade(e.target.value)} placeholder="Cidade *" />
+                                    </div>
+                                    <div className="col-12 col-lg-2 my-2">
+                                        <select className="form-select form-select-sm" placeholder="Estado" value={estado} onChange={(e) => setEstado(e.target.value)}>
+                                            <EstadosList />
+                                        </select>
+                                        {/* <input type="text" class="form-control form-control-sm" id="estadoItem" value={estado} onChange={e => setEstado(e.target.value)} placeholder="Estado *" /> */}
+                                    </div>
+                                </div>
+                                {!window2Mobile() && (<hr />)}
+
+                                <div className="row mt-3">
+                                    <label for="telefoneItem" class="form-label fw-bold">Contatos</label>
+                                    <div className="col-12 col-lg-6 my-2">
+                                        <input type="text" class="form-control form-control-sm" id="telefoneItem" value={telefone} onChange={e => maskTelefone(e.target.value)} placeholder="Telefone *" />
+                                    </div>
+                                    <div className="col-12 col-lg-6 my-2">
+                                        <input type="text" class="form-control form-control-sm" id="celularItem" value={celular} onChange={e => maskCelular(e.target.value)} placeholder="Celular" />
+                                    </div>
+                                    <div className="col-12 col-lg-12 my-2">
+                                        <input type="text" class="form-control form-control-sm" id="emailItem" value={email} onChange={e => setEmail(e.target.value)} placeholder="E-mail *" />
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    {window2Mobile() && (
-                        <VerticalLine />
-                    )}
-                    <div className="col-12 col-sm-6 d-flex">
-                        <div className="col-12">
-                            {!window2Mobile() && (<hr/>)}
-                            <div className="row">
-                                <label for="exampleInputPassword1" class="form-label fw-bold">Imobiliária</label>
-                                <div className="col-12 col-lg-8 my-2">
-                                    <input type="text" class="form-control form-control-sm" id="cepItem" value={companyName} onChange={e => setCompanyName(e.target.value)} placeholder="Nome da Imobiliária" />
-                                </div>
-                                <div className="col-12 col-lg-4 my-2">
-                                    <input type="text" class="form-control form-control-sm" id="cepItem" value={companyCreci} onChange={e => setCompanyCreci(e.target.value)} placeholder="Creci" />
-                                </div>
-                            </div>
-                            {!window2Mobile() && (<hr/>)}
-
-                            <div className="row mt-3">
-                                <label for="cepItem" class="form-label fw-bold">Endereço</label>
-                                <div className="col-12 col-lg-4 my-2">
-                                    <input type="text" class="form-control form-control-sm" id="cepItem" value={cep} onChange={e => maskCep(e.target.value)} onBlur={e => onBlurCep(e)} placeholder="CEP" />
-                                </div>
-                                <div className="col-12 col-lg-8 my-2">
-                                    <input type="text" class="form-control form-control-sm" id="logradouroItem" value={logradouro} onChange={e => setLogradouro(e.target.value)} placeholder="Logradouro" />
-                                </div>
-                                <div className="col-12 col-lg-4 my-2">
-                                    <input type="text" class="form-control form-control-sm" id="numeroItem" value={numero} onChange={e => setNumero(e.target.value)} placeholder="Número" />
-                                </div>
-                                <div className="col-12 col-lg-4 my-2">
-                                    <input type="text" class="form-control form-control-sm" id="cidadeItem" value={cidade} onChange={e => setCidade(e.target.value)} placeholder="Cidade" />
-                                </div>
-                                <div className="col-12 col-lg-4 my-2">
-                                    <input type="text" class="form-control form-control-sm" id="estadoItem" value={estado} onChange={e => setEstado(e.target.value)} placeholder="Estado" />
-                                </div>
-                            </div>
-                            {!window2Mobile() && (<hr/>)}
-
-                            <div className="row mt-3">
-                                <label for="cepItem" class="form-label fw-bold">Contatos</label>
-                                <div className="col-12 col-lg-6 my-2">
-                                    <input type="text" class="form-control form-control-sm" id="telefoneItem" value={telefone} onChange={e => setTelefone(e.target.value)} placeholder="Telefone" />
-                                </div>
-                                <div className="col-12 col-lg-6 my-2">
-                                    <input type="text" class="form-control form-control-sm" id="celularItem" value={celular} onChange={e => setCelular(e.target.value)} placeholder="Celular" />
-                                </div>
-                                <div className="col-12 col-lg-12 my-2">
-                                    <input type="text" class="form-control form-control-sm" id="celularItem" value={celular} onChange={e => setCelular(e.target.value)} placeholder="E-mail" />
-                                </div>
-                            </div>
+                    <hr />
+                    <div className="row">
+                        <div className="col-12 d-flex justify-content-end">
+                            <Link href="/">
+                                <button className="btn btn-sm btn-secondary">Cancelar</button>
+                            </Link>
+                            {loadingSave ?
+                                <button className="ms-2 btn btn-sm btn-orange px-4" disabled><SpinnerSM /></button>
+                                :
+                                <button className="ms-2 btn btn-sm btn-orange" onClick={() => handleSave(token.company_id)}>Salvar</button>
+                            }
                         </div>
                     </div>
                 </div>
-                <hr />
-                <div className="row">
-                    <div className="col-12 d-flex justify-content-end">
-                        <Link href="/">
-                            <button className="btn btn-sm btn-secondary">Cancelar</button>
-                        </Link>
-                        <button className="ms-2 btn btn-sm btn-orange text-white">Salvar</button>
-                    </div>
-                </div>
-            </div>
+            }
+
         </div>
 
     )

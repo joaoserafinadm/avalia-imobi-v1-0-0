@@ -8,8 +8,6 @@ export default async function (req, res) {
 
         const { firstName, lastName, email, password } = req.body
 
-        console.log(req.body)
-
         if (!firstName || !lastName || !email || !password) {
             res.status(400).json({ error: 'Missing body parameters.' })
         } else {
@@ -57,7 +55,7 @@ export default async function (req, res) {
                 const newCompany = await db.collection('companies').insertOne({
                     companyName: '',
                     companyCreci: '',
-                    email: email,
+                    email: '',
                     celular: '',
                     telefone: '',
                     cep: '',

@@ -32,16 +32,16 @@ export default function Home() {
     const token = jwt.decode(Cookie.get('auth'))
 
     const dispatch = useDispatch()
-    
+
 
     useEffect(() => {
-        navbarHide(dispatch)        
+        navbarHide(dispatch)
 
     }, [])
 
     return (
 
-        <div>
+        <div className='fadeItem2s'>
             {/* <Title title={`Olá, ${token.firstName}!`} subtitle={'Qual a sua meta de sustentabilidade para hoje?'} />
 
             <div className='index_bg'></div> */}
@@ -58,9 +58,11 @@ export default function Home() {
 
             <IndexNotifications /> */}
 
+            <span>
 
 
-            childrennnnn
+                childrennnnn
+            </span>
 
 
 

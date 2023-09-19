@@ -20,11 +20,9 @@ export default async (req, res) => {
         if (!userExists) {
             res.status(400).json({ error: 'Wrong e-mail or password.' })
         } else {
-            if (userExists.company_id) {
-                const company = await db.collection('companies').findOne(ObjectID(userExists.company_id))
-                userConfig = company.userConfig
-                companyLogo = company.profileImageUrl
-            }
+
+            const companyExist = await db.collection('companies').findOne(ObjectID(userExists.company_id))
+
             bcrypt.compare(password, userExists.password, async function (err, result) {
                 if (!err && result) {
                     if (userExists.active && (!userExists.dateLimit || userExists.dateLimit.toJSON().slice(0, 10) > new Date().toJSON().slice(0, 10))) {
@@ -33,12 +31,12 @@ export default async (req, res) => {
                             firstName: userExists.firstName,
                             lastName: userExists.lastName,
                             company_id: userExists.company_id,
-                            profilePicture: userExists.profileImageUrl,
-                            permissions: userExists.permissions,
+                            companyName: companyExist.companyName,
+                            profileImageUrl: userExists.profileImageUrl,
                             userStatus: userExists.userStatus,
                             dateLimit: userExists.dateLimit,
-                            userConfig: userConfig,
-                            companyLogo: companyLogo ? companyLogo : '',
+                            headerImg: companyExist.headerImg,
+                            logo: companyExist.logo,
                             active: userExists.active
                         }
 
@@ -46,7 +44,7 @@ export default async (req, res) => {
 
                         const response = res.setHeader('Set-Cookie', cookie.serialize('auth', jwt, {
                             httpOnly: false,
-                            secure: process.env.NODE_ENV !== false, //em produção usar true
+                            secure: process.env.NODE_ENV !== 'production', //em produção usar true
                             sameSite: 'strict',
                             path: '/'
                         }))

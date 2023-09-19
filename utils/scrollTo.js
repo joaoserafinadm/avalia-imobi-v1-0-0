@@ -1,4 +1,4 @@
-export default function scrollDown(id) {
+export default function scrollTo(id) {
 
     if (id) {
         setTimeout(() => {

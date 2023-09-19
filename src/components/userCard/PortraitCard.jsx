@@ -17,7 +17,7 @@ export default function PortraitCard(props) {
             </div>
             <div className={`${styles.profilePicRow}`}>
 
-                <img className={`${styles.profilePicture}`} src={token.profilePicture} alt="" />
+                <img className={`${styles.profilePicture}`} src={token.profileImageUrl} alt="" />
             </div>
             <div className={`${styles.body}`}>
                 <div className="col-12 mt-2 d-flex justify-content-center">

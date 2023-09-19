@@ -1,6 +1,8 @@
 import { connect } from '../../../utils/db'
-import { verify } from 'jsonwebtoken'
+import { verify, sign } from 'jsonwebtoken'
 import { ObjectId, ObjectID } from 'bson'
+import cookie from 'cookie'
+
 
 const authenticated = fn => async (req, res) => {
     verify(req.cookies.auth, process.env.JWT_SECRET, async function (err, decoded) {
@@ -23,16 +25,102 @@ export default authenticated(async (req, res) => {
 
             const { db } = await connect()
 
-            const companyExists = await db.collection('companies').findOne({_id: ObjectId(company_id)})
+            const response = await db.collection('companies').findOne({ _id: ObjectId(company_id) })
 
-            if(!companyExists) {
-                res.status(400).json({error: 'Company does not exist'})
+            if (!response) {
+                res.status(400).json({ error: 'Company does not exist' })
             } else {
-                res.status(200).json({companyExists})
+                res.status(200).json({ response })
             }
         }
 
 
+    } if (req.method === "POST") {
+
+        const { token,
+            company_id,
+            user_id,
+            companyName,
+            companyCreci,
+            telefone,
+            celular,
+            email,
+            cep,
+            logradouro,
+            numero,
+            cidade,
+            estado,
+            logo,
+            headerImg } = req.body
+
+        if (!token || !company_id || !user_id || !companyName || !telefone || !email || !cidade || !estado) {
+            res.status(400).json({ error: "Missing parameters on request body" })
+        } else {
+
+            const { db } = await connect()
+
+            const companyExist = await db.collection('companies').findOne({ _id: ObjectId(company_id) })
+            const userExist = await db.collection('users').findOne({ _id: ObjectId(user_id) })
+
+            if (!companyExist || !userExist) {
+                res.status(400).json({ error: "Company or user do not exist" })
+            } else {
+
+                const updateData = {
+                    companyName,
+                    companyCreci,
+                    telefone,
+                    celular,
+                    email,
+                    cep,
+                    logradouro,
+                    numero,
+                    cidade,
+                    estado,
+                    logo,
+                    headerImg
+                };
+
+                const response = await db.collection("companies").updateOne(
+                    { _id: ObjectId(company_id) },
+                    { $set: updateData }
+                )
+
+                console.log(response)
+
+                if (!response.matchedCount) {
+
+                   
+                    res.status(400).json({ error: "Cant update company" })
+
+                } else {
+
+                    const clains = {
+                        ...token,
+                        companyName: companyName,
+                        headerImg: headerImg,
+                        logo: logo
+                    }
+
+                    const jwt = sign(clains, process.env.JWT_SECRET, {})
+
+                    const response2 = res.setHeader('Set-Cookie', cookie.serialize('auth', jwt, {
+                        httpOnly: false,
+                        secure: process.env.NODE_ENV !== "production", //em produção usar true
+                        sameSite: 'strict',
+                        maxAge: 3600,
+                        path: '/'
+                    }))
+
+
+                    res.status(200).json({ message: "Company updated" })
+                }
+
+            }
+
+
+
+        }
     }
 
 

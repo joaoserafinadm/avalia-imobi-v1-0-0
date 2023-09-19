@@ -23,14 +23,13 @@
 
 
   --ai-primary: #f5874f;
-  --ai-primary-hover: #253855;
-  --ai-primary-disabled: #254471;
+  --ai-primary-hover: #db7846;
+  --ai-primary-disabled: #eb9770;
   --ai-secondary: #4D88BB;
   --ai-dark: #5a5a5a;
   --ai-light: #cacaca;
 
   --ai-bg-primary: #5a5a5a;
-
 
 
 
@@ -82,6 +81,10 @@
 body {
   margin: 0;
   overflow-x: hidden;
+}
+
+a{
+  color: #383b3f !important;
 }
 
 
@@ -2935,18 +2938,18 @@ h1 {
 
 
 .btn-orange {
-  color: var(--cv-light) !important;
-  background-color: #f5874f !important;
+  color: #fff !important;
+  background-color: var(--ai-primary) !important;
   border-radius: 5px !important;
   transition: .5s ease;
 }
 
 .btn-orange:hover {
-  background-color: #af6139 !important;
+  background-color: var(--ai-primary-hover) !important;
 }
 
 .btn-orange:disabled {
-  background-color: #c8967e !important;
+  background-color: var(--ai-primary-disabled) !important;
 }
 
 .span {
