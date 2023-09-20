@@ -13,6 +13,7 @@ import { SpinnerLG, SpinnerSM } from "../src/components/loading/Spinners";
 import scrollTo from "../utils/scrollTo";
 import EstadosList from "../src/components/estadosList";
 import { useRouter } from "next/router";
+import StyledDropzone from "../src/components/styledDropzone/StyledDropzone";
 
 
 
@@ -37,6 +38,8 @@ export default function companyEdit() {
     const [estado, setEstado] = useState('')
     const [headerImg, setHeaderImg] = useState('')
     const [logo, setLogo] = useState('')
+    const [logoPreview, setLogoPreview] = useState('')
+    const [headerImgPreview, setHeaderImgPreview] = useState('')
 
     //Loading
     const [loadingPage, setLoadingPage] = useState(true)
@@ -180,6 +183,10 @@ export default function companyEdit() {
         }
     }
 
+    const handleUpload = (files) => {
+        console.log(files)
+    }
+
 
 
     return (
@@ -200,15 +207,26 @@ export default function companyEdit() {
                                         <span className="span" type='button'>Editar</span>
                                     </div>
                                     <div className="row mt-3 ">
-                                        <div className="col-12 d-flex justify-content-center">
-                                            {logo ?
-                                                <img className="" src={logo} alt="logo" id="logoItem" />
-                                                :
-                                                <img src="https://res.cloudinary.com/dywdcjj76/image/upload/v1695002991/PUBLIC/companyLogoTemplate_xoeyar.png"
-                                                    alt="" style={{ height: '150px' }}
-                                                    type="button" />
-                                            }
-                                        </div>
+                                        <StyledDropzone setFiles={array => { setLogoPreview(array[0]) }} img>
+                                            <div className="col-12 d-flex justify-content-center align-items-center" style={{ height: '150px' }}>
+                                                {logoPreview ?
+                                                    <img className="" src={URL.createObjectURL(logoPreview)} alt="logo" id="logoItem" style={{ maxHeight: "20px", maxWidth: '150px' }} />
+                                                    :
+                                                    <>
+                                                        {logo ?
+                                                            <img className="" src={logo} alt="logo" id="logoItem" />
+                                                            :
+                                                            <img src="https://res.cloudinary.com/dywdcjj76/image/upload/v1695002991/PUBLIC/companyLogoTemplate_xoeyar.png"
+                                                                alt="" style={{ height: '150px' }}
+                                                                type="button" />
+                                                        }
+                                                    </>
+
+                                                }
+
+
+                                            </div>
+                                        </StyledDropzone>
                                     </div>
                                 </div>
                                 <hr />
@@ -219,15 +237,25 @@ export default function companyEdit() {
                                         <span className="span" type='button'>Editar</span>
                                     </div>
                                     <div className="row mt-3 ">
-                                        <div className="col-12 d-flex justify-content-center">
-                                            {logo ?
-                                                <img className="" src={headerImg} alt="header image" id="headerImgItem" />
-                                                :
-                                                <img src="https://res.cloudinary.com/dywdcjj76/image/upload/v1695002991/PUBLIC/headerImgTemplate_dndggp.png"
-                                                    alt="" style={{ height: '150px' }}
-                                                    type="button" />
-                                            }
-                                        </div>
+                                        <StyledDropzone setFiles={array => { setHeaderImgPreview(array[0]) }} img>
+                                            <div className="col-12 d-flex justify-content-center" style={{ height: '150px' }}>
+                                                {headerImgPreview ?
+                                                    <img className="" src={URL.createObjectURL(headerImgPreview)} alt="header image" id="headerImgItem" />
+                                                    :
+                                                    <>
+                                                        {headerImg ?
+                                                            <img className="" src={headerImg} alt="header image" id="headerImgItem" />
+                                                            :
+                                                            <img src="https://res.cloudinary.com/dywdcjj76/image/upload/v1695002991/PUBLIC/headerImgTemplate_dndggp.png"
+                                                                alt="" style={{ height: '150px' }}
+                                                                type="button" />
+                                                        }
+
+                                                    </>
+                                                }
+                                            </div>
+                                        </StyledDropzone>
+
                                     </div>
                                 </div>
                             </div>
