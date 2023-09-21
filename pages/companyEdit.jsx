@@ -14,6 +14,7 @@ import scrollTo from "../utils/scrollTo";
 import EstadosList from "../src/components/estadosList";
 import { useRouter } from "next/router";
 import StyledDropzone from "../src/components/styledDropzone/StyledDropzone";
+import { createImageUrl } from "../utils/createImageUrl";
 
 
 
@@ -144,6 +145,10 @@ export default function companyEdit() {
 
         setLoadingSave(true)
 
+        const newLogo = logoPreview ? await createImageUrl([logoPreview], "AVALIAIMOBI_LOGO_IMG") : ''
+        const newHeaderImg = headerImgPreview ? await createImageUrl([headerImgPreview], "AVALIAIMOBI_HEADER_IMG") : ''
+
+        console.log(newLogo, newHeaderImg)
         const isValid = validate()
 
         if (isValid) {
@@ -162,8 +167,8 @@ export default function companyEdit() {
                 numero,
                 cidade,
                 estado,
-                logo,
-                headerImg
+                logo: newLogo ? newLogo[0].url : logo,
+                headerImg: newHeaderImg ? newHeaderImg[0].url : headerImg
             }
 
             await axios.post(`${baseUrl()}/api/companyEdit`, data)
@@ -203,21 +208,24 @@ export default function companyEdit() {
                                 <div className="row">
 
                                     <div className="d-flex justify-content-between">
-                                        <label htmlFor="logoItem" className=" fw-bold">Logo</label>
-                                        <span className="span" type='button'>Editar</span>
+                                        <input type="file" name="image/*" id="logoItem" accept="image/*" onChange={e => setLogoPreview(e.target.files[0])}
+                                            className="form-input" hidden />
+                                        <label className=" fw-bold">Logo</label>
+                                        <label htmlFor="logoItem" className="span" type='button'>Editar</label>
                                     </div>
-                                    <div className="row mt-3 ">
-                                        <StyledDropzone setFiles={array => { setLogoPreview(array[0]) }} img>
-                                            <div className="col-12 d-flex justify-content-center align-items-center" style={{ height: '150px' }}>
+                                    <StyledDropzone setFiles={array => { setLogoPreview(array[0]) }} img>
+                                        <div className="row mt-3 d-flex justify-content-center align-items-center" style={{ height: '150px' }}>
+
+                                            <div className="col-12 d-flex justify-content-center align-items-center" >
                                                 {logoPreview ?
-                                                    <img className="" src={URL.createObjectURL(logoPreview)} alt="logo" id="logoItem" style={{ maxHeight: "20px", maxWidth: '150px' }} />
+                                                    <img src={URL.createObjectURL(logoPreview)} alt="logo" id="logoItem" className="logoEdit fadeItem" />
                                                     :
                                                     <>
                                                         {logo ?
-                                                            <img className="" src={logo} alt="logo" id="logoItem" />
+                                                            <img src={logo} alt="logo" id="logoItem" className="logoEdit fadeItem" />
                                                             :
-                                                            <img src="https://res.cloudinary.com/dywdcjj76/image/upload/v1695002991/PUBLIC/companyLogoTemplate_xoeyar.png"
-                                                                alt="" style={{ height: '150px' }}
+                                                            <img src="https://res.cloudinary.com/dywdcjj76/image/upload/v1695257785/PUBLIC/companyLogoTemplate_xoeyar.png"
+                                                                alt="" className="logoEdit"
                                                                 type="button" />
                                                         }
                                                     </>
@@ -226,37 +234,39 @@ export default function companyEdit() {
 
 
                                             </div>
-                                        </StyledDropzone>
-                                    </div>
+                                        </div>
+                                    </StyledDropzone>
                                 </div>
                                 <hr />
                                 <div className="row">
 
                                     <div className="d-flex justify-content-between">
-                                        <label htmlFor="headerImgItem" className=" fw-bold">Imagem de capa</label>
-                                        <span className="span" type='button'>Editar</span>
+                                        <input type="file" name="image/*" id="headerImgItem" accept="image/*" onChange={e => setHeaderImgPreview(e.target.files[0])}
+                                            className="form-input" hidden />
+                                        <label className=" fw-bold">Imagem de capa</label>
+                                        <label htmlFor="headerImgItem" className="span" type='button'>Editar</label>
                                     </div>
-                                    <div className="row mt-3 ">
-                                        <StyledDropzone setFiles={array => { setHeaderImgPreview(array[0]) }} img>
-                                            <div className="col-12 d-flex justify-content-center" style={{ height: '150px' }}>
+                                    <StyledDropzone setFiles={array => { setHeaderImgPreview(array[0]) }} img>
+                                        <div className="row mt-3 d-flex justify-content-center align-items-center" style={{ height: '150px' }}>
+                                            <div className="col-12 d-flex justify-content-center" >
                                                 {headerImgPreview ?
-                                                    <img className="" src={URL.createObjectURL(headerImgPreview)} alt="header image" id="headerImgItem" />
+                                                    <img className="headerImgEdit fadeItem" src={URL.createObjectURL(headerImgPreview)} alt="header image" id="headerImgItem" />
                                                     :
                                                     <>
                                                         {headerImg ?
-                                                            <img className="" src={headerImg} alt="header image" id="headerImgItem" />
+                                                            <img className="headerImgEdit fadeItem" src={headerImg} alt="header image" id="headerImgItem" />
                                                             :
                                                             <img src="https://res.cloudinary.com/dywdcjj76/image/upload/v1695002991/PUBLIC/headerImgTemplate_dndggp.png"
-                                                                alt="" style={{ height: '150px' }}
+                                                                alt="" className="headerImgEdit fadeItem"
                                                                 type="button" />
                                                         }
 
                                                     </>
                                                 }
                                             </div>
-                                        </StyledDropzone>
 
-                                    </div>
+                                        </div>
+                                    </StyledDropzone>
                                 </div>
                             </div>
                         </div>

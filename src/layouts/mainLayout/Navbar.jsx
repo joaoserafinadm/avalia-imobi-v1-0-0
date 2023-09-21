@@ -83,18 +83,18 @@ export default function Nav(props) {
                             </small>
                         </div>
                     </div>
-                    <div style={{ height: "30px" }} className="mt-3 slideDown">
+                    <div style={{ height: "75px" }} className=" slideDown d-flex justify-content-center align-items-center">
                         {(token.logo || token.companyName) && (
                             <Link href="/companyEdit" >
                                 <span type="button" className="row align-items-center" >
                                     <div className="d-flex justify-content-center">
                                         {token.logo ? 
                                         <img
-                                            src={`${token.companyLogo}`}
+                                            src={token.logo}
                                             className={`${styles.companyLogo} fadeItem1s`}
                                         />
                                             :
-                                            <span className={`${styles.userName}`}>
+                                            <span className={`${styles.userName} text-center fadeItem1s`}>
                                                 {token.companyName}
                                             </span>
                                             }
