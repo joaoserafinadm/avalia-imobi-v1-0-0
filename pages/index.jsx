@@ -61,7 +61,7 @@ export default function Home() {
             <span>
 
 
-                childrennnnn
+                Página inicial
             </span>
 
 

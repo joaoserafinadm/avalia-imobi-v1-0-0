@@ -14,26 +14,35 @@ export default function PortraitCard(props) {
     return (
         <div className={`${styles.main} shadow`}>
             <div className={`${styles.header}`}>
+                <img src={props.headerImg} alt="" className={`${styles.headerImg}`} />
             </div>
             <div className={`${styles.profilePicRow}`}>
 
-                <img className={`${styles.profilePicture}`} src={token.profileImageUrl} alt="" />
+                <img className={`${styles.profilePicture}`} src={props.profileImageUrl} alt="" />
             </div>
             <div className={`${styles.body}`}>
                 <div className="col-12 mt-2 d-flex justify-content-center">
-                    <span className='fs-5'>{props.firstName} {token.lastName}</span>
+                    <span className='fs-5'>{props.firstName} {props.lastName}</span>
                 </div>
                 <div className="col-12 mt-2 d-flex justify-content-center">
                     <span className='small'>
 
-                        Creci: 72636F | (54) 99989-0835
+                        Creci: {props.creci} | {props.celular}
                     </span>
                 </div>
                 <div className="col-12 mt-2 d-flex justify-content-center">
                     <span className='small'>
 
-                        joaoserafin.adm@gmail.com
+                        {props.mainEmail}
                     </span>
+                </div>
+                <div className="col-12 mt-5 d-flex justify-content-center">
+                    <img src={props.logo} alt="" style={{
+                        maxHeight: "50px",
+                        maxWidth: "130px",
+                        height: "auto",
+                        width: "auto"
+                    }} />
                 </div>
             </div>
         </div>

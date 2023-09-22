@@ -1,4 +1,4 @@
-import {connect} from '../../../utils/db'
+import { connect } from '../../../utils/db'
 import { verify } from 'jsonwebtoken'
 import { ObjectId, ObjectID } from 'bson'
 
@@ -17,7 +17,7 @@ export default authenticated(async (req, res) => {
 
     if (req.method === 'GET') {
 
-        const { user_id } = req.query
+        const { company_id, user_id } = req.query
 
 
         if (!user_id) {
@@ -26,22 +26,21 @@ export default authenticated(async (req, res) => {
 
             const { db } = await connect()
 
+            const companyExist = await db.collection('companies').findOne({ _id: ObjectId(company_id) })
+
             const response = await db.collection('users').findOne({ _id: ObjectId(user_id) })
 
             const data = {
-                firstName: response.firstName,
-                lastName: response.lastName,
-                email: response.email,
-                workEmail: response.workEmail,
-                celular: response.celular,
-                telefone: response.telefone,
-                
+                ...response,
+                headerImg: companyExist.headerImg,
+                logo: companyExist.logo
+
             }
 
             if (!response) {
                 res.status(400).json({ error: 'User do not exists.' })
             } else {
-                res.status(200).json(response)
+                res.status(200).json(data)
             }
         }
     }
