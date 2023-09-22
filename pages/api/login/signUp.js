@@ -88,7 +88,7 @@ export default async function (req, res) {
                     estado: '',
                     company_id: newCompany.insertedId.toString(),
                     userStatus: 'admGlobal',
-                    profileImageUrl: 'https://res.cloudinary.com/dywdcjj76/image/upload/v1692760589/PUBLIC/user_template_ocrbrg.png',
+                    profileImageUrl: 'https://res.cloudinary.com/joaoserafinadm/image/upload/v1692760589/PUBLIC/user_template_ocrbrg.png',
                     password: securePassword,
                     permissions: false,
                     dateAdd: new Date(),
