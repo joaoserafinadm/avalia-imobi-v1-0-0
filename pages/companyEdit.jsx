@@ -224,7 +224,7 @@ export default function companyEdit() {
                                                         {logo ?
                                                             <img src={logo} alt="logo" id="logoItem" className="logoEdit fadeItem" />
                                                             :
-                                                            <img src="https://res.cloudinary.com/dywdcjj76/image/upload/v1695257785/PUBLIC/companyLogoTemplate_xoeyar.png"
+                                                            <img src="https://res.cloudinary.com/joaoserafinadm/image/upload/v1695257785/PUBLIC/companyLogoTemplate_xoeyar.png"
                                                                 alt="" className="logoEdit"
                                                                 type="button" />
                                                         }
@@ -256,7 +256,7 @@ export default function companyEdit() {
                                                         {headerImg ?
                                                             <img className="headerImgEdit fadeItem" src={headerImg} alt="header image" id="headerImgItem" />
                                                             :
-                                                            <img src="https://res.cloudinary.com/dywdcjj76/image/upload/v1695002991/PUBLIC/headerImgTemplate_dndggp.png"
+                                                            <img src="https://res.cloudinary.com/joaoserafinadm/image/upload/v1695601556/PUBLIC/3_weeijf.png"
                                                                 alt="" className="headerImgEdit fadeItem"
                                                                 type="button" />
                                                         }
