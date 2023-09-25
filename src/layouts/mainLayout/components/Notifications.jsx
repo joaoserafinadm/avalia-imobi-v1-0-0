@@ -18,27 +18,27 @@ export default function Notifications(props) {
 
             {!!props.notifications.length && props.notifications.map(elem => {
                 return (
-                    <Link href={elem.link}>
-                        <span type='button' className={`${styles.hover} d-flex justify-content-center align-items-center py-2`}>
-                            <div className={`row `}>
-                                <span className="col-12 d-flex ">
-                                    <div className="col-2 d-flex justify-content-center align-items-center">
-                                        <img src={elem.imageUrl} alt="" height={30} />
+                    <Link href={elem.link} key={elem._id}>
+                        <span type='button' className={`${styles.hover} d-flex justify-content-center align-items-center py-2`} >
+
+                            <span className="col-12 d-flex ">
+                                <div className="col-2 d-flex justify-content-center align-items-center">
+                                    <img src={elem.imageUrl} alt="" height={30} />
+                                    <div style={{ position: "absolute" }}>
+
+                                        {!elem.checked && (
+                                            <div className="notificationIcon fadeItem">
+                                            </div>
+                                        )}
                                     </div>
-                                    <div className="col-10 d-flex justify-content-center align-items-center">
-                                        <span className={`${styles.p}`}>
-                                            {elem.text}
-                                        </span>
-                                    </div>
-
-                                </span>
-
-
-
-                            </div>
-
+                                </div>
+                                <div className="col-10 d-flex justify-content-start align-items-center">
+                                    <span className={`${styles.p}`}>
+                                        {elem.text}
+                                    </span>
+                                </div>
+                            </span>
                         </span>
-
                     </Link>
                 )
             })}

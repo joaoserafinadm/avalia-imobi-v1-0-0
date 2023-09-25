@@ -19,12 +19,7 @@ export default function Nav(props) {
 
     const token = jwt.decode(Cookies.get("auth"));
 
-    console.log("token", token)
-
     const router = useRouter()
-
-
-
 
     function ContextAwareToggle({ children, eventKey, callback }) {
         const { activeEventKey } = useContext(AccordionContext);

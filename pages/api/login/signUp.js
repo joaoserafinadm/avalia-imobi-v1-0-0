@@ -43,14 +43,37 @@ export default async function (req, res) {
 
                 const notifications = [
                     {
-                        // _id: ObjectId(),
+                        _id: ObjectId(),
                         dateAdded: new Date(),
                         subject: 'star',
                         text: "Bem vindo ao Avalia Imobi! Clique aqui para fazer um tour pela plataforma!",
-                        link: 'http://localhost:3000',
-                        imageUrl: 'https://res.cloudinary.com/dywdcjj76/image/upload/v1693963692/PUBLIC/TEMPLATE_IMG_shcaor.png'
+                        link: `https://app.avaliaimobi.com.br/companyEdit`,
+                        imageUrl: 'https://res.cloudinary.com/joaoserafinadm/image/upload/v1693963692/PUBLIC/TEMPLATE_IMG_shcaor.png',
+                        user_id: '',
+                        checked: false
+                    },
+                    {
+                        _id: ObjectId(),
+                        dateAdded: new Date(),
+                        subject: 'star',
+                        text: "Configure a sua imobiliaria.",
+                        link: `https://app.avaliaimobi.com.br/companyEdit`,
+                        imageUrl: 'https://res.cloudinary.com/joaoserafinadm/image/upload/v1695601557/PUBLIC/6_otqvgl.png',
+                        user_id: '',
+                        checked: false
+                    },
+                    {
+                        _id: ObjectId(),
+                        dateAdded: new Date(),
+                        subject: 'star',
+                        text: "Configure o seu perfil.",
+                        link: `https://app.avaliaimobi.com.br/editProfile`,
+                        imageUrl: 'https://res.cloudinary.com/joaoserafinadm/image/upload/v1695601556/PUBLIC/2_fbxre3.png',
+                        user_id: '',
+                        checked: false
                     }
                 ]
+
 
                 const newCompany = await db.collection('companies').insertOne({
                     companyName: '',
@@ -99,7 +122,8 @@ export default async function (req, res) {
                     accessCount: 0,
                     active: true,
                     deleted: false,
-                    notifications: notifications
+                    notifications: notifications,
+                    history: []
                 })
 
                 if (newCompany.insertedId && newUser.insertedId) {

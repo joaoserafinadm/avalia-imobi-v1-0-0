@@ -5,7 +5,7 @@ import Cookies from "js-cookie";
 import jwt from "jsonwebtoken";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import tippy from "tippy.js";
 import Notifications from "./components/Notifications";
 import axios from "axios";
@@ -14,15 +14,50 @@ import { useSelector } from "react-redux";
 
 export default function Header(props) {
 
+    const dropdownRef = useRef(null);
+
     const router = useRouter();
     const token = jwt.decode(Cookies.get('auth'))
     const toggleStatus = useSelector(state => state.toggleStatus)
 
     const [notifications, setNotifications] = useState([])
+    const [dropdownStatus, setDropdownStatus] = useState(true)
 
     useEffect(() => {
         dataFunction(token.sub)
     }, [])
+
+    useEffect(() => {
+        const dropdownElement = dropdownRef.current;
+
+        const showDropdownHandler = () => {
+            setDropdownStatus(true);
+        };
+
+        const hideDropdownHandler = () => {
+            setDropdownStatus(false);
+        };
+
+        dropdownElement.addEventListener('show.bs.dropdown', showDropdownHandler);
+        dropdownElement.addEventListener('hide.bs.dropdown', hideDropdownHandler);
+
+        return () => {
+            dropdownElement.removeEventListener('show.bs.dropdown', showDropdownHandler);
+            dropdownElement.removeEventListener('hide.bs.dropdown', hideDropdownHandler);
+        };
+    }, []);
+
+    useEffect(() => {
+
+        setTimeout(() => {
+
+            if (!dropdownStatus) {
+                handleNotificationCheck()
+            }
+        }, 100)
+
+
+    }, [dropdownStatus])
 
 
     const hendleSession = async () => {
@@ -49,6 +84,33 @@ export default function Header(props) {
 
     }
 
+    const handleShowNotifications = () => {
+
+        const unviewedNot = notifications.filter(elem => elem.checked === false)
+
+        return unviewedNot.length
+    }
+
+    const handleNotificationCheck = async () => {
+
+        const newNotStatus = notifications.map(elem => {
+            return { ...elem, checked: true }
+        })
+
+        setNotifications(newNotStatus)
+
+        if (handleShowNotifications()) {
+
+            await axios.patch(`${baseUrl()}/api/notifications`, {
+                company_id: token.company_id,
+                user_id: token.sub
+            }).then(res => {
+                dataFunction(token.sub)
+            })
+
+        }
+    }
+
 
 
     return (
@@ -68,10 +130,14 @@ export default function Header(props) {
 
             <div className={`d-flex ${styles.configIcons}`}>
 
-
-                <div className={` dropdown`}>
-                    <span type="button" className="" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <div className={` dropdown`} ref={dropdownRef}>
+                    <span type="button" className="" role="button" data-bs-toggle="dropdown" aria-expanded="false" >
                         <FontAwesomeIcon icon={faBell} className="text-light icon px-3 " />
+                        {!!handleShowNotifications() && (
+                            <div className={`${styles.notificationIcon} fadeItem`}>
+                                <p className='text-light d-flex justify-content-center align-items-center'>{handleShowNotifications()}</p>
+                            </div>
+                        )}
                     </span>
 
                     <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownNotification">

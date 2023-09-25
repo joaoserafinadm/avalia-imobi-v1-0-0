@@ -3013,3 +3013,16 @@ h1 {
     width: auto;
     height: auto;
 }
+
+
+.notificationIcon {
+  position: relative;
+	top: -15px;
+	right: 10px;
+	border-radius: 100%;
+	height: 14px;
+	width: 14px;
+	background-color: var(--danger);
+	border: #fff solid 1px;
+  font-size: 10px;
+}

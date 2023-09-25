@@ -82,6 +82,39 @@ export default authenticated(async (req, res) => {
             }
         }
 
+    } else if (req.method === "PATCH") {
+
+        const { company_id, user_id } = req.body
+
+        console.log(req.body, company_id, user_id)
+
+        if (!company_id || !user_id) {
+            res.status(400).json({ error: "Missing parameters on request body" })
+        } else {
+
+            const { db } = await connect()
+
+            const companyExists = await db.collection('companies').findOne({ _id: ObjectId(company_id) })
+            const userExist = await db.collection('users').findOne({ _id: ObjectId(user_id) })
+
+            if (!companyExists || !userExist) {
+                res.status(400).json({ error: "Company or user does not exist" })
+
+            } else {
+
+                const result = await db.collection('users').updateOne(
+                    { _id: new ObjectId(user_id) },
+                    { $set: { 'notifications.$[].checked': true } }
+                );
+
+                if (result.matchedCount) {
+                    res.status(200).json({ message: "Notifications updated" })
+                } else {
+                    res.status(400).json({ error: "Cant update notifications" })
+                }
+            }
+
+        }
 
 
     }

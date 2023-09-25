@@ -8,36 +8,38 @@ import { useSelector } from "react-redux";
 
 export default function MainLayout({ children }) {
 
-  const toggleStatus = useSelector(state => state.toggleStatus)
+    const toggleStatus = useSelector(state => state.toggleStatus)
 
-  const [navbarStatus, setNavbarStatus] = useState(true)
+    const [navbarStatus, setNavbarStatus] = useState(true)
 
-  useEffect(() => {
-    handleSidebarToggle()
-  }, [toggleStatus])
+    useEffect(() => {
+        handleSidebarToggle()
+    }, [toggleStatus])
 
-  const handleSidebarToggle = () => {
-    const fixedWidht = document.documentElement.style.getPropertyValue('--aside-fixed-width')
-    if (toggleStatus) document.documentElement.style.setProperty('--aside-width', fixedWidht)
-    else document.documentElement.style.setProperty('--aside-width', '0px')
-  }
+    const handleSidebarToggle = () => {
+        const fixedWidht = document.documentElement.style.getPropertyValue('--aside-fixed-width')
+        if (toggleStatus) document.documentElement.style.setProperty('--aside-width', fixedWidht)
+        else document.documentElement.style.setProperty('--aside-width', '0px')
+    }
 
-  return (
-    <div className="app">
-      <Navbar />
+    
 
-      <div className={`col  pages`} >
+    return (
+        <div className="app">
+            <Navbar />
 
-
-        <Header navbarStatus={navbarStatus}/>
-
-        {children}
-      </div>
+            <div className={`col  pages`} >
 
 
+                <Header navbarStatus={navbarStatus} />
+
+                {children}
+            </div>
 
 
 
-    </div>
-  );
+
+
+        </div>
+    );
 }
