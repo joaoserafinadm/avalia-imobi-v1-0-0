@@ -12,12 +12,18 @@ import { AccordionContext } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight, faGear, faHome } from "@fortawesome/free-solid-svg-icons";
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
+import window2Mobile from "../../../utils/window2Mobile";
+import { toggleBarChange } from "../../../store/ToggleBarStatus/ToggleBarStatus.action";
 
 export default function Nav(props) {
 
     const token = jwt.decode(Cookies.get("auth"));
+    const toggleStatus = useSelector(state => state.toggleStatus)
+
+    const dispatch = useDispatch()
+
 
     const router = useRouter()
 
@@ -46,128 +52,135 @@ export default function Nav(props) {
 
 
     return (
-        <div
-            className={`${styles.menuArea} shadow`}>
-            <Toggle />
-            <Logo />
-            <div className=" row align-items-center mt-4 mb-2 fadeItem">
-                <div className="col">
+        <>
+            <div className={`${styles.menuArea} shadow`}>
+                <Toggle />
+                <Logo />
+                <div className=" row align-items-center mt-4 mb-2 fadeItem">
+                    <div className="col">
 
-                    <div className="row align-items-center">
-                        <Link href={`/editProfile`}>
-                            <div className="d-flex justify-content-center">
-                                <span type="button">
-                                    <img
-                                        src={token.profileImageUrl}
-                                        alt="User profile picture"
-                                        className={`${styles.img} `}
-                                    />
-                                </span>
-                            </div>
-                        </Link>
-                    </div>
-                    <div className="row align-items-center mt-2">
-                        <div className={`d-flex justify-content-center ${styles.userName}`}>
-                            {token.firstName} {token.lastName}
-                        </div>
-                    </div>
-                    <div className="row align-items-center">
-                        <div className="d-flex justify-content-center">
-                            <small className={styles.userStatus}>
-                                {token.userStatus === 'admGlobal' ? 'Administrador' : ''}
-                            </small>
-                        </div>
-                    </div>
-                    <div style={{ height: "75px" }} className=" slideDown d-flex justify-content-center align-items-center">
-                        {(token.logo || token.companyName) && (
-                            <Link href="/companyEdit" >
-                                <span type="button" className="row align-items-center" >
-                                    <div className="d-flex justify-content-center">
-                                        {token.logo ? 
+                        <div className="row align-items-center">
+                            <Link href={`/editProfile`}>
+                                <div className="d-flex justify-content-center">
+                                    <span type="button">
                                         <img
-                                            src={token.logo}
-                                            className={`${styles.companyLogo} fadeItem1s`}
+                                            src={token.profileImageUrl}
+                                            alt="User profile picture"
+                                            className={`${styles.img} `}
                                         />
-                                            :
-                                            <span className={`${styles.userName} text-center fadeItem1s`}>
-                                                {token.companyName}
-                                            </span>
-                                            }
-                                    </div>
-                                </span>
+                                    </span>
+                                </div>
                             </Link>
-                        )}
+                        </div>
+                        <div className="row align-items-center mt-2">
+                            <div className={`d-flex justify-content-center ${styles.userName}`}>
+                                {token.firstName} {token.lastName}
+                            </div>
+                        </div>
+                        <div className="row align-items-center">
+                            <div className="d-flex justify-content-center">
+                                <small className={styles.userStatus}>
+                                    {token.userStatus === 'admGlobal' ? 'Administrador' : ''}
+                                </small>
+                            </div>
+                        </div>
+                        <div style={{ height: "75px" }} className=" slideDown d-flex justify-content-center align-items-center">
+                            {(token.logo || token.companyName) && (
+                                <Link href="/companyEdit" >
+                                    <span type="button" className="row align-items-center" >
+                                        <div className="d-flex justify-content-center">
+                                            {token.logo ?
+                                                <img
+                                                    src={token.logo}
+                                                    className={`${styles.companyLogo} fadeItem1s`}
+                                                />
+                                                :
+                                                <span className={`${styles.userName} text-center fadeItem1s`}>
+                                                    {token.companyName}
+                                                </span>
+                                            }
+                                        </div>
+                                    </span>
+                                </Link>
+                            )}
+                        </div>
+
+                        <Scrollbars
+                            style={{ height: "65vh" }}
+                            autoHide
+                            autoHideTimeout={3000}
+                            autoHideDuration={200}
+                            renderTrackVertical={(props) => (
+                                <div {...props} className="vtrackSidebar" />
+                            )}
+                            renderThumbVertical={(props) => (
+                                <div {...props} className="vthumbSidebar" />
+                            )}
+                        >
+                            <ul style={{ width: "95%" }}>
+                                <Accordion defaultActiveKey="0">
+                                    <li>
+                                        <ContextAwareToggle eventKey="0" collapse="InicioItem">
+                                            <div className="d-flex justify-content-start " type='button' onClick={() => router.push('/')}>
+                                                <div className="col-1 text-center me-3">
+                                                    <FontAwesomeIcon icon={faHome} className="me-2 icon" />
+                                                </div>
+                                                <div className="col-9">Início</div>
+                                            </div>
+                                        </ContextAwareToggle>
+                                    </li>
+
+                                    <li>
+                                        <ContextAwareToggle eventKey="5" collapse="configuracoesCollapse">
+                                            <div className="d-flex">
+                                                <div className="col-1 text-center me-3">
+                                                    <FontAwesomeIcon icon={faGear} className="me-2 icon" />
+                                                </div>
+                                                <div className="col-9">Configurações</div>
+                                                <div className="col-1 toggleIcon text-end">
+                                                    <FontAwesomeIcon icon={faAngleRight} className=" icon" />
+                                                </div>
+                                            </div>
+                                        </ContextAwareToggle>
+                                        <Accordion.Collapse eventKey="5">
+                                            <ul>
+                                                <li>
+                                                    <Link href={`/companyEdit`}>
+                                                        <span>Imobiliária</span>
+                                                    </Link>
+                                                </li>
+                                                <li>
+                                                    <Link href={`/editProfile`}>
+                                                        <span>Editar Cartão</span>
+                                                    </Link>
+                                                </li>
+                                                <li>
+                                                    <Link href="/passwordChange">
+                                                        <span>Alterar Senha</span>
+                                                    </Link>
+                                                </li>
+                                                <li>
+                                                    <Link href="/accountSetup">
+                                                        <span>Configuração da Conta</span>
+                                                    </Link>
+                                                </li>
+                                            </ul>
+                                        </Accordion.Collapse>
+                                    </li>
+                                </Accordion>
+                            </ul>
+
+                        </Scrollbars>
+
                     </div>
-
-                    <Scrollbars
-                        style={{ height: "65vh" }}
-                        autoHide
-                        autoHideTimeout={3000}
-                        autoHideDuration={200}
-                        renderTrackVertical={(props) => (
-                            <div {...props} className="vtrackSidebar" />
-                        )}
-                        renderThumbVertical={(props) => (
-                            <div {...props} className="vthumbSidebar" />
-                        )}
-                    >
-                        <ul style={{ width: "95%" }}>
-                            <Accordion defaultActiveKey="0">
-                                <li>
-                                    <ContextAwareToggle eventKey="0" collapse="InicioItem">
-                                        <div className="d-flex justify-content-start " type='button' onClick={() => router.push('/')}>
-                                            <div className="col-1 text-center me-3">
-                                                <FontAwesomeIcon icon={faHome} className="me-2 icon" />
-                                            </div>
-                                            <div className="col-9">Início</div>
-                                        </div>
-                                    </ContextAwareToggle>
-                                </li>
-
-                                <li>
-                                    <ContextAwareToggle eventKey="5" collapse="configuracoesCollapse">
-                                        <div className="d-flex">
-                                            <div className="col-1 text-center me-3">
-                                                <FontAwesomeIcon icon={faGear} className="me-2 icon" />
-                                            </div>
-                                            <div className="col-9">Configurações</div>
-                                            <div className="col-1 toggleIcon text-end">
-                                                <FontAwesomeIcon icon={faAngleRight} className=" icon" />
-                                            </div>
-                                        </div>
-                                    </ContextAwareToggle>
-                                    <Accordion.Collapse eventKey="5">
-                                        <ul>
-                                            <li>
-                                                <Link href={`/companyEdit`}>
-                                                    <span>Imobiliária</span>
-                                                </Link>
-                                            </li>
-                                            <li>
-                                                <Link href={`/editProfile`}>
-                                                    <span>Editar Cartão</span>
-                                                </Link>
-                                            </li>
-                                            <li>
-                                                <Link href="/passwordChange">
-                                                    <span>Alterar Senha</span>
-                                                </Link>
-                                            </li>
-                                            <li>
-                                                <Link href="/accountSetup">
-                                                    <span>Configuração da Conta</span>
-                                                </Link>
-                                            </li>
-                                        </ul>
-                                    </Accordion.Collapse>
-                                </li>
-                            </Accordion>
-                        </ul>
-
-                    </Scrollbars>
-
                 </div>
             </div>
-        </div>
+            {!window2Mobile() && toggleStatus === true &&  (
+                <div className={`fadeItem ${styles.navbarBackground}`} onClick={() => dispatch(toggleBarChange(toggleStatus))}>
+                    
+                </div>
+            )}
+        </>
+
     );
 }

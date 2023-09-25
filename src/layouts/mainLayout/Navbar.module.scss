@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     background-color: var(--bg-white);
-    position:fixed;
+    position: fixed;
     left: calc(var(--aside-width) - var(--aside-fixed-width));
     height: 100vh;
     width: var(--aside-fixed-width);
@@ -29,7 +29,8 @@
     color: var(--gray);
     transition: ease-in-out 0.2s;
 }
-.menuArea ul li:hover  {
+
+.menuArea ul li:hover {
     color: var(--cv-primary);
     font-weight: 410;
 }
@@ -48,7 +49,7 @@
     text-decoration: none;
     color: var(--gray);
     transition: ease-in-out .3s;
-    
+
 }
 
 .menuArea ul li span:hover {
@@ -75,11 +76,22 @@
 
 .navItemsPosition {
     height: 63vh;
-  }
+}
 
-  .companyLogo {
+.companyLogo {
     max-height: 50px;
     max-width: 130px;
     height: auto;
     width: auto;
-  }
+}
+
+
+.navbarBackground {
+    background-color: #00000094;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    transition: ease .5s;
+    z-index: 100;
+}
