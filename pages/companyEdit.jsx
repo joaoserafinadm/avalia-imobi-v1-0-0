@@ -277,49 +277,49 @@ export default function companyEdit() {
                             <div className="col-12">
                                 {!window2Mobile() && (<hr />)}
                                 <div className="row">
-                                    <label for="companyNameItem" class="form-label fw-bold">Imobiliária</label>
+                                    <label for="companyNameItem" className="form-label fw-bold">Imobiliária</label>
                                     <div className="col-12 col-lg-8 my-2">
-                                        <input type="text" class="form-control form-control-sm" id="companyNameItem" value={companyName} onChange={e => setCompanyName(e.target.value)} placeholder="Nome da Imobiliária *" />
+                                        <input type="text" className="form-control form-control-sm" id="companyNameItem" value={companyName} onChange={e => setCompanyName(e.target.value)} placeholder="Nome da Imobiliária *" />
                                     </div>
                                     <div className="col-12 col-lg-4 my-2">
-                                        <input type="text" class="form-control form-control-sm" id="companyCreciItem" value={companyCreci} onChange={e => setCompanyCreci(e.target.value)} placeholder="Creci" />
+                                        <input type="text" className="form-control form-control-sm" id="companyCreciItem" value={companyCreci} onChange={e => setCompanyCreci(e.target.value)} placeholder="Creci" />
                                     </div>
                                 </div>
                                 {!window2Mobile() && (<hr />)}
 
                                 <div className="row mt-3">
-                                    <label for="cepItem" class="form-label fw-bold">Endereço</label>
+                                    <label for="cepItem" className="form-label fw-bold">Endereço</label>
                                     <div className="col-12 col-lg-4 my-2">
-                                        <input type="text" class="form-control form-control-sm" id="cepItem" value={cep} onChange={e => maskCep(e.target.value)} onBlur={e => onBlurCep(e)} placeholder="CEP" />
+                                        <input type="text" className="form-control form-control-sm" id="cepItem" value={cep} onChange={e => maskCep(e.target.value)} onBlur={e => onBlurCep(e)} placeholder="CEP" />
                                     </div>
                                     <div className="col-12 col-lg-8 my-2">
-                                        <input type="text" class="form-control form-control-sm" id="logradouroItem" value={logradouro} onChange={e => setLogradouro(e.target.value)} placeholder="Logradouro" />
+                                        <input type="text" className="form-control form-control-sm" id="logradouroItem" value={logradouro} onChange={e => setLogradouro(e.target.value)} placeholder="Logradouro" />
                                     </div>
                                     <div className="col-12 col-lg-4 my-2">
-                                        <input type="text" class="form-control form-control-sm" id="numeroItem" value={numero} onChange={e => setNumero(e.target.value)} placeholder="Número" />
+                                        <input type="text" className="form-control form-control-sm" id="numeroItem" value={numero} onChange={e => setNumero(e.target.value)} placeholder="Número" />
                                     </div>
                                     <div className="col-12 col-lg-6 my-2">
-                                        <input type="text" class="form-control form-control-sm" id="cidadeItem" value={cidade} onChange={e => setCidade(e.target.value)} placeholder="Cidade *" />
+                                        <input type="text" className="form-control form-control-sm" id="cidadeItem" value={cidade} onChange={e => setCidade(e.target.value)} placeholder="Cidade *" />
                                     </div>
                                     <div className="col-12 col-lg-2 my-2">
                                         <select className="form-select form-select-sm" placeholder="Estado" value={estado} onChange={(e) => setEstado(e.target.value)}>
                                             <EstadosList />
                                         </select>
-                                        {/* <input type="text" class="form-control form-control-sm" id="estadoItem" value={estado} onChange={e => setEstado(e.target.value)} placeholder="Estado *" /> */}
+                                        {/* <input type="text" className="form-control form-control-sm" id="estadoItem" value={estado} onChange={e => setEstado(e.target.value)} placeholder="Estado *" /> */}
                                     </div>
                                 </div>
                                 {!window2Mobile() && (<hr />)}
 
                                 <div className="row mt-3">
-                                    <label for="telefoneItem" class="form-label fw-bold">Contatos</label>
+                                    <label for="telefoneItem" className="form-label fw-bold">Contatos</label>
                                     <div className="col-12 col-lg-6 my-2">
-                                        <input type="text" class="form-control form-control-sm" id="telefoneItem" value={telefone} onChange={e => maskTelefone(e.target.value)} placeholder="Telefone *" />
+                                        <input type="text" className="form-control form-control-sm" id="telefoneItem" value={telefone} onChange={e => maskTelefone(e.target.value)} placeholder="Telefone *" />
                                     </div>
                                     <div className="col-12 col-lg-6 my-2">
-                                        <input type="text" class="form-control form-control-sm" id="celularItem" value={celular} onChange={e => maskCelular(e.target.value)} placeholder="Celular" />
+                                        <input type="text" className="form-control form-control-sm" id="celularItem" value={celular} onChange={e => maskCelular(e.target.value)} placeholder="Celular" />
                                     </div>
                                     <div className="col-12 col-lg-12 my-2">
-                                        <input type="text" class="form-control form-control-sm" id="emailItem" value={email} onChange={e => setEmail(e.target.value)} placeholder="E-mail *" />
+                                        <input type="text" className="form-control form-control-sm" id="emailItem" value={email} onChange={e => setEmail(e.target.value)} placeholder="E-mail *" />
                                     </div>
                                 </div>
                             </div>

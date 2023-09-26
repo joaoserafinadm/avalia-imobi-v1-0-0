@@ -115,8 +115,8 @@ export default function signIn(props) {
                 <div className="col-12 col-lg-6 d-flex justify-content-center align-items-center">
                     <form onSubmit={e => handleSignIn(e)}>
 
-                        <div class={`card `}>
-                            <div class={`card-body ${styles.cardSize} `}>
+                        <div className={`card `}>
+                            <div className={`card-body ${styles.cardSize} `}>
                                 <div className="row mb-3">
                                     <h1 className={`${styles.title} title-dark`}>Login</h1>
                                 </div>
@@ -142,7 +142,7 @@ export default function signIn(props) {
                                     <input
                                         type="email"
                                         id="emailInput"
-                                        class="form-control"
+                                        className="form-control"
                                         placeholder="E-mail"
                                         value={email}
                                         onChange={(e) => setEmail(e.target.value)}
@@ -153,7 +153,7 @@ export default function signIn(props) {
                                     <input
                                         type="password"
                                         id="passwordInput"
-                                        class="form-control"
+                                        className="form-control"
                                         placeholder="Senha"
                                         value={password}
                                         onChange={(e) => setPassword(e.target.value)}

@@ -5,7 +5,6 @@ import baseUrl from "../../../utils/baseUrl";
 
 export default function AuthModal(props) {
 
-    console.log("props", props)
 
     const [code, setCode] = useState('')
     const [resendEmailError, setResendEmailError] = useState('')
