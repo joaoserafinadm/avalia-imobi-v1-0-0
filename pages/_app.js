@@ -46,21 +46,12 @@ export default function MyApp({ Component, pageProps }) {
 
     const router = useRouter();
     const newRoute = router.asPath;
-    const signUpRoute = newRoute === "/signup";
     const premiumAccount = newRoute === "/premiumAccount";
 
     const [passwordRecoverRoute, setPasswordRecoverRoute] = useState(false);
 
     useEffect(() => {
-        if (window.innerWidth < 450) {
-            // window.location.href = 'http://localhost:3001'
-        } else {
-            hrefVerify();
-
-            if (window.innerWidth < 800) {
-                document.documentElement.style.setProperty("--aside-width", "0px");
-            }
-        }
+        hrefVerify();
     }, []);
 
     const hrefVerify = async () => {
@@ -73,55 +64,59 @@ export default function MyApp({ Component, pageProps }) {
             var passwordRecoverRoute = true;
         }
 
-        if (
-            !Cookie.get("auth") &&
+        if (!Cookie.get("auth") &&
             window.location.href !== baseUrl() &&
-            !passwordRecoverRoute
-        ) {
+            !passwordRecoverRoute) {
+
             setTimeout(async () => {
                 await Router.replace("/");
             }, 1000);
+
         }
     };
 
     const render = () => {
+
+        if (!token && passwordRecoverRoute) {
+            return <PasswordRecover />;
+        }
+
+        
         if (!token) {
             return (
                 <Provider store={store}>
                     <PersistGate persistor={persistedStore}>
 
-                            <Login onChange={(token) => setToken(token)} />
+                        <Login onChange={(token) => setToken(token)} />
 
                     </PersistGate>
                 </Provider>
             );
         }
 
-        if (!token && passwordRecoverRoute) {
-            return <PasswordRecover />;
-        }
+        
 
         if (token) {
             return (
-                    <Provider store={store}>
-                        <PersistGate persistor={persistedStore}>
-                            <Head>
-                                <title>Avalia Imobi</title>
-                                <meta
-                                    name="viewport"
-                                    content="width=device-width, initial-scale=1, shrink-to-fit=no"
-                                />
-                                <link rel="icon" href="favicon.ico" />
+                <Provider store={store}>
+                    <PersistGate persistor={persistedStore}>
+                        <Head>
+                            <title>Avalia Imobi</title>
+                            <meta
+                                name="viewport"
+                                content="width=device-width, initial-scale=1, shrink-to-fit=no"
+                            />
+                            <link rel="icon" href="favicon.ico" />
 
-                                <link rel="manifest" href="/manifest.json" />
-                                <link rel="apple-touch-icon" href="/icon.png" />
-                                <meta name="theme-color" content="#fff" />
-                            </Head>
-                            <MainLayout>
-                                    <Component  {...pageProps} />
-                            </MainLayout>
-                        </PersistGate>
-                    </Provider>
+                            <link rel="manifest" href="/manifest.json" />
+                            <link rel="apple-touch-icon" href="/icon.png" />
+                            <meta name="theme-color" content="#fff" />
+                        </Head>
+                        <MainLayout>
+                            <Component  {...pageProps} />
+                        </MainLayout>
+                    </PersistGate>
+                </Provider>
             );
         }
     };
