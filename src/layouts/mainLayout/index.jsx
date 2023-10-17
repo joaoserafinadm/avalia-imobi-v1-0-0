@@ -22,17 +22,14 @@ export default function MainLayout({ children }) {
         else document.documentElement.style.setProperty('--aside-width', '0px')
     }
 
-    
+
 
     return (
-        <div className="app">
+        <body className="app">
+            <Header navbarStatus={navbarStatus} />
             <Navbar />
 
-            <div className={`col  pages`} >
-
-
-                <Header navbarStatus={navbarStatus} />
-
+            <div className={`  pages`} >
                 {children}
             </div>
 
@@ -40,6 +37,6 @@ export default function MainLayout({ children }) {
 
 
 
-        </div>
+        </body>
     );
 }

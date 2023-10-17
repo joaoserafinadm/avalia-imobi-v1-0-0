@@ -58,10 +58,9 @@ export default function Home() {
 
             <IndexNotifications /> */}
 
+            
             <span>
-
-
-                Página inicial
+                dsadsadsa
             </span>
 
 

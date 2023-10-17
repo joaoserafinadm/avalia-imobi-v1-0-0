@@ -2,9 +2,10 @@
     margin: 0;
     padding: 0;
     background-color: var(--bg-white);
-    position: fixed;
+    position: fixed !important;
     left: calc(var(--aside-width) - var(--aside-fixed-width));
     height: 100vh;
+    top: 0;
     width: var(--aside-fixed-width);
     z-index: 1000;
     background-color: #fff;

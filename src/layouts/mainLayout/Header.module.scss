@@ -30,13 +30,13 @@
     position: fixed !important;
     top: 0;
     right: 0;
-    width: calc(100vw - var(--aside-width));
-
+    width: 100vw;
     height: var(--header-height);
-    z-index: 1001 !important;
+    z-index: 1;
     transition: ease-in-out .3s;
-
 }
+
+
 
 .configIcons {
     position: fixed;

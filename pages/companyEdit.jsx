@@ -15,6 +15,7 @@ import EstadosList from "../src/components/estadosList";
 import { useRouter } from "next/router";
 import StyledDropzone from "../src/components/styledDropzone/StyledDropzone";
 import { createImageUrl } from "../utils/createImageUrl";
+import ImageHeaderModal from "../src/companyEdit/ImageHeaderModal";
 
 
 
@@ -37,10 +38,11 @@ export default function companyEdit() {
     const [numero, setNumero] = useState('')
     const [cidade, setCidade] = useState('')
     const [estado, setEstado] = useState('')
-    const [headerImg, setHeaderImg] = useState('')
+    const [headerImg_id, setHeaderImg_id] = useState('')
     const [logo, setLogo] = useState('')
     const [logoPreview, setLogoPreview] = useState('')
     const [headerImgPreview, setHeaderImgPreview] = useState('')
+    const [backgroundImages, setBackgroundImages] = useState([])
 
     //Loading
     const [loadingPage, setLoadingPage] = useState(true)
@@ -71,12 +73,29 @@ export default function companyEdit() {
             setNumero(data.numero)
             setCidade(data.cidade)
             setEstado(data.estado)
-            setHeaderImg(data.headerImg)
+            setHeaderImg_id(data.headerImg_id)
             setLogo(data.logo)
-            setLoadingPage(false)
+            backgroundImagesData(company_id)
+
         }).catch(e => {
             console.log(e)
         })
+    }
+
+    const backgroundImagesData = async (company_id) => {
+
+        await axios.get(`${baseUrl()}/api/companyEdit/headerImg`, {
+            params: {
+                company_id: company_id
+            }
+        }).then(res => {
+
+            setBackgroundImages(res.data.data)
+            setLoadingPage(false)
+
+
+        })
+
     }
 
     const maskCep = (value) => {
@@ -127,8 +146,6 @@ export default function companyEdit() {
 
     const validate = () => {
 
-
-
         if (!companyName || !telefone || !cidade || !email) {
             if (!companyName) document.getElementById("companyNameItem").classList.add('inputError')
             if (!telefone) document.getElementById("telefoneItem").classList.add('inputError')
@@ -146,9 +163,8 @@ export default function companyEdit() {
         setLoadingSave(true)
 
         const newLogo = logoPreview ? await createImageUrl([logoPreview], "AVALIAIMOBI_LOGO_IMG") : ''
-        const newHeaderImg = headerImgPreview ? await createImageUrl([headerImgPreview], "AVALIAIMOBI_HEADER_IMG") : ''
+        // const newHeaderImg = headerImgPreview ? await createImageUrl([headerImgPreview], "AVALIAIMOBI_HEADER_IMG") : ''
 
-        console.log(newLogo, newHeaderImg)
         const isValid = validate()
 
         if (isValid) {
@@ -168,7 +184,7 @@ export default function companyEdit() {
                 cidade,
                 estado,
                 logo: newLogo ? newLogo[0].url : logo,
-                headerImg: newHeaderImg ? newHeaderImg[0].url : headerImg
+                headerImg_id: headerImg_id
             }
 
             await axios.post(`${baseUrl()}/api/companyEdit`, data)
@@ -188,8 +204,12 @@ export default function companyEdit() {
         }
     }
 
-    const handleUpload = (files) => {
-        console.log(files)
+    const handleHeaderIgmPreview = (_id) => {
+
+        const image_id = backgroundImages.find(elem => elem._id === _id)
+
+        return (image_id.imageUrl)
+
     }
 
 
@@ -200,65 +220,94 @@ export default function companyEdit() {
             {loadingPage ?
                 <SpinnerLG />
                 :
+                <>
+                    <ImageHeaderModal backgroundImages={backgroundImages} headerImg_id={headerImg_id} setHeaderImg_id={value => setHeaderImg_id(value)} backgroundImagesData={() => backgroundImagesData(token.company_id)} />
 
-                <div className="pagesContent shadow fadeItem" id="pageTop">
-                    <div className="row d-flex justify-content-center">
-                        <div className="col-12 col-sm-5 d-flex">
-                            <div className="col-12">
-                                <div className="row">
+                    <div className="pagesContent shadow fadeItem" id="pageTop">
+                        <div className="row d-flex justify-content-center">
+                            <div className="col-12 col-sm-5 d-flex">
+                                <div className="col-12">
+                                    <div className="row">
 
-                                    <div className="d-flex justify-content-between">
-                                        <input type="file" name="image/*" id="logoItem" accept="image/*" onChange={e => setLogoPreview(e.target.files[0])}
-                                            className="form-input" hidden />
-                                        <label className=" fw-bold">Logo</label>
-                                        <label htmlFor="logoItem" className="span" type='button'>Editar</label>
-                                    </div>
-                                    <StyledDropzone setFiles={array => { setLogoPreview(array[0]) }} img>
-                                        <div className="row mt-3 d-flex justify-content-center align-items-center" style={{ height: '150px' }}>
-
-                                            <div className="col-12 d-flex justify-content-center align-items-center" >
-                                                {logoPreview ?
-                                                    <img src={URL.createObjectURL(logoPreview)} alt="logo" id="logoItem" className="logoEdit fadeItem" />
-                                                    :
-                                                    <>
-                                                        {logo ?
-                                                            <img src={logo} alt="logo" id="logoItem" className="logoEdit fadeItem" />
-                                                            :
-                                                            <img src="https://res.cloudinary.com/joaoserafinadm/image/upload/v1695257785/PUBLIC/companyLogoTemplate_xoeyar.png"
-                                                                alt="" className="logoEdit"
-                                                                type="button" />
-                                                        }
-                                                    </>
-
-                                                }
-
-
-                                            </div>
+                                        <div className="d-flex justify-content-between">
+                                            <input type="file" name="image/*" id="logoItem" accept="image/*" onChange={e => setLogoPreview(e.target.files[0])}
+                                                className="form-input" hidden />
+                                            <label className=" fw-bold">Logo</label>
+                                            <label htmlFor="logoItem" className="span" type='button'>Editar</label>
                                         </div>
-                                    </StyledDropzone>
-                                </div>
-                                <hr />
-                                <div className="row">
+                                        <StyledDropzone setFiles={array => { setLogoPreview(array[0]) }} img>
+                                            <div className="row mt-3 d-flex justify-content-center align-items-center" style={{ height: '150px' }}>
 
-                                    <div className="d-flex justify-content-between">
-                                        <input type="file" name="image/*" id="headerImgItem" accept="image/*" onChange={e => setHeaderImgPreview(e.target.files[0])}
-                                            className="form-input" hidden />
-                                        <label className=" fw-bold">Imagem de capa</label>
-                                        <label htmlFor="headerImgItem" className="span" type='button'>Editar</label>
+                                                <div className="col-12 d-flex justify-content-center align-items-center" >
+                                                    {logoPreview ?
+                                                        <img src={URL.createObjectURL(logoPreview)} alt="logo" id="logoItem" className="logoEdit fadeItem" />
+                                                        :
+                                                        <>
+                                                            {logo ?
+                                                                <img src={logo} alt="logo" id="logoItem" className="logoEdit fadeItem" />
+                                                                :
+                                                                <img src="https://res.cloudinary.com/joaoserafinadm/image/upload/v1695257785/PUBLIC/companyLogoTemplate_xoeyar.png"
+                                                                    alt="" className="logoEdit"
+                                                                    type="button" />
+                                                            }
+                                                        </>
+
+                                                    }
+
+
+                                                </div>
+                                            </div>
+                                        </StyledDropzone>
                                     </div>
-                                    <StyledDropzone setFiles={array => { setHeaderImgPreview(array[0]) }} img>
+                                    <hr />
+                                    <div className="row">
+
+
+                                        <div className="d-flex justify-content-between">
+                                            <span className=" fw-bold" data-bs-toggle="modal" data-bs-target="#ImageHeaderModal">Imagem de capa</span>
+                                            <span className="span" type='button' data-bs-toggle="modal" data-bs-target="#ImageHeaderModal">Editar</span>
+                                        </div>
+
+                                        <div className="row mt-3 d-flex justify-content-center align-items-center" style={{ height: '150px' }}>
+                                            <div className="col-12 d-flex justify-content-center" >
+                                                {headerImg_id ?
+                                                    <img className="headerImgEdit fadeItem" type="button"
+                                                        src={handleHeaderIgmPreview(headerImg_id)} alt="header image" id="headerImgItem"
+                                                        data-bs-toggle="modal" data-bs-target="#ImageHeaderModal" />
+                                                    :
+                                                    <img src="https://res.cloudinary.com/joaoserafinadm/image/upload/v1695601556/PUBLIC/3_weeijf.png"
+                                                        alt="" className="headerImgEdit fadeItem"
+                                                        type="button" data-bs-toggle="modal" data-bs-target="#ImageHeaderModal" />
+                                                }
+                                            </div>
+
+                                        </div>
+
+
+
+
+
+                                        {/* <div className="d-flex justify-content-between">
+                                            <input type="file" name="image/*" id="headerImgItem" accept="image/*" onChange={e => setHeaderImgPreview(e.target.files[0])}
+                                                className="form-input" hidden />
+                                            <span className=" fw-bold" data-bs-toggle="modal" data-bs-target="#ImageHeaderModal">Imagem de capa</span>
+                                            <label htmlFor="headerImgItem" className="span" type='button' >Editar</label>
+                                            <span className="span" type='button' data-bs-toggle="modal" data-bs-target="#ImageHeaderModal">Editar</span>
+                                        </div>
+                                        <StyledDropzone setFiles={array => { setHeaderImgPreview(array[0]) }} img>
+
                                         <div className="row mt-3 d-flex justify-content-center align-items-center" style={{ height: '150px' }}>
                                             <div className="col-12 d-flex justify-content-center" >
                                                 {headerImgPreview ?
                                                     <img className="headerImgEdit fadeItem" src={URL.createObjectURL(headerImgPreview)} alt="header image" id="headerImgItem" />
                                                     :
                                                     <>
-                                                        {headerImg ?
-                                                            <img className="headerImgEdit fadeItem" src={headerImg} alt="header image" id="headerImgItem" />
+                                                        {headerImg_id ?
+                                                            <img className="headerImgEdit fadeItem" src={headerImg_id} alt="header image" id="headerImgItem" />
                                                             :
                                                             <img src="https://res.cloudinary.com/joaoserafinadm/image/upload/v1695601556/PUBLIC/3_weeijf.png"
                                                                 alt="" className="headerImgEdit fadeItem"
-                                                                type="button" />
+                                                                type="button" data-bs-toggle="modal" data-bs-target="#ImageHeaderModal" />
                                                         }
 
                                                     </>
@@ -266,79 +315,81 @@ export default function companyEdit() {
                                             </div>
 
                                         </div>
-                                    </StyledDropzone>
-                                </div>
-                            </div>
-                        </div>
-                        {window2Mobile() && (
-                            <VerticalLine />
-                        )}
-                        <div className="col-12 col-sm-6 d-flex">
-                            <div className="col-12">
-                                {!window2Mobile() && (<hr />)}
-                                <div className="row">
-                                    <label for="companyNameItem" className="form-label fw-bold">Imobiliária</label>
-                                    <div className="col-12 col-lg-8 my-2">
-                                        <input type="text" className="form-control form-control-sm" id="companyNameItem" value={companyName} onChange={e => setCompanyName(e.target.value)} placeholder="Nome da Imobiliária *" />
-                                    </div>
-                                    <div className="col-12 col-lg-4 my-2">
-                                        <input type="text" className="form-control form-control-sm" id="companyCreciItem" value={companyCreci} onChange={e => setCompanyCreci(e.target.value)} placeholder="Creci" />
-                                    </div>
-                                </div>
-                                {!window2Mobile() && (<hr />)}
-
-                                <div className="row mt-3">
-                                    <label for="cepItem" className="form-label fw-bold">Endereço</label>
-                                    <div className="col-12 col-lg-4 my-2">
-                                        <input type="text" className="form-control form-control-sm" id="cepItem" value={cep} onChange={e => maskCep(e.target.value)} onBlur={e => onBlurCep(e)} placeholder="CEP" />
-                                    </div>
-                                    <div className="col-12 col-lg-8 my-2">
-                                        <input type="text" className="form-control form-control-sm" id="logradouroItem" value={logradouro} onChange={e => setLogradouro(e.target.value)} placeholder="Logradouro" />
-                                    </div>
-                                    <div className="col-12 col-lg-4 my-2">
-                                        <input type="text" className="form-control form-control-sm" id="numeroItem" value={numero} onChange={e => setNumero(e.target.value)} placeholder="Número" />
-                                    </div>
-                                    <div className="col-12 col-lg-6 my-2">
-                                        <input type="text" className="form-control form-control-sm" id="cidadeItem" value={cidade} onChange={e => setCidade(e.target.value)} placeholder="Cidade *" />
-                                    </div>
-                                    <div className="col-12 col-lg-2 my-2">
-                                        <select className="form-select form-select-sm" placeholder="Estado" value={estado} onChange={(e) => setEstado(e.target.value)}>
-                                            <EstadosList />
-                                        </select>
-                                        {/* <input type="text" className="form-control form-control-sm" id="estadoItem" value={estado} onChange={e => setEstado(e.target.value)} placeholder="Estado *" /> */}
-                                    </div>
-                                </div>
-                                {!window2Mobile() && (<hr />)}
-
-                                <div className="row mt-3">
-                                    <label for="telefoneItem" className="form-label fw-bold">Contatos</label>
-                                    <div className="col-12 col-lg-6 my-2">
-                                        <input type="text" className="form-control form-control-sm" id="telefoneItem" value={telefone} onChange={e => maskTelefone(e.target.value)} placeholder="Telefone *" />
-                                    </div>
-                                    <div className="col-12 col-lg-6 my-2">
-                                        <input type="text" className="form-control form-control-sm" id="celularItem" value={celular} onChange={e => maskCelular(e.target.value)} placeholder="Celular" />
-                                    </div>
-                                    <div className="col-12 col-lg-12 my-2">
-                                        <input type="text" className="form-control form-control-sm" id="emailItem" value={email} onChange={e => setEmail(e.target.value)} placeholder="E-mail *" />
+                                        </StyledDropzone> */}
                                     </div>
                                 </div>
                             </div>
+                            {window2Mobile() && (
+                                <VerticalLine />
+                            )}
+                            <div className="col-12 col-sm-6 d-flex">
+                                <div className="col-12">
+                                    {!window2Mobile() && (<hr />)}
+                                    <div className="row">
+                                        <label for="companyNameItem" className="form-label fw-bold">Imobiliária</label>
+                                        <div className="col-12 col-lg-8 my-2">
+                                            <input type="text" className="form-control form-control-sm" id="companyNameItem" value={companyName} onChange={e => setCompanyName(e.target.value)} placeholder="Nome da Imobiliária *" />
+                                        </div>
+                                        <div className="col-12 col-lg-4 my-2">
+                                            <input type="text" className="form-control form-control-sm" id="companyCreciItem" value={companyCreci} onChange={e => setCompanyCreci(e.target.value)} placeholder="Creci" />
+                                        </div>
+                                    </div>
+                                    {!window2Mobile() && (<hr />)}
+
+                                    <div className="row mt-3">
+                                        <label for="cepItem" className="form-label fw-bold">Endereço</label>
+                                        <div className="col-12 col-lg-4 my-2">
+                                            <input type="text" className="form-control form-control-sm" id="cepItem" value={cep} onChange={e => maskCep(e.target.value)} onBlur={e => onBlurCep(e)} placeholder="CEP" />
+                                        </div>
+                                        <div className="col-12 col-lg-8 my-2">
+                                            <input type="text" className="form-control form-control-sm" id="logradouroItem" value={logradouro} onChange={e => setLogradouro(e.target.value)} placeholder="Logradouro" />
+                                        </div>
+                                        <div className="col-12 col-lg-4 my-2">
+                                            <input type="text" className="form-control form-control-sm" id="numeroItem" value={numero} onChange={e => setNumero(e.target.value)} placeholder="Número" />
+                                        </div>
+                                        <div className="col-12 col-lg-6 my-2">
+                                            <input type="text" className="form-control form-control-sm" id="cidadeItem" value={cidade} onChange={e => setCidade(e.target.value)} placeholder="Cidade *" />
+                                        </div>
+                                        <div className="col-12 col-lg-2 my-2">
+                                            <select className="form-select form-select-sm" placeholder="Estado" value={estado} onChange={(e) => setEstado(e.target.value)}>
+                                                <EstadosList />
+                                            </select>
+                                            {/* <input type="text" className="form-control form-control-sm" id="estadoItem" value={estado} onChange={e => setEstado(e.target.value)} placeholder="Estado *" /> */}
+                                        </div>
+                                    </div>
+                                    {!window2Mobile() && (<hr />)}
+
+                                    <div className="row mt-3">
+                                        <label for="telefoneItem" className="form-label fw-bold">Contatos</label>
+                                        <div className="col-12 col-lg-6 my-2">
+                                            <input type="text" className="form-control form-control-sm" id="telefoneItem" value={telefone} onChange={e => maskTelefone(e.target.value)} placeholder="Telefone *" />
+                                        </div>
+                                        <div className="col-12 col-lg-6 my-2">
+                                            <input type="text" className="form-control form-control-sm" id="celularItem" value={celular} onChange={e => maskCelular(e.target.value)} placeholder="Celular" />
+                                        </div>
+                                        <div className="col-12 col-lg-12 my-2">
+                                            <input type="text" className="form-control form-control-sm" id="emailItem" value={email} onChange={e => setEmail(e.target.value)} placeholder="E-mail *" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr />
+                        <div className="row">
+                            <div className="col-12 d-flex justify-content-end">
+                                <Link href="/">
+                                    <button className="btn btn-sm btn-secondary">Cancelar</button>
+                                </Link>
+                                {loadingSave ?
+                                    <button className="ms-2 btn btn-sm btn-orange px-4" disabled><SpinnerSM /></button>
+                                    :
+                                    <button className="ms-2 btn btn-sm btn-orange" onClick={() => handleSave(token.company_id)}>Salvar</button>
+                                }
+                            </div>
                         </div>
                     </div>
-                    <hr />
-                    <div className="row">
-                        <div className="col-12 d-flex justify-content-end">
-                            <Link href="/">
-                                <button className="btn btn-sm btn-secondary">Cancelar</button>
-                            </Link>
-                            {loadingSave ?
-                                <button className="ms-2 btn btn-sm btn-orange px-4" disabled><SpinnerSM /></button>
-                                :
-                                <button className="ms-2 btn btn-sm btn-orange" onClick={() => handleSave(token.company_id)}>Salvar</button>
-                            }
-                        </div>
-                    </div>
-                </div>
+                </>
+
             }
 
         </div>

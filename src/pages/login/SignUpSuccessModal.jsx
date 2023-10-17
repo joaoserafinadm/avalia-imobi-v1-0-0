@@ -38,7 +38,7 @@ export default function SignUpSuccessModal(props) {
 
                         <button
                             type="button"
-                            className="btn btn-success btn-sm"
+                            className="btn btn-orange btn-sm"
                             data-bs-dismiss="modal"
                             onClick={() => props.setSection('signIn')}>
                             Entrar!

@@ -81,7 +81,7 @@ export default function MyApp({ Component, pageProps }) {
             return <PasswordRecover />;
         }
 
-        
+
         if (!token) {
             return (
                 <Provider store={store}>
@@ -94,7 +94,7 @@ export default function MyApp({ Component, pageProps }) {
             );
         }
 
-        
+
 
         if (token) {
             return (
@@ -112,7 +112,9 @@ export default function MyApp({ Component, pageProps }) {
                             <link rel="apple-touch-icon" href="/icon.png" />
                             <meta name="theme-color" content="#fff" />
                         </Head>
+
                         <MainLayout>
+                           
                             <Component  {...pageProps} />
                         </MainLayout>
                     </PersistGate>

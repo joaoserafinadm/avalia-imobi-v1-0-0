@@ -75,6 +75,50 @@ export default async function (req, res) {
                 ]
 
 
+                const backgroundImages = [
+                    {
+                        _id: ObjectId(),
+                        imageUrl: 'https://res.cloudinary.com/joaoserafinadm/image/upload/v1696809593/AVALIA%20IMOBI/BACKGROUND_IMAGES/1_rdqugq.png',
+                        user_id: ''
+                    },
+                    {
+                        _id: ObjectId(),
+                        imageUrl: 'https://res.cloudinary.com/joaoserafinadm/image/upload/v1696809594/AVALIA%20IMOBI/BACKGROUND_IMAGES/bg1_qevnqz.png',
+                        user_id: ''
+                    },
+                    {
+                        _id: ObjectId(),
+                        imageUrl: 'https://res.cloudinary.com/joaoserafinadm/image/upload/v1696809594/AVALIA%20IMOBI/BACKGROUND_IMAGES/bg2_odug7b.png',
+                        user_id: ''
+                    },
+                    {
+                        _id: ObjectId(),
+                        imageUrl: 'https://res.cloudinary.com/joaoserafinadm/image/upload/v1696809594/AVALIA%20IMOBI/BACKGROUND_IMAGES/8_fym2vs.png',
+                        user_id: ''
+                    },
+                    {
+                        _id: ObjectId(),
+                        imageUrl: 'https://res.cloudinary.com/joaoserafinadm/image/upload/v1696809593/AVALIA%20IMOBI/BACKGROUND_IMAGES/bg3_bjwf6x.png',
+                        user_id: ''
+                    },
+                    {
+                        _id: ObjectId(),
+                        imageUrl: 'https://res.cloudinary.com/joaoserafinadm/image/upload/v1696809593/AVALIA%20IMOBI/BACKGROUND_IMAGES/4_xnjdaa.png',
+                        user_id: ''
+                    },
+                    {
+                        _id: ObjectId(),
+                        imageUrl: 'https://res.cloudinary.com/joaoserafinadm/image/upload/v1696809593/AVALIA%20IMOBI/BACKGROUND_IMAGES/7_ucmfzk.png',
+                        user_id: ''
+                    },
+                    {
+                        _id: ObjectId(),
+                        imageUrl: 'https://res.cloudinary.com/joaoserafinadm/image/upload/v1696809593/AVALIA%20IMOBI/BACKGROUND_IMAGES/5_bxgph5.png',
+                        user_id: ''
+                    },
+                ]
+
+
                 const newCompany = await db.collection('companies').insertOne({
                     companyName: '',
                     companyCreci: '',
@@ -86,7 +130,8 @@ export default async function (req, res) {
                     numero: '',
                     cidade: '',
                     estado: '',
-                    headerImg: '',
+                    backgroundImages: backgroundImages,
+                    headerImg_id: '',
                     logo: '',
                     active: true,
                     dateAdded: new Date(),
