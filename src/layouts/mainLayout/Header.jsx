@@ -151,7 +151,7 @@ export default function Header(props) {
                         <>
                             {showNotification && (
 
-                                <NotificationsSM notifications={notifications} />
+                                <NotificationsSM notifications={notifications} notificationOff={() => setShowNotification(false)}/>
                             )}
                         </>
 
