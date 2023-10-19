@@ -3,7 +3,7 @@
     padding: 0;
     background-color: var(--bg-white);
     position: fixed !important;
-    left: calc(var(--aside-width) - var(--aside-fixed-width));
+    // left:var(--aside-width) ;
     height: 100vh;
     top: 0;
     width: var(--aside-fixed-width);

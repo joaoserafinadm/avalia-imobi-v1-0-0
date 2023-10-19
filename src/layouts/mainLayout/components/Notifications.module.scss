@@ -1,6 +1,29 @@
 .cardSize {
     width: 350px;
+}
 
+.cardSizeSM {
+    position: fixed;
+    background-color: #fff;
+    top: var(--header-height);
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    padding: 15px;
+}
+
+.cardInner {
+    overflow-y: scroll;
+    height: calc(100vh - var(--header-height) - 60px - 90px);
+}
+
+.notificationsFooter {
+    background-color: #fff;
+    align-items: center;
+    width: 100vw;
+    height: 60px;
+    position: fixed;
+    bottom: 0;
 }
 
 .p {
@@ -11,6 +34,6 @@
     transition: .3s ease;
 }
 
-.hover:hover{
+.hover:hover {
     background-color: #dedede !important;
 }

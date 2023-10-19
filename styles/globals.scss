@@ -7,7 +7,8 @@
 
   --header-height: 50px;
   --aside-fixed-width: 250px;
-  --aside-width: var(--aside-fixed-width);
+  // --aside-width: var(--aside-fixed-width);
+  --aside-width: 0px;
 
   --shadow: 0 2px 23px 0 rgba(0, 0, 0, 0.1), 0 2px 49px 0 rgba(0, 0, 0, 0.06);
 
@@ -76,6 +77,47 @@
   text-decoration: none;
   scroll-behavior: smooth;
 }
+
+// ---------Scrollbar ---------------
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #C9C9C9 #DFE9EB;
+}
+
+/* Chrome, Edge and Safari */
+*::-webkit-scrollbar {
+  height: 7px;
+  width: 7px;
+}
+*::-webkit-scrollbar-track {
+  border-radius: 5px;
+  background-color: #DFE9EB;
+}
+
+*::-webkit-scrollbar-track:hover {
+  background-color: #DFE9EB;
+}
+
+*::-webkit-scrollbar-track:active {
+  background-color: #D1DADC;
+}
+
+*::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: #C9C9C9;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: #C9C9C9;
+}
+
+*::-webkit-scrollbar-thumb:active {
+  background-color: #BABABA;
+}
+
+// -----------------------------------
+
 
 
 body {

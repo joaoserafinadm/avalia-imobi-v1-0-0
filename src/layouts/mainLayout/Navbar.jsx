@@ -53,7 +53,7 @@ export default function Nav(props) {
 
     return (
         <>
-            <div className={`${styles.menuArea} shadow`}>
+            <div className={`${styles.menuArea} shadow`} style={{left: `${toggleStatus ? "0px" : "-250px"}`}}>
                 <Toggle />
                 <Logo />
                 <div className=" row align-items-center mt-4 mb-2 fadeItem">

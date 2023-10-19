@@ -11,6 +11,8 @@ import Notifications from "./components/Notifications";
 import axios from "axios";
 import baseUrl from "../../../utils/baseUrl";
 import { useSelector } from "react-redux";
+import window2Mobile from "../../../utils/window2Mobile";
+import NotificationsSM from "./components/NotificationsSM";
 
 export default function Header(props) {
 
@@ -22,6 +24,7 @@ export default function Header(props) {
 
     const [notifications, setNotifications] = useState([])
     const [dropdownStatus, setDropdownStatus] = useState(true)
+    const [showNotification, setShowNotification] = useState(false)
 
     useEffect(() => {
         dataFunction(token.sub)
@@ -120,7 +123,7 @@ export default function Header(props) {
                     <Link href="/">
                         <div className='d-flex justify-content-center align-items-center ' >
                             <span type='button'>
-                                <img src="/LOGO_02.png" alt="logo" className='' height={30} />
+                                <img src="/LOGO_05.png" alt="logo" className='' height={20} />
                             </span>
                         </div>
                     </Link>
@@ -131,7 +134,7 @@ export default function Header(props) {
             <div className={`d-flex ${styles.configIcons}`}>
 
                 <div className={` dropdown`} ref={dropdownRef}>
-                    <span type="button" className="" role="button" data-bs-toggle="dropdown" aria-expanded="false" >
+                    <span type="button" className="" role="button" data-bs-toggle={window2Mobile() ? "dropdown" : ''} aria-expanded="false" onClick={() => setShowNotification(!showNotification)}>
                         <FontAwesomeIcon icon={faBell} className="text-light icon px-3 " />
                         {!!handleShowNotifications() && (
                             <div className={`${styles.notificationIcon} fadeItem`}>
@@ -140,9 +143,20 @@ export default function Header(props) {
                         )}
                     </span>
 
-                    <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownNotification">
-                        <Notifications notifications={notifications} />
-                    </ul>
+                    {window2Mobile() ?
+                        <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownNotification">
+                            <Notifications notifications={notifications} />
+                        </ul>
+                        :
+                        <>
+                            {showNotification && (
+
+                                <NotificationsSM notifications={notifications} />
+                            )}
+                        </>
+
+                    }
+
                 </div>
 
 

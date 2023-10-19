@@ -11,3 +11,9 @@ export function toggleBarOff() {
         payload: false
     }
 }
+export function toggleBarOn() {
+    return {
+        type: "TOGGLE_BAR_ON",
+        payload: true
+    }
+}

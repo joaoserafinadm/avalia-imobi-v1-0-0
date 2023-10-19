@@ -4,13 +4,20 @@ import Logo from "./components/Logo";
 import Header from "./Header";
 import Navbar from "./Navbar";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleBarOff, toggleBarOn } from "../../../store/ToggleBarStatus/ToggleBarStatus.action";
+import window2Mobile from "../../../utils/window2Mobile";
 
 export default function MainLayout({ children }) {
 
     const toggleStatus = useSelector(state => state.toggleStatus)
 
-    const [navbarStatus, setNavbarStatus] = useState(true)
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        if (window2Mobile()) dispatch(toggleBarOn())
+        else dispatch(toggleBarOff())
+    }, [])
 
     useEffect(() => {
         handleSidebarToggle()
@@ -18,15 +25,20 @@ export default function MainLayout({ children }) {
 
     const handleSidebarToggle = () => {
         const fixedWidht = document.documentElement.style.getPropertyValue('--aside-fixed-width')
-        if (toggleStatus) document.documentElement.style.setProperty('--aside-width', fixedWidht)
-        else document.documentElement.style.setProperty('--aside-width', '0px')
+        if (toggleStatus && window2Mobile()) {
+            document.documentElement.style.setProperty('--aside-width', '250px')
+        }
+        else {
+
+            document.documentElement.style.setProperty('--aside-width', '0px')
+        }
     }
 
 
 
     return (
         <body className="app">
-            <Header navbarStatus={navbarStatus} />
+            <Header navbarStatus={toggleStatus} />
             <Navbar />
 
             <div className={`  pages`} >

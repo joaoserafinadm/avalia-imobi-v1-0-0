@@ -2,12 +2,12 @@ import styles from './Notifications.module.scss'
 import Icons from '../../../components/icons'
 import Link from 'next/link'
 
-export default function Notifications(props) {
+export default function NotificationsSM(props) {
 
 
 
     return (
-        <div className={`${styles.cardSize}`}>
+        <div className={`${styles.cardSizeSM} fadeItem `}>
             <div className="row mb-2">
                 <div className="col-12 d-flex justify-content-center align-itens-center">
 
@@ -15,7 +15,7 @@ export default function Notifications(props) {
                 </div>
             </div>
             <hr />
-            <div className={`${styles.cardInner}`}>
+            <div className={`${styles.cardInner} fadeItem `}>
 
 
                 {!!props.notifications.length && props.notifications.map(elem => {
@@ -45,12 +45,13 @@ export default function Notifications(props) {
                     )
                 })}
                 
+
             </div>
 
-            <hr />
-
-            <div className="row mb-2">
+            <div className={`row mb-2 ${styles.notificationsFooter}`}>
+                <hr className='py-0 my-0' />
                 <div className="col-12 d-flex justify-content-center align-itens-center">
+
 
                     <span type='button' className='span p'>Visualizar todas as notificações <Icons icon='a-l' /></span>
                 </div>
