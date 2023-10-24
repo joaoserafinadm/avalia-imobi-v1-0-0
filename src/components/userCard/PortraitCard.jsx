@@ -13,8 +13,8 @@ export default function PortraitCard(props) {
 
     return (
         <div className={`${styles.main} shadow`}>
-            <div className={`${styles.header}`}>
-                <img src={props.headerImg} alt="" className={`${styles.headerImg}`} />
+            <div className={`${styles.header}`} style={{ backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.05)), url(${props.headerImg})` }}>
+
             </div>
             <div className={`${styles.profilePicRow}`}>
 
@@ -32,8 +32,7 @@ export default function PortraitCard(props) {
                 </div>
                 <div className="col-12 mt-2 d-flex justify-content-center">
                     <span className='small'>
-
-                        {props.mainEmail}
+                        {props.email}
                     </span>
                 </div>
                 <div className="col-12 mt-5 d-flex justify-content-center">

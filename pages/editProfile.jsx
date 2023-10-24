@@ -13,6 +13,7 @@ import baseUrl from "../utils/baseUrl";
 import { SpinnerLG } from "../src/components/loading/Spinners";
 import StyledDropzone from "../src/components/styledDropzone/StyledDropzone";
 import VerticalLine from "../utils/VerticalLine";
+import LandscapeCard from "../src/components/userCard/LandscapeCard";
 
 
 
@@ -24,8 +25,8 @@ export default function EditProfile() {
     //States
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
-    const [mainEmail, setMainEmail] = useState('')
-    const [secondEmail, setSecondEmail] = useState('')
+    const [Email, setEmail] = useState('')
+    const [workEmail, setWorkEmail] = useState('')
     const [celular, setCelular] = useState('')
     const [telefone, setTelefone] = useState('')
     const [creci, setCreci] = useState('')
@@ -56,12 +57,14 @@ export default function EditProfile() {
 
             setFirstName(res.data.firstName)
             setLastName(res.data.lastName)
-            setMainEmail(res.data.email)
+            setEmail(res.data.email)
+            setWorkEmail(res.data.workEmail)
+            setTelefone(res.data.telefone)
+            setCelular(res.data.celular)
             setCreci(res.data.creci)
             setProfileImageUrl(res.data.profileImageUrl)
             setHeaderImg(res.data.headerImg)
             setLogo(res.data.logo)
-
         })
     }
 
@@ -93,21 +96,55 @@ export default function EditProfile() {
                 :
                 <div className="pagesContent shadow fadeItem">
                     <div className="row d-flex justify-content-center">
-                        <div className="col-5 d-flex justify-content-center">
-                            <div className="my-5">
 
-                                <PortraitCard
-                                    firstName={firstName}
-                                    lastName={lastName}
-                                    creci={creci}
-                                    mainEmail={mainEmail}
-                                    secondEmail={secondEmail}
-                                    celular={celular}
-                                    telefone={telefone}
-                                    profileImageUrl={profileImageUrl}
-                                    headerImg={headerImg}
-                                    logo={logo}
-                                />
+                        <div className="col-5 ">
+                            <div id="carouselExampleControls" class="carousel carousel-dark slide" data-bs-ride="carousel">
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active">
+                                        <div className="d-flex justify-content-center align-items-center">
+                                            <div className="my-5">
+
+                                                <PortraitCard
+                                                    firstName={firstName}
+                                                    lastName={lastName}
+                                                    creci={creci}
+                                                    email={workEmail}
+                                                    celular={celular}
+                                                    telefone={telefone}
+                                                    profileImageUrl={profileImageUrl}
+                                                    headerImg={headerImg}
+                                                    logo={logo}
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="carousel-item ">
+                                        <div className="d-flex justify-content-center align-items-center">
+                                            <div className="my-5">
+
+                                                <LandscapeCard
+                                                    firstName={firstName}
+                                                    lastName={lastName}
+                                                    creci={creci}
+                                                    email={workEmail}
+                                                    celular={celular}
+                                                    telefone={telefone}
+                                                    profileImageUrl={profileImageUrl}
+                                                    headerImg={headerImg}
+                                                    logo={logo}
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
                             </div>
                         </div>
 
@@ -173,12 +210,12 @@ export default function EditProfile() {
                                         <div className="row mt-3">
                                             <label for="mainEmailItem" className="form-label fw-bold">Contato</label>
                                             <div className="col-12 col-lg-6 my-2">
-                                                <label for="mainEmailItem" className="form-label ">E-mail principal</label>
-                                                <input type="text" className="form-control form-control-sm" disabled id="mainEmailItem" value={mainEmail} onChange={e => setMainEmail(e.target.value)} placeholder="" />
+                                                <label for="mainEmailItem" className="form-label ">E-mail de cadastro</label>
+                                                <input type="text" className="form-control form-control-sm" disabled id="mainEmailItem" value={Email} onChange={e => setEmail(e.target.value)} placeholder="" />
                                             </div>
                                             <div className="col-12 col-lg-6 my-2">
-                                                <label for="secondaEmailItem" className="form-label ">E-mail secundário</label>
-                                                <input type="text" className="form-control form-control-sm" id="secondaEmailItem" value={secondEmail} onChange={e => setSecondEmail(e.target.value)} placeholder="" />
+                                                <label for="secondaEmailItem" className="form-label ">E-mail de trabalho</label>
+                                                <input type="text" className="form-control form-control-sm" id="secondaEmailItem" value={workEmail} onChange={e => setWorkEmail(e.target.value)} placeholder="" />
                                             </div>
                                             <div className="col-12 col-lg-6 my-2">
                                                 <label for="telefoneItem" className="form-label ">Telefone</label>
