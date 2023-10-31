@@ -3092,3 +3092,17 @@ h1 {
   border: #fff solid 1px;
   font-size: 10px;
 }
+
+.fixedTopicsTop {
+  position: fixed;
+  left: 0;
+	justify-content: center !important;
+	margin: 0 !important;
+	width: 100%;
+	top: calc(var(--header-height) + 0px);
+	padding: 20px 0;
+	background: #fff;
+	z-index: 0;
+  animation: slideDown 1s;
+	transition: 0.5s ease;
+}

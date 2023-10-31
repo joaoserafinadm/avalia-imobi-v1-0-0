@@ -19,6 +19,7 @@ import CropperImageModal from "../src/companyEdit/CropperImageModal";
 import CardsCarouselModal from "../src/editProfile/CardsCarouselModal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faIdCard } from "@fortawesome/free-solid-svg-icons";
+import FixedTopicsTop from "../src/components/fixedTopics";
 
 
 
@@ -154,27 +155,35 @@ export default function EditProfile() {
                             )}
                             <div className="col-sm-5 col-12">
                                 {!window2Mobile() && (
-                                    <div className="row ">
-                                        <CardsCarouselModal  firstName={firstName}
-                                    lastName={lastName}
-                                    creci={creci}
-                                    email={workEmail}
-                                    celular={celular}
-                                    telefone={telefone}
-                                    profileImageUrl={profileImageUrlReview ? profileImageUrlReview : profileImageUrl}
-                                    headerImg={headerImg}
-                                    logo={logo}
-                                    logradouro={logradouro}
-                                    numero={numero}
-                                    cidade={cidade}
-                                    estado={estado} />
-                                        <div className="col-12 d-flex justify-content-end mb-2">
-                                            <button className="btn btn-sm btn-orange" data-bs-toggle="modal" data-bs-target="#CardsCarouselModal" >
-                                                <FontAwesomeIcon icon={faIdCard} className="icon me-2"/> Cartão
-                                            </button>
+                                    <>
+                                        <div className="row" >
+                                            <CardsCarouselModal firstName={firstName}
+                                                lastName={lastName}
+                                                creci={creci}
+                                                email={workEmail}
+                                                celular={celular}
+                                                telefone={telefone}
+                                                profileImageUrl={profileImageUrlReview ? profileImageUrlReview : profileImageUrl}
+                                                headerImg={headerImg}
+                                                logo={logo}
+                                                logradouro={logradouro}
+                                                numero={numero}
+                                                cidade={cidade}
+                                                estado={estado} />
+
+                                            <FixedTopicsTop>
+
+                                                <div className="col-12 d-flex justify-content-end " >
+                                                    <button className="btn btn-sm btn-orange" data-bs-toggle="modal" data-bs-target="#CardsCarouselModal"  >
+                                                        <FontAwesomeIcon icon={faIdCard} className="icon me-2" /> Cartão
+                                                    </button>
+                                                </div>
+                                            </FixedTopicsTop>
+
                                         </div>
                                         <hr />
-                                    </div>
+                                    </>
+
                                 )}
                                 <div className="row">
                                     <div className="col-12">
@@ -292,6 +301,6 @@ export default function EditProfile() {
                 </>
 
             }
-        </div>
+        </div >
     )
 }
