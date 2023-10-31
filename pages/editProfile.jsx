@@ -14,6 +14,8 @@ import { SpinnerLG } from "../src/components/loading/Spinners";
 import StyledDropzone from "../src/components/styledDropzone/StyledDropzone";
 import VerticalLine from "../utils/VerticalLine";
 import LandscapeCard from "../src/components/userCard/LandscapeCard";
+import CardsCarousel from "../src/editProfile/CardsCarousel";
+import CropperImageModal from "../src/companyEdit/CropperImageModal";
 
 
 
@@ -34,6 +36,14 @@ export default function EditProfile() {
     const [profileImageUrlReview, setProfileImageUrlReview] = useState('')
     const [headerImg, setHeaderImg] = useState('')
     const [logo, setLogo] = useState('')
+    const [logradouro, setLogradouro] = useState('')
+    const [numero, setNumero] = useState('')
+    const [cidade, setCidade] = useState('')
+    const [estado, setEstado] = useState('')
+
+    //Image crop
+    const [selectFile, setSelectFile] = useState(null)
+
 
     //Loading 
     const [loadingPage, setLoadingPage] = useState(true)
@@ -65,6 +75,10 @@ export default function EditProfile() {
             setProfileImageUrl(res.data.profileImageUrl)
             setHeaderImg(res.data.headerImg)
             setLogo(res.data.logo)
+            setLogradouro(res.data.logradouro)
+            setNumero(res.data.numero)
+            setCidade(res.data.cidade)
+            setEstado(res.data.estado)
         })
     }
 
@@ -87,6 +101,20 @@ export default function EditProfile() {
             .replace(/(-\d{4})\d+?$/, '$1'))
     }
 
+    const handleFileChange = file => {
+        console.log(file)
+        if (file) {
+            setSelectFile(URL.createObjectURL(file))
+            setTimeout(() => {
+                var modal = document.getElementById('cropperImageModal')
+                var cropperModal = new bootstrap.Modal(modal)
+                cropperModal.show()
+            }, 20)
+        } else {
+            return
+        }
+    }
+
 
     return (
         <div >
@@ -94,146 +122,136 @@ export default function EditProfile() {
             {loadingPage ?
                 <SpinnerLG />
                 :
-                <div className="pagesContent shadow fadeItem">
-                    <div className="row d-flex justify-content-center">
+                <>
 
-                        <div className="col-5 ">
-                            <div id="carouselExampleControls" class="carousel carousel-dark slide" data-bs-ride="carousel">
-                                <div class="carousel-inner">
-                                    <div class="carousel-item active">
-                                        <div className="d-flex justify-content-center align-items-center">
-                                            <div className="my-5">
+                    <CropperImageModal selectFile={selectFile} setResult={value => setProfileImageUrlReview(value)} />
 
-                                                <PortraitCard
-                                                    firstName={firstName}
-                                                    lastName={lastName}
-                                                    creci={creci}
-                                                    email={workEmail}
-                                                    celular={celular}
-                                                    telefone={telefone}
-                                                    profileImageUrl={profileImageUrl}
-                                                    headerImg={headerImg}
-                                                    logo={logo}
-                                                />
+
+
+                    <div className="pagesContent shadow fadeItem">
+                        <div className="row d-flex justify-content-center">
+                            {window2Mobile() && (
+                                <CardsCarousel firstName={firstName}
+                                    lastName={lastName}
+                                    creci={creci}
+                                    email={workEmail}
+                                    celular={celular}
+                                    telefone={telefone}
+                                    profileImageUrl={profileImageUrlReview ? profileImageUrlReview : profileImageUrl}
+                                    headerImg={headerImg}
+                                    logo={logo}
+                                    logradouro={logradouro}
+                                    numero={numero}
+                                    cidade={cidade}
+                                    estado={estado} />
+                            )}
+
+                            {window2Mobile() && (
+                                <VerticalLine />
+                            )}
+                            <div className="col-sm-5 col-12 d-flex">
+                                <div className="row">
+                                    <div className="col-12">
+
+
+                                        <div className="row">
+
+                                            <div className="d-flex justify-content-between">
+                                                <input type="file" name="image/*" id="logoItem" accept="image/*" onChange={e => handleFileChange(e.target.files[0])}
+                                                    className="form-input" hidden />
+                                                <label className=" fw-bold">Imagem de perfil</label>
+                                                <label htmlFor="logoItem" className="span" type='button'>Editar</label>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="carousel-item ">
-                                        <div className="d-flex justify-content-center align-items-center">
-                                            <div className="my-5">
+                                            <StyledDropzone setFiles={array => { handleFileChange(array[0]) }} img>
+                                                <div className="row mt-3 d-flex justify-content-center align-items-center" style={{ height: '150px' }}>
 
-                                                <LandscapeCard
-                                                    firstName={firstName}
-                                                    lastName={lastName}
-                                                    creci={creci}
-                                                    email={workEmail}
-                                                    celular={celular}
-                                                    telefone={telefone}
-                                                    profileImageUrl={profileImageUrl}
-                                                    headerImg={headerImg}
-                                                    logo={logo}
-                                                />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                    <span class="visually-hidden">Previous</span>
-                                </button>
-                                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                    <span class="visually-hidden">Next</span>
-                                </button>
-                            </div>
-                        </div>
+                                                    <div className="col-12 d-flex justify-content-center align-items-center" >
+                                                        {profileImageUrlReview ?
+                                                            <img src={profileImageUrlReview} alt="logo" id="logoItem" className="editProfileImage fadeItem" />
+                                                            :
+                                                            <>
+                                                                {profileImageUrl ?
+                                                                    <img src={profileImageUrl} alt="logo" id="logoItem" className="editProfileImage fadeItem" />
+                                                                    :
+                                                                    <img src="https://res.cloudinary.com/dywdcjj76/image/upload/v1695257785/PUBLIC/companyLogoTemplate_xoeyar.png"
+                                                                        alt="" className="editProfileImage"
+                                                                        type="button" />
+                                                                }
+                                                            </>
 
-                        {window2Mobile() && (
-                            <>
-                                {window2Mobile() && (
-                                    <VerticalLine />
-                                )}
-                                <div className="col-6 d-flex">
-                                    <div className="row">
-                                        <div className="col-12">
+                                                        }
 
 
-                                            <div className="row">
-
-                                                <div className="d-flex justify-content-between">
-                                                    <input type="file" name="image/*" id="logoItem" accept="image/*" onChange={e => setLogoPreview(e.target.files[0])}
-                                                        className="form-input" hidden />
-                                                    <label className=" fw-bold">Imagem de perfil</label>
-                                                    <label htmlFor="logoItem" className="span" type='button'>Editar</label>
-                                                </div>
-                                                <StyledDropzone setFiles={array => { setProfileImageUrlReview(array[0]) }} img>
-                                                    <div className="row mt-3 d-flex justify-content-center align-items-center" style={{ height: '150px' }}>
-
-                                                        <div className="col-12 d-flex justify-content-center align-items-center" >
-                                                            {profileImageUrlReview ?
-                                                                <img src={URL.createObjectURL(profileImageUrlReview)} alt="logo" id="logoItem" className="logoEdit fadeItem" />
-                                                                :
-                                                                <>
-                                                                    {profileImageUrl ?
-                                                                        <img src={profileImageUrl} alt="logo" id="logoItem" className="logoEdit fadeItem" />
-                                                                        :
-                                                                        <img src="https://res.cloudinary.com/dywdcjj76/image/upload/v1695257785/PUBLIC/companyLogoTemplate_xoeyar.png"
-                                                                            alt="" className="logoEdit"
-                                                                            type="button" />
-                                                                    }
-                                                                </>
-
-                                                            }
-
-
-                                                        </div>
                                                     </div>
-                                                </StyledDropzone>
-                                            </div>
+                                                </div>
+                                            </StyledDropzone>
+                                            {/* <StyledDropzone setFiles={array => { setProfileImageUrlReview(array[0]) }} img>
+                                            <div className="row mt-3 d-flex justify-content-center align-items-center" style={{ height: '150px' }}>
 
+                                                <div className="col-12 d-flex justify-content-center align-items-center" >
+                                                    {profileImageUrlReview ?
+                                                        <img src={URL.createObjectURL(profileImageUrlReview)} alt="logo" id="logoItem" className="logoEdit fadeItem" />
+                                                        :
+                                                        <>
+                                                            {profileImageUrl ?
+                                                                <img src={profileImageUrl} alt="logo" id="logoItem" className="logoEdit fadeItem" />
+                                                                :
+                                                                <img src="https://res.cloudinary.com/dywdcjj76/image/upload/v1695257785/PUBLIC/companyLogoTemplate_xoeyar.png"
+                                                                    alt="" className="logoEdit"
+                                                                    type="button" />
+                                                            }
+                                                        </>
+
+                                                    }
+
+
+                                                </div>
+                                            </div>
+                                        </StyledDropzone> */}
                                         </div>
-                                        <div className="row mt-3">
-                                            <label for="firstNameItem" className="form-label fw-bold">Identificação</label>
-                                            <div className="col-12 col-lg-4 my-2">
-                                                <label for="firstNameItem" className="form-label ">Nome</label>
-                                                <input type="text" className="form-control form-control-sm" id="firstNameItem" value={firstName} onChange={e => setFirstName(e.target.value)} placeholder="" />
-                                            </div>
-                                            <div className="col-12 col-lg-4 my-2">
-                                                <label for="LastNameItem" className="form-label ">Sobrenome</label>
-                                                <input type="text" className="form-control form-control-sm" id="lastNameItem" value={lastName} onChange={e => setLastName(e.target.value)} placeholder="" />
-                                            </div>
-                                            <div className="col-12 col-lg-4 my-2">
-                                                <label for="creciItem" className="form-label ">Creci</label>
-                                                <input type="text" className="form-control form-control-sm" id="creciItem" value={creci} onChange={e => setCreci(e.target.value)} placeholder="" />
-                                            </div>
+
+                                    </div>
+                                    <div className="row mt-3">
+                                        <label for="firstNameItem" className="form-label fw-bold">Identificação</label>
+                                        <div className="col-12 col-lg-4 my-2">
+                                            <label for="firstNameItem" className="form-label ">Nome</label>
+                                            <input type="text" className="form-control form-control-sm" id="firstNameItem" value={firstName} onChange={e => setFirstName(e.target.value)} placeholder="" />
                                         </div>
-                                        <div className="row mt-3">
-                                            <label for="mainEmailItem" className="form-label fw-bold">Contato</label>
-                                            <div className="col-12 col-lg-6 my-2">
-                                                <label for="mainEmailItem" className="form-label ">E-mail de cadastro</label>
-                                                <input type="text" className="form-control form-control-sm" disabled id="mainEmailItem" value={Email} onChange={e => setEmail(e.target.value)} placeholder="" />
-                                            </div>
-                                            <div className="col-12 col-lg-6 my-2">
-                                                <label for="secondaEmailItem" className="form-label ">E-mail de trabalho</label>
-                                                <input type="text" className="form-control form-control-sm" id="secondaEmailItem" value={workEmail} onChange={e => setWorkEmail(e.target.value)} placeholder="" />
-                                            </div>
-                                            <div className="col-12 col-lg-6 my-2">
-                                                <label for="telefoneItem" className="form-label ">Telefone</label>
-                                                <input type="text" className="form-control form-control-sm" id="telefoneItem" value={telefone} onChange={e => maskTelefone(e.target.value)} placeholder="" />
-                                            </div>
-                                            <div className="col-12 col-lg-6 my-2">
-                                                <label for="telefoneItem" className="form-label ">Celular</label>
-                                                <input type="text" className="form-control form-control-sm" id="telefoneItem" value={celular} onChange={e => maskCelular(e.target.value)} placeholder="" />
-                                            </div>
+                                        <div className="col-12 col-lg-4 my-2">
+                                            <label for="LastNameItem" className="form-label ">Sobrenome</label>
+                                            <input type="text" className="form-control form-control-sm" id="lastNameItem" value={lastName} onChange={e => setLastName(e.target.value)} placeholder="" />
+                                        </div>
+                                        <div className="col-12 col-lg-4 my-2">
+                                            <label for="creciItem" className="form-label ">Creci</label>
+                                            <input type="text" className="form-control form-control-sm" id="creciItem" value={creci} onChange={e => setCreci(e.target.value)} placeholder="" />
                                         </div>
                                     </div>
-
+                                    <div className="row mt-3">
+                                        <label for="mainEmailItem" className="form-label fw-bold">Contato</label>
+                                        <div className="col-12 col-lg-6 my-2">
+                                            <label for="mainEmailItem" className="form-label ">E-mail de cadastro</label>
+                                            <input type="text" className="form-control form-control-sm" disabled id="mainEmailItem" value={Email} onChange={e => setEmail(e.target.value)} placeholder="" />
+                                        </div>
+                                        <div className="col-12 col-lg-6 my-2">
+                                            <label for="secondaEmailItem" className="form-label ">E-mail de trabalho</label>
+                                            <input type="text" className="form-control form-control-sm" id="secondaEmailItem" value={workEmail} onChange={e => setWorkEmail(e.target.value)} placeholder="" />
+                                        </div>
+                                        <div className="col-12 col-lg-6 my-2">
+                                            <label for="telefoneItem" className="form-label ">Telefone</label>
+                                            <input type="text" className="form-control form-control-sm" id="telefoneItem" value={telefone} onChange={e => maskTelefone(e.target.value)} placeholder="" />
+                                        </div>
+                                        <div className="col-12 col-lg-6 my-2">
+                                            <label for="telefoneItem" className="form-label ">Celular</label>
+                                            <input type="text" className="form-control form-control-sm" id="telefoneItem" value={celular} onChange={e => maskCelular(e.target.value)} placeholder="" />
+                                        </div>
+                                    </div>
                                 </div>
-                            </>
-                        )}
+
+                            </div>
 
 
 
+                        </div>
                         <hr />
                         <div className="row">
                             <div className="col-12 d-flex justify-content-end">
@@ -245,7 +263,8 @@ export default function EditProfile() {
                             </div>
                         </div>
                     </div>
-                </div>
+                </>
+
             }
         </div>
     )

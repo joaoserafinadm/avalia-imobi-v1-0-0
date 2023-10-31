@@ -36,7 +36,11 @@ export default authenticated(async (req, res) => {
                 ...response,
                 headerImg: headerImg,
                 logo: companyExist.logo,
-                telefone: response.telefone ? response.telefone : companyExist.telefone
+                telefone: response.telefone ? response.telefone : companyExist.telefone,
+                logradouro: companyExist.logradouro,
+                numero: companyExist.numero,
+                cidade: companyExist.cidade,
+                estado: companyExist.estado,
             }
 
             if (!response) {

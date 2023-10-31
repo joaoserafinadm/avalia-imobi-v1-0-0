@@ -101,18 +101,28 @@
 
 
 .mainLS {
-    height: 250px;
-    width: 500px;
+    height: 192px;
+    width: 340px;
     border: 1px solid #fff;
     border-radius: 5px;
     display: flex;
 }
+.mainBackLS {
+    height: 192px;
+    width: 340px;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    display: flex;
+    background-size: cover;
+    /* Ajusta a imagem para cobrir todo o espaço */
+    background-position: center;
+    // opacity: 0.2;
+}
 
 .headerLS {
-    height: 249px;
-    width: 200px;
-    border-radius: 4px  0 0 4px;
-    background-color: #f5874f;
+    height: 191px;
+    width: 130px;
+    border-radius: 4px 0 0 4px;
     // border-bottom: 5px solid #fff;
     // background-image: url(${props.headerImg}); /* Define a imagem como plano de fundo */
     background-size: cover;
@@ -121,24 +131,52 @@
     /* Centraliza a imagem */
 }
 
-
-.profilePictureLS {
-
-    height: 176px;
-    width: 176px;
-    border-radius: 88px;
-    border: 5px solid #fff;
-}
-
 .profilePicRowLS {
-    position: relative;
-    left: -150px;
+    position: absolute;
+    left: 105px;
+    top: 96px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
+.profilePictureLS {
+    height: 125px;
+    width: 125px;
+    border-radius: 75px;
+    border: 3px solid #fff;
+}
+
+
+
 .bodyLS {
-    position: relative;
-    left: -110px;
+    position: absolute;
+    right: 10px;
+    width:290px;
+}
+
+.logoLS {
+    position: absolute;
+    right: 15px;
+    bottom: 15px;
+    height: 30px;
+}
+.logoBackLS {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logoImgLS {
+    max-width: 200px;
+  max-height: 75px;
+  width: 100%;
+  height: auto;
+  position: absolute;
+}
+
+.fontSize{
+    font-size: 12px;
 }

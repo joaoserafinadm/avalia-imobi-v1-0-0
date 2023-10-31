@@ -22,7 +22,7 @@ export default function PortraitCard(props) {
             </div>
             <div className={`${styles.body}`}>
                 <div className="col-12 mt-2 d-flex justify-content-center">
-                    <span className='fs-5'>{props.firstName} {props.lastName}</span>
+                    <span className='fs-4'>{props.firstName} {props.lastName}</span>
                 </div>
                 <div className="col-12 mt-2 d-flex justify-content-center">
                     <span className='small'>
