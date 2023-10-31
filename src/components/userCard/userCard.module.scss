@@ -93,7 +93,7 @@
 
     .body {
         position: relative;
-        top: -50px;
+        top: -80px;
     }
 
 }
@@ -106,6 +106,12 @@
     border: 1px solid #fff;
     border-radius: 5px;
     display: flex;
+    border-radius: 4px 0 0 4px;
+    // border-bottom: 5px solid #fff;
+    // background-image: url(${props.headerImg}); /* Define a imagem como plano de fundo */
+    background-size: cover;
+    /* Ajusta a imagem para cobrir todo o espaço */
+    background-position: center;
 }
 .mainBackLS {
     height: 192px;
@@ -116,25 +122,21 @@
     background-size: cover;
     /* Ajusta a imagem para cobrir todo o espaço */
     background-position: center;
+    background-color: rgba(0, 0, 0, 0.5);
     // opacity: 0.2;
 }
 
 .headerLS {
     height: 191px;
     width: 130px;
-    border-radius: 4px 0 0 4px;
-    // border-bottom: 5px solid #fff;
-    // background-image: url(${props.headerImg}); /* Define a imagem como plano de fundo */
-    background-size: cover;
-    /* Ajusta a imagem para cobrir todo o espaço */
-    background-position: center;
+
     /* Centraliza a imagem */
 }
 
 .profilePicRowLS {
-    position: absolute;
-    left: 105px;
-    top: 96px;
+    position: relative;
+    left: 10px;
+    top: 0px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -150,9 +152,9 @@
 
 
 .bodyLS {
-    position: absolute;
-    right: 10px;
-    width:290px;
+    position: relative;
+    left: 15px !important;
+    width:calc(340px - 10px - 125px);
 }
 
 .logoLS {
@@ -174,7 +176,6 @@
   max-height: 75px;
   width: 100%;
   height: auto;
-  position: absolute;
 }
 
 .fontSize{

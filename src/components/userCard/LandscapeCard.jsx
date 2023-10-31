@@ -10,10 +10,10 @@ export default function LandscapeCard(props) {
 
 
     return (
-        <div className={`${styles.mainLS} shadow`}>
-            <div className={`${styles.headerLS}`} style={{ backgroundImage: `linear-gradient(to right,#fff0, #fff), ${props.headerImg ? `url(${props.headerImg})` : "#f5874f"}`, backgroundColor: props.headerImg ? '' : "#f5874f" }}>
+        <div className={`${styles.mainLS} shadow`} style={{ backgroundImage: `linear-gradient(to right,#fff0, #fff 40%), ${props.headerImg ? `url(${props.headerImg})` : "#f5874f"}`, backgroundColor: props.headerImg ? '' : "#f5874f" }}>
+            {/* <div className={`${styles.headerLS}`} >
 
-            </div>
+            </div> */}
             <div className={`${styles.profilePicRowLS}`}>
 
                 <img className={`${styles.profilePictureLS}`} src={props.profileImageUrl} alt="" />

@@ -11,12 +11,12 @@ export default function CardsCarousel(props) {
 
     return (
 
-        <div className="col-6">
+        <div className="col-xl-6 col-12">
             <div id="carouselExampleControls" class="carousel carousel-dark slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
                     <div class="carousel-item active" data-bs-interval="8000">
                         <div className="d-flex justify-content-center align-items-center">
-                            <div className="my-5">
+                            <div className="my-5" >
 
                                 <PortraitCard
                                     firstName={props.firstName}
@@ -34,8 +34,8 @@ export default function CardsCarousel(props) {
                     </div>
                     <div class="carousel-item " data-bs-interval="8000">
                         <div className="d-flex justify-content-center align-items-center">
-                            <div className="my-5">
-                                <div className="my-3">
+                            <div className="my-5"  style={{scale: props.mobileView ? "0.8": "1"}}>
+                                <div className="my-3" >
 
 
                                     <LandscapeCard
