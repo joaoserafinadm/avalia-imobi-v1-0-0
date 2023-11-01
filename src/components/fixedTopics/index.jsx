@@ -50,7 +50,7 @@ export function FixedTopicsBottom({ children }) {
 
 
     return (
-        <div className={` ${fixed && `${styles.fixedTopicsBottom}  shadow fadeItem1s`} `}>
+        <div className={` ${fixed && `${styles.fixedTopicsBottom}  shadow `} `}>
             {children}
         </div>
     )
