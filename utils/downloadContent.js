@@ -9,6 +9,7 @@ export default function downloadContent(id, fileName) {
 
     html2canvas(chartContainer, {
         scale,
+        dpi:144,
         letterRendering: 1,
         allowTaint: true,
         useCORS:true,
