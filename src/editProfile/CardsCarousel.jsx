@@ -42,7 +42,7 @@ export default function CardsCarousel(props) {
                             <div className="my-5" style={{ scale: props.mobileView ? "0.8" : "1" }}>
                                 <div className="my-3" >
                                     <div className="row mb-1">
-                                        <div className="col-12 d-flex justify-content-end">
+                                        <div className="col-12 d-flex justify-content-center">
 
 
 
