@@ -1,6 +1,9 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import LandscapeCard from "../components/userCard/LandscapeCard";
 import LandscapeCardBack from "../components/userCard/LandscapeCardBack";
 import PortraitCard from "../components/userCard/PortraitCard";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
+import downloadContent from "../../utils/downloadContent";
 
 
 
@@ -29,14 +32,42 @@ export default function CardsCarousel(props) {
                                     headerImg={props.headerImg}
                                     logo={props.logo}
                                 />
+
+
                             </div>
                         </div>
                     </div>
                     <div class="carousel-item " data-bs-interval="8000">
                         <div className="d-flex justify-content-center align-items-center">
-                            <div className="my-5"  style={{scale: props.mobileView ? "0.8": "1"}}>
+                            <div className="my-5" style={{ scale: props.mobileView ? "0.8" : "1" }}>
                                 <div className="my-3" >
+                                    <div className="row mb-1">
+                                        <div className="col-12 d-flex justify-content-end">
 
+
+
+                                            <div className="dropdown">
+                                                <button
+                                                    className="btn btn-light btn-sm  mt-2"
+                                                    type="button"
+                                                    id="downloadDropdownButton"
+                                                    data-bs-toggle="dropdown"
+                                                    aria-expanded="false">
+                                                    <FontAwesomeIcon icon={faBars} className="icon" />
+                                                </button>
+                                                <ul
+                                                    className="dropdown-menu"
+                                                    aria-labelledby="downloadDropdownButton">
+                                                    <li>
+                                                        <button onClick={() => { downloadContent("landscapeCardItem", "Cartão - " + props.firstName + " " + props.lastName); downloadContent("landscapeCardItemBack", "Cartão fundo - " + props.firstName + " " + props.lastName) }}
+                                                            className="dropdown-item">
+                                                            Baixar cartão
+                                                        </button>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
 
                                     <LandscapeCard
                                         firstName={props.firstName}

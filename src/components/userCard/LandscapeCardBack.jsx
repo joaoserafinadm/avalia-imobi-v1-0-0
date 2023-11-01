@@ -10,7 +10,9 @@ export default function LandscapeCardBack(props) {
 
 
     return (
-        <div className={`${styles.mainBackLS} shadow`} style={{ backgroundImage: ` url(${props.headerImg})` }}>
+        <div id='landscapeCardItemBack'
+        className={`${styles.mainBackLS} shadow`} 
+        style={{ backgroundImage: ` url(${props.headerImg})` }}>
             <div className={`${styles.logoBackLS}`}>
                 <img src={props.logo} alt="" height={50} className={`${styles.logoImgLS}`}/>
 
