@@ -43,10 +43,12 @@ export function FixedTopicsBottom({ children }) {
 
     const [fixed, setFixed] = useState(true);
 
-    const handleScroll = () => {
+    useEffect(() => {
         if (!window2Mobile()) setFixed(true)
         else setFixed(false)
-    };
+
+    }, [])
+
 
 
     return (
