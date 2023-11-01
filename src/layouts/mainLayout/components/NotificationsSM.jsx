@@ -1,6 +1,8 @@
 import styles from './Notifications.module.scss'
 import Icons from '../../../components/icons'
 import Link from 'next/link'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faLeftLong } from '@fortawesome/free-solid-svg-icons'
 
 export default function NotificationsSM(props) {
 
@@ -8,11 +10,17 @@ export default function NotificationsSM(props) {
 
     return (
         <>
-        <div className={`${styles.cardOuter}`} onClick={() => props.notificationOff()}>
+            {/* <div className={`${styles.cardOuter}`} onClick={() => props.notificationOff()}>
 
-        </div>
+            </div> */}
             <div className={`${styles.cardSizeSM} fadeItem `}>
                 <div className="row mb-2">
+                    <div >
+
+                        <span className={`${styles.backButtom} px-3`} onClick={() => props.notificationOff()}>
+                            <FontAwesomeIcon icon={faLeftLong} className='icon' />
+                        </span>
+                    </div>
                     <div className="col-12 d-flex justify-content-center align-itens-center">
 
                         <span className='bold'>Notificações</span>

@@ -1,4 +1,5 @@
 .menuArea {
+    position: relative;
     margin: 0;
     padding: 0;
     background-color: var(--bg-white);
@@ -7,7 +8,7 @@
     height: 100vh;
     top: 0;
     width: var(--aside-fixed-width);
-    z-index: 1000;
+    z-index: 2;
     background-color: #fff;
     transition: ease-in-out .3s;
 }
@@ -94,5 +95,5 @@
     height: 100%;
     top: 0px;
     transition: ease .5s;
-    z-index: 100;
+    z-index: 1;
 }

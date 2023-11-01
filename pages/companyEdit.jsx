@@ -16,6 +16,7 @@ import { useRouter } from "next/router";
 import StyledDropzone from "../src/components/styledDropzone/StyledDropzone";
 import { createImageUrl } from "../utils/createImageUrl";
 import ImageHeaderModal from "../src/companyEdit/ImageHeaderModal";
+import { FixedTopicsBottom } from "../src/components/fixedTopics";
 
 
 
@@ -375,18 +376,21 @@ export default function companyEdit() {
                             </div>
                         </div>
                         <hr />
-                        <div className="row">
-                            <div className="col-12 d-flex justify-content-end">
-                                <Link href="/">
-                                    <button className="btn btn-sm btn-secondary">Cancelar</button>
-                                </Link>
-                                {loadingSave ?
-                                    <button className="ms-2 btn btn-sm btn-orange px-4" disabled><SpinnerSM /></button>
-                                    :
-                                    <button className="ms-2 btn btn-sm btn-orange" onClick={() => handleSave(token.company_id)}>Salvar</button>
-                                }
+                        <FixedTopicsBottom >
+
+                            <div className="row">
+                                <div className="col-12 d-flex justify-content-end">
+                                    <Link href="/">
+                                        <button className="btn btn-sm btn-secondary">Cancelar</button>
+                                    </Link>
+                                    {loadingSave ?
+                                        <button className="ms-2 btn btn-sm btn-orange px-4" disabled><SpinnerSM /></button>
+                                        :
+                                        <button className="ms-2 btn btn-sm btn-orange" onClick={() => handleSave(token.company_id)}>Salvar</button>
+                                    }
+                                </div>
                             </div>
-                        </div>
+                        </FixedTopicsBottom>
                     </div>
                 </>
 

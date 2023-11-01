@@ -19,7 +19,7 @@ import CropperImageModal from "../src/companyEdit/CropperImageModal";
 import CardsCarouselModal from "../src/editProfile/CardsCarouselModal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faIdCard } from "@fortawesome/free-solid-svg-icons";
-import FixedTopicsTop from "../src/components/fixedTopics";
+import { FixedTopicsBottom, FixedTopicsTop } from "../src/components/fixedTopics";
 
 
 
@@ -288,15 +288,18 @@ export default function EditProfile() {
 
                         </div>
                         <hr />
-                        <div className="row">
-                            <div className="col-12 d-flex justify-content-end">
-                                <Link href="/">
+                        <FixedTopicsBottom >
+                            <div className="row">
+                                <div className="col-12 d-flex justify-content-end">
+                                    <Link href="/">
 
-                                    <button className="btn btn-sm btn-secondary">Cancelar</button>
-                                </Link>
-                                <button className="ms-2 btn btn-sm btn-orange text-light">Salvar</button>
+                                        <button className="btn btn-sm btn-secondary">Cancelar</button>
+                                    </Link>
+                                    <button className="ms-2 btn btn-sm btn-orange text-light">Salvar</button>
+                                </div>
                             </div>
-                        </div>
+
+                        </FixedTopicsBottom>
                     </div>
                 </>
 

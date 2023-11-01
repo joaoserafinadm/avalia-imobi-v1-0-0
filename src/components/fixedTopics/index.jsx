@@ -1,9 +1,11 @@
 import { useEffect } from "react";
 import { useState } from "react";
+import styles from "./fixedTopics.module.scss"
+import window2Mobile from "../../../utils/window2Mobile";
 
 
 
-export default function FixedTopicsTop({ children }) {
+export function FixedTopicsTop({ children }) {
 
     const [fixed, setFixed] = useState(false);
 
@@ -26,11 +28,30 @@ export default function FixedTopicsTop({ children }) {
     }, []);
 
     return (
-        <div className={` ${fixed && "fixedTopicsTop shadow"} `}>
+        <div className={` ${fixed && `${styles.fixedTopicsTop}  shadow`} `}>
             {children}
         </div>
 
 
     )
 
+}
+
+
+
+export function FixedTopicsBottom({ children }) {
+
+    const [fixed, setFixed] = useState(true);
+
+    const handleScroll = () => {
+        if (!window2Mobile()) setFixed(true)
+        else setFixed(false)
+    };
+
+
+    return (
+        <div className={` ${fixed && `${styles.fixedTopicsBottom}  shadow fadeItem1s`} `}>
+            {children}
+        </div>
+    )
 }

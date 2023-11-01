@@ -5,12 +5,12 @@
 .cardSizeSM {
     position: fixed;
     background-color: #fff;
-    top: var(--header-height);
+    top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
     padding: 15px;
-    z-index: 10000002;
+    z-index: 3 !important;
 }
 
 .cardOuter { 
@@ -47,4 +47,9 @@
 
 .hover:hover {
     background-color: #dedede !important;
+}
+
+.backButtom {
+    position: absolute;
+    right: 0;
 }
