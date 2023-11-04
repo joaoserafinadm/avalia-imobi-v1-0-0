@@ -2,11 +2,15 @@ import axios from "axios"
 
 export const createImageUrl = (filesList, directory) => new Promise((resolve, reject) => {
 
+    console.log("filesList", filesList)
+
     let newList = []
 
     let iteration = 0
 
     for (let [index, elem] of filesList.entries()) {
+
+        console.log("elem", elem)
 
         const reader = new FileReader()
         if (reader) {

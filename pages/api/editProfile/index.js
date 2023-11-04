@@ -1,6 +1,7 @@
 import { connect } from '../../../utils/db'
-import { verify } from 'jsonwebtoken'
+import { verify, sign } from 'jsonwebtoken'
 import { ObjectId, ObjectID } from 'bson'
+import cookie from 'cookie'
 
 const authenticated = fn => async (req, res) => {
     verify(req.cookies.auth, process.env.JWT_SECRET, async function (err, decoded) {
@@ -51,6 +52,31 @@ export default authenticated(async (req, res) => {
         }
     }
 
+    // else if (req.method === "POST") {
+
+
+    //     const { company_id,
+    //         user_id,
+    //         profileImageUrl,
+    //         firstName,
+    //         lastName,
+    //         workEmail,
+    //         creci,
+    //         telefone,
+    //         celular } = req.body
+
+    //     if (!company_id || !user_id || !profileImageUrl || !firstName || !lastName || !workEmail || !creci || !celular || !telefone) {
+
+    //         res.status(400).json({ error: 'Missing parameters on request body.' })
+    //     }
+    //     else {
+
+    //         const { db } = await connect()
+
+
+    //     }
+    // }
+
     else if (req.method === 'PATCH') {
 
         const updateObject = req.body
@@ -58,10 +84,27 @@ export default authenticated(async (req, res) => {
         const { db } = await connect()
 
         await db.collection('users').updateOne(
-            { _id: ObjectId(user_id) },
+            { _id: ObjectId(updateObject.user_id) },
             {
                 $set: updateObject
             })
+
+            const token = updateObject.token
+
+        const clains = {
+            ...token,
+            profileImageUrl: updateObject.profileImageUrl
+        }
+
+        const jwt = sign(clains, process.env.JWT_SECRET, {})
+
+        const response2 = res.setHeader('Set-Cookie', cookie.serialize('auth', jwt, {
+            httpOnly: false,
+            secure: process.env.NODE_ENV !== "production", //em produção usar true
+            sameSite: 'strict',
+            // maxAge: 3600,
+            path: '/'
+        }))
         res.status(200).json({ message: 'Profile Updated.' })
 
     }

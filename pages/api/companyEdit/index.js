@@ -9,7 +9,7 @@ const authenticated = fn => async (req, res) => {
         if (!err && decoded) {
             return await fn(req, res)
         }
-        res.status(500).json({ message: 'You are not authenticated.' })
+        res.status(500).json({ message: 'You are not authenticated.' });
     })
 }
 
@@ -63,7 +63,9 @@ export default authenticated(async (req, res) => {
             const userExist = await db.collection('users').findOne({ _id: ObjectId(user_id) })
 
             if (!companyExist || !userExist) {
+
                 res.status(400).json({ error: "Company or user do not exist" })
+                
             } else {
 
                 const updateData = {
@@ -86,8 +88,6 @@ export default authenticated(async (req, res) => {
                     { $set: updateData }
                 )
 
-                console.log(response)
-
                 if (!response.matchedCount) {
 
                    
@@ -108,7 +108,7 @@ export default authenticated(async (req, res) => {
                         httpOnly: false,
                         secure: process.env.NODE_ENV !== "production", //em produção usar true
                         sameSite: 'strict',
-                        maxAge: 3600,
+                        // maxAge: 3600,
                         path: '/'
                     }))
 

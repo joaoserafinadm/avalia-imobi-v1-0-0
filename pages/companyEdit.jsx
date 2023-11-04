@@ -17,6 +17,7 @@ import StyledDropzone from "../src/components/styledDropzone/StyledDropzone";
 import { createImageUrl } from "../utils/createImageUrl";
 import ImageHeaderModal from "../src/companyEdit/ImageHeaderModal";
 import { FixedTopicsBottom } from "../src/components/fixedTopics";
+import removeInputError from "../utils/removeInputError";
 
 
 
@@ -146,6 +147,8 @@ export default function companyEdit() {
     }
 
     const validate = () => {
+
+        removeInputError()
 
         if (!companyName || !telefone || !cidade || !email) {
             if (!companyName) document.getElementById("companyNameItem").classList.add('inputError')

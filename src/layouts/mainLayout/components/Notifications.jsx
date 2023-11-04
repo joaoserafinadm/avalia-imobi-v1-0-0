@@ -21,7 +21,7 @@ export default function Notifications(props) {
                 {!!props.notifications.length && props.notifications.map(elem => {
                     return (
                         <Link href={elem.link} key={elem._id}>
-                            <span type='button' className={`${styles.hover} d-flex justify-content-center align-items-center py-2`} >
+                            <span type='button' className={`${styles.hover} d-flex justify-content-center align-items-center py-2`} onClick={() => props.notificationOff()}>
 
                                 <span className="col-12 d-flex ">
                                     <div className="col-2 d-flex justify-content-center align-items-center">

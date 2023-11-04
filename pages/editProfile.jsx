@@ -10,7 +10,7 @@ import Cookies from "js-cookie";
 import jwt from "jsonwebtoken";
 import axios from "axios";
 import baseUrl from "../utils/baseUrl";
-import { SpinnerLG } from "../src/components/loading/Spinners";
+import { SpinnerLG, SpinnerSM } from "../src/components/loading/Spinners";
 import StyledDropzone from "../src/components/styledDropzone/StyledDropzone";
 import VerticalLine from "../utils/VerticalLine";
 import LandscapeCard from "../src/components/userCard/LandscapeCard";
@@ -20,6 +20,10 @@ import CardsCarouselModal from "../src/editProfile/CardsCarouselModal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faIdCard } from "@fortawesome/free-solid-svg-icons";
 import { FixedTopicsBottom, FixedTopicsTop } from "../src/components/fixedTopics";
+import scrollTo from "../utils/scrollTo";
+import removeInputError from "../utils/removeInputError";
+import { createImageUrl } from "../utils/createImageUrl";
+import { useRouter } from "next/router";
 
 
 
@@ -27,6 +31,7 @@ export default function EditProfile() {
 
     const token = jwt.decode(Cookies.get('auth'))
     const dispatch = useDispatch()
+    const router = useRouter()
 
     //States
     const [firstName, setFirstName] = useState('')
@@ -51,6 +56,7 @@ export default function EditProfile() {
 
     //Loading 
     const [loadingPage, setLoadingPage] = useState(true)
+    const [loadingSave, setLoadingSave] = useState(false)
 
     useEffect(() => {
         navbarHide(dispatch)
@@ -106,7 +112,8 @@ export default function EditProfile() {
     }
 
     const handleFileChange = file => {
-        console.log(file)
+
+
         if (file) {
             setSelectFile(URL.createObjectURL(file))
             setTimeout(() => {
@@ -120,8 +127,63 @@ export default function EditProfile() {
     }
 
 
+    const validate = () => {
+
+        removeInputError()
+
+        if ( !workEmail || !firstName || !lastName || !celular || !creci) {
+            // if (!profileImageUrl) document.getElementById("profileImageUrlItem").classList.add('inputError')
+            if (!workEmail) document.getElementById("workEmailItem").classList.add('inputError')
+            if (!firstName) document.getElementById("firstNameItem").classList.add('inputError')
+            if (!lastName) document.getElementById("lastNameItem").classList.add('inputError')
+            if (!celular) document.getElementById("celularItem").classList.add('inputError')
+            if (!creci) document.getElementById("creciItem").classList.add('inputError')
+            scrollTo('pageTop')
+            return false
+        }
+        else return true
+    }
+
+    const handleSave = async (company_id) => {
+
+        setLoadingSave(true)
+
+        const isValid = validate()
+
+        if (isValid) {
+
+            const blobFile = await fetch(profileImageUrlReview).then(r => r.blob());
+
+            const newLogo = profileImageUrlReview ? await createImageUrl([blobFile], "AVALIAIMOBI_USERS") : ''
+
+            await axios.patch(`${baseUrl()}/api/editProfile`, {
+                token: token,
+                company_id,
+                user_id: token.sub,
+                profileImageUrl: newLogo ? newLogo[0].url : profileImageUrl,
+                firstName,
+                lastName,
+                workEmail,
+                creci,
+                telefone,
+                celular
+            }).then(res => {
+                localStorage.setItem('auth', (Cookies.get('auth')))
+                router.push('/')
+                setLoadingSave(false)
+
+            }).catch(e => {
+                setLoadingSave(false)
+
+            })
+
+        }
+
+    }
+
+
     return (
-        <div >
+        <div id="pageTop">
             <Title title={'Editar Cartão'} backButton='/' />
             {loadingPage ?
                 <SpinnerLG />
@@ -247,28 +309,28 @@ export default function EditProfile() {
 
                                     </div>
                                     <div className="row mt-3">
-                                        <label for="firstNameItem" className="form-label fw-bold">Identificação</label>
+                                        <label for="firstNameItem" className="form-label fw-bold">Identificação*</label>
                                         <div className="col-12 col-lg-4 my-2">
-                                            <label for="firstNameItem" className="form-label ">Nome</label>
+                                            <label for="firstNameItem" className="form-label ">Nome*</label>
                                             <input type="text" className="form-control form-control-sm" id="firstNameItem" value={firstName} onChange={e => setFirstName(e.target.value)} placeholder="" />
                                         </div>
                                         <div className="col-12 col-lg-4 my-2">
-                                            <label for="LastNameItem" className="form-label ">Sobrenome</label>
+                                            <label for="LastNameItem" className="form-label ">Sobrenome*</label>
                                             <input type="text" className="form-control form-control-sm" id="lastNameItem" value={lastName} onChange={e => setLastName(e.target.value)} placeholder="" />
                                         </div>
                                         <div className="col-12 col-lg-4 my-2">
-                                            <label for="creciItem" className="form-label ">Creci</label>
+                                            <label for="creciItem" className="form-label ">Creci*</label>
                                             <input type="text" className="form-control form-control-sm" id="creciItem" value={creci} onChange={e => setCreci(e.target.value)} placeholder="" />
                                         </div>
                                     </div>
                                     <div className="row mt-3">
-                                        <label for="mainEmailItem" className="form-label fw-bold">Contato</label>
+                                        <label for="workEmailItem" className="form-label fw-bold">Contato</label>
                                         <div className="col-12 col-lg-6 my-2">
-                                            <label for="mainEmailItem" className="form-label ">E-mail de cadastro</label>
-                                            <input type="text" className="form-control form-control-sm" disabled id="mainEmailItem" value={Email} onChange={e => setEmail(e.target.value)} placeholder="" />
+                                            <label for="workEmailItem" className="form-label ">E-mail de cadastro</label>
+                                            <input type="text" className="form-control form-control-sm" disabled id="workEmailItem" value={Email} onChange={e => setEmail(e.target.value)} placeholder="" />
                                         </div>
                                         <div className="col-12 col-lg-6 my-2">
-                                            <label for="secondaEmailItem" className="form-label ">E-mail de trabalho</label>
+                                            <label for="secondaEmailItem" className="form-label ">E-mail de trabalho*</label>
                                             <input type="text" className="form-control form-control-sm" id="secondaEmailItem" value={workEmail} onChange={e => setWorkEmail(e.target.value)} placeholder="" />
                                         </div>
                                         <div className="col-12 col-lg-6 my-2">
@@ -276,8 +338,8 @@ export default function EditProfile() {
                                             <input type="text" className="form-control form-control-sm" id="telefoneItem" value={telefone} onChange={e => maskTelefone(e.target.value)} placeholder="" />
                                         </div>
                                         <div className="col-12 col-lg-6 my-2">
-                                            <label for="telefoneItem" className="form-label ">Celular</label>
-                                            <input type="text" className="form-control form-control-sm" id="telefoneItem" value={celular} onChange={e => maskCelular(e.target.value)} placeholder="" />
+                                            <label for="telefoneItem" className="form-label ">Celular*</label>
+                                            <input type="text" className="form-control form-control-sm" id="celularItem" value={celular} onChange={e => maskCelular(e.target.value)} placeholder="" />
                                         </div>
                                     </div>
                                 </div>
@@ -295,8 +357,12 @@ export default function EditProfile() {
 
                                         <button className="btn btn-sm btn-secondary">Cancelar</button>
                                     </Link>
-                                    <button className="ms-2 btn btn-sm btn-orange text-light">Salvar</button>
-                                </div>
+                                    {loadingSave ?
+                                        <button className="ms-2 btn btn-sm btn-orange px-4" disabled><SpinnerSM /></button>
+                                        :
+                                        <button className="ms-2 btn btn-sm btn-orange" onClick={() => handleSave(token.company_id)}>Salvar</button>
+                                    }
+                                     </div>
                             </div>
 
                         </FixedTopicsBottom>
