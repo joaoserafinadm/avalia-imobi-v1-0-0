@@ -9,7 +9,7 @@ export default function scrollTo(id) {
                 inline: "nearest"
             });
 
-        }, 10)
+        }, 50)
 
     } else {
         return 

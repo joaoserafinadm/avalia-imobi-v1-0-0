@@ -6,6 +6,10 @@ import jwt from "jsonwebtoken";
 import { FixedTopicsBottom } from "../src/components/fixedTopics";
 import Link from "next/link";
 import PropertyTypeCard from "../src/addClient/PropertyTypeCard";
+import navbarHide from "../utils/navbarHide";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import scrollTo from "../utils/scrollTo";
 
 
 
@@ -16,6 +20,7 @@ import PropertyTypeCard from "../src/addClient/PropertyTypeCard";
 export default function addClient() {
 
     const token = jwt.decode(Cookies.get("auth"));
+    const dispatch = useDispatch()
 
     //states
     const [clientName, setClientName] = useState('')
@@ -30,6 +35,19 @@ export default function addClient() {
     const [loadingPage, setLoadingPage] = useState(false)
     const [loadingSave, setLoadingSave] = useState(false)
     const [loadingSaveLink, setLoadingSaveLink] = useState(false)
+
+
+    useEffect(() => {
+
+        dataFunction(token.company_id)
+        navbarHide(dispatch)
+
+    }, [])
+
+
+    const dataFunction = (company_id) => {
+
+    }
 
 
     const handleSave = () => {
@@ -75,16 +93,16 @@ export default function addClient() {
 
 
                                 <div className="my-2 col-lg-3 col-xxl-2 col-6 d-flex justify-content-center">
-                                    <PropertyTypeCard type="Apartamento" setPropertyType={(value) => setPropertyType(value)} propertyType={propertyType} />
+                                    <PropertyTypeCard type="Apartamento" setPropertyType={(value) => { setPropertyType(value); scrollTo('propertyInfo') }} propertyType={propertyType} />
                                 </div>
                                 <div className="my-2 col-lg-3 col-xxl-2 col-6 d-flex justify-content-center">
-                                    <PropertyTypeCard type="Casa" setPropertyType={(value) => setPropertyType(value)} propertyType={propertyType} />
+                                    <PropertyTypeCard type="Casa" setPropertyType={(value) => { setPropertyType(value); scrollTo('propertyInfo') }} propertyType={propertyType} />
                                 </div>
                                 <div className="my-2 col-lg-3 col-xxl-2 col-6 d-flex justify-content-center">
-                                    <PropertyTypeCard type="Comercial" setPropertyType={(value) => setPropertyType(value)} propertyType={propertyType} />
+                                    <PropertyTypeCard type="Comercial" setPropertyType={(value) => { setPropertyType(value); scrollTo('propertyInfo') }} propertyType={propertyType} />
                                 </div>
                                 <div className="my-2 col-lg-3 col-xxl-2 col-6 d-flex justify-content-center">
-                                    <PropertyTypeCard type="Terreno" setPropertyType={(value) => setPropertyType(value)} propertyType={propertyType} />
+                                    <PropertyTypeCard type="Terreno" setPropertyType={(value) => { setPropertyType(value); scrollTo('propertyInfo') }} propertyType={propertyType} />
                                 </div>
                             </div>
 
@@ -96,7 +114,7 @@ export default function addClient() {
 
 
                 {propertyType && (
-                    <div className="row mt-3 fadeItem">
+                    <div className="row mt-3 fadeItem" id="propertyInfo" style={{ height: '250px' }}>
                         <label for="telefoneItem" className="form-label fw-bold">{propertyType}</label>
 
                     </div>
