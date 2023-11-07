@@ -10,7 +10,7 @@ import { Accordion } from "react-bootstrap";
 import { useAccordionButton } from "react-bootstrap/AccordionButton";
 import { AccordionContext } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleRight, faGear, faHome } from "@fortawesome/free-solid-svg-icons";
+import { faAngleRight, faGear, faHome, faHouseUser } from "@fortawesome/free-solid-svg-icons";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
@@ -53,7 +53,7 @@ export default function Nav(props) {
 
     return (
         <>
-            <div className={`${styles.menuArea} shadow`} style={{left: `${toggleStatus ? "0px" : "-250px"}`}}>
+            <div className={`${styles.menuArea} shadow`} style={{ left: `${toggleStatus ? "0px" : "-250px"}` }}>
                 <Toggle />
                 <Logo />
                 <div className=" row align-items-center mt-4 mb-2 fadeItem">
@@ -129,6 +129,33 @@ export default function Nav(props) {
                                             </div>
                                         </ContextAwareToggle>
                                     </li>
+                                    <li>
+                                        <ContextAwareToggle eventKey="2" collapse="configuracoesCollapse">
+                                            <div className="d-flex">
+                                                <div className="col-1 text-center me-3">
+                                                    <FontAwesomeIcon icon={faHouseUser} className="me-2 icon" />
+                                                </div>
+                                                <div className="col-9">Clientes</div>
+                                                <div className="col-1 toggleIcon text-end">
+                                                    <FontAwesomeIcon icon={faAngleRight} className=" icon" />
+                                                </div>
+                                            </div>
+                                        </ContextAwareToggle>
+                                        <Accordion.Collapse eventKey="2">
+                                            <ul>
+                                                <li>
+                                                    <Link href={`/addClient`}>
+                                                        <span>Adicionar cliente</span>
+                                                    </Link>
+                                                </li>
+                                                <li>
+                                                    <Link href={`/addClient`}>
+                                                        <span>Gestão de clientes</span>
+                                                    </Link>
+                                                </li>
+                                            </ul>
+                                        </Accordion.Collapse>
+                                    </li>
 
                                     <li>
                                         <ContextAwareToggle eventKey="5" collapse="configuracoesCollapse">
@@ -175,9 +202,9 @@ export default function Nav(props) {
                     </div>
                 </div>
             </div>
-            {!window2Mobile() && toggleStatus === true &&  (
+            {!window2Mobile() && toggleStatus === true && (
                 <div className={`fadeItem ${styles.navbarBackground}`} onClick={() => dispatch(toggleBarChange(toggleStatus))}>
-                    
+
                 </div>
             )}
         </>

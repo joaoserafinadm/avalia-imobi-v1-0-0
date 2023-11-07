@@ -39,6 +39,26 @@ export default function passwordChange() {
     }, [])
 
 
+    const validate = () => {
+
+        let oldPasswordError = ''
+        let newPasswordError = ''
+
+        if (!oldPassword) oldPasswordError = 'Senha inválida'
+        if (newPassword.length < 6) newPasswordError = 'A senha deve ter no mínimo 6 caracteres'
+        if (newPassword !== confirmPassaword) newPasswordError = "Confirmação de senha incorreta"
+        if (!newPassword) newPasswordError = 'Digite uma senha'
+
+        if (oldPasswordError || newPasswordError) {
+            setOldPasswordError(oldPasswordError)
+            setNewPasswordError(newPasswordError)
+            return false
+        } else {
+            return true
+        }
+    }
+
+
     return (
         <div>
             <Title title={`Alterar senha`} subtitle={''} backButton='/' />
