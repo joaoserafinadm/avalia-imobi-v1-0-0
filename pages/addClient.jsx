@@ -83,43 +83,48 @@ export default function addClient() {
                 </div>
 
                 {manualRegister && (
+                    <>
 
-                    <div className="row fadeItem mt-3">
-                        <label for="telefoneItem" className="form-label fw-bold">Informações do Imóvel</label>
-                        <div className="col-12  my-2">
-                            <label for="clientNameItem" className="form-label ">Tipo do imóvel*</label>
+                        <div className="row fadeItem mt-3">
+                            <label for="telefoneItem" className="form-label fw-bold">Informações do Imóvel</label>
+                            <div className="col-12  my-2">
+                                <label for="clientNameItem" className="form-label ">Tipo do imóvel*</label>
 
-                            <div className="row">
+                                <div className="row">
 
 
-                                <div className="my-2 col-lg-3 col-xxl-2 col-6 d-flex justify-content-center">
-                                    <PropertyTypeCard type="Apartamento" setPropertyType={(value) => { setPropertyType(value); scrollTo('propertyInfo') }} propertyType={propertyType} />
+                                    <div className="my-2 col-lg-3 col-xxl-2 col-6 d-flex justify-content-center">
+                                        <PropertyTypeCard type="Apartamento" setPropertyType={(value) => { setPropertyType(value); scrollTo('propertyInfo') }} propertyType={propertyType} />
+                                    </div>
+                                    <div className="my-2 col-lg-3 col-xxl-2 col-6 d-flex justify-content-center">
+                                        <PropertyTypeCard type="Casa" setPropertyType={(value) => { setPropertyType(value); scrollTo('propertyInfo') }} propertyType={propertyType} />
+                                    </div>
+                                    <div className="my-2 col-lg-3 col-xxl-2 col-6 d-flex justify-content-center">
+                                        <PropertyTypeCard type="Comercial" setPropertyType={(value) => { setPropertyType(value); scrollTo('propertyInfo') }} propertyType={propertyType} />
+                                    </div>
+                                    <div className="my-2 col-lg-3 col-xxl-2 col-6 d-flex justify-content-center">
+                                        <PropertyTypeCard type="Terreno" setPropertyType={(value) => { setPropertyType(value); scrollTo('propertyInfo') }} propertyType={propertyType} />
+                                    </div>
                                 </div>
-                                <div className="my-2 col-lg-3 col-xxl-2 col-6 d-flex justify-content-center">
-                                    <PropertyTypeCard type="Casa" setPropertyType={(value) => { setPropertyType(value); scrollTo('propertyInfo') }} propertyType={propertyType} />
-                                </div>
-                                <div className="my-2 col-lg-3 col-xxl-2 col-6 d-flex justify-content-center">
-                                    <PropertyTypeCard type="Comercial" setPropertyType={(value) => { setPropertyType(value); scrollTo('propertyInfo') }} propertyType={propertyType} />
-                                </div>
-                                <div className="my-2 col-lg-3 col-xxl-2 col-6 d-flex justify-content-center">
-                                    <PropertyTypeCard type="Terreno" setPropertyType={(value) => { setPropertyType(value); scrollTo('propertyInfo') }} propertyType={propertyType} />
-                                </div>
+
+
                             </div>
-
-
                         </div>
-                    </div>
+
+
+
+                        {propertyType && (
+                            <div className="row mt-3 fadeItem" id="propertyInfo" style={{ height: '250px' }}>
+                                <label for="telefoneItem" className="form-label fw-bold">{propertyType}</label>
+
+                            </div>
+                        )}
+
+
+
+                    </>
 
                 )}
-
-
-                {propertyType && (
-                    <div className="row mt-3 fadeItem" id="propertyInfo" style={{ height: '250px' }}>
-                        <label for="telefoneItem" className="form-label fw-bold">{propertyType}</label>
-
-                    </div>
-                )}
-
 
 
                 <hr />
