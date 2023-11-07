@@ -10,6 +10,9 @@ import navbarHide from "../utils/navbarHide";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import scrollTo from "../utils/scrollTo";
+import baseUrl from "../utils/baseUrl";
+import axios from "axios";
+import { useRouter } from "next/router";
 
 
 
@@ -21,6 +24,7 @@ export default function addClient() {
 
     const token = jwt.decode(Cookies.get("auth"));
     const dispatch = useDispatch()
+    const router = useRouter()
 
     //states
     const [clientName, setClientName] = useState('')
@@ -53,7 +57,35 @@ export default function addClient() {
     const handleSave = () => {
 
     }
-    const handleSaveLink = () => {
+    const handleSaveLink = (company_id) => {
+
+        setLoadingSave(true)
+
+        const isValid = true
+
+        if (isValid) {
+
+            const data = {
+                company_id: token.company_id,
+                user_id: token.sub,
+                clientName: clientName,
+                clientLastName: clientLastName,
+                celular: celular,
+                propertyType: propertyType
+            }
+
+            axios.post(`${baseUrl()}/api/addClient`, data).then(res => {
+
+                console.log(res)
+
+                router.push('/')
+
+
+            })
+
+
+        }
+        setLoadingSave(false)
 
     }
 
@@ -153,9 +185,9 @@ export default function addClient() {
                                 :
                                 <>
                                     {manualRegister ?
-                                        <button className="ms-2 btn btn-sm btn-orange fadeItem" disabled={!clientName} onClick={() => handleSave(token.company_id)}>Salvar</button>
+                                        <button className="ms-2 btn btn-sm btn-orange fadeItem" disabled={!clientName} onClick={() => handleSave(token.company_id)}>Cadastrar</button>
                                         :
-                                        <button className="ms-2 btn btn-sm btn-orange fadeItem" disabled={!clientName} onClick={() => handleSaveLink(token.company_id)}>Salvar e copiar link</button>
+                                        <button className="ms-2 btn btn-sm btn-orange fadeItem" disabled={!clientName} onClick={() => handleSaveLink(token.company_id)}>Salvar e enviar link</button>
                                     }
                                 </>
                             }

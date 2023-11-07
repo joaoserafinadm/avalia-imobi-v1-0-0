@@ -136,7 +136,8 @@ export default async function (req, res) {
                     active: true,
                     dateAdded: new Date(),
                     dateUpdate: '',
-                    styles: styles
+                    styles: styles,
+                    clients: [],
                 })
 
 

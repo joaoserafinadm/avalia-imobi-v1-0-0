@@ -35,6 +35,7 @@ import MainLayout from "../src/layouts/mainLayout";
 import Login from "../src/pages/login";
 import PasswordRecover from "../src/pages/login/PasswordRecovery";
 import jwt from "jsonwebtoken";
+import NewClient from "../src/pages/newClient/index.jsx";
 
 
 // import SignUp from '../src/components/signUp/SignUp'
@@ -47,8 +48,11 @@ export default function MyApp({ Component, pageProps }) {
     const router = useRouter();
     const newRoute = router.asPath;
     const premiumAccount = newRoute === "/premiumAccount";
+    const newClient = newRoute === "/newClient";
+
 
     const [passwordRecoverRoute, setPasswordRecoverRoute] = useState(false);
+    const [newClientRoute, setNewClientRoute] = useState(false);
 
     useEffect(() => {
         hrefVerify();
@@ -58,15 +62,24 @@ export default function MyApp({ Component, pageProps }) {
         const urlSearchParams = new URLSearchParams(window.location.search);
         const queryId = urlSearchParams.get("id");
         const queryToken = urlSearchParams.get("token");
+        const queryClientId = urlSearchParams.get("clientId");
+
+        console.log(urlSearchParams, queryId, queryToken, queryClientId)
 
         if (queryId && queryToken) {
             setPasswordRecoverRoute(true);
             var passwordRecoverRoute = true;
         }
 
+        if (queryId && queryClientId) {
+            setNewClientRoute(true);
+            var newClientRoute = true;
+        }
+
         if (!Cookie.get("auth") &&
             window.location.href !== baseUrl() &&
-            !passwordRecoverRoute) {
+            !passwordRecoverRoute &&
+            !newClientRoute) {
 
             setTimeout(async () => {
                 await Router.replace("/");
@@ -77,8 +90,14 @@ export default function MyApp({ Component, pageProps }) {
 
     const render = () => {
 
+
+
         if (!token && passwordRecoverRoute) {
             return <PasswordRecover />;
+        }
+
+        if ( newClientRoute) {
+            return <NewClient />;
         }
 
 
@@ -114,7 +133,7 @@ export default function MyApp({ Component, pageProps }) {
                         </Head>
 
                         <MainLayout>
-                           
+
                             <Component  {...pageProps} />
                         </MainLayout>
                     </PersistGate>
