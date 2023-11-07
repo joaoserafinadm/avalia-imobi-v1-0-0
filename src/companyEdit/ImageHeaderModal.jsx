@@ -100,7 +100,7 @@ export default function ImageHeaderModal(props) {
 
                                         <img
                                             src={elem.imageUrl} onClick={() => setHeaderImgPreview(elem._id)}
-                                            className={` m-2 p-2  rounded justify-content-center align-items-center cardAnimation headerImgEdit ${headerImgPreview === elem._id ? 'border border-3 border-success ' : ''}`} alt="" type="button" />
+                                            className={` m-2 p-2  rounded justify-content-center align-items-center cardAnimation headerImgEdit ${headerImgPreview === elem._id ? 'border-selected ' : ''}`} alt="" type="button" />
 
                                         <div className="dropdown">
                                             <button
