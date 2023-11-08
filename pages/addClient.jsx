@@ -7,12 +7,14 @@ import { FixedTopicsBottom } from "../src/components/fixedTopics";
 import Link from "next/link";
 import PropertyTypeCard from "../src/addClient/PropertyTypeCard";
 import navbarHide from "../utils/navbarHide";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import scrollTo from "../utils/scrollTo";
 import baseUrl from "../utils/baseUrl";
 import axios from "axios";
 import { useRouter } from "next/router";
+import { addAlert } from "../store/Alerts/Alerts.actions";
+import { ObjectId } from "bson";
 
 
 
@@ -24,7 +26,7 @@ export default function addClient() {
 
     const token = jwt.decode(Cookies.get("auth"));
     const dispatch = useDispatch()
-    const router = useRouter()
+    const alertsArray = useSelector(state => state.alerts)
 
     //states
     const [clientName, setClientName] = useState('')
@@ -78,13 +80,25 @@ export default function addClient() {
 
                 console.log(res)
 
-                router.push('/')
+                const alert = {
+                    _id: new ObjectId(),
+                    type: 'addUserLink',
+                    message: 'Cliente adicionado com sucesso! Compartilhar o formulário?' ,
+                    link: res.data
+                }
+
+                console.log("alertsArray", alertsArray)
+
+                dispatch(addAlert(alertsArray,[alert]))
+
+
 
 
             })
 
 
         }
+        setLoadingSave(false)
         setLoadingSave(false)
 
     }

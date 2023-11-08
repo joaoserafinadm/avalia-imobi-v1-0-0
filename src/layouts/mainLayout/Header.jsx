@@ -13,6 +13,7 @@ import baseUrl from "../../../utils/baseUrl";
 import { useSelector } from "react-redux";
 import window2Mobile from "../../../utils/window2Mobile";
 import NotificationsSM from "./components/NotificationsSM";
+import Alerts from "../../alerts";
 
 export default function Header(props) {
 
@@ -118,6 +119,10 @@ export default function Header(props) {
 
     return (
         <div className={`d-flex justify-content-center align-items-center ${styles.header}`}>
+
+
+            <Alerts />
+
             {!toggleStatus && (
                 <div className="fadeItem">
                     <Link href="/">
@@ -135,7 +140,7 @@ export default function Header(props) {
 
                 <div className={` dropdown`} ref={dropdownRef}>
                     <span type="button" className="" role="button" data-bs-toggle={window2Mobile() ? "dropdown" : ''} aria-expanded="false" onClick={() => setShowNotification(!showNotification)}>
-                        <FontAwesomeIcon icon={faBell} className={` icon px-3`}  style={{color: showNotification && !window2Mobile() ? "#e8d3b9" : "#fff"}}/>
+                        <FontAwesomeIcon icon={faBell} className={` icon px-3`} style={{ color: showNotification && !window2Mobile() ? "#e8d3b9" : "#fff" }} />
                         {!!handleShowNotifications() && (
                             <div className={`${styles.notificationIcon} fadeItem`}>
                                 <p className='text-light d-flex justify-content-center align-items-center'>{handleShowNotifications()}</p>
@@ -151,7 +156,7 @@ export default function Header(props) {
                         <>
                             {showNotification && (
 
-                                <NotificationsSM notifications={notifications} notificationOff={() => setShowNotification(false)}/>
+                                <NotificationsSM notifications={notifications} notificationOff={() => setShowNotification(false)} />
                             )}
                         </>
 
