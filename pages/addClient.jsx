@@ -32,6 +32,7 @@ export default function addClient() {
     const [clientName, setClientName] = useState('')
     const [clientLastName, setClientLastName] = useState('')
     const [celular, setCelular] = useState('')
+    const [email, setEmail] = useState('')
     const [propertyType, setPropertyType] = useState('')
 
     //render
@@ -81,15 +82,14 @@ export default function addClient() {
                 console.log(res)
 
                 const alert = {
-                    _id: new ObjectId(),
                     type: 'addUserLink',
-                    message: 'Cliente adicionado com sucesso! Compartilhar o formulário?' ,
+                    message: 'Cliente adicionado com sucesso! Compartilhar o formulário?',
                     link: res.data
                 }
 
                 console.log("alertsArray", alertsArray)
 
-                dispatch(addAlert(alertsArray,[alert]))
+                dispatch(addAlert(alertsArray, [alert]))
 
 
 
@@ -120,11 +120,17 @@ export default function addClient() {
                         <input type="text" className="form-control form-control-sm" id="clientLastNameItem" value={clientLastName} onChange={e => setClientLastName(e.target.value)} placeholder="" />
                     </div>
                     {manualRegister && (
+                        <>
 
-                        <div className="col-12 col-lg-6 my-2 fadeItem">
-                            <label for="celularItem" className="form-label ">Celular*</label>
-                            <input type="text" className="form-control form-control-sm" id="celularItem" value={celular} onChange={e => setCelular(e.target.value)} placeholder="" />
-                        </div>
+                            <div className="col-12 col-lg-6 my-2 fadeItem">
+                                <label for="celularItem" className="form-label ">Celular*</label>
+                                <input type="text" className="form-control form-control-sm" id="celularItem" value={celular} onChange={e => setCelular(e.target.value)} placeholder="" />
+                            </div>
+                            <div className="col-12 col-lg-6 my-2 fadeItem">
+                                <label for="emailItem" className="form-label ">Email*</label>
+                                <input type="text" className="form-control form-control-sm" id="emailItem" value={email} onChange={e => setEmail(e.target.value)} placeholder="" />
+                            </div>
+                        </>
                     )}
                 </div>
 
