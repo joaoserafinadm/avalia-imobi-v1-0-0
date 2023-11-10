@@ -43,8 +43,8 @@ export default function Alerts() {
                                     <Link href={`fb-messenger://send?text=${elem.link}`} target="_blank">
                                         <div className="btn-round text-white bg-facebook mx-2 d-flex justify-content-center align-items-center"><FontAwesomeIcon icon={faFacebookMessenger} className="icon" /></div>
                                     </Link>
-                                    
-                                    <div className="btn-round text-white bg-secondary mx-2 d-flex justify-content-center align-items-center" onClick={() => handleCopy(elem.link)}>{copied ? <FontAwesomeIcon icon={faCheck} className="icon" /> : <FontAwesomeIcon icon={faCopy} className="icon" />}</div>
+
+                                    <div className="btn-round text-white bg-secondary mx-2 d-flex justify-content-center align-items-center" onClick={() => handleCopy(elem.link)}>{copied ? <FontAwesomeIcon icon={faCheck} className="icon text-success" /> : <FontAwesomeIcon icon={faCopy} className="icon" />}</div>
 
 
                                 </div>
