@@ -21,7 +21,7 @@ export default function Alerts() {
                             <span> {elem.message} </span>
 
                             {/* <Link href={`${elem.link}`} target="_blank"> */}
-                            <Link href={`whatsapp://send?text=${elem.link}`} target="_blank">
+                            <Link href={`whatsapp://send?text="${elem.link}"`} target="_blank">
                                 <p>{elem.link}</p>
                             </Link>
                             <button type="button" class="btn-close" aria-label="Close" onClick={() => dispatch(removeAlert(alertsArray, index))}></button>
