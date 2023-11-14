@@ -16,9 +16,6 @@ import {
 } from 'next-share'
 
 
-// import {
-//     FacebookMessengerShareButton
-//   } from "react-share";
 
 export default function Alerts() {
 
@@ -62,7 +59,7 @@ export default function Alerts() {
                                     </span> */}
 
 
-                                    <WhatsappShareButton
+                                    {/* <WhatsappShareButton
                                         url={elem.link}
                                         title={'Cadastro do imóvel - Avalia Imobi'}
                                         separator=":: "
@@ -78,11 +75,11 @@ export default function Alerts() {
                                     >
                                         facebook
                                         <FacebookMessengerIcon size={32} round />
-                                    </FacebookMessengerShareButton>
+                                    </FacebookMessengerShareButton> */}
 
 
 
-                                    {/* <span className="mx-2" type="button" >
+                                    <span className="mx-2" type="button" >
                                         <Link href={`whatsapp://send?text=${elem.link}`} target="_blank">
                                             <div className="d-flex justify-content-center">
                                                 <div className="btn-round text-light bg-whatsapp d-flex justify-content-center align-items-center">
@@ -95,7 +92,7 @@ export default function Alerts() {
                                         </Link>
                                     </span>
                                     <span className="mx-2" type="button" >
-                                        <Link href={`fb-messenger://share/?link=${elem.link}`} target="_blank">
+                                        <Link href={`m.me://share/?link=${elem.link}`} target="_blank">
                                             <div className="d-flex justify-content-center">
                                                 <div className="btn-round text-light bg-facebook d-flex justify-content-center align-items-center">
                                                     <FontAwesomeIcon icon={faFacebookMessenger} className="icon" />
@@ -105,7 +102,7 @@ export default function Alerts() {
                                                 <span className={`${styles.small}`}>Fecebook Messenger</span>
                                             </div>
                                         </Link>
-                                    </span> */}
+                                    </span>
 
 
 
