@@ -99,7 +99,7 @@ export default function Alerts() {
                                                 </div>
                                             </div>
                                             <div className="d-flex justify-content-center align-items-center">
-                                                <span className={`${styles.small}`}>Fecebook Messenger</span>
+                                                <span className={`${styles.small}`}>Fecebook Messenger 2</span>
                                             </div>
                                         </Link>
                                     </span>
