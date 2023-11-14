@@ -92,14 +92,15 @@ export default function Alerts() {
                                         </Link>
                                     </span>
                                     <span className="mx-2" type="button" >
-                                        <Link href={`fb-messenger://share?link=${elem.link}&app_id=1416284265963991`} target="_blank">
+                                        <Link href={`fb-messenger://share?link=${elem.link}&app_id=1416284265963991`} >
                                             <div className="d-flex justify-content-center">
                                                 <div className="btn-round text-light bg-facebook d-flex justify-content-center align-items-center">
                                                     <FontAwesomeIcon icon={faFacebookMessenger} className="icon" />
                                                 </div>
                                             </div>
                                             <div className="d-flex justify-content-center align-items-center">
-                                                <span className={`${styles.small}`}>Fecebook Messenger</span>
+                                                <span className={`${styles.small}`}>{`fb-messenger://share?link=${elem.link}&app_id=1416284265963991`}</span>
+                                                {/* <span className={`${styles.small}`}>Fecebook Messenger</span> */}
                                             </div>
                                         </Link>
                                     </span>
