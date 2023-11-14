@@ -79,6 +79,7 @@
     "react-redux": "^7.2.6",
     "react-select": "^5.7.3",
     "react-select-search": "^4.1.6",
+    "react-share": "^4.4.1",
     "react-sticky": "^6.0.3",
     "react-use-scroll-position": "^2.0.0",
     "react-vis-network-graph": "^3.0.1",
