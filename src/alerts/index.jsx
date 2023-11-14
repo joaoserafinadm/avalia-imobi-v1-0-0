@@ -11,14 +11,14 @@ import handleShare from "../../utils/handleShare"
 import {
     WhatsappShareButton,
     WhatsappIcon,
-    // FacebookMessengerShareButton,
-    // FacebookMessengerIcon,
+    FacebookMessengerShareButton,
+    FacebookMessengerIcon,
 } from 'next-share'
 
 
-import {
-    FacebookMessengerShareButton
-  } from "react-share";
+// import {
+//     FacebookMessengerShareButton
+//   } from "react-share";
 
 export default function Alerts() {
 
@@ -72,12 +72,12 @@ export default function Alerts() {
 
                                     <FacebookMessengerShareButton
                                         url={elem.link}
-                                        // title={'Cadastro do imóvel - Avalia Imobi'}
-                                        // separator=":: "
-                                        // appId={''}
+                                        title={'Cadastro do imóvel - Avalia Imobi'}
+                                        separator=":: "
+                                        appId={'1416284265963991'}
                                     >
                                         facebook
-                                        {/* <FacebookMessengerIcon size={32} round /> */}
+                                        <FacebookMessengerIcon size={32} round />
                                     </FacebookMessengerShareButton>
 
 
