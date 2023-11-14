@@ -80,7 +80,7 @@ export default function Alerts() {
 
 
                                     <span className="mx-2" type="button" >
-                                        <Link href={`whatsapp://send?text=${elem.link}&app_id=1416284265963991`} target="_blank">
+                                        <Link href={`whatsapp://send?text=${elem.link}`} target="_blank">
                                             <div className="d-flex justify-content-center">
                                                 <div className="btn-round text-light bg-whatsapp d-flex justify-content-center align-items-center">
                                                     <FontAwesomeIcon icon={faWhatsapp} className="icon" />
