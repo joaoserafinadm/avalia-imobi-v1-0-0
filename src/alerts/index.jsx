@@ -8,6 +8,11 @@ import { faCheck, faCopy } from "@fortawesome/free-solid-svg-icons"
 import { useState } from "react"
 import handleShare from "../../utils/handleShare"
 
+import {
+    WhatsappShareButton,
+    WhatsappIcon,
+} from 'next-share'
+
 
 export default function Alerts() {
 
@@ -49,7 +54,19 @@ export default function Alerts() {
                                             <span className={`${styles.small}`}>Whatsapp</span>
                                         </div>
                                     </span> */}
-                                    <span className="mx-2" type="button" >
+
+
+                                    <WhatsappShareButton
+                                        url={elem.link}
+                                        title={'Cadastro do imóvel - Avalia Imobi'}
+                                        separator=":: "
+                                    >
+                                        <WhatsappIcon size={32} round />
+                                    </WhatsappShareButton>
+
+
+
+                                    {/* <span className="mx-2" type="button" >
                                         <Link href={`whatsapp://send?text=${elem.link}`} target="_blank">
                                             <div className="d-flex justify-content-center">
                                                 <div className="btn-round text-light bg-whatsapp d-flex justify-content-center align-items-center">
@@ -72,7 +89,7 @@ export default function Alerts() {
                                                 <span className={`${styles.small}`}>Fecebook Messenger</span>
                                             </div>
                                         </Link>
-                                    </span>
+                                    </span> */}
 
 
 
