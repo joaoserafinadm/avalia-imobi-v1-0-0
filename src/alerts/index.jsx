@@ -11,6 +11,8 @@ import handleShare from "../../utils/handleShare"
 import {
     WhatsappShareButton,
     WhatsappIcon,
+    FacebookMessengerShareButton,
+    FacebookMessengerIcon,
 } from 'next-share'
 
 
@@ -63,6 +65,13 @@ export default function Alerts() {
                                     >
                                         <WhatsappIcon size={32} round />
                                     </WhatsappShareButton>
+
+                                    <FacebookMessengerShareButton
+                                        url={'https://github.com/next-share'}
+                                        appId={''}
+                                    >
+                                        <FacebookMessengerIcon size={32} round />
+                                    </FacebookMessengerShareButton>
 
 
 
