@@ -33,7 +33,6 @@ export default function Alerts() {
 
 
 
-
     return (
         <div className={`${styles.alertsPosition}`}>
             {alertsArray.map((elem, index, array) => {
@@ -105,7 +104,7 @@ export default function Alerts() {
                                         </a>
                                     </span>
                                     <span className="mx-2" type="button" >
-                                        <a href={`instagram://sharesheet?link=${elem.link}`} target="_blank">
+                                        <a href={`instagram://sharesheet?text=${elem.link}`} target="_blank">
                                             <div className="d-flex justify-content-center">
                                                 <div className="btn-round text-light bg-facebook d-flex justify-content-center align-items-center">
                                                     <FontAwesomeIcon icon={faInstagram} className="icon" />
