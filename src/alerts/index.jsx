@@ -92,7 +92,8 @@ export default function Alerts() {
                                         </Link>
                                     </span>
                                     <span className="mx-2" type="button" >
-                                        <a href={`fb-messenger://share?link=${elem.link}&app_id=1416284265963991`} target="_blank">
+                                        {/* <a href={`fb-messenger://share?link=${elem.link}&app_id=1416284265963991`} target="_blank"> */}
+                                        <a href={`fb-messenger://share?link=${elem.link}`} target="_blank">
                                             <div className="d-flex justify-content-center">
                                                 <div className="btn-round text-light bg-facebook d-flex justify-content-center align-items-center">
                                                     <FontAwesomeIcon icon={faFacebookMessenger} className="icon" />
@@ -100,6 +101,18 @@ export default function Alerts() {
                                             </div>
                                             <div className="d-flex justify-content-center align-items-center">
                                                 <span className={`${styles.small}`}>Fecebook Messenger</span>
+                                            </div>
+                                        </a>
+                                    </span>
+                                    <span className="mx-2" type="button" >
+                                        <a href={`instagram://sharesheet?text=${elem.link}`} target="_blank">
+                                            <div className="d-flex justify-content-center">
+                                                <div className="btn-round text-light bg-facebook d-flex justify-content-center align-items-center">
+                                                    <FontAwesomeIcon icon={faInstagram} className="icon" />
+                                                </div>
+                                            </div>
+                                            <div className="d-flex justify-content-center align-items-center">
+                                                <span className={`${styles.small}`}>Instagram direct</span>
                                             </div>
                                         </a>
                                     </span>
