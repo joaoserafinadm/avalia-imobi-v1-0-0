@@ -78,40 +78,39 @@ export default function Alerts() {
 
 
 
-                                    <span className="mx-2" type="button" >
+                                    <span className="mx-2 cardAnimation" type="button" >
                                         <Link href={`whatsapp://send?text=${elem.link}`} target="_blank">
                                             <div className="d-flex justify-content-center">
                                                 <div className="btn-round text-light bg-whatsapp d-flex justify-content-center align-items-center">
                                                     <FontAwesomeIcon icon={faWhatsapp} className="icon" />
                                                 </div>
                                             </div>
-                                            <div className="d-flex justify-content-center align-items-center">
-                                                <span className={`${styles.small}`}>Whatsapp</span>
+                                            <div className="d-flex justify-content-center align-items-center mt-1">
+                                                <span className={`${styles.small} text-center`}>Whatsapp</span>
                                             </div>
                                         </Link>
                                     </span>
-                                    <span className="mx-2" type="button" >
-                                        {/* <a href={`fb-messenger://share?link=${elem.link}&app_id=1416284265963991`} target="_blank"> */}
+                                    <span className="mx-2 cardAnimation" type="button" >
                                         <a href={`fb-messenger://share?link=${elem.link}`} target="_blank">
                                             <div className="d-flex justify-content-center">
                                                 <div className="btn-round text-light bg-facebook d-flex justify-content-center align-items-center">
                                                     <FontAwesomeIcon icon={faFacebookMessenger} className="icon" />
                                                 </div>
                                             </div>
-                                            <div className="d-flex justify-content-center align-items-center">
-                                                <span className={`${styles.small}`}>Fecebook Messenger</span>
+                                            <div className="d-flex justify-content-center align-items-center mt-1">
+                                                <span className={`${styles.small} text-center`}>Fecebook<br />Messenger</span>
                                             </div>
                                         </a>
                                     </span>
-                                    <span className="mx-2" type="button" >
+                                    <span className="mx-2 cardAnimation" type="button" >
                                         <a href={`instagram://sharesheet?text=${elem.link}`} target="_blank">
                                             <div className="d-flex justify-content-center">
                                                 <div className="btn-round text-light bg-facebook d-flex justify-content-center align-items-center">
                                                     <FontAwesomeIcon icon={faInstagram} className="icon" />
                                                 </div>
                                             </div>
-                                            <div className="d-flex justify-content-center align-items-center">
-                                                <span className={`${styles.small}`}>Instagram direct</span>
+                                            <div className="d-flex justify-content-center align-items-center mt-1">
+                                                <span className={`${styles.small} text-center`}>Instagram<br />direct</span>
                                             </div>
                                         </a>
                                     </span>

@@ -40,7 +40,7 @@ export default authenticated(async (req, res) => {
                 const newId = ObjectId()
 
                 // const urlToken = `${baseUrl()}/newClient/${newId}`
-                const urlToken =encodeURIWithSpecialCharacters(`${baseUrl()}/newClient/params?id%${userExist._id}%clientId=${newId}`)
+                const urlToken = `${baseUrl()}/newClient/params?id=${userExist._id}%clientId=${newId}`
 
 
                 const response = await db.collection("companies").updateOne({ _id: ObjectId(company_id), },
@@ -72,7 +72,7 @@ export default authenticated(async (req, res) => {
 
 
 function encodeURIWithSpecialCharacters(uri) {
-    return encodeURIComponent(uri).replace(/[!'()*]/g, function(c) {
+    return encodeURIComponent(uri).replace(/[!'()*]/g, function (c) {
         return '%' + c.charCodeAt(0).toString(16);
     });
 }
