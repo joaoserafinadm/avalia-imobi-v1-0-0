@@ -26,10 +26,24 @@ export default function Alerts() {
     const [copied, setCopied] = useState(false)
 
 
-    const handleCopy = (value) => {
-        navigator.clipboard.writeText(value);
+    const handleCopy = (url) => {
+
+        const newLink = replaceAmpersand(url)
+        
+        navigator.clipboard.writeText(newLink);
         setCopied(true)
+
+        setTimeout(() => {
+            setCopied(false)
+        }, 6000)
     }
+
+
+    const replaceAmpersand = (url) => {
+        // Substituir "%26" por "&"
+        const updatedUrl = url.replace(/%26/g, '&');
+        return updatedUrl;
+    };
 
 
 
@@ -86,7 +100,7 @@ export default function Alerts() {
                                                 </div>
                                             </div>
                                             <div className="d-flex justify-content-center align-items-center mt-1">
-                                                <span className={`${styles.small} text-center`}>Whatsapp</span>
+                                                <span className={`${styles.small} text-center bold`}>Whatsapp</span>
                                             </div>
                                         </Link>
                                     </span>
@@ -98,11 +112,11 @@ export default function Alerts() {
                                                 </div>
                                             </div>
                                             <div className="d-flex justify-content-center align-items-center mt-1">
-                                                <span className={`${styles.small} text-center`}>Fecebook<br />Messenger</span>
+                                                <span className={`${styles.small} text-center bold`}>Fecebook<br />Messenger</span>
                                             </div>
                                         </a>
                                     </span>
-                                    <span className="mx-2 cardAnimation" type="button" >
+                                    {/* <span className="mx-2 cardAnimation" type="button" >
                                         <a href={`instagram://sharesheet?text=${elem.link}`} target="_blank">
                                             <div className="d-flex justify-content-center">
                                                 <div className="btn-round text-light bg-facebook d-flex justify-content-center align-items-center">
@@ -113,6 +127,15 @@ export default function Alerts() {
                                                 <span className={`${styles.small} text-center`}>Instagram<br />direct</span>
                                             </div>
                                         </a>
+                                    </span> */}
+
+                                    <span className="mx-2 cardAnimation" type="button" onClick={() => handleCopy(elem.link)}>
+                                        <div className="btn-round text-white bg-secondary mx-2 d-flex justify-content-center align-items-center" >
+                                            {copied ? <FontAwesomeIcon icon={faCheck} className="icon fadeItem" /> : <FontAwesomeIcon icon={faCopy} className="icon fadeItem" />}
+                                        </div>
+                                        <div className="d-flex justify-content-center align-items-center mt-1">
+                                            <span className={`${styles.small} text-center bold`}>Copiar<br />link</span>
+                                        </div>
                                     </span>
 
 
