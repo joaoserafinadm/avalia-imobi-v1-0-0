@@ -40,7 +40,7 @@ export default authenticated(async (req, res) => {
                 const newId = ObjectId()
 
                 // const urlToken = `${baseUrl()}/newClient/${newId}`
-                const urlToken = `${baseUrl()}/newClient/params?id=${userExist._id}%clientId=${newId}`
+                const urlToken = `${baseUrl()}/newClient/params?id=${userExist._id}%26clientId=${newId}`
 
 
                 const response = await db.collection("companies").updateOne({ _id: ObjectId(company_id), },
