@@ -28,9 +28,8 @@ export default function Alerts() {
 
     const handleCopy = (url) => {
 
-        const newLink = replaceAmpersand(url)
         
-        navigator.clipboard.writeText(newLink);
+        navigator.clipboard.writeText(url);
         setCopied(true)
 
         setTimeout(() => {
@@ -41,7 +40,7 @@ export default function Alerts() {
 
     const replaceAmpersand = (url) => {
         // Substituir "%26" por "&"
-        const updatedUrl = url.replace(/%26/g, '&');
+        const updatedUrl = url.replace(/&/g, '%26');
         return updatedUrl;
     };
 
@@ -93,7 +92,7 @@ export default function Alerts() {
 
 
                                     <span className="mx-2 cardAnimation" type="button" >
-                                        <Link href={`whatsapp://send?text=${elem.link}`} target="_blank">
+                                        <Link href={`whatsapp://send?text=${replaceAmpersand(elem.link)}`} target="_blank">
                                             <div className="d-flex justify-content-center">
                                                 <div className="btn-round text-light bg-whatsapp d-flex justify-content-center align-items-center">
                                                     <FontAwesomeIcon icon={faWhatsapp} className="icon" />
@@ -105,7 +104,7 @@ export default function Alerts() {
                                         </Link>
                                     </span>
                                     <span className="mx-2 cardAnimation" type="button" >
-                                        <a href={`fb-messenger://share?link=${elem.link}`} target="_blank">
+                                        <a href={`fb-messenger://share?link=${replaceAmpersand(elem.link)}`} target="_blank">
                                             <div className="d-flex justify-content-center">
                                                 <div className="btn-round text-light bg-facebook d-flex justify-content-center align-items-center">
                                                     <FontAwesomeIcon icon={faFacebookMessenger} className="icon" />
