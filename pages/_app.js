@@ -63,6 +63,7 @@ export default function MyApp({ Component, pageProps }) {
         const queryId = urlSearchParams.get("id");
         const queryToken = urlSearchParams.get("token");
         const queryClientId = urlSearchParams.get("clientId");
+        const queryUserId = urlSearchParams.get("userId");
 
         console.log(urlSearchParams, queryId, queryToken, queryClientId)
 
@@ -71,7 +72,7 @@ export default function MyApp({ Component, pageProps }) {
             var passwordRecoverRoute = true;
         }
 
-        if (queryId && queryClientId) {
+        if (queryClientId && queryUserId) {
             setNewClientRoute(true);
             var newClientRoute = true;
         }
