@@ -89,9 +89,9 @@ export default authenticated(async (req, res) => {
     if (req.method === "DELETE") {
 
 
-        const { company_id, headerImg_id } = req.query
+        const { company_id, backgroundImg_id } = req.query
 
-        if (!company_id || !headerImg_id) {
+        if (!company_id || !backgroundImg_id) {
 
             res.status(200).json({ error: "Missing parameters on request body" })
 
@@ -110,7 +110,7 @@ export default authenticated(async (req, res) => {
                     {
                         $pull: {
                             "backgroundImages": {
-                                _id: ObjectId(headerImg_id),
+                                _id: ObjectId(backgroundImg_id),
                             }
                         }
                     })

@@ -51,7 +51,7 @@ export default authenticated(async (req, res) => {
             cidade,
             estado,
             logo,
-            headerImg_id } = req.body
+            backgroundImg_id } = req.body
 
         if (!token || !company_id || !user_id || !companyName || !telefone || !email || !cidade || !estado) {
             res.status(400).json({ error: "Missing parameters on request body" })
@@ -80,7 +80,7 @@ export default authenticated(async (req, res) => {
                     cidade,
                     estado,
                     logo,
-                    headerImg_id
+                    backgroundImg_id
                 };
 
                 const response = await db.collection("companies").updateOne(
@@ -98,7 +98,7 @@ export default authenticated(async (req, res) => {
                     const clains = {
                         ...token,
                         companyName: companyName,
-                        headerImg_id: headerImg_id,
+                        backgroundImg_id: backgroundImg_id,
                         logo: logo
                     }
 

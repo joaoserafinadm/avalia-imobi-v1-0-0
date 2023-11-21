@@ -40,7 +40,7 @@ export default function companyEdit() {
     const [numero, setNumero] = useState('')
     const [cidade, setCidade] = useState('')
     const [estado, setEstado] = useState('')
-    const [headerImg_id, setHeaderImg_id] = useState('')
+    const [backgroundImg_id, setBackgroundImg_id] = useState('')
     const [logo, setLogo] = useState('')
     const [logoPreview, setLogoPreview] = useState('')
     const [headerImgPreview, setHeaderImgPreview] = useState('')
@@ -75,7 +75,7 @@ export default function companyEdit() {
             setNumero(data.numero)
             setCidade(data.cidade)
             setEstado(data.estado)
-            setHeaderImg_id(data.headerImg_id)
+            setBackgroundImg_id(data.backgroundImg_id)
             setLogo(data.logo)
             backgroundImagesData(company_id)
 
@@ -188,7 +188,7 @@ export default function companyEdit() {
                 cidade,
                 estado,
                 logo: newLogo ? newLogo[0].url : logo,
-                headerImg_id: headerImg_id
+                backgroundImg_id: backgroundImg_id
             }
 
             await axios.post(`${baseUrl()}/api/companyEdit`, data)
@@ -225,7 +225,7 @@ export default function companyEdit() {
                 <SpinnerLG />
                 :
                 <>
-                    <ImageHeaderModal backgroundImages={backgroundImages} headerImg_id={headerImg_id} setHeaderImg_id={value => setHeaderImg_id(value)} backgroundImagesData={() => backgroundImagesData(token.company_id)} />
+                    <ImageHeaderModal backgroundImages={backgroundImages} backgroundImg_id={backgroundImg_id} setBackgroundImg_id={value => setBackgroundImg_id(value)} backgroundImagesData={() => backgroundImagesData(token.company_id)} />
 
                     <div className="pagesContent shadow fadeItem" id="pageTop">
                         <div className="row d-flex justify-content-center">
@@ -274,9 +274,9 @@ export default function companyEdit() {
 
                                         <div className="row mt-3 d-flex justify-content-center align-items-center" style={{ height: '150px' }}>
                                             <div className="col-12 d-flex justify-content-center" >
-                                                {headerImg_id ?
+                                                {backgroundImg_id ?
                                                     <img className="headerImgEdit fadeItem" type="button"
-                                                        src={handleHeaderIgmPreview(headerImg_id)} alt="header image" id="headerImgItem"
+                                                        src={handleHeaderIgmPreview(backgroundImg_id)} alt="header image" id="headerImgItem"
                                                         data-bs-toggle="modal" data-bs-target="#ImageHeaderModal" />
                                                     :
                                                     <img src="https://res.cloudinary.com/joaoserafinadm/image/upload/v1695601556/PUBLIC/3_weeijf.png"
@@ -291,35 +291,7 @@ export default function companyEdit() {
 
 
 
-                                        {/* <div className="d-flex justify-content-between">
-                                            <input type="file" name="image/*" id="headerImgItem" accept="image/*" onChange={e => setHeaderImgPreview(e.target.files[0])}
-                                                className="form-input" hidden />
-                                            <span className=" fw-bold" data-bs-toggle="modal" data-bs-target="#ImageHeaderModal">Imagem de capa</span>
-                                            <label htmlFor="headerImgItem" className="span" type='button' >Editar</label>
-                                            <span className="span" type='button' data-bs-toggle="modal" data-bs-target="#ImageHeaderModal">Editar</span>
-                                        </div>
-                                        <StyledDropzone setFiles={array => { setHeaderImgPreview(array[0]) }} img>
-
-                                        <div className="row mt-3 d-flex justify-content-center align-items-center" style={{ height: '150px' }}>
-                                            <div className="col-12 d-flex justify-content-center" >
-                                                {headerImgPreview ?
-                                                    <img className="headerImgEdit fadeItem" src={URL.createObjectURL(headerImgPreview)} alt="header image" id="headerImgItem" />
-                                                    :
-                                                    <>
-                                                        {headerImg_id ?
-                                                            <img className="headerImgEdit fadeItem" src={headerImg_id} alt="header image" id="headerImgItem" />
-                                                            :
-                                                            <img src="https://res.cloudinary.com/joaoserafinadm/image/upload/v1695601556/PUBLIC/3_weeijf.png"
-                                                                alt="" className="headerImgEdit fadeItem"
-                                                                type="button" data-bs-toggle="modal" data-bs-target="#ImageHeaderModal" />
-                                                        }
-
-                                                    </>
-                                                }
-                                            </div>
-
-                                        </div>
-                                        </StyledDropzone> */}
+                                        
                                     </div>
                                 </div>
                             </div>

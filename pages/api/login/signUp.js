@@ -131,7 +131,7 @@ export default async function (req, res) {
                     cidade: '',
                     estado: '',
                     backgroundImages: backgroundImages,
-                    headerImg_id: '',
+                    backgroundImg_id: '',
                     logo: '',
                     active: true,
                     dateAdded: new Date(),

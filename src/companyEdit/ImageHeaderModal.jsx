@@ -69,7 +69,7 @@ export default function ImageHeaderModal(props) {
         await axios.delete(`${baseUrl()}/api/companyEdit/headerImg`, {
             params: {
                 company_id,
-                headerImg_id: id
+                backgroundImg_id: id
             }
         }).then(res => {
             props.backgroundImagesData()
@@ -148,7 +148,7 @@ export default function ImageHeaderModal(props) {
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-orange btn-sm" data-bs-dismiss="modal" onClick={() => props.setHeaderImg_id(headerImgPreview)}>Selecionar</button>
+                        <button type="button" class="btn btn-orange btn-sm" data-bs-dismiss="modal" onClick={() => props.setBackgroundImg_id(headerImgPreview)}>Selecionar</button>
                     </div>
                 </div>
             </div>

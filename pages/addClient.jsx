@@ -60,7 +60,7 @@ export default function addClient() {
     const handleSave = () => {
 
     }
-    const handleSaveLink = (company_id) => {
+    const handleSaveLink = async(company_id) => {
 
         setLoadingSave(true)
 
@@ -77,9 +77,7 @@ export default function addClient() {
                 propertyType: propertyType
             }
 
-            axios.post(`${baseUrl()}/api/addClient`, data).then(res => {
-
-                console.log(res)
+            await axios.post(`${baseUrl()}/api/addClient`, data).then(res => {
 
                 const alert = {
                     type: 'addUserLink',
@@ -87,19 +85,13 @@ export default function addClient() {
                     link: res.data
                 }
 
-                console.log("alertsArray", alertsArray)
-
                 dispatch(addAlert(alertsArray, [alert]))
-
-
-
+                setLoadingSave(false)
 
             })
 
 
         }
-        setLoadingSave(false)
-        setLoadingSave(false)
 
     }
 
@@ -191,8 +183,6 @@ export default function addClient() {
 
 
 
-
-
                             {manualRegister ?
 
                                 <button className="btn btn-sm btn-secondary ms-2 fadeItem" onClick={() => setManualRegister(false)}>Cadastro resumido</button>
@@ -201,7 +191,7 @@ export default function addClient() {
 
                             }
                             {loadingSave ?
-                                <button className="ms-2 btn btn-sm btn-orange px-4" disabled><SpinnerSM /></button>
+                                <button className="ms-2 btn btn-sm btn-orange px-5" disabled><SpinnerSM /></button>
                                 :
                                 <>
                                     {manualRegister ?
