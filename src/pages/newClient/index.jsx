@@ -9,6 +9,8 @@ import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import styles from './newClient.module.scss'
 import { FixedTopicsBottom } from "../../components/fixedTopics";
 import Link from "next/link";
+import PropertyTypeCard from "../../addClient/PropertyTypeCard";
+import scrollTo from "../../../utils/scrollTo";
 
 
 export default function NewClient() {
@@ -33,6 +35,7 @@ export default function NewClient() {
     const [userFirstName, setUserFirstName] = useState('')
     const [userLastName, setUserLastName] = useState('')
     const [profileImageUrl, setProfileImageUrl] = useState('')
+    const [propertyType, setPropertyType] = useState('')
 
     //Loading
     const [loadingPage, setLoadingPage] = useState(true)
@@ -86,33 +89,87 @@ export default function NewClient() {
                     <SpinnerLG />
                 </div>
                 :
-                <div style={{ backgroundImage: `linear-gradient(to bottom,#fff0, #fff 80%), ${backgroundImg ? `url(${backgroundImg})` : "#f5874f"}`, backgroundColor: backgroundImg ? '' : "#f5874f", height: '100vh', position:'fixed', width:'100vw' }}>
-
-                    <div>
-
-                        <img src={profileImageUrl} alt="logo" id="logoItem" className={`${styles.profileImage} ${styles.profileImagePosition} fadeItem1s `} />
-                        <img src={logo} alt="logo" id="logoItem" className={`${styles.logo} ${styles.logoPosition} fadeItem1s `} />
-
-                    </div>
-                    <div className="card m-3 fadeItem1s" style={{ height: "90%" }}>
-                        <div className="card-body">
-                            <div className={`${styles.textPosition} px-1 fadeItem1s`}>
+                <div style={{ backgroundImage: `linear-gradient(to bottom,#fff0, #fff 80%), ${backgroundImg ? `url(${backgroundImg})` : "#f5874f"}`, backgroundColor: backgroundImg ? '' : "#f5874f", height: '100vh', position: 'fixed', width: '100vw' }}>
 
 
-                                <TypeAnimation
-                                    sequence={[
-                                        `Olá ${clientName}, me chamo ${userFirstName}, e irei te ajudar a avaliar o seu imóvel.`,
-                                        100,
-                                        `Olá ${clientName}, me chamo ${userFirstName}, e irei te ajudar a avaliar o seu imóvel.\n
-                            Preecha o formulário de cadastro para que possamos começar.`,
-                                    ]}
-                                    wrapper="span"
-                                    speed={50}
-                                    style={{ fontSize: '1.5em', display: 'inline-block' }}
-                                />
+                    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active" style={{ height: '100vh' }}>
+
+                                <div>
+
+                                    <img src={profileImageUrl} alt="logo" id="logoItem" className={`${styles.profileImage} ${styles.profileImagePosition} fadeItem1s `} />
+                                    <img src={logo} alt="logo" id="logoItem" className={`${styles.logo} ${styles.logoPosition} fadeItem1s `} />
+
+                                </div>
+                                <div className="card m-3 fadeItem1s" style={{ height: "90%" }}>
+                                    <div className="card-body">
+                                        <div className={`${styles.textPosition} px-1 fadeItem1s`}>
+
+
+                                            <TypeAnimation
+                                                sequence={[
+                                                    `Olá ${clientName}, me chamo ${userFirstName}, e irei te ajudar a avaliar o seu imóvel.`,
+                                                    100,
+                                                    `Olá ${clientName}, me chamo ${userFirstName}, e irei te ajudar a avaliar o seu imóvel.\n
+    Preecha o formulário de cadastro para que possamos começar.`,
+                                                ]}
+                                                wrapper="span"
+                                                speed={50}
+                                                style={{ fontSize: '1.5em', display: 'inline-block' }}
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
                             </div>
+                            <div class="carousel-item" style={{ height: '100vh' }}>
+                                <div className="card m-3 fadeItem1s" style={{ height: "90%" }}>
+                                    <div className="card-body">
+
+                                        <div className="row fadeItem mt-3">
+                                            <label for="telefoneItem" className="form-label fw-bold">Informações do Imóvel</label>
+                                            <div className="col-12  my-2">
+                                                <label for="clientNameItem" className="form-label ">Tipo do imóvel*</label>
+
+                                                <div className="row">
+
+
+                                                    <div className="my-2 col-lg-3 col-xxl-2 col-6 d-flex justify-content-center">
+                                                        <PropertyTypeCard type="Apartamento" setPropertyType={(value) => { setPropertyType(value); scrollTo('propertyInfo') }} propertyType={propertyType} />
+                                                    </div>
+                                                    <div className="my-2 col-lg-3 col-xxl-2 col-6 d-flex justify-content-center">
+                                                        <PropertyTypeCard type="Casa" setPropertyType={(value) => { setPropertyType(value); scrollTo('propertyInfo') }} propertyType={propertyType} />
+                                                    </div>
+                                                    <div className="my-2 col-lg-3 col-xxl-2 col-6 d-flex justify-content-center">
+                                                        <PropertyTypeCard type="Comercial" setPropertyType={(value) => { setPropertyType(value); scrollTo('propertyInfo') }} propertyType={propertyType} />
+                                                    </div>
+                                                    <div className="my-2 col-lg-3 col-xxl-2 col-6 d-flex justify-content-center">
+                                                        <PropertyTypeCard type="Terreno" setPropertyType={(value) => { setPropertyType(value); scrollTo('propertyInfo') }} propertyType={propertyType} />
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
+
+
+
+
+
+
+
+
                     {showStartBtn && (
                         // <div className="fadeItem1s2s">
                         //     <button className="btn btn-primary">Começar <FontAwesomeIcon icon={faArrowRight} className="icon ms-1" /></button>
@@ -120,7 +177,9 @@ export default function NewClient() {
                         <FixedTopicsBottom >
 
                             <div className="row ps-2 pe-3 fadeItem1s">
-                                <button className="ms-2 btn btn-sm btn-orange" >Começar <FontAwesomeIcon icon={faArrowRight} className="icon ms-1" /></button>
+                                <button className="ms-2 btn btn-sm btn-orange" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                                    Começar <FontAwesomeIcon icon={faArrowRight} className="icon ms-1" />
+                                </button>
 
                             </div>
                         </FixedTopicsBottom>
