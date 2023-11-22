@@ -6,7 +6,9 @@ import { useState } from "react";
 import { TypeAnimation } from 'react-type-animation';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
-
+import styles from './newClient.module.scss'
+import { FixedTopicsBottom } from "../../components/fixedTopics";
+import Link from "next/link";
 
 
 export default function NewClient() {
@@ -23,7 +25,7 @@ export default function NewClient() {
     const [clientLastName, setClientLastName] = useState('')
     const [email, setEmail] = useState('')
     const [celular, setCelular] = useState('')
-    const [styles, setStyles] = useState('')
+    const [style, setStyle] = useState('')
     const [logo, setLogo] = useState('')
     const [backgroundImg, setBackgroundImg] = useState('')
     const [companyName, setCompanyName] = useState('')
@@ -60,7 +62,7 @@ export default function NewClient() {
                 setClientLastName(res.data.clientLastName)
                 setEmail(res.data.email)
                 setCelular(res.data.celular)
-                setStyles(res.data.styles)
+                setStyle(res.data.styles)
                 setLogo(res.data.logo)
                 setBackgroundImg(res.data.backgroundImg)
                 setCompanyName(res.data.companyName)
@@ -84,30 +86,44 @@ export default function NewClient() {
                     <SpinnerLG />
                 </div>
                 :
-                <div>
+                <div style={{ backgroundImage: `linear-gradient(to bottom,#fff0, #fff 80%), ${backgroundImg ? `url(${backgroundImg})` : "#f5874f"}`, backgroundColor: backgroundImg ? '' : "#f5874f", height: '100vh', position:'fixed', width:'100vw' }}>
+
                     <div>
 
-                        <img src={profileImageUrl} alt="logo" id="logoItem" className="editProfileImage fadeItem" />
-                        <img src={logo} alt="logo" id="logoItem" className="logoEdit fadeItem" />
+                        <img src={profileImageUrl} alt="logo" id="logoItem" className={`${styles.profileImage} ${styles.profileImagePosition} fadeItem1s `} />
+                        <img src={logo} alt="logo" id="logoItem" className={`${styles.logo} ${styles.logoPosition} fadeItem1s `} />
 
                     </div>
+                    <div className="card m-3 fadeItem1s" style={{ height: "90%" }}>
+                        <div className="card-body">
+                            <div className={`${styles.textPosition} px-1 fadeItem1s`}>
 
-                    <TypeAnimation
-                        sequence={[
-                            `Olá ${clientName}, me chamo ${userFirstName}, e irei te ajudar a avaliar o seu imóvel.`,
-                            100,
-                            `Olá ${clientName}, me chamo ${userFirstName}, e irei te ajudar a avaliar o seu imóvel.\n
+
+                                <TypeAnimation
+                                    sequence={[
+                                        `Olá ${clientName}, me chamo ${userFirstName}, e irei te ajudar a avaliar o seu imóvel.`,
+                                        100,
+                                        `Olá ${clientName}, me chamo ${userFirstName}, e irei te ajudar a avaliar o seu imóvel.\n
                             Preecha o formulário de cadastro para que possamos começar.`,
-                        ]}
-                        wrapper="span"
-                        speed={50}
-                    // style={{ fontSize: '2em', display: 'inline-block' }}
-                    />
-
-                    {showStartBtn && (
-                        <div className="fadeItem2s">
-                            <button className="btn btn-primary">Começar <FontAwesomeIcon icon={faArrowRight} className="icon ms-1"/></button>
+                                    ]}
+                                    wrapper="span"
+                                    speed={50}
+                                    style={{ fontSize: '1.5em', display: 'inline-block' }}
+                                />
+                            </div>
                         </div>
+                    </div>
+                    {showStartBtn && (
+                        // <div className="fadeItem1s2s">
+                        //     <button className="btn btn-primary">Começar <FontAwesomeIcon icon={faArrowRight} className="icon ms-1" /></button>
+                        // </div>
+                        <FixedTopicsBottom >
+
+                            <div className="row ps-2 pe-3 fadeItem1s">
+                                <button className="ms-2 btn btn-sm btn-orange" >Começar <FontAwesomeIcon icon={faArrowRight} className="icon ms-1" /></button>
+
+                            </div>
+                        </FixedTopicsBottom>
                     )}
 
                 </div>

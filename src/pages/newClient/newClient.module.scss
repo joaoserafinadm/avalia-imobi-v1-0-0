@@ -1,0 +1,31 @@
+.profileImage {
+    height: 160px ;
+    border-radius: 80px ;
+}
+
+.profileImagePosition {
+    position: absolute;
+    top: -10px;
+    right: 0px ;
+    z-index: 1;
+}
+
+.logo {
+    max-height: 50px;
+    max-width: 150px;
+    width: auto;
+    height: auto;
+  }
+
+  .logoPosition {
+    position: absolute;
+    top: 70px;
+    left: 35px ;
+    z-index: 1;
+  }
+
+  .textPosition {
+    position: absolute;
+    top: 160px;
+  }
+
