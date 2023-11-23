@@ -12,6 +12,8 @@ import Link from "next/link";
 import PropertyTypeCard from "../../addClient/PropertyTypeCard";
 import scrollTo from "../../../utils/scrollTo";
 import Page1 from "./Page1";
+import slideNumber from "../../../utils/slideNumber";
+import FixedButtons from "./FixedButtons";
 
 
 export default function NewClient() {
@@ -41,6 +43,7 @@ export default function NewClient() {
     //Loading
     const [loadingPage, setLoadingPage] = useState(true)
     const [showStartBtn, setShowStartBtn] = useState(false)
+    const [slide, setSlide] = useState(0)
 
     useEffect(() => {
         dataFunction(queryUserId, queryClientId)
@@ -93,9 +96,15 @@ export default function NewClient() {
                 <div className="fadeItem" style={{ backgroundImage: `linear-gradient(to bottom,#fff0, #fff 80%), ${backgroundImg ? `url(${backgroundImg})` : "#f5874f"}`, backgroundColor: backgroundImg ? '' : "#f5874f", height: '100vh', position: 'fixed', width: '100vw' }}>
 
 
-                    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                    <div
+                        id="carouselExampleControls"
+                        class="carousel slide"
+                        data-bs-touch="false"
+                        data-bs-interval="false">
                         <div class="carousel-inner">
-                            <div class="carousel-item active" style={{ height: '100vh' }}>
+
+
+                            <div class="carousel-item active" style={{ height: '100vh' }} >
 
                                 <div>
 
@@ -131,7 +140,7 @@ export default function NewClient() {
 
 
                             </div>
-                            <div class="carousel-item" style={{ height: '100vh' }}>
+                            <div class="carousel-item" style={{ height: '100vh' }} >
                                 <div className="card m-3 fadeItem1s" style={{ height: "90%" }}>
                                     <div className="card-body">
 
@@ -159,12 +168,7 @@ export default function NewClient() {
                         // </div>
                         <FixedTopicsBottom >
 
-                            <div className="row ps-2 pe-3 fadeItem1s">
-                                <button className="ms-2 btn btn-sm btn-orange" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-                                    Começar <FontAwesomeIcon icon={faArrowRight} className="icon ms-1" />
-                                </button>
-
-                            </div>
+                            <FixedButtons setSlide={(value => setSlide(value))} slide={slide} />
                         </FixedTopicsBottom>
                     )}
 
