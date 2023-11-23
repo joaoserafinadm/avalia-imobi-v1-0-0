@@ -11,6 +11,7 @@ import { FixedTopicsBottom } from "../../components/fixedTopics";
 import Link from "next/link";
 import PropertyTypeCard from "../../addClient/PropertyTypeCard";
 import scrollTo from "../../../utils/scrollTo";
+import Page1 from "./Page1";
 
 
 export default function NewClient() {
@@ -45,7 +46,7 @@ export default function NewClient() {
         dataFunction(queryUserId, queryClientId)
         setTimeout(() => {
             setShowStartBtn(true)
-        }, 11000)
+        }, 8000)
     }, [])
 
     const dataFunction = async (user_id, client_id) => {
@@ -89,7 +90,7 @@ export default function NewClient() {
                     <SpinnerLG />
                 </div>
                 :
-                <div style={{ backgroundImage: `linear-gradient(to bottom,#fff0, #fff 80%), ${backgroundImg ? `url(${backgroundImg})` : "#f5874f"}`, backgroundColor: backgroundImg ? '' : "#f5874f", height: '100vh', position: 'fixed', width: '100vw' }}>
+                <div className="fadeItem" style={{ backgroundImage: `linear-gradient(to bottom,#fff0, #fff 80%), ${backgroundImg ? `url(${backgroundImg})` : "#f5874f"}`, backgroundColor: backgroundImg ? '' : "#f5874f", height: '100vh', position: 'fixed', width: '100vw' }}>
 
 
                     <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
@@ -99,24 +100,29 @@ export default function NewClient() {
                                 <div>
 
                                     <img src={profileImageUrl} alt="logo" id="logoItem" className={`${styles.profileImage} ${styles.profileImagePosition} fadeItem1s `} />
-                                    <img src={logo} alt="logo" id="logoItem" className={`${styles.logo} ${styles.logoPosition} fadeItem1s `} />
 
                                 </div>
                                 <div className="card m-3 fadeItem1s" style={{ height: "90%" }}>
                                     <div className="card-body">
+                                        <div style={{ width: '45vw', height: '90px' }} className="d-flex justify-content-center align-items-center">
+
+                                            <img src={logo} alt="logo" id="logoItem" className={`${styles.logo} ${styles.logoPosition} fadeItem1s `} />
+                                        </div>
                                         <div className={`${styles.textPosition} px-1 fadeItem1s`}>
 
 
                                             <TypeAnimation
                                                 sequence={[
-                                                    `Olá ${clientName}, me chamo ${userFirstName}, e irei te ajudar a avaliar o seu imóvel.`,
-                                                    100,
-                                                    `Olá ${clientName}, me chamo ${userFirstName}, e irei te ajudar a avaliar o seu imóvel.\n
-    Preecha o formulário de cadastro para que possamos começar.`,
+                                                    200,
+                                                    `Olá ${clientName}.`,
+                                                    500,
+                                                    `Olá ${clientName}.\nMe chamo ${userFirstName}, e irei te ajudar a avaliar o seu imóvel.`,
+                                                    200,
+                                                    `Olá ${clientName}.\nMe chamo ${userFirstName}, e irei te ajudar a avaliar o seu imóvel.\nPreecha o formulário de cadastro para que possamos começar.`,
                                                 ]}
                                                 wrapper="span"
                                                 speed={50}
-                                                style={{ fontSize: '1.5em', display: 'inline-block' }}
+                                                style={{ fontSize: '1.5em', display: 'inline-block', whiteSpace: 'pre-line' }}
                                             />
                                         </div>
                                     </div>
@@ -129,32 +135,9 @@ export default function NewClient() {
                                 <div className="card m-3 fadeItem1s" style={{ height: "90%" }}>
                                     <div className="card-body">
 
-                                        <div className="row fadeItem mt-3">
-                                            <label for="telefoneItem" className="form-label fw-bold">Informações do Imóvel</label>
-                                            <div className="col-12  my-2">
-                                                <label for="clientNameItem" className="form-label ">Tipo do imóvel*</label>
-
-                                                <div className="row">
-
-
-                                                    <div className="my-2 col-lg-3 col-xxl-2 col-6 d-flex justify-content-center">
-                                                        <PropertyTypeCard type="Apartamento" setPropertyType={(value) => { setPropertyType(value); scrollTo('propertyInfo') }} propertyType={propertyType} />
-                                                    </div>
-                                                    <div className="my-2 col-lg-3 col-xxl-2 col-6 d-flex justify-content-center">
-                                                        <PropertyTypeCard type="Casa" setPropertyType={(value) => { setPropertyType(value); scrollTo('propertyInfo') }} propertyType={propertyType} />
-                                                    </div>
-                                                    <div className="my-2 col-lg-3 col-xxl-2 col-6 d-flex justify-content-center">
-                                                        <PropertyTypeCard type="Comercial" setPropertyType={(value) => { setPropertyType(value); scrollTo('propertyInfo') }} propertyType={propertyType} />
-                                                    </div>
-                                                    <div className="my-2 col-lg-3 col-xxl-2 col-6 d-flex justify-content-center">
-                                                        <PropertyTypeCard type="Terreno" setPropertyType={(value) => { setPropertyType(value); scrollTo('propertyInfo') }} propertyType={propertyType} />
-                                                    </div>
-                                                </div>
-
-
-                                            </div>
-                                        </div>
-
+                                        <Page1
+                                            setPropertyType={(value) => { setPropertyType(value) }}
+                                            propertyType={propertyType} />
 
                                     </div>
                                 </div>
