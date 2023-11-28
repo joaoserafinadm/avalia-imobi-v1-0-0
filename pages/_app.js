@@ -97,8 +97,14 @@ export default function MyApp({ Component, pageProps }) {
             return <PasswordRecover />;
         }
 
-        if ( newClientRoute) {
-            return <NewClient />;
+        if (newClientRoute) {
+            return (
+                <Provider store={store}>
+                    <PersistGate persistor={persistedStore}>
+                        <NewClient />;
+                    </PersistGate>
+                </Provider>
+            )
         }
 
 

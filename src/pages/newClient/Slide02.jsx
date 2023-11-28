@@ -4,7 +4,7 @@ import TypeApartamento from "./TypeApartamento";
 
 
 
-export default function Page1(props) {
+export default function Slide02(props) {
 
     const newClientForm = useSelector(state => state.newClientForm)
 
