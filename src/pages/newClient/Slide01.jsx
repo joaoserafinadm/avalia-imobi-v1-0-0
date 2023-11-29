@@ -11,17 +11,28 @@ export default function Slide01(props) {
     const dispatch = useDispatch()
 
 
+    const maskTelefone = (value) => {
+        return dispatch(setCelular(value
+            .replace(/\D/g, '')
+            .replace(/(\d{2})(\d)/, '($1) $2')
+            .replace(/(\d{4})(\d)/, '$1-$2')
+            .replace(/(\d{4})-(\d)(\d{4})/, '$1$2-$3')
+            .replace(/(-\d{4})\d+?$/, '$1'))
+        )
+    }
+
+
 
     return (
         <div className="row fadeItem mt-3">
-            <label for="geralForm" className="form-label fw-bold">Informações do cliente</label>
+            <label for="geralForm" className="form-label fw-bold">Informações de Cadastro</label>
 
             <div className="col-12 fadeItem">
                 <div className="row">
 
                     <div className="col-12 my-2  pe-1">
 
-                        <label for="geralForm" className="form-label">Nome*</label>
+                        <label for="geralForm" className="form-label">Nome<b>*</b></label>
                         <input
                             type="text"
                             className="form-control"
@@ -43,14 +54,14 @@ export default function Slide01(props) {
                     </div>
                     <div className="col-12 my-2  pe-1">
 
-                        <label for="geralForm" className="form-label">Celular*</label>
+                        <label for="geralForm" className="form-label">Celular<b>*</b></label>
                         <input
                             type="text"
                             className="form-control"
                             name="celularItem"
                             id="celularItem"
                             value={newClientForm.celular}
-                            onChange={e => dispatch(setCelular(e.target.value))} />
+                            onChange={e => maskTelefone(e.target.value)} />
                     </div>
                     <div className="col-12 my-2  pe-1">
 
@@ -70,6 +81,7 @@ export default function Slide01(props) {
                 </div>
             </div>
 
+            <span className="small mt-3">*Campos obrigatórios</span>
 
         </div>
     )

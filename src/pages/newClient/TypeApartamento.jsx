@@ -1,8 +1,13 @@
+import { useDispatch, useSelector } from "react-redux"
+import { setAreaTotal, setAreaTotalPrivativa, setBanheiros, setQuartos, setSuites, setVagasGaragem } from "../../../store/NewClientForm/NewClientForm.actions"
 
 
 
 
 export default function TypeApartamento(props) {
+
+    const newClientForm = useSelector(state => state.newClientForm)
+    const dispatch = useDispatch()
 
 
 
@@ -12,66 +17,107 @@ export default function TypeApartamento(props) {
 
             <div className="col-12 fadeItem">
 
-                <label for="geralForm" className="form-label">Área</label>
                 <div className="row">
-                    <div className="col-12 my-1 d-flex">
 
-                        <div className="col-6  pe-1">
-
-                            <label for="geralForm" className="form-label">Largura</label>
-                            <div className="input-group ">
-                                <input
-                                    type="number"
-                                    className="form-control"
-                                    name="larguraItem"
-                                    id="larguraItem"
-                                    value={props.largura}
-                                    onChange={e => props.setLargura(e.target.value)} />
-                                <span class="input-group-text" id="basic-addon1">m</span>
-                            </div>
-                        </div>
-                        <div className="col-6 ps-1">
-                            <label for="geralForm" className="form-label">Largura</label>
-                            <div className="input-group  ">
-                                <input
-                                    type="number"
-                                    className="form-control"
-                                    name="larguraItem"
-                                    id="larguraItem"
-                                    value={props.largura}
-                                    onChange={e => props.setLargura(e.target.value)} />
-                                <span class="input-group-text" id="basic-addon1">m</span>
-                            </div>
-                        </div>
-
-                    </div>
                     <div className="col-12 my-1">
-                        <label for="geralForm" className="form-label">Área total</label>
+                        <label for="areaTotalItem" className="form-label">Área total</label>
 
                         <div className="input-group  ">
                             <input
                                 type="number"
                                 className="form-control"
-                                name="larguraItem"
-                                id="larguraItem"
-                                value={props.largura}
-                                onChange={e => props.setLargura(e.target.value)} />
+                                name="areaTotalItem"
+                                id="areaTotalItem"
+                                value={newClientForm.areaTotal}
+                                onChange={e => dispatch(setAreaTotal(e.target.value))} />
                             <span class="input-group-text" id="basic-addon1">m²</span>
                         </div>
                     </div>
                     <div className="col-12 my-1">
-                        <label for="geralForm" className="form-label">Área total</label>
+                        <label for="areaTotalPrivativaItem" className="form-label">Área total - Privativa</label>
 
                         <div className="input-group  ">
                             <input
                                 type="number"
                                 className="form-control"
-                                name="larguraItem"
-                                id="larguraItem"
-                                value={props.largura}
-                                onChange={e => props.setLargura(e.target.value)} />
+                                name="areaTotalPrivativaItem"
+                                id="areaTotalPrivativaItem"
+                                value={newClientForm.areaTotalPrivativa}
+                                onChange={e => dispatch(setAreaTotalPrivativa(e.target.value))} />
                             <span class="input-group-text" id="basic-addon1">m²</span>
                         </div>
+                    </div>
+                    <div className="col-12 my-1">
+                        <label for="quartosItem" className="form-label">Número de quartos</label>
+
+                        <select id="quartosItem"
+                            class="form-select"
+                            aria-label="Default select example"
+                            value={newClientForm.quartos}
+                            onChange={e => dispatch(setQuartos(e.target.value))}>
+                            <option value='' selected disabled>Escolha...</option>
+                            <option value="Kitnet">Kitnet</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="3">4</option>
+                            <option value="3">5</option>
+                            <option value="3">6</option>
+                        </select>
+                    </div>
+                    <div className="col-12 my-1">
+                        <label for="suitesItem" className="form-label">Número de suítes</label>
+
+                        <select id="suitesItem"
+                            class="form-select"
+                            aria-label="Default select example"
+                            value={newClientForm.suites}
+                            onChange={e => dispatch(setSuites(e.target.value))}>
+                            <option value='' selected disabled>Escolha...</option>
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="3">4</option>
+                            <option value="3">5</option>
+                            <option value="3">6</option>
+                        </select>
+                    </div>
+                    <div className="col-12 my-1">
+                        <label for="suitesItem" className="form-label">Banheiros</label>
+
+                        <select id="suitesItem"
+                            class="form-select"
+                            aria-label="Default select example"
+                            value={newClientForm.banheiros}
+                            onChange={e => dispatch(setBanheiros(e.target.value))}>
+                            <option value='' selected disabled>Escolha...</option>
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="3">4</option>
+                            <option value="3">5</option>
+                            <option value="3">6</option>
+                        </select>
+                    </div>
+                    <div className="col-12 my-1">
+                        <label for="vagasGaragemItem" className="form-label">Vagas de garagem</label>
+
+                        <select id="vagasGaragemItem"
+                            class="form-select"
+                            aria-label="Default select example"
+                            value={newClientForm.vagasGaragem}
+                            onChange={e => dispatch(setVagasGaragem(e.target.value))}>
+                            <option value='' selected disabled>Escolha...</option>
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="3">4</option>
+                            <option value="3">5</option>
+                            <option value="3">6</option>
+                        </select>
                     </div>
 
                 </div>

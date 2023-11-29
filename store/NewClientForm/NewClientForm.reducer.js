@@ -33,6 +33,12 @@ export default function inventoryStatesReducer(state = {
     userLastName: '',
     profileImageUrl: '',
     propertyType: '',
+    areaTotal: '',
+    areaTotalPrivativa: '',
+    quartos: '',
+    suites: '',
+    banheiros: '',
+    vagasGaragem: '',
 }, action) {
     switch (action.type) {
         case 'INITIAL_VALUES':
@@ -83,6 +89,23 @@ export default function inventoryStatesReducer(state = {
         case 'SET_PROPERTY_TYPE':
             return { ...state, propertyType: action.payload }
 
+        case 'SET_AREA_TOTAL':
+            return { ...state, areaTotal: action.payload }
+
+        case 'SET_AREA_TOTAL_PRIVATIVA':
+            return { ...state, areaTotalPrivativa: action.payload }
+
+        case 'SET_QUARTOS':
+            return { ...state, quartos: action.payload }
+
+        case 'SET_SUITES':
+            return { ...state, suites: action.payload }
+
+        case 'SET_BANHEIROS':
+            return { ...state, banheiros: action.payload }
+
+        case 'SET_VAGAS_GARAGEM':
+            return { ...state, vagasGaragem: action.payload }
 
 
         default: return state

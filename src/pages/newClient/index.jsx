@@ -17,6 +17,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { initialValues, setBackgroundImg, setCelular, setClientLastName, setClientName, setClient_id, setCompanyName, setEmail, setLogo, setProfileImageUrl, setStyle, setUserFirstName, setUserLastName, setUser_id } from "../../../store/NewClientForm/NewClientForm.actions";
 import Slide01 from "./Slide01";
 import Slide02 from "./Slide02";
+import Slide03 from "./Slide03";
 
 
 export default function NewClient() {
@@ -128,6 +129,23 @@ export default function NewClient() {
                                     <div className="card-body">
 
                                         <Slide02 />
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class={`carousel-item  ${initialSlide === 3 && 'active'}`} style={{ height: '100vh' }} >
+                                <div className="card m-3 fadeItem1s" style={{ height: "90%", overflowY: 'scroll' }}>
+                                    <div className="card-body">
+
+                                        <Slide03 />
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class={`carousel-item  ${initialSlide === 4 && 'active'}`} style={{ height: '100vh' }} >
+                                <div className="card m-3 fadeItem1s" style={{ height: "90%", overflowY: 'scroll' }}>
+                                    <div className="card-body">
+                                        <img src="/JU.jpeg" alt="" height={500}/>
 
                                     </div>
                                 </div>

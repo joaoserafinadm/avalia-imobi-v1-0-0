@@ -124,5 +124,49 @@ export function setPropertyType(data) {
     }
 }
 
+export function setAreaTotal(data) {
+    return {
+        type: 'SET_AREA_TOTAL',
+        payload: data
+    }
+}
+
+export function setAreaTotalPrivativa(data) {
+    return {
+        type: 'SET_AREA_TOTAL_PRIVATIVA',
+        payload: data
+    }
+}
+
+export function setQuartos(data) {
+    return {
+        type: 'SET_QUARTOS',
+        payload: data
+    }
+}
+
+export function setSuites(data) {
+    return {
+        type: 'SET_SUITES',
+        payload: data
+    }
+}
+
+export function setBanheiros(data) {
+    return {
+        type: 'SET_BANHEIROS',
+        payload: data
+    }
+}
+
+export function setVagasGaragem(data) {
+    return {
+        type: 'SET_VAGAS_GARAGEM',
+        payload: data
+    }
+}
+
+
+
 
 

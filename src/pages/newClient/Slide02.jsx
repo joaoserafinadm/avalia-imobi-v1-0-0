@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import PropertyTypeCard from "../../addClient/PropertyTypeCard";
 import TypeApartamento from "./TypeApartamento";
+import TypeTerreno from "./TypeTerreno";
 
 
 
@@ -12,7 +13,7 @@ export default function Slide02(props) {
 
     return (
         <>
-            <div className="row fadeItem mt-3">
+            <div className="row fadeItem mt-3 pb-5">
 
                 <label for="geralForm" className="form-label fw-bold">Informações do Imóvel</label>
 
@@ -38,9 +39,13 @@ export default function Slide02(props) {
 
 
                 </div>
-                {newClientForm.propertyType === "Terreno" && (
+                {newClientForm.propertyType === "Apartamento" && (
                     <TypeApartamento />
                 )}
+                {newClientForm.propertyType === "Terreno" && (
+                    <TypeTerreno />
+                )}
+
 
             </div >
         </>

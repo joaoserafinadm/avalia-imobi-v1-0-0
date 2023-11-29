@@ -1,4 +1,4 @@
-import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeft, faArrowRight, faHeart } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useDispatch, useSelector } from "react-redux";
 import slideNumber from "../../../utils/slideNumber";
@@ -23,6 +23,32 @@ export default function FixedButtons(props) {
     }
 
 
+    const handleDisabled = (form) => {
+
+        if (form.slide === 1) {
+            if (!form.clientName || !form.celular) {
+                return true
+            } else {
+                return false
+            }
+        }
+
+        if (form.slide === 2) {
+
+            if (form.propertyType === 'Apartamento') {
+                if (!form.areaTotal || !form.areaTotalPrivativa || !form.quartos || !form.suites || !form.banheiros || !form.vagasGaragem) {
+                    return true
+                } else {
+                    return false
+                }
+            } else {
+                return true
+            }
+        }
+
+    }
+
+
 
 
     return (
@@ -38,7 +64,10 @@ export default function FixedButtons(props) {
                     <div className="fadeItem d-flex">
                         <div className="col-6">
                             <div className="row">
-                                <span className="ms-2 text-center text-secondary" data-bs-target="#carouselExampleControls" data-bs-slide="previus" onClick={() => handleSlide('carouselExampleControls')}>
+                                <span className="ms-2 text-center text-secondary"
+                                    data-bs-target="#carouselExampleControls"
+                                    data-bs-slide="previus"
+                                    onClick={() => handleSlide('carouselExampleControls')}>
                                     <FontAwesomeIcon icon={faArrowLeft} className="icon ms-1 " /> Voltar
                                 </span>
                             </div>
@@ -46,7 +75,11 @@ export default function FixedButtons(props) {
                         <div className="col-6">
                             <div className="row">
 
-                                <button className="ms-2 btn btn-sm btn-orange" data-bs-target="#carouselExampleControls" data-bs-slide="next" onClick={() => handleSlide('carouselExampleControls')}>
+                                <button className="ms-2 btn btn-sm btn-orange"
+                                    data-bs-target="#carouselExampleControls"
+                                    disabled={handleDisabled(newClientForm)}
+                                    data-bs-slide="next"
+                                    onClick={() => handleSlide('carouselExampleControls')}>
                                     Continuar <FontAwesomeIcon icon={faArrowRight} className="icon ms-1" />
                                 </button>
                             </div>
@@ -57,9 +90,40 @@ export default function FixedButtons(props) {
 
             {newClientForm.slide === 3 && (
 
-                <button className="ms-2 btn btn-sm btn-orange fadeItem" data-bs-target="#carouselExampleControls" data-bs-slide="next" onClick={() => handleSlide('carouselExampleControls')}>
-                    Finalizar <FontAwesomeIcon icon={faArrowRight} className="icon ms-1" />
-                </button>
+                <div className="fadeItem d-flex">
+                    <div className="col-6">
+                        <div className="row">
+                            <span className="ms-2 text-center text-secondary"
+                                data-bs-target="#carouselExampleControls"
+                                data-bs-slide="previus"
+                                onClick={() => handleSlide('carouselExampleControls')}>
+                                <FontAwesomeIcon icon={faArrowLeft} className="icon ms-1 " /> Voltar
+                            </span>
+                        </div>
+                    </div>
+                    <div className="col-6">
+                        <div className="row">
+
+                            <button className="ms-2 btn btn-sm btn-orange"
+                                data-bs-target="#carouselExampleControls"
+                                disabled={handleDisabled(newClientForm)}
+                                data-bs-slide="next"
+                                onClick={() => handleSlide('carouselExampleControls')}>
+                                Finalizar <FontAwesomeIcon icon={faArrowRight} className="icon ms-1" />
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {newClientForm.slide === 4 && (
+
+                <div className="fadeItem d-flex"
+                    data-bs-target="#carouselExampleControls"
+                    data-bs-slide="next"
+                    onClick={() => handleSlide('carouselExampleControls')}>
+                    Te amo <FontAwesomeIcon className="icon " icon={faHeart} />
+                </div>
             )}
 
         </div>
