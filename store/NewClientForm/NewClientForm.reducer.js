@@ -39,6 +39,8 @@ export default function inventoryStatesReducer(state = {
     suites: '',
     banheiros: '',
     vagasGaragem: '',
+    sacadas: '',
+    andar: '',
 }, action) {
     switch (action.type) {
         case 'INITIAL_VALUES':
@@ -106,6 +108,12 @@ export default function inventoryStatesReducer(state = {
 
         case 'SET_VAGAS_GARAGEM':
             return { ...state, vagasGaragem: action.payload }
+
+        case 'SET_SACADAS':
+            return { ...state, sacadas: action.payload }
+
+        case 'SET_ANDAR':
+            return { ...state, andar: action.payload }
 
 
         default: return state

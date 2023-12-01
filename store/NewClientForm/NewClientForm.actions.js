@@ -166,6 +166,20 @@ export function setVagasGaragem(data) {
     }
 }
 
+export function setSacadas(data) {
+    return {
+        type: 'SET_SACADAS',
+        payload: data
+    }
+}
+
+export function setAndar(data) {
+    return {
+        type: 'SET_ANDAR',
+        payload: data
+    }
+}
+
 
 
 

@@ -18,6 +18,7 @@ import { initialValues, setBackgroundImg, setCelular, setClientLastName, setClie
 import Slide01 from "./Slide01";
 import Slide02 from "./Slide02";
 import Slide03 from "./Slide03";
+import Slide04 from "./Slide04";
 
 
 export default function NewClient() {
@@ -142,14 +143,23 @@ export default function NewClient() {
                                     </div>
                                 </div>
                             </div>
-                            <div class={`carousel-item  ${initialSlide === 4 && 'active'}`} style={{ height: '100vh' }} >
+                            <div class={`carousel-item  ${initialSlide === 5 && 'active'}`} style={{ height: '100vh' }} >
+                                <div className="card m-3 fadeItem1s" style={{ height: "90%", overflowY: 'scroll' }}>
+                                    <div className="card-body">
+
+                                        <Slide04 />
+
+                                    </div>
+                                </div>
+                            </div>
+                            {/* <div class={`carousel-item  ${initialSlide === 6 && 'active'}`} style={{ height: '100vh' }} >
                                 <div className="card m-3 fadeItem1s" style={{ height: "90%", overflowY: 'scroll' }}>
                                     <div className="card-body">
                                         <img src="/JU.jpeg" alt="" height={500}/>
 
                                     </div>
                                 </div>
-                            </div>
+                            </div> */}
 
                         </div>
                     </div>
