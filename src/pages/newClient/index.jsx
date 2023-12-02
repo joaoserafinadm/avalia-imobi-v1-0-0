@@ -143,7 +143,7 @@ export default function NewClient() {
                                     </div>
                                 </div>
                             </div>
-                            <div class={`carousel-item  ${initialSlide === 5 && 'active'}`} style={{ height: '100vh' }} >
+                            <div class={`carousel-item  ${initialSlide === 4 && 'active'}`} style={{ height: '100vh' }} >
                                 <div className="card m-3 fadeItem1s" style={{ height: "90%", overflowY: 'scroll' }}>
                                     <div className="card-body">
 

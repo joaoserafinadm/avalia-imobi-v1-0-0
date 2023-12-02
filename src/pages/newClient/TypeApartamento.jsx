@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux"
-import { setAndar, setAreaTotal, setAreaTotalPrivativa, setBanheiros, setQuartos, setSuites, setVagasGaragem } from "../../../store/NewClientForm/NewClientForm.actions"
+import { setAndar, setAreaTotal, setAreaTotalPrivativa, setBanheiros, setQuartos, setSacadas, setSuites, setVagasGaragem } from "../../../store/NewClientForm/NewClientForm.actions"
 
 
 

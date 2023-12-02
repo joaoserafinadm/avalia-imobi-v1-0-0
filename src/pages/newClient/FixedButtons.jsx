@@ -60,7 +60,8 @@ export default function FixedButtons(props) {
                 </button>
             )}
             {(newClientForm.slide === 1 ||
-                newClientForm.slide === 2) && (
+                newClientForm.slide === 2 ||
+                newClientForm.slide === 3) && (
                     <div className="fadeItem d-flex">
                         <div className="col-6">
                             <div className="row">
@@ -88,7 +89,7 @@ export default function FixedButtons(props) {
 
                 )}
 
-            {newClientForm.slide === 3 && (
+            {newClientForm.slide === 4 && (
 
                 <div className="fadeItem d-flex">
                     <div className="col-6">
@@ -116,16 +117,7 @@ export default function FixedButtons(props) {
                 </div>
             )}
 
-            {newClientForm.slide === 4 && (
-
-                <div className="fadeItem d-flex"
-                    data-bs-target="#carouselExampleControls"
-                    data-bs-slide="next"
-                    onClick={() => handleSlide('carouselExampleControls')}>
-                    Te amo <FontAwesomeIcon className="icon " icon={faHeart} />
-                </div>
-            )}
-
+           
         </div>
     )
 
