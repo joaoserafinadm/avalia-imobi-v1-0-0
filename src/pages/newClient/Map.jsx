@@ -1,43 +1,111 @@
+import React, { useRef, useEffect } from 'react'
+import { GoogleMap, Marker, useJsApiLoader, Autocomplete } from '@react-google-maps/api';
 
-import React, { useEffect } from "react";
-import { Loader } from "@googlemaps/js-api-loader";
+const containerStyle = {
+    width: '400px',
+    height: '400px'
+};
 
+const center = {
+    lat: -3.745,
+    lng: -38.523
+};
 
-export default function Map() {
+function Map() {
 
-    const mapRef = React.useRef(null)
+    const positionMarker = useRef()
+    const [position, setPosition] = React.useState(null);
 
     useEffect(() => {
-        const initMap = async () => {
+        console.log("positionMarker", positionMarker)
+    }, [positionMarker])
 
-            const loader = new Loader({
-                apiKey: process.env.GOOGLE_MAPS_API_KEY,
-                version: 'weekly'
-            })
 
-            const {Map} =  await loader.importLibrary('maps')
+    const { isLoaded } = useJsApiLoader({
+        id: 'avalia-imobi',
+        googleMapsApiKey: "AIzaSyAU54iwv20-0BDGcVzMcMrVZpmZRPJDDic",
+        libraries: ['places']
+        // language: "pt-BR",
+        // region: "BR",
+    })
 
-            const position = {
-                lat: -25.363,
-                long: 131.044
-            }
 
-            const mapOptions  = {
-                center: position,
-                zoom: 8
-            }
+    const handlePlaceSelect = (place) => {
 
-            //setup map
-            const map = new Map(mapRef.current, mapOptions)
+        console.log("place", place)
+        // const lat = place.geometry.location.lat();
+        // const lng = place.geometry.location.lng();
 
-        }
+        // setPosition({
+        //   lat,
+        //   lng
+        // });
+    };
 
-        initMap()
+
+    // {
+    //   version: "weekly",
+    //     apiKey: "AIzaSyAU54iwv20-0BDGcVzMcMrVZpmZRPJDDic",
+    //       id: "avalia-imobi",
+    //         libraries: ["places"],
+    //           language: "pt-BR",
+    //             region: "BR",
+    //               mapIds: [],
+    //                 nonce: "",
+    //                   url: "https://maps.googleapis.com/maps/api/js",
+    //                     authReferrerPolicy: "origin"
+    // }
+
+
+    const [map, setMap] = React.useState(null)
+
+    const onLoad = React.useCallback(function callback(map) {
+        // This is just an example of getting and using the map instance!!! don't just blindly copy!
+        const bounds = new window.google.maps.LatLngBounds(center);
+        map.fitBounds(bounds);
+
+        setMap(map)
     }, [])
 
+    const onUnmount = React.useCallback(function callback(map) {
+        setMap(null)
+    }, [])
 
-    return (
-        <div style={{height: '500px'}} ref={mapRef} />
-            
-    )
+    return isLoaded ? (
+        <>
+            <div className="row">
+                <div className="col-12">
+                    <Autocomplete
+                        onPlaceChanged={(e) => handlePlaceSelect(e)}>
+                        <input
+                            type="text"
+                            placeholder='Pesquisar'
+                            className="form-control"
+                            ref={positionMarker} />
+                    </Autocomplete>
+
+                </div>
+            </div>
+            <div className="row">
+                <div className="col-12">
+                    <GoogleMap
+                        containerStyle={{ width: '100%' }}
+                        mapContainerStyle={containerStyle}
+                        center={center}
+                        zoom={10}
+                        onLoad={onLoad}
+                        onUnmount={onUnmount}
+                    >
+                        <Marker position={center} />
+                    </GoogleMap>
+
+                </div>
+            </div>
+
+
+        </>
+
+    ) : <></>
 }
+
+export default React.memo(Map)

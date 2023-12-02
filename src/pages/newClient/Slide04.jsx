@@ -7,14 +7,17 @@ import { Loader } from "@googlemaps/js-api-loader";
 export default function Slide04(props) {
 
 
-    
+
 
 
     return (
         <div className="row fadeItem mt-3">
-            <label for="geralForm" className="form-label fw-bold">Informações Gerais</label>
+            <label for="geralForm" className="form-label fw-bold">Localização</label>
+            <div className="col-12">
 
-            <Map />
+
+                <Map />
+            </div>
 
 
 

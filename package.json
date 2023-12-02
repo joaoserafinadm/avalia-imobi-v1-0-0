@@ -24,6 +24,7 @@
     "@react-email/button": "0.0.10",
     "@react-email/components": "0.0.7",
     "@react-email/html": "0.0.4",
+    "@react-google-maps/api": "^2.19.2",
     "@react-icons/all-files": "^4.1.0",
     "@sendgrid/mail": "^7.6.0",
     "apexcharts": "^3.35.5",
