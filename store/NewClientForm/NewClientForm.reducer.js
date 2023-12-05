@@ -15,6 +15,7 @@ const initialValues = {
     userLastName: '',
     profileImageUrl: '',
     propertyType: '',
+    features: []
 }
 
 export default function inventoryStatesReducer(state = {
@@ -41,6 +42,15 @@ export default function inventoryStatesReducer(state = {
     vagasGaragem: '',
     sacadas: '',
     andar: '',
+    cep: '',
+    cidade: '',
+    uf: '',
+    logradouro: '',
+    numero: '',
+    bairro: '',
+    latitude: '',
+    longitude: '',
+    features: []
 }, action) {
     switch (action.type) {
         case 'INITIAL_VALUES':
@@ -114,6 +124,36 @@ export default function inventoryStatesReducer(state = {
 
         case 'SET_ANDAR':
             return { ...state, andar: action.payload }
+
+        case 'SET_CEP':
+            return { ...state, cep: action.payload }
+
+        case 'SET_CIDADE':
+            return { ...state, cidade: action.payload }
+
+        case 'SET_UF':
+            return { ...state, uf: action.payload }
+
+        case 'SET_LOGRADOURO':
+            return { ...state, logradouro: action.payload }
+
+        case 'SET_NUMERO':
+            return { ...state, numero: action.payload }
+
+        case 'SET_BAIRRO':
+            return { ...state, bairro: action.payload }
+
+        case 'SET_LATITUDE':
+            return { ...state, latitude: action.payload }
+
+        case 'SET_LONGITUDE':
+            return { ...state, longitude: action.payload }
+
+        case 'SET_FEATURES':
+            return { ...state, features: action.payload }
+
+        case 'DELETE_FEATURE':
+            return { ...state, features: action.payload }
 
 
         default: return state

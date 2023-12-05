@@ -4,7 +4,7 @@ import { GoogleMap, Marker, useJsApiLoader, Autocomplete } from '@react-google-m
 const libraries = ['places']
 
 
-export default function Map() {
+export default function Map(props) {
 
     const positionMarker = useRef()
     const [position, setPosition] = useState(null);
@@ -61,7 +61,6 @@ export default function Map() {
 
                         placesService.getDetails({ placeId }, (place, status) => {
                             if (status === window.google.maps.places.PlacesServiceStatus.OK) {
-                                console.log("Place object:", place);
 
                                 // Aqui estão algumas das informações disponíveis no objeto 'place'.
                                 // Você pode explorar o objeto para obter mais detalhes conforme necessário.
@@ -70,9 +69,9 @@ export default function Map() {
                                 const formattedAddress = place.formatted_address;
                                 const location = place.geometry.location.toJSON();
 
-                                console.log("Address Components:", addressComponents);
-                                console.log("Formatted Address:", formattedAddress);
-                                console.log("Location:", location);
+                                // console.log("Address Components:", addressComponents);
+                                // console.log("Formatted Address:", formattedAddress);
+                                // console.log("Location:", location);
 
                                 setPosition(location)
                                 map.panTo(location)
@@ -89,7 +88,7 @@ export default function Map() {
 
     return isLoaded ? (
         <>
-            <div className="row">
+            {/* <div className="row">
                 <div className="col-12">
                     <Autocomplete
                         onPlaceChanged={place => onPlaceChanged(place)} >
@@ -101,14 +100,14 @@ export default function Map() {
                     </Autocomplete>
 
                 </div>
-            </div>
+            </div> */}
 
             <div className="row mt-4">
                 <div className="col-12" style={{ width: '100%' }}>
 
                     <GoogleMap
                         mapContainerStyle={containerStyle}
-                        center={position}
+                        center={props.location}
                         zoom={zoom}
                         onLoad={onLoad}
                         onUnmount={onUnmount}
@@ -119,7 +118,7 @@ export default function Map() {
                             fullscreenControl: false
                         }}
                     >
-                        <Marker position={position} />
+                        <Marker position={props.location} />
                     </GoogleMap>
 
                 </div>

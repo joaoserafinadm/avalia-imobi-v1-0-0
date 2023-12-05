@@ -118,7 +118,7 @@ export default function NewClient() {
                             </div>
                             <div class={`carousel-item  ${initialSlide === 1 && 'active'}`} style={{ height: '100vh' }} >
                                 <div className="card m-3 fadeItem1s" style={{ height: "90%", overflowY: 'scroll' }}>
-                                    <div className="card-body">
+                                    <div className="card-body pb-5">
 
                                         <Slide01 />
 
@@ -127,7 +127,7 @@ export default function NewClient() {
                             </div>
                             <div class={`carousel-item  ${initialSlide === 2 && 'active'}`} style={{ height: '100vh' }} >
                                 <div className="card m-3 fadeItem1s" style={{ height: "90%", overflowY: 'scroll' }}>
-                                    <div className="card-body">
+                                    <div className="card-body pb-5">
 
                                         <Slide02 />
 
@@ -136,7 +136,7 @@ export default function NewClient() {
                             </div>
                             <div class={`carousel-item  ${initialSlide === 3 && 'active'}`} style={{ height: '100vh' }} >
                                 <div className="card m-3 fadeItem1s" style={{ height: "90%", overflowY: 'scroll' }}>
-                                    <div className="card-body">
+                                    <div className="card-body pb-5">
 
                                         <Slide03 />
 
@@ -145,7 +145,7 @@ export default function NewClient() {
                             </div>
                             <div class={`carousel-item  ${initialSlide === 4 && 'active'}`} style={{ height: '100vh' }} >
                                 <div className="card m-3 fadeItem1s" style={{ height: "90%", overflowY: 'scroll' }}>
-                                    <div className="card-body">
+                                    <div className="card-body pb-5">
 
                                         <Slide04 />
 
