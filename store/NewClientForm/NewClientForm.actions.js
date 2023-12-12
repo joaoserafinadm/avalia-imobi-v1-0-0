@@ -17,7 +17,8 @@ export function initialValues() {
             userLastName: '',
             profileImageUrl: '',
             propertyType: '',
-            features: []
+            features: [],
+            files: []
         }
     }
 }
@@ -244,7 +245,6 @@ export function setFeatures(features, data) {
     let newFeatures = features.concat([data])
     return {
         type: 'SET_FEATURES',
-        // payload: data
         payload: newFeatures
     }
 }
@@ -255,6 +255,34 @@ export function deleteFeature(features, data) {
         payload: features.filter(feature => feature !== data)
     }
 }
+
+export function setFiles(files, data) {
+
+    console.log('reduxFiles', files, data)
+    
+    let newFiles = files.concat(data)
+
+    console.log('newFiles', newFiles)
+
+    return {
+        type: 'SET_FILES',
+        payload: newFiles
+    }
+}
+
+export function deleteFiles(files, index) {
+
+    const newFiles = ([...files.slice(0, index), ...files.slice(index + 1)])
+
+
+    return {
+        type: 'DELETE_FILES',
+        payload: newFiles
+    }
+}
+
+
+
 
 
 

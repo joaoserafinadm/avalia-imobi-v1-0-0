@@ -15,6 +15,8 @@ export default function Slide04(props) {
     const newClientForm = useSelector(state => state.newClientForm)
     const dispatch = useDispatch()
 
+    const [zoom, setZoom] = useState(16)
+
     const onBlurCep = async (event) => {
 
         const adress = await buscaCep(event)
@@ -55,6 +57,8 @@ export default function Slide04(props) {
 
                     dispatch(setLatitude(location.lat))
                     dispatch(setLongitude(location.lng))
+
+                    setZoom(16)
 
                     console.log(location)
                 } else {
@@ -166,7 +170,10 @@ export default function Slide04(props) {
 
 
 
-                <Map location={{ lat: newClientForm.latitude, lng: newClientForm.longitude }} />
+                <Map location={{ lat: newClientForm.latitude, lng: newClientForm.longitude }} zoom={zoom}/>
+
+
+
             </div>
 
 

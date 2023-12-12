@@ -19,6 +19,8 @@ import Slide01 from "./Slide01";
 import Slide02 from "./Slide02";
 import Slide03 from "./Slide03";
 import Slide04 from "./Slide04";
+import Slide05 from "./Slide05";
+import Slide06 from "./Slide06";
 
 
 export default function NewClient() {
@@ -38,6 +40,7 @@ export default function NewClient() {
     const [loadingPage, setLoadingPage] = useState(true)
     const [showStartBtn, setShowStartBtn] = useState(false)
     const [slide, setSlide] = useState(0)
+    const [files, setFiles] = useState([])
 
     useEffect(() => {
         dataFunction(queryUserId, queryClientId)
@@ -148,6 +151,24 @@ export default function NewClient() {
                                     <div className="card-body pb-5">
 
                                         <Slide04 />
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class={`carousel-item  ${initialSlide === 5 && 'active'}`} style={{ height: '100vh' }} >
+                                <div className="card m-3 fadeItem1s" style={{ height: "90%", overflowY: 'scroll' }}>
+                                    <div className="card-body pb-5">
+
+                                        <Slide05 setFiles={array => setFiles(array)} />
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class={`carousel-item  ${initialSlide === 6 && 'active'}`} style={{ height: '100vh' }} >
+                                <div className="card m-3 fadeItem1s" style={{ height: "90%", overflowY: 'scroll' }}>
+                                    <div className="card-body pb-5">
+
+                                        <Slide06 files={files} />
 
                                     </div>
                                 </div>

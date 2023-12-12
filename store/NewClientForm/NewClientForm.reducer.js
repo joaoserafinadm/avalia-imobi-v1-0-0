@@ -50,7 +50,8 @@ export default function inventoryStatesReducer(state = {
     bairro: '',
     latitude: '',
     longitude: '',
-    features: []
+    features: [],
+    files: []
 }, action) {
     switch (action.type) {
         case 'INITIAL_VALUES':
@@ -154,6 +155,12 @@ export default function inventoryStatesReducer(state = {
 
         case 'DELETE_FEATURE':
             return { ...state, features: action.payload }
+
+        case 'SET_FILES':
+            return { ...state, files: action.payload }
+
+        case 'DELETE_FILES':
+            return { ...state, files: action.payload }
 
 
         default: return state

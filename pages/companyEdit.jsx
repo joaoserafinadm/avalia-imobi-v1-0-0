@@ -255,9 +255,7 @@ export default function companyEdit() {
                                                                     type="button" />
                                                             }
                                                         </>
-
                                                     }
-
 
                                                 </div>
                                             </div>

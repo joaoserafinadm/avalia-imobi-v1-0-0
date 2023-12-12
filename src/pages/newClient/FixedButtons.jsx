@@ -61,7 +61,9 @@ export default function FixedButtons(props) {
             )}
             {(newClientForm.slide === 1 ||
                 newClientForm.slide === 2 ||
-                newClientForm.slide === 3) && (
+                newClientForm.slide === 3 ||
+                newClientForm.slide === 4 ||
+                newClientForm.slide === 5) && (
                     <div className="fadeItem d-flex">
                         <div className="col-6">
                             <div className="row">
@@ -89,7 +91,7 @@ export default function FixedButtons(props) {
 
                 )}
 
-            {newClientForm.slide === 4 && (
+            {newClientForm.slide === 6 && (
 
                 <div className="fadeItem d-flex">
                     <div className="col-6">
@@ -117,7 +119,7 @@ export default function FixedButtons(props) {
                 </div>
             )}
 
-           
+
         </div>
     )
 

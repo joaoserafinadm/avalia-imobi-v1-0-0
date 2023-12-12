@@ -24,7 +24,7 @@ export default function Map(props) {
         height: '500px'
     };
 
-    const center = {lat: -27.6347491, lng: -52.2747035}
+    const center = { lat: -27.6347491, lng: -52.2747035 }
 
 
 
@@ -75,7 +75,7 @@ export default function Map(props) {
 
                                 setPosition(location)
                                 map.panTo(location)
-                                setZoom(18)
+                                setZoom(16)
 
                                 // Agora você pode manipular essas informações conforme necessário.
                             }
@@ -103,12 +103,12 @@ export default function Map(props) {
             </div> */}
 
             <div className="row mt-4">
-                <div className="col-12" style={{ width: '100%' }}>
+                <div className="col-12" style={{ width: '100%', height: '100px' }}>
 
                     <GoogleMap
                         mapContainerStyle={containerStyle}
                         center={props.location}
-                        zoom={zoom}
+                        zoom={props.zoom}
                         onLoad={onLoad}
                         onUnmount={onUnmount}
                         options={{

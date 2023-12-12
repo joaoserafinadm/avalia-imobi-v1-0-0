@@ -3,23 +3,6 @@ import { useEffect } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { filesize } from 'filesize'
 
-const baseStyle = {
-    flex: 1,
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    padding: '20px',
-    borderWidth: 1.5,
-    borderRadius: 5,
-    borderColor: '#bdbdbd',
-    borderStyle: 'dashed',
-    backgroundColor: '#eee',
-    color: '#696969',
-    outline: 'none',
-    transition: 'border .24s ease-in-out'
-};
-
-
 
 const acceptStyle = {
     opacity: ".6",
@@ -41,6 +24,24 @@ const rejectStyle = {
 
 export default function StyledDropzone(props) {
 
+    const baseStyle = props.baseStyle ? {
+        flex: 1,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        padding: '20px',
+        borderWidth: 1.5,
+        borderRadius: 5,
+        borderColor: '#bdbdbd',
+        borderStyle: 'dashed',
+        backgroundColor: '#eee',
+        color: '#696969',
+        outline: 'none',
+        transition: 'border .24s ease-in-out'
+    } : {
+    
+    };
+
     const {
         getRootProps,
         getInputProps,
@@ -56,7 +57,7 @@ export default function StyledDropzone(props) {
     });
 
     const style = useMemo(() => ({
-        // ...baseStyle,
+        ...baseStyle,
         ...(isDragAccept ? acceptStyle : {}),
         ...(isDragReject ? rejectStyle : {})
     }), [
