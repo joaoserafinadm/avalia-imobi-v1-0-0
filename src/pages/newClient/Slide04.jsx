@@ -170,7 +170,7 @@ export default function Slide04(props) {
 
 
 
-                <Map location={{ lat: newClientForm.latitude, lng: newClientForm.longitude }} zoom={zoom}/>
+                {/* <Map location={{ lat: newClientForm.latitude, lng: newClientForm.longitude }} zoom={zoom}/> */}
 
 
 
