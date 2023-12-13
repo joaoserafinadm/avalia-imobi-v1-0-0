@@ -120,6 +120,23 @@ export default function FixedButtons(props) {
             )}
 
 
+            {newClientForm.slide === 7 && (
+                <div className="fadeItem d-flex">
+                    <div className="col-6">
+                        <div className="row">
+                            <span className="ms-2 text-center text-secondary"
+                                data-bs-target="#carouselExampleControls"
+                                data-bs-slide="previus"
+                                onClick={() => handleSlide('carouselExampleControls')}>
+                                <FontAwesomeIcon icon={faArrowLeft} className="icon ms-1 " /> Voltar
+                            </span>
+                        </div>
+                    </div>
+
+                </div>
+            )}
+
+
         </div>
     )
 

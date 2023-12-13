@@ -21,6 +21,7 @@ import Slide03 from "./Slide03";
 import Slide04 from "./Slide04";
 import Slide05 from "./Slide05";
 import Slide06 from "./Slide06";
+import Slide07 from "./Slide07";
 
 
 export default function NewClient() {
@@ -30,6 +31,8 @@ export default function NewClient() {
     const queryToken = urlSearchParams.get("token");
     const queryClientId = urlSearchParams.get("clientId");
     const queryUserId = urlSearchParams.get("userId");
+
+    console.log("queryClientId", queryClientId)
 
     const newClientForm = useSelector(state => state.newClientForm)
     const dispatch = useDispatch()
@@ -172,6 +175,13 @@ export default function NewClient() {
 
                                     </div>
                                 </div>
+                            </div>
+                            <div class={`carousel-item  ${initialSlide === 7 && 'active'}`} style={{ height: '100vh' }} >
+
+
+                                <Slide07 />
+
+
                             </div>
                             {/* <div class={`carousel-item  ${initialSlide === 6 && 'active'}`} style={{ height: '100vh' }} >
                                 <div className="card m-3 fadeItem1s" style={{ height: "90%", overflowY: 'scroll' }}>

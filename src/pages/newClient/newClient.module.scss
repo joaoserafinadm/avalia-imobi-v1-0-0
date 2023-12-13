@@ -16,6 +16,13 @@
     width: auto;
     height: auto;
   }
+  
+.logoEnd {
+    max-height: 100px;
+    max-width: 70vw;
+    width: auto;
+    height: auto;
+  }
 
   // .logoPosition {
   //   position: absolute;
@@ -23,6 +30,11 @@
   //   left: 35px ;
   //   z-index: 1;
   // }
+  .logoEndPosition {
+    position: absolute;
+    bottom: 70px;
+    z-index: 1;
+  }
 
   .textPosition {
     position: absolute;
