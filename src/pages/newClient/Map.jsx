@@ -1,14 +1,22 @@
 import React, { useRef, useEffect, useState, useCallback } from 'react'
 import { GoogleMap, Marker, useJsApiLoader, Autocomplete } from '@react-google-maps/api';
+import { useSelector } from 'react-redux';
 
 const libraries = ['places']
 
 
 export default function Map(props) {
 
+    const newClientForm = useSelector(state => state.newClientForm)
+
+    const slide = newClientForm.slide
+
     const positionMarker = useRef()
     const [position, setPosition] = useState(null);
-    const [zoom, setZoom] = useState(10)
+    const [zoom, setZoom] = useState(15)
+    const [map, setMap] = useState(null)
+
+
 
 
     const { isLoaded } = useJsApiLoader({
@@ -21,22 +29,27 @@ export default function Map(props) {
 
     const containerStyle = {
         width: '100%',
-        height: '500px'
+        height: '80vw'
     };
 
     const center = { lat: -27.6347491, lng: -52.2747035 }
 
 
 
-    const [map, setMap] = useState(null)
 
     const onLoad = useCallback(function callback(map) {
         // This is just an example of getting and using the map instance!!! don't just blindly copy!
-        const bounds = new window.google.maps.LatLngBounds(center);
-        map.fitBounds(bounds);
 
-        setMap(map)
-    }, [])
+        if (newClientForm.location) {
+
+            const bounds = new window.google.maps.LatLngBounds(newClientForm.location);
+            // const bounds = new window.google.maps.LatLngBounds(center);
+            map.fitBounds(bounds);
+
+            setMap(map)
+
+        }
+    }, [newClientForm.location])
 
     const onUnmount = useCallback(function callback(map) {
         setMap(null)
@@ -75,7 +88,7 @@ export default function Map(props) {
 
                                 setPosition(location)
                                 map.panTo(location)
-                                setZoom(16)
+                                setZoom(15)
 
                                 // Agora você pode manipular essas informações conforme necessário.
                             }
@@ -102,14 +115,16 @@ export default function Map(props) {
                 </div>
             </div> */}
 
-            <div className="row mt-4">
-                <div className="col-12" style={{ width: '100%', height: '100px' }}>
+            <div className="row">
+                <div className="col-12" >
 
                     <GoogleMap
                         mapContainerStyle={containerStyle}
                         center={props.location}
-                        zoom={props.zoom}
+                        zoom={zoom}
+                        // zoom={props.zoom}
                         onLoad={onLoad}
+                        on
                         onUnmount={onUnmount}
                         options={{
                             zoomControl: false,

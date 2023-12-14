@@ -54,7 +54,7 @@ export default function Slide07(props) {
                                         500,
                                         `Pronto!\nVocê finalizou o formulário com sucesso.`,
                                         500,
-                                        `Pronto!\nVocê finalizou o formulário com sucesso.\nEm breve retorno com a avaliação do seu imóvel.`,
+                                        `Pronto!\nVocê finalizou o formulário com sucesso.\nEm breve retornaremos com a avaliação do seu imóvel.`,
                                     ]}
                                     wrapper="span"
                                     speed={50}
@@ -62,16 +62,23 @@ export default function Slide07(props) {
                                 />
                             </div>
 
+                            {showEndLogo && (
+
+                                <div className="col-12 h-100 d-flex justify-content-center align-items-end">
+
+                                    <div className={` d-flex justify-content-center align-items-center ${styles.logoBottom}`}>
+
+                                        <div>
+
+
+                                            <img src={newClientForm.logo} alt="logo" id="logoItem" className={`${styles.logoEnd}  fadeItem2s `} />
+                                            {/* <img src={newClientForm.logo} alt="logo" id="logoItem" className={`${styles.logoEnd} ${styles.logoEndPosition} fadeItem2s `} /> */}
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
 
                         </div>
-                        {showEndLogo && (
-
-                            <div className="col-12 d-flex justify-content-center">
-
-
-                                <img src={newClientForm.logo} alt="logo" id="logoItem" className={`${styles.logoEnd} ${styles.logoEndPosition} fadeItem2s `} />
-                            </div>
-                        )}
 
                     </div>
                 </>
