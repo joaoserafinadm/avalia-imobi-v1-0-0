@@ -2,8 +2,6 @@ import axios from "axios"
 
 export const createImageUrl = (filesList, directory) => new Promise((resolve, reject) => {
 
-    console.log("filesList", filesList)
-
     let newList = []
 
     let iteration = 0

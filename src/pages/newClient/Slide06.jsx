@@ -68,7 +68,10 @@ export default function Slide06(props) {
 
 
             <div className="col-12 my-2 mb-4">
-                <Map location={{ lat: newClientForm.latitude, lng: newClientForm.longitude }} zoom={18} />
+                {newClientForm.latitude && newClientForm.longitude && (
+
+                    <Map location={{ lat: newClientForm.latitude, lng: newClientForm.longitude }} zoom={18} />
+                )}
 
             </div>
 

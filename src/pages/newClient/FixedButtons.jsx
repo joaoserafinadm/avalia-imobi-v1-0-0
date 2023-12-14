@@ -55,7 +55,7 @@ export default function FixedButtons(props) {
         <div className="row ps-2 pe-3 fadeItem1s">
             {newClientForm.slide === 0 && (
 
-                <button className="ms-2 btn btn-sm btn-orange fadeItem" data-bs-target="#carouselExampleControls" data-bs-slide="next" onClick={() => handleSlide('carouselExampleControls')}>
+                <button className="ms-2 btn btn-sm btn-orange fadeItem" data-bs-target="#clientFormCarousel" data-bs-slide="next" onClick={() => handleSlide('clientFormCarousel')}>
                     Começar <FontAwesomeIcon icon={faArrowRight} className="icon ms-1" />
                 </button>
             )}
@@ -68,9 +68,9 @@ export default function FixedButtons(props) {
                         <div className="col-6">
                             <div className="row">
                                 <span className="ms-2 text-center text-secondary"
-                                    data-bs-target="#carouselExampleControls"
+                                    data-bs-target="#clientFormCarousel"
                                     data-bs-slide="previus"
-                                    onClick={() => handleSlide('carouselExampleControls')}>
+                                    onClick={() => handleSlide('clientFormCarousel')}>
                                     <FontAwesomeIcon icon={faArrowLeft} className="icon ms-1 " /> Voltar
                                 </span>
                             </div>
@@ -79,10 +79,10 @@ export default function FixedButtons(props) {
                             <div className="row">
 
                                 <button className="ms-2 btn btn-sm btn-orange"
-                                    data-bs-target="#carouselExampleControls"
+                                    data-bs-target="#clientFormCarousel"
                                     disabled={handleDisabled(newClientForm)}
                                     data-bs-slide="next"
-                                    onClick={() => handleSlide('carouselExampleControls')}>
+                                    onClick={() => handleSlide('clientFormCarousel')}>
                                     Continuar <FontAwesomeIcon icon={faArrowRight} className="icon ms-1" />
                                 </button>
                             </div>
@@ -97,9 +97,9 @@ export default function FixedButtons(props) {
                     <div className="col-6">
                         <div className="row">
                             <span className="ms-2 text-center text-secondary"
-                                data-bs-target="#carouselExampleControls"
+                                data-bs-target="#clientFormCarousel"
                                 data-bs-slide="previus"
-                                onClick={() => handleSlide('carouselExampleControls')}>
+                                onClick={() => handleSlide('clientFormCarousel')}>
                                 <FontAwesomeIcon icon={faArrowLeft} className="icon ms-1 " /> Voltar
                             </span>
                         </div>
@@ -108,10 +108,9 @@ export default function FixedButtons(props) {
                         <div className="row">
 
                             <button className="ms-2 btn btn-sm btn-orange"
-                                data-bs-target="#carouselExampleControls"
+                                data-bs-target="#clientFormCarousel"
                                 disabled={handleDisabled(newClientForm)}
-                                data-bs-slide="next"
-                                onClick={() => handleSlide('carouselExampleControls')}>
+                                onClick={() => props.handleSave()}>
                                 Finalizar <FontAwesomeIcon icon={faArrowRight} className="icon ms-1" />
                             </button>
                         </div>
@@ -125,9 +124,9 @@ export default function FixedButtons(props) {
                     <div className="col-6">
                         <div className="row">
                             <span className="ms-2 text-center text-secondary"
-                                data-bs-target="#carouselExampleControls"
+                                data-bs-target="#clientFormCarousel"
                                 data-bs-slide="previus"
-                                onClick={() => handleSlide('carouselExampleControls')}>
+                                onClick={() => handleSlide('clientFormCarousel')}>
                                 <FontAwesomeIcon icon={faArrowLeft} className="icon ms-1 " /> Voltar
                             </span>
                         </div>

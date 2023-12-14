@@ -22,6 +22,7 @@ import Slide04 from "./Slide04";
 import Slide05 from "./Slide05";
 import Slide06 from "./Slide06";
 import Slide07 from "./Slide07";
+import { createImageUrl } from "../../../utils/createImageUrl";
 
 
 export default function NewClient() {
@@ -97,6 +98,27 @@ export default function NewClient() {
     }
 
 
+    const handleSave = async (form) => {
+
+        const filesUrl = await createImageUrl(files, 'CLIENT_FILES')
+
+        console.log("filesUrl", filesUrl)
+
+        const data = {
+            ...form,
+            files: filesUrl
+        }
+
+        await axios.post(`${baseUrl()}/api/addClient/clientForm`, data)
+
+        console.log("data", data)
+
+
+
+
+    }
+
+
     return (
         <div>
             {loadingPage ?
@@ -108,7 +130,7 @@ export default function NewClient() {
 
 
                     <div
-                        id="carouselExampleControls"
+                        id="clientFormCarousel"
                         class="carousel slide"
                         data-bs-touch="false"
                         data-bs-interval="false">
@@ -179,7 +201,7 @@ export default function NewClient() {
                             <div class={`carousel-item  ${initialSlide === 7 && 'active'}`} style={{ height: '100vh' }} >
 
 
-                                <Slide07 />
+                                <Slide07  />
 
 
                             </div>
@@ -208,7 +230,7 @@ export default function NewClient() {
                         // </div>
                         <FixedTopicsBottom >
 
-                            <FixedButtons setSlide={(value => setSlide(value))} slide={slide} />
+                            <FixedButtons setSlide={(value => setSlide(value))} slide={slide} handleSave={() => handleSave(newClientForm)}/>
                         </FixedTopicsBottom>
                     )}
 
