@@ -16,33 +16,89 @@ export default function Slide06(props) {
             <div className="col-12 d-flex  justify-content-center my-2">
                 <PropertyTypeCard type={newClientForm.propertyType} />
             </div>
-            <div className="col-12 my-2">
-                Área Total: {newClientForm.areaTotal} m²
+            <div className="col-12 my-2 d-flex">
+                <div className="bold me-1">
+                    Área Total:
+                </div>
+                <div>
+                    {newClientForm.areaTotal} m²
+                </div>
             </div>
-            <div className="col-12 my-2">
-                Área Total Privativa: {newClientForm.areaTotalPrivativa} m²
+            <div className="col-12 my-2 d-flex">
+                <div className="bold me-1">
+                    Área Total Privativa:
+                </div>
+                <div>
+                    {newClientForm.areaTotalPrivativa} m²
+                </div>
+
             </div>
-            <div className="col-12 my-2">
-                {newClientForm.quartos} quarto{newClientForm.quartos > 1 ? 's' : ''}
+            <div className="col-12 my-2 d-flex">
+                <div>
+                    {newClientForm.quartos}
+
+                </div>
+                <div className="ms-1 bold">
+
+                    quarto{newClientForm.quartos > 1 ? 's' : ''}
+                </div>
             </div>
-            <div className="col-12 my-2">
-                {newClientForm.suites} suíte{newClientForm.suites > 1 ? 's' : ''}
+            <div className="col-12 my-2 d-flex">
+                <div>
+
+                    {newClientForm.suites}
+                </div>
+                <div className="ms-1 bold">
+
+                    suíte{newClientForm.suites > 1 ? 's' : ''}
+                </div>
             </div>
-            <div className="col-12 my-2">
-                {newClientForm.banheiros} banheiro{newClientForm.banheiros > 1 ? 's' : ''}
+            <div className="col-12 my-2 d-flex">
+                <div>
+
+                    {newClientForm.banheiros}
+                </div>
+                <div className="ms-1 bold">
+
+                    banheiro{newClientForm.banheiros > 1 ? 's' : ''}
+                </div>
             </div>
-            <div className="col-12 my-2">
-                {newClientForm.vagasGaragem} vaga{newClientForm.vagasGaragem > 1 ? 's' : ''} de garagem
+            <div className="col-12 my-2 d-flex">
+                <div>
+
+                    {newClientForm.vagasGaragem}
+                </div>
+                <div className="ms-1 bold">
+
+                    vaga{newClientForm.vagasGaragem > 1 ? 's' : ''} de garagem
+                </div>
             </div>
-            <div className="col-12 my-2">
-                {newClientForm.sacadas} sacada{newClientForm.sacadas > 1 ? 's' : ''}
+            <div className="col-12 my-2 d-flex">
+                <div>
+
+                    {newClientForm.sacadas}
+                </div>
+                <div className="ms-1 bold">
+
+                    sacada{newClientForm.sacadas > 1 ? 's' : ''}
+                </div>
             </div>
-            <div className="col-12 my-2 mb-4">
-                {newClientForm.andar}º andar
+            <div className="col-12 my-2 d-flex mb-4">
+
+                <div>
+
+                    {newClientForm.andar}º
+                </div>
+                <div className="ms-1 bold">
+
+                    andar{newClientForm.sacadas > 1 ? 's' : ''}
+                </div>
+
+
             </div>
-            <div className="px-3">
+            < div className="px-3" >
                 <hr />
-            </div>
+            </div >
 
             <div className="col-12 mb-2">
                 <label for="geralForm" className=" fw-bold">Caracteristicas Gerais</label>
@@ -83,24 +139,25 @@ export default function Slide06(props) {
                 <label for="geralForm" className="form-label fw-bold">Imagens</label>
             </div>
 
-            {props.files.length === 0 ?
-                <div className="col-12 my-2 d-flex justify-content-center mb-5">
-                    <span className="small">Nenhuma imagem carregada</span>
-                </div>
-                :
-                <div className="col-12 my-2 d-flex align-items-center mb-5" style={{ "overflowX": 'scroll' }}>
+            {
+                props.files.length === 0 ?
+                    <div className="col-12 my-2 d-flex justify-content-center mb-5">
+                        <span className="small">Nenhuma imagem carregada</span>
+                    </div>
+                    :
+                    <div className="col-12 my-2 d-flex align-items-center mb-5" style={{ "overflowX": 'scroll' }}>
 
-                    {props.files.map(elem => {
-                        return (
-                            <div>
-                                <img src={URL.createObjectURL(elem)} alt="" className="fileImgs mx-2 fadeItem" />
-                            </div>
-                        )
-                    })}
-                </div>
+                        {props.files.map(elem => {
+                            return (
+                                <div>
+                                    <img src={URL.createObjectURL(elem)} alt="" className="fileImgs mx-2 fadeItem" />
+                                </div>
+                            )
+                        })}
+                    </div>
             }
 
 
-        </div>
+        </div >
     )
 }
