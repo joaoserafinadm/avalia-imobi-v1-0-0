@@ -14,7 +14,7 @@ import Page1 from "./Page1";
 import FixedButtons from "./FixedButtons";
 import ApresentationMobile from "./ApresentationMobile";
 import { useDispatch, useSelector } from "react-redux";
-import { initialValues, setBackgroundImg, setCelular, setClientLastName, setClientName, setClient_id, setCompanyName, setEmail, setLogo, setProfileImageUrl, setStyle, setUserFirstName, setUserLastName, setUser_id } from "../../../store/NewClientForm/NewClientForm.actions";
+import { initialValues, setBackgroundImg, setCelular, setClientLastName, setClientName, setClient_id, setCompanyName, setEmail, setLogo, setProfileImageUrl, setSlide, setStyle, setUserFirstName, setUserLastName, setUser_id } from "../../../store/NewClientForm/NewClientForm.actions";
 import Slide01 from "./Slide01";
 import Slide02 from "./Slide02";
 import Slide03 from "./Slide03";
@@ -23,6 +23,7 @@ import Slide05 from "./Slide05";
 import Slide06 from "./Slide06";
 import Slide07 from "./Slide07";
 import { createImageUrl } from "../../../utils/createImageUrl";
+import slideNumber from "../../../utils/slideNumber";
 
 
 export default function NewClient() {
@@ -33,7 +34,6 @@ export default function NewClient() {
     const queryClientId = urlSearchParams.get("clientId");
     const queryUserId = urlSearchParams.get("userId");
 
-    console.log("queryClientId", queryClientId)
 
     const newClientForm = useSelector(state => state.newClientForm)
     const dispatch = useDispatch()
@@ -43,8 +43,8 @@ export default function NewClient() {
     //Loading
     const [loadingPage, setLoadingPage] = useState(true)
     const [showStartBtn, setShowStartBtn] = useState(false)
-    const [slide, setSlide] = useState(0)
     const [files, setFiles] = useState([])
+    const [loadingSave, setLoadingSave] = useState(false)
 
     useEffect(() => {
         dataFunction(queryUserId, queryClientId)
@@ -97,21 +97,40 @@ export default function NewClient() {
 
     }
 
+    const handleSlide = (id) => {
+        setTimeout(() => {
+
+            dispatch(setSlide(slideNumber(id)))
+        }, 700)
+    }
+
+
 
     const handleSave = async (form) => {
 
-        const filesUrl = await createImageUrl(files, 'CLIENT_FILES')
+        setLoadingSave(true)
 
-        console.log("filesUrl", filesUrl)
+        // const filesUrl = []
+        const filesUrl = files.length > 0 ? await createImageUrl(files, 'CLIENT_FILES') : []
 
         const data = {
             ...form,
             files: filesUrl
         }
 
-        await axios.post(`${baseUrl()}/api/addClient/clientForm`, data)
+        var myCarousel = document.querySelector('#clientFormCarousel')
+        var carousel = new bootstrap.Carousel(myCarousel)
 
-        console.log("data", data)
+
+        await axios.post(`${baseUrl()}/api/addClient/clientForm`, data)
+            .then(res => {
+                setLoadingSave(false)
+                carousel.next()
+                handleSlide('clientFormCarousel')
+            }).catch(e => {
+                setLoadingSave(false)
+            })
+
 
 
 
@@ -201,7 +220,7 @@ export default function NewClient() {
                             <div class={`carousel-item  ${initialSlide === 7 && 'active'}`} style={{ height: '100vh' }} >
 
 
-                                <Slide07  />
+                                <Slide07 />
 
 
                             </div>
@@ -230,7 +249,9 @@ export default function NewClient() {
                         // </div>
                         <FixedTopicsBottom >
 
-                            <FixedButtons setSlide={(value => setSlide(value))} slide={slide} handleSave={() => handleSave(newClientForm)}/>
+                            <FixedButtons
+                                handleSave={() => handleSave(newClientForm)}
+                                loadingSave={loadingSave} />
                         </FixedTopicsBottom>
                     )}
 

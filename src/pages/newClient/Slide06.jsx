@@ -10,7 +10,7 @@ export default function Slide06(props) {
 
 
     return (
-        <div className="row fadeItem mt-3">
+        <div className="row fadeItem mt-3 pb-5">
             <label for="geralForm" className="form-label fw-bold">Resumo</label>
 
             <div className="col-12 d-flex  justify-content-center my-2">
@@ -84,11 +84,11 @@ export default function Slide06(props) {
             </div>
 
             {props.files.length === 0 ?
-                <div className="col-12 my-2 d-flex justify-content-center">
+                <div className="col-12 my-2 d-flex justify-content-center mb-5">
                     <span className="small">Nenhuma imagem carregada</span>
                 </div>
                 :
-                <div className="col-12 my-2 d-flex align-items-center " style={{ "overflowX": 'scroll' }}>
+                <div className="col-12 my-2 d-flex align-items-center mb-5" style={{ "overflowX": 'scroll' }}>
 
                     {props.files.map(elem => {
                         return (

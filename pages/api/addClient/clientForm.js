@@ -75,19 +75,32 @@ export default async function (req, res) {
                     res.status(400).json({ error: 'Company does not exist' })
                 } else {
 
-                    console.log("companyExist", companyExist)
-
                     const clientExist = companyExist?.clients?.find(elem => elem?._id?.toString() === data.client_id)
 
-                    
+
                     if (!clientExist) {
                         res.status(400).json({ error: 'Client does not exist' })
                     } else {
 
+                        const {
+                            slide,
+                            client_id,
+                            styles,
+                            logo,
+                            backgroundImg,
+                            companyName,
+                            userFirstName,
+                            userLastName,
+                            profileImageUrl,
+
+                            ...dataFilter
+                        } = data
+
                         const newData = {
                             ...clientExist,
-                            ...data
+                            ...dataFilter
                         }
+
 
                         const result = await db.collection('companies').updateOne(
                             { _id: ObjectId(companyExist._id), 'clients._id': ObjectId(data.client_id) }, {

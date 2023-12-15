@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useDispatch, useSelector } from "react-redux";
 import slideNumber from "../../../utils/slideNumber";
 import { setSlide } from "../../../store/NewClientForm/NewClientForm.actions";
+import { SpinnerSM } from "../../components/loading/Spinners";
 
 
 
@@ -104,22 +105,32 @@ export default function FixedButtons(props) {
                             </span>
                         </div>
                     </div>
-                    <div className="col-6">
-                        <div className="row">
+                    {!props.loadingSave ?
 
-                            <button className="ms-2 btn btn-sm btn-orange"
-                                data-bs-target="#clientFormCarousel"
-                                disabled={handleDisabled(newClientForm)}
-                                onClick={() => props.handleSave()}>
-                                Finalizar <FontAwesomeIcon icon={faArrowRight} className="icon ms-1" />
-                            </button>
+                        <div className="col-6">
+                            <div className="row">
+
+                                <button className="ms-2 btn btn-sm btn-orange"
+                                    data-bs-target="#clientFormCarousel"
+                                    disabled={handleDisabled(newClientForm)}
+                                    onClick={() => props.handleSave()}>
+                                    Finalizar <FontAwesomeIcon icon={faArrowRight} className="icon ms-1" />
+                                </button>
+                            </div>
                         </div>
-                    </div>
+                        :
+                        <div className="col-6">
+                            <div className="row">
+
+                                <button className="ms-2 btn btn-sm btn-orange px-4" disabled><SpinnerSM /></button>
+                            </div>
+                        </div>
+                    }
                 </div>
             )}
 
 
-            {newClientForm.slide === 7 && (
+            {/* {newClientForm.slide === 7 && (
                 <div className="fadeItem d-flex">
                     <div className="col-6">
                         <div className="row">
@@ -133,7 +144,7 @@ export default function FixedButtons(props) {
                     </div>
 
                 </div>
-            )}
+            )} */}
 
 
         </div>
