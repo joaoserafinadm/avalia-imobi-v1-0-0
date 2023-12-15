@@ -247,12 +247,17 @@ export default function NewClient() {
                         // <div className="fadeItem1s2s">
                         //     <button className="btn btn-primary">Começar <FontAwesomeIcon icon={faArrowRight} className="icon ms-1" /></button>
                         // </div>
-                        <FixedTopicsBottom >
+                        <>
+                            {initialSlide !== 7 && (
 
-                            <FixedButtons
-                                handleSave={() => handleSave(newClientForm)}
-                                loadingSave={loadingSave} />
-                        </FixedTopicsBottom>
+                                <FixedTopicsBottom >
+
+                                    <FixedButtons
+                                        handleSave={() => handleSave(newClientForm)}
+                                        loadingSave={loadingSave} />
+                                </FixedTopicsBottom>
+                            )}
+                        </>
                     )}
 
                 </div>
