@@ -149,7 +149,7 @@ export default function Nav(props) {
                                                     </Link>
                                                 </li>
                                                 <li>
-                                                    <Link href={`/addClient`}>
+                                                    <Link href={`/clientsManagement`}>
                                                         <span>Gestão de clientes</span>
                                                     </Link>
                                                 </li>

@@ -33,6 +33,12 @@
   --ai-bg-primary: #5a5a5a;
 
 
+  --apartamento-color: #ff5154;
+  --casa-color: #0fb8ce;
+  --terreno-color: #21a663;
+  --comercial-color: #ff9900;
+
+
 
 
 
@@ -118,6 +124,23 @@
 }
 
 // -----------------------------------
+
+
+.apartamento-color {
+  color: var(--apartamento-color) !important;
+}
+
+.casa-color {
+  color: var(--casa-color) !important;
+}
+
+.terreno-color {
+  color: var(--terreno-color) !important;
+}
+
+.comercial-color {
+  color: var(--comercial-color) !important;
+}
 
 
 
@@ -3143,9 +3166,11 @@ h1 {
 .bg-whatsapp {
   background-color: #2bb741;
 }
+
 .bg-facebook {
   background-color: #0086f7;
 }
+
 .bg-instagram {
   background-color: #d56692;
 }
