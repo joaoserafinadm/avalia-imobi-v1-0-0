@@ -48,7 +48,7 @@ export default function clientsManagement() {
         }
         else return ''
     }
-    
+
     return (
         <div >
             <Title title={'Gestão de Clientes'} backButton='/' />
@@ -97,29 +97,31 @@ export default function clientsManagement() {
 
                                                     </div>
                                                 </div>
-                                                <div className="row">
+                                                <div className="row mt-1">
                                                     <div className="col-12 d-flex justify-content-between">
                                                         <div className="col">
+                                                            <span className="d-flex align-items-center">
+                                                                <div className="me-2">
+                                                                    <img className="cardProfileImg"
+                                                                        src="https://res.cloudinary.com/joaoserafinadm/image/upload/v1700622419/AVALIA%20IMOBI/USERS_IMG/xwsqidtdw3srsnjvom50.jpg" alt="" />
+                                                                </div>
+                                                                <div>
 
-                                                            <span className="small">
-                                                                Data de cadastro: 10/10/2020
+                                                                    Juliane Kosloski
+                                                                </div>
                                                             </span>
+
+
                                                         </div>
-                                                        <div className="col d-flex justify-content-center">
+                                                        <div className="col d-flex justify-content-center align-items-center">
 
                                                             <span className="small">
                                                                 Atualizado em: 10/10/2020
                                                             </span>
                                                         </div>
-                                                        <div className="col d-flex justify-content-end">
-                                                            <span className="d-flex">
-                                                                <div>
-
-                                                                    Juliane Kosloski
-                                                                </div>
-                                                                <div>
-                                                                    img
-                                                                </div>
+                                                        <div className="col d-flex justify-content-end align-items-center">
+                                                            <span className="small">
+                                                                Data de cadastro: 10/10/2020
                                                             </span>
                                                         </div>
 
@@ -127,7 +129,7 @@ export default function clientsManagement() {
                                                 </div>
                                             </div>
                                             <VerticalLine />
-                                            <div className="d-flex justify-content-center align-items-center" style={{ width: '122px', height: '50px' }} >
+                                            <div className="d-flex justify-content-center align-items-center" style={{ width: '120px', height: '60px' }} >
                                                 <div class="btn-group" role="group" aria-label="Basic example">
                                                     <button type="button" class="btn btn-light border"><FontAwesomeIcon icon={faEye} className="icon  text-secondary" /></button>
                                                     {/* <button type="button" class="btn btn-light border"><FontAwesomeIcon icon={faEdit} className="icon text-secondary" /></button> */}
