@@ -3185,6 +3185,16 @@ h1 {
   animation: slideLeft 0.2s ease-in-out;
 }
 
+@media screen and (max-width: 800px) {
+  .slideLeft {
+    position: absolute;
+    top: 0;
+    right: 0;
+    animation: slideLeft 0.2s ease-in-out;
+
+  }
+}
+
 @keyframes slideLeft {
   0% {
     opacity: 0;
@@ -3196,4 +3206,3 @@ h1 {
     transform: translateX(0);
   }
 }
-

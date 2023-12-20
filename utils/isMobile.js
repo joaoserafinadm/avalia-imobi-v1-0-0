@@ -16,7 +16,7 @@
 
 export default function isMobile() {
 
-    if (window.innerWidth < 850) return false
-    else return true
+    if (window.innerWidth < 850) return true
+    else return false
 
 }

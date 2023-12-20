@@ -63,13 +63,18 @@ export default function ClientCard(props) {
                             </div>
 
                             <span className={`col fs-5 d-flex align-items-center justify-content-end ${handleIconColor(props.elem.propertyType)}`}>
-                                
 
-                                    <div className="small" style={{fontSize:'10px'}}>
-
+                                {!isMobile() ?
+                                    <div className="small fadeItem me-2" >
                                         {props.elem.propertyType}
                                     </div>
-                                <FontAwesomeIcon icon={handleIcon(props.elem.propertyType)} className={`icon ms-2`} />
+                                    :
+                                    <div className="small fadeItem me-1" style={{fontSize: '12px'}} >
+                                        {props.elem.propertyType}
+                                    </div>
+
+                                }
+                                <FontAwesomeIcon icon={handleIcon(props.elem.propertyType)} className={`icon`} />
                             </span>
 
 
@@ -85,14 +90,14 @@ export default function ClientCard(props) {
                                     </div>
                                     <div>
 
-                                        Juliane Kosloski
+                                        Juliane <br /> Kosloski
                                     </div>
                                 </span>
 
 
                             </div>
 
-                            {isMobile() && (
+                            {!isMobile() && (
                                 <>
                                     <div className="col d-flex justify-content-center align-items-center">
 
@@ -114,7 +119,7 @@ export default function ClientCard(props) {
                     </div>
                 </div>
                 {props.idSelected === props.elem._id && (
-                    <div className="slideLeft d-flex ms-2">
+                    <div className="slideLeft d-flex ms-2 bg-light h-100 align-items-center">
                         <VerticalLine />
                         <div className="d-flex justify-content-center align-items-center " style={{ width: '120px', height: '60px' }} >
                             <div class="btn-group" role="group" aria-label="Basic example">

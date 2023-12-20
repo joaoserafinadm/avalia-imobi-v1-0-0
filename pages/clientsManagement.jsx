@@ -70,7 +70,7 @@ export default function clientsManagement() {
                                 return (
                                     <ClientCard
                                         elem={elem}
-                                        setIdSelected={value => setIdSelected(value)}
+                                        setIdSelected={value => idSelected === value ? setIdSelected('') : setIdSelected(value)}
                                         idSelected={idSelected} />
                                 )
                             })}
