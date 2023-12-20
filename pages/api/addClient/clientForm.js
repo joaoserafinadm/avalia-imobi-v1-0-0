@@ -98,7 +98,9 @@ export default async function (req, res) {
 
                         const newData = {
                             ...clientExist,
-                            ...dataFilter
+                            ...dataFilter,
+                            active: true,
+                            dateUpdated: new Date()
                         }
 
 

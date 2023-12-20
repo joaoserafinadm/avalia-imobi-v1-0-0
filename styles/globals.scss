@@ -3178,5 +3178,22 @@ h1 {
 .cardProfileImg {
   height: 30px;
   border-radius: 100%;
-  
+
 }
+
+.slideLeft {
+  animation: slideLeft 0.2s ease-in-out;
+}
+
+@keyframes slideLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
