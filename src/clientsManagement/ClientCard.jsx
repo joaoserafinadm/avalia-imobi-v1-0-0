@@ -1,15 +1,25 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import VerticalLine from "../../utils/VerticalLine";
 import { faBuilding, faCheck, faEye, faHouse, faMapLocation, faStore, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import isMobile from "../../utils/isMobile";
+import tippy from "tippy.js";
 
 
 
 
 export default function ClientCard(props) {
 
-
+    useEffect(() => {
+        tippy('#viewClientButton', {
+            content: "Visualizar",
+            placement: 'bottom'
+        });
+        tippy('#deleteClientButton', {
+            content: "Deletar",
+            placement: 'bottom'
+        });
+    }, [props.idSelected])
 
     const handleIconColor = (elem) => {
 
@@ -69,7 +79,7 @@ export default function ClientCard(props) {
                                         {props.elem.propertyType}
                                     </div>
                                     :
-                                    <div className="small fadeItem me-1" style={{fontSize: '12px'}} >
+                                    <div className="small fadeItem me-1" style={{ fontSize: '12px' }} >
                                         {props.elem.propertyType}
                                     </div>
 
@@ -119,13 +129,13 @@ export default function ClientCard(props) {
                     </div>
                 </div>
                 {props.idSelected === props.elem._id && (
-                    <div className="slideLeft d-flex ms-2 bg-light h-100 align-items-center">
+                    <div className="slideLeft d-flex ms-2 bg-light h-100 align-items-center shadow">
                         <VerticalLine />
                         <div className="d-flex justify-content-center align-items-center " style={{ width: '120px', height: '60px' }} >
                             <div class="btn-group" role="group" aria-label="Basic example">
-                                <button type="button" class="btn btn-light border"><FontAwesomeIcon icon={faEye} className="icon  text-secondary" /></button>
+                                <button type="button" class="btn btn-light border" id="viewClientButton"><FontAwesomeIcon icon={faEye} className="icon  text-secondary" /></button>
 
-                                <button type="button" class="btn btn-light border"><FontAwesomeIcon icon={faTrashAlt} className="icon text-secondary" /></button>
+                                <button type="button" class="btn btn-light border" id="deleteClientButton"><FontAwesomeIcon icon={faTrashAlt} className="icon text-secondary" /></button>
                             </div>
 
                         </div>

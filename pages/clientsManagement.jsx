@@ -7,6 +7,7 @@ import jwt from "jsonwebtoken";
 import baseUrl from "../utils/baseUrl";
 import ClientCard from "../src/clientsManagement/ClientCard";
 import Link from "next/link";
+import ClientsManagementSections from "../src/clientsManagement/ClientsManagementSections";
 
 
 
@@ -18,6 +19,7 @@ export default function clientsManagement() {
     const [loadingPage, setLoadingPage] = useState(true)
     const [clientsArray, setClientsArray] = useState([])
     const [idSelected, setIdSelected] = useState('')
+    const [section, setSection] = useState('')
 
     useEffect(() => {
         dataFunction(token.company_id)
@@ -60,27 +62,57 @@ export default function clientsManagement() {
                             </Link>
                         </div>
                     </div>
-                    <hr />
+                    {/* <hr /> */}
 
-                    <div className="row d-flex justify-content-center">
-                        <div className="col-12" style={{ overflowY: 'scroll', height: '100%' }}>
-                            {clientsArray.map(elem => {
+                    <div className="container carousel  " data-bs-touch="false" data-bs-interval='false' id="clientsManagementSection">
+                        <ClientsManagementSections section={section} setSection={value => setSection(value)} />
+
+                        <div className="carousel-inner ">
+                            <div className="carousel-item active">
+                                <div className="row d-flex justify-content-center">
+                                    <div className="col-12" style={{ overflowY: 'scroll', height: '100%' }}>
+                                        {clientsArray.map(elem => {
 
 
-                                return (
-                                    <ClientCard
-                                        elem={elem}
-                                        setIdSelected={value => idSelected === value ? setIdSelected('') : setIdSelected(value)}
-                                        idSelected={idSelected} />
-                                )
-                            })}
+                                            return (
+                                                <ClientCard
+                                                    elem={elem}
+                                                    setIdSelected={value => idSelected === value ? setIdSelected('') : setIdSelected(value)}
+                                                    idSelected={idSelected} />
+                                            )
+                                        })}
 
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div className="carousel-item">
+                                <div className="row d-flex justify-content-center">
+                                    <div className="col-12" style={{ overflowY: 'scroll', height: '100%' }}>
+                                        {clientsArray.map(elem => {
+
+
+                                            return (
+                                                <ClientCard
+                                                    elem={elem}
+                                                    setIdSelected={value => idSelected === value ? setIdSelected('') : setIdSelected(value)}
+                                                    idSelected={idSelected} />
+                                            )
+                                        })}
+
+
+                                    </div>
+
+                                </div>
+                            </div>
 
                         </div>
-
                     </div>
+                </div >
 
-                </div>
+
+
 
             }
         </div>

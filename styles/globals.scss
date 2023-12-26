@@ -500,6 +500,10 @@ textarea:focus {
   // color: #fff !important;
 }
 
+.text-orange {
+  color: var(--ai-primary) !important;
+}
+
 .text-gray-dark {
   color: #343a40 !important;
 }
@@ -2176,16 +2180,16 @@ h1 {
   user-select: none;
 }
 
-.tippy-box[data-theme~='exempleTooltip'] {
-  background-color: rgb(228, 228, 228);
-  color: rgb(0, 0, 0);
-  border: none;
-  box-shadow: 0 4px 8px 0 rgba(74, 93, 99, .5);
-
+.tippy-box[data-theme~="exempleTooltip"] {
+	background-color: rgb(228, 228, 228) !important;
+	color: rgb(0, 0, 0) !important;
+	border: none !important;
+	box-shadow: 0 4px 8px 0 rgba(74, 93, 99, 0.5) !important;
 }
 
-.tippy-box[data-theme~='exempleTooltip'][data-placement^='top-end']>.tippy-arrow::before {
-  border-top-color: rgb(228, 228, 228);
+.tippy-box[data-theme~="exempleTooltip"][data-placement^="top-end"]
+	> .tippy-arrow::before {
+	border-top-color: rgb(228, 228, 228) !important;
 }
 
 .exempleTooltip {
@@ -3183,6 +3187,9 @@ h1 {
 
 .slideLeft {
   animation: slideLeft 0.2s ease-in-out;
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 
 @media screen and (max-width: 800px) {

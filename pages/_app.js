@@ -5,19 +5,19 @@ import { Provider, useDispatch } from "react-redux";
 import Cookie from "js-cookie";
 import { PersistGate } from "redux-persist/integration/react";
 import { createGlobalStyle } from "styled-components";
-
+import 'tippy.js/dist/tippy.css';
 
 if (typeof window !== "undefined") {
-    window.bootstrap = require("bootstrap/dist/js/bootstrap.bundle.js");
-    require("apexcharts/dist/apexcharts.common.js");
-    require("../node_modules/popper.js/dist/umd/popper.min.js");
+    window.bootstrap = require('bootstrap/dist/js/bootstrap.bundle.js')
+    require('apexcharts/dist/apexcharts.common.js')
+    require("../node_modules/popper.js/dist/umd/popper.min.js")
     require("jquery");
-    require("@popperjs/core");
+    require("@popperjs/core")
     require("bootstrap");
-    require("bootstrap/dist/css/bootstrap.min.css");
-    require("bootstrap/dist/js/bootstrap.bundle");
-    require("bootstrap/dist/js/bootstrap.min.js");
-}
+    require("bootstrap/dist/css/bootstrap.min.css")
+    require("bootstrap/dist/js/bootstrap.bundle")
+    require("bootstrap/dist/js/bootstrap.min.js")
+  }
 
 import { config, dom } from "@fortawesome/fontawesome-svg-core";
 config.autoAddCss = false;
