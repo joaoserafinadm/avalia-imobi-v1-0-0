@@ -57,7 +57,7 @@ export default function ClientCard(props) {
 
 
     return (
-        <div className="card my-3 cardAnimation" type="button" onClick={() => props.setIdSelected(props.elem._id)} style={{ overflowX: 'hidden' }}>
+        <div className="card my-3 cardAnimation fadeItem" type="button" onClick={() => props.setIdSelected(props.elem._id)} style={{ overflowX: 'hidden' }}>
             <div className="card-body d-flex">
                 <div className="col me-2">
 

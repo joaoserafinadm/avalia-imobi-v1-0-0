@@ -2181,15 +2181,14 @@ h1 {
 }
 
 .tippy-box[data-theme~="exempleTooltip"] {
-	background-color: rgb(228, 228, 228) !important;
-	color: rgb(0, 0, 0) !important;
-	border: none !important;
-	box-shadow: 0 4px 8px 0 rgba(74, 93, 99, 0.5) !important;
+  background-color: rgb(228, 228, 228) !important;
+  color: rgb(0, 0, 0) !important;
+  border: none !important;
+  box-shadow: 0 4px 8px 0 rgba(74, 93, 99, 0.5) !important;
 }
 
-.tippy-box[data-theme~="exempleTooltip"][data-placement^="top-end"]
-	> .tippy-arrow::before {
-	border-top-color: rgb(228, 228, 228) !important;
+.tippy-box[data-theme~="exempleTooltip"][data-placement^="top-end"]>.tippy-arrow::before {
+  border-top-color: rgb(228, 228, 228) !important;
 }
 
 .exempleTooltip {
@@ -3212,4 +3211,8 @@ h1 {
     opacity: 1;
     transform: translateX(0);
   }
+}
+
+#clientsManagementList{
+  scroll-margin: 250px !important;
 }

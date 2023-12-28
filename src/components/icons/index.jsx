@@ -8,7 +8,7 @@ export default function Icons(props) {
 
     switch (props.icon) {
         case 'a-l':
-            return <AiOutlineRight className="me-2" />
+            return <AiOutlineLeft className="me-2" />
             break;
         case 'a-r':
             return <AiOutlineRight className="me-2" />
