@@ -111,14 +111,14 @@ export default function ClientCard(props) {
                                 <>
                                     <div className="col d-flex justify-content-center align-items-center">
 
-                                        <span className="small">
-                                            Atualizado em: 10/10/2020
+                                        <span className="small text-center">
+                                            Atualizado em: <br /> 10/10/2020
                                         </span>
                                     </div>
 
                                     <div className="col d-flex justify-content-end align-items-center">
-                                        <span className="small">
-                                            Data de cadastro: 10/10/2020
+                                        <span className="small text-center">
+                                            Data de cadastro: <br /> 10/10/2020
                                         </span>
                                     </div>
                                 </>

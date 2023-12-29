@@ -1203,7 +1203,7 @@ $akvo-color-hover: #4f5459;
 #passo3,
 #passo4,
 #passo5 {
-  scroll-margin: 160px;
+  scroll-margin: 250px;
 }
 
 #themeElement {
@@ -3213,6 +3213,6 @@ h1 {
   }
 }
 
-#clientsManagementList{
-  scroll-margin: 250px !important;
+.scrollTop {
+  scroll-margin-top: 250px; /* Adicione a margem superior desejada */
 }

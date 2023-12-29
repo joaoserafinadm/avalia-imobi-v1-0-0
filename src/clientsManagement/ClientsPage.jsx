@@ -14,7 +14,7 @@ export default function ClientsPage(props) {
         if (props.section === 'allClients') return elem
     })
 
-    const elementosPorPagina = 5;
+    const elementosPorPagina = 6;
 
     const handleClientsArray = (array, page) => {
 
