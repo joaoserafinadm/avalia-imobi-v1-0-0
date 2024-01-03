@@ -14,6 +14,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import navbarHide from "../utils/navbarHide";
 import { useDispatch } from "react-redux";
+import DeleteClientModal from "../src/clientsManagement/DeleteClientModal";
 
 
 
@@ -133,6 +134,9 @@ export default function clientsManagement() {
 
                         </div>
                     </div>
+
+
+                    <DeleteClientModal />
 
 
                 </div >

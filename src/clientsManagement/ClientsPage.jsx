@@ -1,6 +1,7 @@
 import { useState } from "react"
 import ClientCard from "./ClientCard"
 import Pagination from "./Pagination"
+import ClientCard_02 from "./ClientCard_02"
 
 
 
@@ -29,21 +30,21 @@ export default function ClientsPage(props) {
 
     return (
         <>
-            <div className="row scrollTop" id="clientsManagementList">
-                <div className="col-12">
+            <div className="row scrollTop d-flex" id="clientsManagementList">
 
-                    {handleClientsArray(clients, page).map(elem => {
+                {handleClientsArray(clients, page).map(elem => {
 
-                        return (
-                            <ClientCard
+                    return (
+                        <div className="col-12 col-sm-6 col-md-4 col-xl-3 d-flex justify-content-center">
+                            <ClientCard_02
                                 elem={elem}
                                 setIdSelected={value => idSelected === value ? setIdSelected('') : setIdSelected(value)}
                                 idSelected={idSelected} />
-                        )
-                    })
-                    }
+                        </div>
+                    )
+                })
+                }
 
-                </div>
             </div>
 
             <div className="row ">

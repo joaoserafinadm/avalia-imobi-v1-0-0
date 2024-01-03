@@ -4,6 +4,7 @@ import { faBuilding, faCheck, faEye, faHouse, faMapLocation, faStore, faTrashAlt
 import { useEffect, useState } from "react";
 import isMobile from "../../utils/isMobile";
 import tippy from "tippy.js";
+import DeleteClientModal from "./DeleteClientModal";
 
 
 
@@ -67,7 +68,7 @@ export default function ClientCard(props) {
                             <div className="col d-flex align-items-center">
 
                                 <span className="fs-5 bold">
-                                    {props.elem.clientName}
+                                    {props.elem.clientName} {" " + props.elem.clientLastName}
                                 </span>
                                 <FontAwesomeIcon icon={faCheck} className="icon text-success ms-2" />
                             </div>
@@ -135,10 +136,19 @@ export default function ClientCard(props) {
                             <div class="btn-group" role="group" aria-label="Basic example">
                                 <button type="button" class="btn btn-light border" id="viewClientButton"><FontAwesomeIcon icon={faEye} className="icon  text-secondary" /></button>
 
-                                <button type="button" class="btn btn-light border" id="deleteClientButton"><FontAwesomeIcon icon={faTrashAlt} className="icon text-secondary" /></button>
+                                <button
+                                    type="button"
+                                    class="btn btn-light border"
+                                    id="deleteClientButton"
+                                    data-bs-toggle="modal"
+                                    data-bs-target={"#deleteClientModal" + props.elem._id}>
+                                    <FontAwesomeIcon icon={faTrashAlt} className="icon text-secondary" />
+                                </button>
                             </div>
 
                         </div>
+
+                        <DeleteClientModal elem={props.elem} />
                     </div>
                 )}
 
