@@ -30,7 +30,7 @@ export default function ClientsPage(props) {
 
     return (
         <>
-            <div className="row scrollTop d-flex" id="clientsManagementList">
+            <div className="row scrollTop  d-flex" id="clientsManagementList">
 
                 {handleClientsArray(clients, page).map(elem => {
 
