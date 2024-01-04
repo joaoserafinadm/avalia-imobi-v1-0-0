@@ -126,6 +126,7 @@ export default function clientsManagement() {
                             <div className="carousel-item">
                                 <div className="row d-flex justify-content-center">
                                     <div className="col-12" >
+                                        
                                         <ClientsPage clients={clientsArray} section='allClients' user_id={token.user_id} />
                                     </div>
 

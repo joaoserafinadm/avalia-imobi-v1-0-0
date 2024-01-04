@@ -44,7 +44,7 @@ export default function ClientCard_02(props) {
 
 
     return (
-        <div class="card my-2 cardAnimation shadow" style={{ width: "100%" }}>
+        <div class="card my-2 cardAnimation shadow" style={{ width: "100%" }} >
             {client?.propertyType && (
 
                 <span className={`${styles.propertyTypeHeader} d-flex align-items-center  ${handleIconColor(props.elem.propertyType)}`}  >
@@ -64,7 +64,7 @@ export default function ClientCard_02(props) {
             )}
 
             {!client?.files?.length ?
-                <div className=" d-flex card-img-top justify-content-center align-items-center bg-light bg-gradient" style={{ height: '150px' }}>
+                <div className=" d-flex card-img-top justify-content-center align-items-center bg-light bg-gradient" style={{ height: '170px' }}>
                     <span className="text-secondary">Sem fotos</span>
                 </div>
                 :
@@ -72,7 +72,7 @@ export default function ClientCard_02(props) {
                     <div className="carousel-inner card-img-top  ">
                         {client?.files?.map((elem, index) => (
                             <div key={index} className={`carousel-item text-center bg-secondary  ${index === activeIndex ? 'active' : ''}`}>
-                                <img src={elem.url} className="card-img-top headerImgEdit" alt={`Slide ${index + 1}`} />
+                                <img src={elem.url} className={`card-img-top  ${styles.clientCardImage}`} alt={`Slide ${index + 1}`} />
                             </div>
                         ))}
                     </div>
