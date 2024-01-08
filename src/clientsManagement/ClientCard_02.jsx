@@ -45,23 +45,7 @@ export default function ClientCard_02(props) {
 
     return (
         <div class="card my-2 cardAnimation shadow" style={{ width: "100%" }} >
-            {client?.propertyType && (
 
-                <span className={`${styles.propertyTypeHeader} d-flex align-items-center  ${handleIconColor(props.elem.propertyType)}`}  >
-
-                    {!isMobile() ?
-                        <div className="small  me-2" >
-                            {client?.propertyType}
-                        </div>
-                        :
-                        <div className="small  me-1" style={{ fontSize: '12px' }} >
-                            {client?.propertyType}
-                        </div>
-
-                    }
-                    <FontAwesomeIcon icon={handleIcon(client?.propertyType)} className={`icon`} />
-                </span>
-            )}
 
             {!client?.files?.length ?
                 <div className=" d-flex card-img-top justify-content-center align-items-center bg-light bg-gradient" style={{ height: '170px' }}>
@@ -87,10 +71,42 @@ export default function ClientCard_02(props) {
                 </div>
             }
 
+            {client?.propertyType && (
+
+                <span className={`${styles.propertyTypeHeader} d-flex align-items-center  ${handleIconColor(props.elem.propertyType)}`}  >
+
+                    {!isMobile() ?
+                        <div className="small  me-2" >
+                            {client?.propertyType}
+                        </div>
+                        :
+                        <div className="small  me-1" style={{ fontSize: '12px' }} >
+                            {client?.propertyType}
+                        </div>
+
+                    }
+                    <FontAwesomeIcon icon={handleIcon(client?.propertyType)} className={`icon`} />
+                </span>
+            )}
+
             {/* </div> */}
+            <div className={`row d-flex justify-content-end ${styles.profilePosition}`}>
+
+                <span className="d-flex align-items-center">
+                    <div className="small bold bg-white pe-3 ps-2" style={{ borderRadius: '5px 0 0 5px', position: 'relative', right: '-10px' }}>
+
+                        Juliane Kosloski
+                    </div>
+                    <img className="cardProfileImg bold border border-4 border-white rounded-circle" style={{ position: 'relative' }}
+                        src="https://res.cloudinary.com/joaoserafinadm/image/upload/v1700622419/AVALIA%20IMOBI/USERS_IMG/xwsqidtdw3srsnjvom50.jpg" alt="" />
+
+                </span>
+
+            </div>
             <div class="card-body">
 
-                <h5 class="card-title">{client?.clientName} {client.clientLastName}</h5>
+
+                <h5 class="card-title mt-1">{client?.clientName} {client.clientLastName}</h5>
                 {handleShowClient(client) ?
                     <>
                         <div className="row small">
@@ -105,21 +121,104 @@ export default function ClientCard_02(props) {
 
 
                         </div>
-                        <div className="row d-flex justify-content-end">
+                        <hr />
+                        <div className="row  small d-flex align-items-center">
 
-                            <span className="d-flex align-items-center">
-                                <div className="me-2">
-                                    <img className="cardProfileImg"
-                                        src="https://res.cloudinary.com/joaoserafinadm/image/upload/v1700622419/AVALIA%20IMOBI/USERS_IMG/xwsqidtdw3srsnjvom50.jpg" alt="" />
-                                </div>
-                                <div className="small">
+                            <div className="col-6 text-center  my-2">
+                                {client?.areaTotal && (
+                                    <>
+                                        <div className="bold">
+                                            Área Total:
+                                        </div>
+                                        <div>
 
-                                    Juliane Kosloski
-                                </div>
-                            </span>
+                                            {client?.areaTotal} m²
+                                        </div>
+                                    </>
+                                )}
+                            </div>
+                            <div className="col-6  text-center   my-2">
+                                {client?.areaTotal && (
+                                    <>
+                                        <div className="bold">
+                                            Área Total Privativa:
+                                        </div>
+                                        <div>
 
+                                            {client?.areaTotalPrivativa} m²
+                                        </div>
+                                    </>
+                                )}
+                            </div>
                         </div>
-                        <div className="row d-flex justify-content-center">
+                        <div className="row small d-flex justify-content-center ">
+
+                            <div className="col-6 justify-content-center d-flex  my-2">
+                                {client?.quartos && (
+                                    <>
+                                        <div>
+                                            {client.quartos}
+
+                                        </div>
+                                        <div className="ms-1 bold">
+
+                                            quarto{client.quartos > 1 ? 's' : ''}
+                                        </div>
+                                    </>
+                                )}
+                            </div>
+                            <div className="col-6 justify-content-center d-flex  my-2">
+
+                                {client?.banheiros && (
+                                    <>
+                                        <div>
+
+                                            {client.banheiros}
+                                        </div>
+                                        <div className="ms-1 bold">
+
+                                            banheiro{client.banheiros > 1 ? 's' : ''}
+                                        </div>
+                                    </>
+                                )}
+
+                            </div>
+                            <div className="col-6 justify-content-center d-flex  my-2">
+
+                                {client?.suites && (
+                                    <>
+                                        <div>
+
+                                            {client.suites}
+                                        </div>
+                                        <div className="ms-1 bold">
+
+                                            suíte{client.suites > 1 ? 's' : ''}
+                                        </div>
+                                    </>
+                                )}
+
+                            </div>
+                            <div className="col-6 justify-content-center d-flex  my-2">
+
+                                {client?.quartos && (
+                                    <>
+                                        <div>
+                                            {client.vagasGaragem}
+                                        </div>
+                                        <div className="ms-1 bold">
+
+                                            vaga{client.vagasGaragem > 1 ? 's' : ''}
+                                        </div>
+                                    </>
+                                )}
+
+                            </div>
+                        </div>
+
+
+
+                        <div className="row d-flex justify-content-center mt-2">
                             <div className="col-12 d-flex justify-content-center">
 
                                 <div class="btn-group" role="group" aria-label="Basic example">
