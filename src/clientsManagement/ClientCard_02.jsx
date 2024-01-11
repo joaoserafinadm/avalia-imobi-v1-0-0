@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import isMobile from "../../utils/isMobile"
 import { handleIcon, handleIconColor } from "../components/icons/propertyTypeIcons"
 import styles from './ClientCard.module.scss'
-import { faEye, faTrashAlt } from "@fortawesome/free-solid-svg-icons"
+import { faEdit, faEye, faMoneyCheckDollar, faTrashAlt } from "@fortawesome/free-solid-svg-icons"
 import { useEffect, useState } from "react"
 import tippy from "tippy.js";
 
@@ -20,6 +20,14 @@ export default function ClientCard_02(props) {
         });
         tippy("#deleteClientButton" + props.elem._id, {
             content: "Deletar",
+            placement: 'bottom'
+        });
+        tippy("#evaluateClientButton" + props.elem._id, {
+            content: "Avaliar",
+            placement: 'bottom'
+        });
+        tippy("#editClientButton" + props.elem._id, {
+            content: "Editar",
             placement: 'bottom'
         });
     }, [])
@@ -97,9 +105,12 @@ export default function ClientCard_02(props) {
 
                         Juliane Kosloski
                     </div>
-                    <img className="cardProfileImg bold border border-4 border-white rounded-circle" style={{ position: 'relative' }}
-                        src="https://res.cloudinary.com/joaoserafinadm/image/upload/v1700622419/AVALIA%20IMOBI/USERS_IMG/xwsqidtdw3srsnjvom50.jpg" alt="" />
+                    <div className="cardProfileImg">
 
+                        <img className="cardProfileImg2 bold border border-4 border-white" style={{ position: 'relative' }}
+                            src="https://res.cloudinary.com/joaoserafinadm/image/upload/v1700622419/AVALIA%20IMOBI/USERS_IMG/xwsqidtdw3srsnjvom50.jpg" alt="" />
+
+                    </div>
                 </span>
 
             </div>
@@ -222,7 +233,12 @@ export default function ClientCard_02(props) {
                             <div className="col-12 d-flex justify-content-center">
 
                                 <div class="btn-group" role="group" aria-label="Basic example">
-                                    <button type="button" class="btn btn-light border" id={"viewClientButton" + props.elem._id}><FontAwesomeIcon icon={faEye} className="icon  text-secondary" /></button>
+                                    <button type="button" class="btn btn-light border" id={"viewClientButton" + props.elem._id} data-bs-toggle="modal" data-bs-target="#viewClientModal">
+                                        <FontAwesomeIcon icon={faEye} className="icon  text-secondary" />
+                                    </button>
+                                    <button type="button" class="btn btn-light border" id={"evaluateClientButton" + props.elem._id}>
+                                        <FontAwesomeIcon icon={faMoneyCheckDollar} className="icon  text-secondary" />
+                                    </button>
 
                                     <button
                                         type="button"
@@ -238,17 +254,39 @@ export default function ClientCard_02(props) {
                     </>
 
                     :
-                    <div className="row my-5 ">
-                        <div className="col-12 d-flex justify-content-center">
-                            <span>Desatualizado</span>
+                    <>
+                        <div className="row my-5 ">
+                            <div className="col-12 d-flex justify-content-center">
+                                <span>Desatualizado</span>
+
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="col-12 d-flex justify-content-center">
+                                <div class="btn-group" role="group" aria-label="Basic example">
+                                    <button type="button" class="btn btn-light border" id={"editClientButton" + props.elem._id}>
+                                        <FontAwesomeIcon icon={faEdit} className="icon  text-secondary" />
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        class="btn btn-light border"
+                                        id={"deleteClientButton" + props.elem._id}
+                                        data-bs-toggle="modal"
+                                        data-bs-target={"#deleteClientModal" + props.elem._id}>
+                                        <FontAwesomeIcon icon={faTrashAlt} className="icon text-secondary" />
+                                    </button>
+                                </div>
+
+                            </div>
 
                         </div>
-                    </div>
+                    </>
                 }
 
 
 
             </div>
-        </div>
+        </div >
     )
 }

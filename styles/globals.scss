@@ -3179,7 +3179,14 @@ h1 {
 }
 
 .cardProfileImg {
-  height: 40px;
+  height: 50px;
+  border-radius: 100% 0 100% 100%;
+
+  background-color: #fff;
+}
+
+.cardProfileImg2 {
+  height: 50px;
   border-radius: 100%;
 
 }
@@ -3217,4 +3224,3 @@ h1 {
   scroll-margin-top: 250px;
   /* Adicione a margem superior desejada */
 }
-

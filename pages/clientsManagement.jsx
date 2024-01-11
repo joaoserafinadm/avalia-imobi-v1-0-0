@@ -15,6 +15,7 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import navbarHide from "../utils/navbarHide";
 import { useDispatch } from "react-redux";
 import DeleteClientModal from "../src/clientsManagement/DeleteClientModal";
+import ViewClientModal from "../src/clientsManagement/ViewClientModal";
 
 
 
@@ -126,7 +127,7 @@ export default function clientsManagement() {
                             <div className="carousel-item">
                                 <div className="row d-flex justify-content-center">
                                     <div className="col-12" >
-                                        
+
                                         <ClientsPage clients={clientsArray} section='allClients' user_id={token.user_id} />
                                     </div>
 
@@ -138,6 +139,7 @@ export default function clientsManagement() {
 
 
                     <DeleteClientModal />
+                    <ViewClientModal />
 
 
                 </div >
