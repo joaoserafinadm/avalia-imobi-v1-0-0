@@ -3,6 +3,7 @@ import ClientCard from "./ClientCard"
 import Pagination from "./Pagination"
 import ClientCard_02 from "./ClientCard_02"
 import ViewClientModal from "./ViewClientModal"
+import ClientStatus from "./ClientStatus"
 
 
 
@@ -33,6 +34,32 @@ export default function ClientsPage(props) {
 
     return (
         <>
+            {/* <div className="row mb-3">
+                <div className="col-12 col-sm-6 col-md-3 d-flex justify-content-start align-items-center my-1">
+                    <ClientStatus status='outdated' />
+                    <span className="small ms-1">
+                        Aguardando cadastro
+                    </span>
+                </div>
+                <div className="col-12 col-sm-6 col-md-3 d-flex justify-content-start align-items-center my-1">
+                    <ClientStatus status='active' />
+                    <span className="small ms-1">
+                        Aguardando avaliação
+                    </span>
+                </div>
+                <div className="col-12 col-sm-6 col-md-3 d-flex justify-content-start align-items-center my-1">
+                    <ClientStatus status='evaluated' />
+                    <span className="small ms-1">
+                        Avaliado
+                    </span>
+                </div>
+                <div className="col-12 col-sm-6 col-md-3 d-flex justify-content-start align-items-center my-1">
+                    <ClientStatus status='sold' />
+                    <span className="small ms-1">
+                        Vendido
+                    </span>
+                </div>
+            </div> */}
             <div className="row scrollTop  d-flex" id="clientsManagementList">
 
                 {handleClientsArray(clients, page).map(elem => {

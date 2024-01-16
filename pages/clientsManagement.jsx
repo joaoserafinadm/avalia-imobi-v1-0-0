@@ -111,6 +111,7 @@ export default function clientsManagement() {
                             </div>
                         </div>
                     </div>
+                    
                     {/* <hr /> */}
 
                     <div className="container carousel  " data-bs-touch="false" data-bs-interval='false' id="clientsManagementSection">

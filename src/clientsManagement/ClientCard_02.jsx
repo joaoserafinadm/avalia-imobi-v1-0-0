@@ -6,6 +6,7 @@ import { faEdit, faEye, faMoneyCheckDollar, faTrashAlt } from "@fortawesome/free
 import { useEffect, useState } from "react"
 import tippy from "tippy.js";
 import { Swiper, SwiperSlide } from 'swiper/react';
+import ClientStatus from "./ClientStatus"
 
 
 export default function ClientCard_02(props) {
@@ -59,13 +60,13 @@ export default function ClientCard_02(props) {
                     <span className="text-secondary">Sem fotos</span>
                 </div>
                 :
-                <Swiper className="card-img-top " 
-                style={{
-                    '--swiper-navigation-color': '#fff',
-                    '--swiper-pagination-color': '#fff',
-                    '--swiper-navigation-size': '25px',
-                    zIndex: 0
-                }}
+                <Swiper className="card-img-top "
+                    style={{
+                        '--swiper-navigation-color': '#fff',
+                        '--swiper-pagination-color': '#fff',
+                        '--swiper-navigation-size': '25px',
+                        zIndex: 0
+                    }}
                     slidesPerView={1}
                     pagination={{ clickable: false }}
                     navigation>
@@ -135,7 +136,10 @@ export default function ClientCard_02(props) {
             <div class="card-body">
 
 
-                <h5 class="card-title mt-1">{client?.clientName} {client.clientLastName}</h5>
+                <h5 class="card-title mt-1"><ClientStatus status={'active'} id={client?._id} /> {client?.clientName} {client.clientLastName} </h5>
+
+
+
                 {handleShowClientInfo(client) ?
                     <>
                         <div className="row small">
