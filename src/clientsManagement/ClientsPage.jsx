@@ -1,7 +1,8 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import ClientCard from "./ClientCard"
 import Pagination from "./Pagination"
 import ClientCard_02 from "./ClientCard_02"
+import ViewClientModal from "./ViewClientModal"
 
 
 
@@ -9,13 +10,14 @@ export default function ClientsPage(props) {
 
     const [idSelected, setIdSelected] = useState('')
     const [page, setPage] = useState(1)
+    const [clientSelected, setClientSelected] = useState('')
+
 
     const clients = props.clients.filter(elem => {
         if (props.section === 'myClients') return elem.id === props.user_id
         if (props.section === 'allClients') return elem
     })
 
-    console.log('clients', clients, props.section)
 
     const elementosPorPagina = 8;
 
@@ -25,7 +27,6 @@ export default function ClientsPage(props) {
         const indiceFim = indiceInicio + elementosPorPagina;
 
         return array.slice(indiceInicio, indiceFim);
-
 
     }
 
@@ -39,7 +40,7 @@ export default function ClientsPage(props) {
                     return (
                         <div className="col-12 col-sm-6 col-md-4 col-xl-3 d-flex justify-content-center">
                             <ClientCard_02
-                                elem={elem}
+                                elem={elem} setClientSelected={value => setClientSelected(value)}
                                 setIdSelected={value => idSelected === value ? setIdSelected('') : setIdSelected(value)}
                                 idSelected={idSelected} />
                         </div>
@@ -54,6 +55,9 @@ export default function ClientsPage(props) {
                     <Pagination array={props.clients} setPage={value => setPage(value)} page={page} elementosPorPagina={elementosPorPagina} />
                 </div>
             </div>
+
+            <ViewClientModal clientSelected={clientSelected} />
+
         </>
     )
 }

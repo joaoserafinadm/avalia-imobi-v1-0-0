@@ -5,7 +5,7 @@ import styles from './ClientCard.module.scss'
 import { faEdit, faEye, faMoneyCheckDollar, faTrashAlt } from "@fortawesome/free-solid-svg-icons"
 import { useEffect, useState } from "react"
 import tippy from "tippy.js";
-
+import { Swiper, SwiperSlide } from 'swiper/react';
 
 
 export default function ClientCard_02(props) {
@@ -32,8 +32,7 @@ export default function ClientCard_02(props) {
         });
     }, [])
 
-    const handleShowClient = (elem) => {
-
+    const handleShowClientInfo = (elem) => {
 
         if (elem.propertyType) return true
         else return false
@@ -60,23 +59,42 @@ export default function ClientCard_02(props) {
                     <span className="text-secondary">Sem fotos</span>
                 </div>
                 :
-                <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel" style={{ zIndex: 0 }}>
-                    <div className="carousel-inner card-img-top  ">
-                        {client?.files?.map((elem, index) => (
-                            <div key={index} className={`carousel-item text-center bg-secondary  ${index === activeIndex ? 'active' : ''}`}>
-                                <img src={elem.url} className={`card-img-top  ${styles.clientCardImage}`} alt={`Slide ${index + 1}`} />
-                            </div>
-                        ))}
-                    </div>
-                    <button className="carousel-control-prev" type="button" data-bs-slide="prev" onClick={handlePrev} >
-                        <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span className="visually-hidden">Previous</span>
-                    </button>
-                    <button className="carousel-control-next" type="button" data-bs-slide="next" onClick={handleNext} >
-                        <span className="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span className="visually-hidden">Next</span>
-                    </button>
-                </div>
+                <Swiper className="card-img-top " 
+                style={{
+                    '--swiper-navigation-color': '#fff',
+                    '--swiper-pagination-color': '#fff',
+                    '--swiper-navigation-size': '25px',
+                    zIndex: 0
+                }}
+                    slidesPerView={1}
+                    pagination={{ clickable: false }}
+                    navigation>
+                    {client?.files?.map((elem, index) => (
+                        <SwiperSlide key={index} className="text-center bg-secondary ">
+
+
+                            <img src={elem.url} className={`card-img-top  ${styles.clientCardImage}`} alt={`Slide ${index + 1}`} />
+
+                        </SwiperSlide>
+                    ))}
+                </Swiper>
+                // <div id="clientImageCarousel" className="carousel slide" data-bs-ride="carousel" >
+                //     <div className="carousel-inner card-img-top  ">
+                //         {client?.files?.map((elem, index) => (
+                //             <div key={index} className={`carousel-item text-center bg-secondary  ${index === activeIndex ? 'active' : ''}`}>
+                //                 <img src={elem.url} className={`card-img-top  ${styles.clientCardImage}`} alt={`Slide ${index + 1}`} />
+                //             </div>
+                //         ))}
+                //     </div>
+                //     <button className="carousel-control-prev" type="button" data-bs-slide="prev" onClick={handlePrev} >
+                //         <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                //         <span className="visually-hidden">Previous</span>
+                //     </button>
+                //     <button className="carousel-control-next" type="button" data-bs-slide="next" onClick={handleNext} >
+                //         <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                //         <span className="visually-hidden">Next</span>
+                //     </button>
+                // </div>
             }
 
             {client?.propertyType && (
@@ -118,7 +136,7 @@ export default function ClientCard_02(props) {
 
 
                 <h5 class="card-title mt-1">{client?.clientName} {client.clientLastName}</h5>
-                {handleShowClient(client) ?
+                {handleShowClientInfo(client) ?
                     <>
                         <div className="row small">
 
@@ -233,7 +251,13 @@ export default function ClientCard_02(props) {
                             <div className="col-12 d-flex justify-content-center">
 
                                 <div class="btn-group" role="group" aria-label="Basic example">
-                                    <button type="button" class="btn btn-light border" id={"viewClientButton" + props.elem._id} data-bs-toggle="modal" data-bs-target="#viewClientModal">
+                                    <button
+                                        type="button"
+                                        class="btn btn-light border"
+                                        id={"viewClientButton" + props.elem._id}
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#viewClientModal"
+                                        onClick={() => props.setClientSelected(props.elem)}>
                                         <FontAwesomeIcon icon={faEye} className="icon  text-secondary" />
                                     </button>
                                     <button type="button" class="btn btn-light border" id={"evaluateClientButton" + props.elem._id}>

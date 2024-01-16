@@ -15,12 +15,19 @@ export default function ViewClientModal(props) {
             <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title title-dark">Visualizar Cliente</h5>
+                        <h5 class="modal-title title-dark bold">{props.clientSelected.clientName} {props.clientSelected.clientLastName}</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div className="modal-body">
+                        <div className="row">
+                            <div className="col-12">
 
-                        Infos
+                            </div>
+                        </div>
+
+
+
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Fechar</button>

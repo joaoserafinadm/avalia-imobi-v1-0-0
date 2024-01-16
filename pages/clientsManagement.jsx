@@ -139,7 +139,6 @@ export default function clientsManagement() {
 
 
                     <DeleteClientModal />
-                    <ViewClientModal />
 
 
                 </div >
