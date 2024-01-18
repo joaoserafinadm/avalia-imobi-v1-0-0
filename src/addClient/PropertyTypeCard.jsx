@@ -25,7 +25,7 @@ export default function PropertyTypeCard(props) {
                                 props.type === 'Comercial' ? faStore :
                                     props.type === 'Terreno' ? faMapLocation : faHome} />
                 </div>
-                <div className="row mt-1 ">
+                <div className="row mt-1 d-flex">
                     <div className="col-12 d-flex justify-content-center align-items-center">
 
                         <span className={` ${props.type === newClientForm.propertyType ? 'title-color' : 'text-secondary'}`}>{props.type}</span>

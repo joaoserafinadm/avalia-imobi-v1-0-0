@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import isMobile from "../../utils/isMobile"
 import { handleIcon, handleIconColor } from "../components/icons/propertyTypeIcons"
 import styles from './ClientCard.module.scss'
-import { faEdit, faEye, faMoneyCheckDollar, faTrashAlt } from "@fortawesome/free-solid-svg-icons"
+import { faEdit, faEye, faMoneyCheckDollar, faShare, faTrashAlt } from "@fortawesome/free-solid-svg-icons"
 import { useEffect, useState } from "react"
 import tippy from "tippy.js";
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -29,6 +29,10 @@ export default function ClientCard_02(props) {
         });
         tippy("#editClientButton" + props.elem._id, {
             content: "Editar",
+            placement: 'bottom'
+        });
+        tippy("#shareClientButton" + props.elem._id, {
+            content: "Enviar formulário",
             placement: 'bottom'
         });
     }, [])
@@ -292,6 +296,11 @@ export default function ClientCard_02(props) {
                         <div className="row">
                             <div className="col-12 d-flex justify-content-center">
                                 <div class="btn-group" role="group" aria-label="Basic example">
+
+                                    <button type="button" class="btn btn-light border" id={"shareClientButton" + props.elem._id}>
+                                        <FontAwesomeIcon icon={faShare} className="icon  text-secondary" />
+                                    </button>
+
                                     <button type="button" class="btn btn-light border" id={"editClientButton" + props.elem._id}>
                                         <FontAwesomeIcon icon={faEdit} className="icon  text-secondary" />
                                     </button>
