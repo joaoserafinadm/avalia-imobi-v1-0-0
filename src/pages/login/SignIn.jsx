@@ -97,133 +97,137 @@ export default function signIn(props) {
 
     return (
         <>
-            <div
-                className="row fadeItem1s d-flex justify-content-center"
-                style={{ height: "100%" }}
-            >
-                {window.innerWidth > 990 && (
-                    <div className="col-6 d-flex justify-content-center align-items-center">
-                        <img
-                            src="/LOGO_02.png"
-                            alt=""
-                            className={`${styles.logoImg}`}
-                            onLoad={() => setLoadedImages(loadedImages + 1)}
-                        />
-                    </div>
-                )}
+            <div className="row fadeItem1s "
+                style={{ height: "100%" }}>
+                <div className="col-12 d-flex justify-content-evenly">
 
-                <div className="col-12 col-lg-6 d-flex justify-content-center align-items-center">
-                    <form onSubmit={e => handleSignIn(e)}>
 
-                        <div className={`card `}>
-                            <div className={`card-body ${styles.cardSize} `}>
-                                <div className="row mb-3">
-                                    <h1 className={`${styles.title} title-dark`}>Login</h1>
-                                </div>
-                                <div className="row">
-                                    <div className="col-12  d-flex justify-content-start">
-                                        <span>Não possui uma conta?</span>
+
+                    {window.innerWidth > 990 && (
+                        <div className=" d-flex justify-content-center align-items-center">
+                            <img
+                                src="/LOGO_06.png"
+                                alt=""
+                                className={`${styles.logoImg}`}
+                                onLoad={() => setLoadedImages(loadedImages + 1)}
+                            />
+                        </div>
+                    )}
+
+                    <div className=" d-flex justify-content-center align-items-center">
+                        <form onSubmit={e => handleSignIn(e)}>
+
+                            <div className={`card `}>
+                                <div className={`card-body ${styles.cardSize} `}>
+                                    <div className="row mb-3">
+                                        <h1 className={`${styles.title} title-dark`}>Login</h1>
                                     </div>
-                                    <div className="col-12  d-flex justify-content-start">
-                                        <span
-                                            className="span"
-                                            type="button"
-                                            onClick={() => {
-                                                props.setSection("signUp");
-                                            }}
-                                        >
-                                            Cadastre-se
+                                    <div className="row">
+                                        <div className="col-12  d-flex justify-content-start">
+                                            <span>Não possui uma conta?</span>
+                                        </div>
+                                        <div className="col-12  d-flex justify-content-start">
+                                            <span
+                                                className="span"
+                                                type="button"
+                                                onClick={() => {
+                                                    props.setSection("signUp");
+                                                }}
+                                            >
+                                                Cadastre-se
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <hr />
+
+                                    <div className="row mt-3 mb-3">
+                                        <input
+                                            type="email"
+                                            id="emailInput"
+                                            className="form-control"
+                                            placeholder="E-mail"
+                                            value={email}
+                                            onChange={(e) => setEmail(e.target.value)}
+                                        />
+                                        <span className="small text-danger fadeItem">{emailError}</span>
+                                    </div>
+                                    <div className="row mb-3">
+                                        <input
+                                            type="password"
+                                            id="passwordInput"
+                                            className="form-control"
+                                            placeholder="Senha"
+                                            value={password}
+                                            onChange={(e) => setPassword(e.target.value)}
+                                        />
+                                        <span className="small text-danger fadeItem">
+                                            {passwordError}
                                         </span>
                                     </div>
-                                </div>
-                                <hr />
-
-                                <div className="row mt-3 mb-3">
-                                    <input
-                                        type="email"
-                                        id="emailInput"
-                                        className="form-control"
-                                        placeholder="E-mail"
-                                        value={email}
-                                        onChange={(e) => setEmail(e.target.value)}
-                                    />
-                                    <span className="small text-danger fadeItem">{emailError}</span>
-                                </div>
-                                <div className="row mb-3">
-                                    <input
-                                        type="password"
-                                        id="passwordInput"
-                                        className="form-control"
-                                        placeholder="Senha"
-                                        value={password}
-                                        onChange={(e) => setPassword(e.target.value)}
-                                    />
-                                    <span className="small text-danger fadeItem">
-                                        {passwordError}
-                                    </span>
-                                </div>
-                                <div className="row mb-3">
-                                    {singInLoading ? (
-                                        <button
-                                            disabled
-                                            className="btn btn-orange"
-                                            onClick={() => handleSignIn()}
-                                        >
-                                            <SpinnerSM />
-                                        </button>
-                                    ) : (
-                                        <button className="btn btn-outline-orange" type="submit">
-                                            Entrar
-                                        </button>
-                                    )}
-                                </div>
-                                <div className="row mb-1">
-                                    <small>
-                                        <span
-                                            className="span"
-                                            type="button"
-                                            onClick={() => props.setSection("rescuePassword")}
-                                        >
-                                            Esqueceu a senha?
-                                        </span>
-                                    </small>
-                                </div>
-                                <div className="row d-flex">
-                                    <div className="col">
-                                        <hr />
+                                    <div className="row mb-3">
+                                        {singInLoading ? (
+                                            <button
+                                                disabled
+                                                className="btn btn-orange"
+                                                onClick={() => handleSignIn()}
+                                            >
+                                                <SpinnerSM />
+                                            </button>
+                                        ) : (
+                                            <button className="btn btn-outline-orange" type="submit">
+                                                Entrar
+                                            </button>
+                                        )}
                                     </div>
-                                    <div className="col-1 d-flex justify-content-center align-items-center">
-                                        <span>
-                                            <small>Ou</small>
-                                        </span>
+                                    <div className="row mb-1">
+                                        <small>
+                                            <span
+                                                className="span"
+                                                type="button"
+                                                onClick={() => props.setSection("rescuePassword")}
+                                            >
+                                                Esqueceu a senha?
+                                            </span>
+                                        </small>
                                     </div>
-                                    <div className="col">
-                                        <hr />
+                                    <div className="row d-flex">
+                                        <div className="col">
+                                            <hr />
+                                        </div>
+                                        <div className="col-1 d-flex justify-content-center align-items-center">
+                                            <span>
+                                                <small>Ou</small>
+                                            </span>
+                                        </div>
+                                        <div className="col">
+                                            <hr />
+                                        </div>
                                     </div>
-                                </div>
-                                <div className="row">
-                                    <span className="card py-2 px-1 my-2 cardAnimation" type="button" >
-                                        <div className="row ">
-                                            <div className="col-12 d-flex justify-content-center">
-                                                <div className="icon-start">
-                                                    <img
-                                                        src="/ICON-GOOGLE.png"
-                                                        alt=""
-                                                        className="socialIcon"
-                                                    />
-                                                </div>
-                                                <div>
-                                                    <span >Continuar com o Google</span>
+                                    <div className="row">
+                                        <span className="card py-2 px-1 my-2 cardAnimation" type="button" >
+                                            <div className="row ">
+                                                <div className="col-12 d-flex justify-content-center">
+                                                    <div className="icon-start">
+                                                        <img
+                                                            src="/ICON-GOOGLE.png"
+                                                            alt=""
+                                                            className="socialIcon"
+                                                        />
+                                                    </div>
+                                                    <div>
+                                                        <span >Continuar com o Google</span>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </span>
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </form>
+                        </form>
 
+                    </div>
                 </div>
+
             </div>
         </>
     );

@@ -10,7 +10,7 @@ import { Accordion } from "react-bootstrap";
 import { useAccordionButton } from "react-bootstrap/AccordionButton";
 import { AccordionContext } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleRight, faGear, faHome, faHouseUser } from "@fortawesome/free-solid-svg-icons";
+import { faAngleRight, faGear, faHome, faHouseUser, faUsers } from "@fortawesome/free-solid-svg-icons";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
@@ -150,6 +150,33 @@ export default function Nav(props) {
                                                 </li>
                                                 <li>
                                                     <Link href={`/clientsManagement`}>
+                                                        <span>Gestão de clientes</span>
+                                                    </Link>
+                                                </li>
+                                            </ul>
+                                        </Accordion.Collapse>
+                                    </li>
+                                    <li>
+                                        <ContextAwareToggle eventKey="3" collapse="configuracoesCollapse">
+                                            <div className="d-flex">
+                                                <div className="col-1 text-center me-3">
+                                                    <FontAwesomeIcon icon={faUsers} className="me-2 icon" />
+                                                </div>
+                                                <div className="col-9">Usuários</div>
+                                                <div className="col-1 toggleIcon text-end">
+                                                    <FontAwesomeIcon icon={faAngleRight} className=" icon" />
+                                                </div>
+                                            </div>
+                                        </ContextAwareToggle>
+                                        <Accordion.Collapse eventKey="3">
+                                            <ul>
+                                                <li>
+                                                    <Link href={`/userAdd`}>
+                                                        <span>Adicionar usuário</span>
+                                                    </Link>
+                                                </li>
+                                                <li>
+                                                    <Link href={`/usersManagement`}>
                                                         <span>Gestão de clientes</span>
                                                     </Link>
                                                 </li>

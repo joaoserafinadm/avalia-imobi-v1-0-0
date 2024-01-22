@@ -58,6 +58,7 @@ export default authenticated(async (req, res) => {
                     _id: ObjectId(),
                     user_id,
                     dateAdded: new Date(),
+                    checked: false,
                     subject,
                     text,
                     link
