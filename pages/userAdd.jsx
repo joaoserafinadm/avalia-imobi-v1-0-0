@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Title from "../src/components/title/Title2";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faUserGear, faUserTie } from "@fortawesome/free-solid-svg-icons";
@@ -7,12 +7,15 @@ import Cookies from "js-cookie";
 import jwt from "jsonwebtoken";
 import Link from "next/link";
 import { SpinnerSM } from "../src/components/loading/Spinners"
+import { useDispatch } from "react-redux";
+import navbarHide from "../utils/navbarHide";
 
 
 
 export default function userAdd() {
 
     const token = jwt.decode(Cookies.get("auth"));
+    const dispatch = useDispatch()
 
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
@@ -20,6 +23,11 @@ export default function userAdd() {
     const [userType, setUserType] = useState('')
 
     const [loadingSave, setLoadingSave] = useState(false)
+
+    useEffect(() => {
+        navbarHide(dispatch)
+        
+    }, [])
 
 
     const handleDisableSave = () => {
