@@ -50,7 +50,6 @@ export default function clientsManagement() {
                 company_id: company_id
             }
         }).then(res => {
-            console.log(res.data)
             setAllClients(res.data)
             setClientsArray(res.data)
             setLoadingPage(false)
