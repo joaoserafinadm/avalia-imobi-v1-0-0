@@ -143,7 +143,7 @@ export default function MyApp({ Component, pageProps }) {
 
                             <link rel="manifest" href="/manifest.json" />
                             <link rel="apple-touch-icon" href="/icon.png" />
-                            <meta name="theme-color" content="#fff" />
+                            <meta name="theme-color" content="#5a5a5a" />
                         </Head>
 
                         <MainLayout>
