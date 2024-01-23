@@ -121,7 +121,7 @@ export default function clientsManagement() {
                             <div className="carousel-item active">
                                 <div className="row d-flex justify-content-center">
                                     <div className="col-12" >
-                                        <ClientsPage clients={clientsArray} section='myClients' user_id={token.user_id} />
+                                        <ClientsPage clients={clientsArray} section='myClients' user_id={token.sub} />
                                     </div>
                                 </div>
                             </div>
@@ -129,7 +129,7 @@ export default function clientsManagement() {
                                 <div className="row d-flex justify-content-center">
                                     <div className="col-12" >
 
-                                        <ClientsPage clients={clientsArray} section='allClients' user_id={token.user_id} />
+                                        <ClientsPage clients={clientsArray} section='allClients' user_id={token.sub} />
                                     </div>
 
                                 </div>

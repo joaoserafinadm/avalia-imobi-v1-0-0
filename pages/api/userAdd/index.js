@@ -82,7 +82,7 @@ export default authenticated(async (req, res) => {
                         lastName: lastName,
                         cpf: '',
                         email: email,
-                        workEmail: '',
+                        workEmail: email,
                         creci: '',
                         telefone: '',
                         celular: '',

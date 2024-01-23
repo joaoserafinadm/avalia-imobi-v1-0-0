@@ -14,8 +14,10 @@ export default function ClientsPage(props) {
     const [clientSelected, setClientSelected] = useState('')
 
 
+
+
     const clients = props.clients.filter(elem => {
-        if (props.section === 'myClients') return elem.id === props.user_id
+        if (props.section === 'myClients') return elem.user_id === props.user_id
         if (props.section === 'allClients') return elem
     })
 
@@ -60,28 +62,40 @@ export default function ClientsPage(props) {
                     </span>
                 </div>
             </div> */}
-            <div className="row scrollTop  d-flex" id="clientsManagementList">
-
-                {handleClientsArray(clients, page).map(elem => {
-
-                    return (
-                        <div className="col-12 col-sm-6 col-md-4 col-xl-3 d-flex justify-content-center">
-                            <ClientCard_02
-                                elem={elem} setClientSelected={value => setClientSelected(value)}
-                                setIdSelected={value => idSelected === value ? setIdSelected('') : setIdSelected(value)}
-                                idSelected={idSelected} />
-                        </div>
-                    )
-                })
-                }
-
-            </div>
-
-            <div className="row ">
-                <div className="col-12 d-flex justify-content-center">
-                    <Pagination array={props.clients} setPage={value => setPage(value)} page={page} elementosPorPagina={elementosPorPagina} />
+            {clients.length === 0 ?
+                <div className="row my-5 scrollTop " id="clientsManagementList">
+                    <div className="col-12  d-flex justify-content-center">
+                        <span className="small text-secondary text-center">Nenhum cliente cadastrado</span>
+                    </div>
                 </div>
-            </div>
+                :
+                <>
+                    <div className="row scrollTop  d-flex" id="clientsManagementList">
+
+                        {handleClientsArray(clients, page).map(elem => {
+
+                            return (
+                                <div className="col-12 col-sm-6 col-md-4 col-xl-3 d-flex justify-content-center">
+                                    <ClientCard_02
+                                        elem={elem} setClientSelected={value => setClientSelected(value)}
+                                        setIdSelected={value => idSelected === value ? setIdSelected('') : setIdSelected(value)}
+                                        idSelected={idSelected} />
+                                </div>
+                            )
+                        })
+                        }
+
+                    </div>
+
+                    <div className="row ">
+                        <div className="col-12 d-flex justify-content-center">
+                            <Pagination array={clients} setPage={value => setPage(value)} page={page} elementosPorPagina={elementosPorPagina} />
+                        </div>
+                    </div>
+                </>
+
+            }
+
 
             <ViewClientModal clientSelected={clientSelected} />
 
