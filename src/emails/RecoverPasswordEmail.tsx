@@ -38,7 +38,7 @@ export const RecoverPasswordEmail: React.FC<Readonly<EmailTemplateProps>> = ({
                         <Img
                             height="80"
                             alt="Avalia Imboi"
-                            src='https://res.cloudinary.com/dywdcjj76/image/upload/v1694998829/AVALIA%20IMOBI/LOGOS/LOGO_02_wkzqga.png'
+                            src='https://res.cloudinary.com/joaoserafinadm/image/upload/v1694998829/AVALIA%20IMOBI/LOGOS/LOGO_02_wkzqga.png'
                             className="my-0 mx-auto"
                         />
                     </Section>

@@ -46,7 +46,8 @@ export default async (req, res) => {
                             httpOnly: false,
                             secure: process.env.NODE_ENV !== 'production', //em produção usar true
                             sameSite: 'strict',
-                            path: '/'
+                            path: '/',
+                            maxAge: 31536000
                         }))
 
                         await db.collection('users').updateOne({ _id: ObjectID(userExists._id) },

@@ -20,13 +20,15 @@ import * as React from 'react';
 
 interface EmailTemplateProps {
     firstName: string;
-    code: string;
+    email: string;
+    password: string;
 }
 
 
-export const AuthEmail: React.FC<Readonly<EmailTemplateProps>> = ({
+export const newUserEmail: React.FC<Readonly<EmailTemplateProps>> = ({
     firstName,
-    code
+    email,
+    password
 }) => (
     <Html>
         <Head />
@@ -46,20 +48,49 @@ export const AuthEmail: React.FC<Readonly<EmailTemplateProps>> = ({
                         Bem vindo ao <strong>Avalia Imobi</strong>!
                     </Heading>
                     <Text className="text-black text-[16px] leading-[24px]">
-                        Olá {firstName},
+                        Olá <strong>{firstName}</strong>,
                     </Text>
                     <Text className="text-black text-[16px] leading-[24px]">
-                        Para validarmos seu acesso à ferramenta com segurança, use o código abaixo:
+                        Seja bem-vindo ao Avalia imobi!
                     </Text>
-                    <Section className="text-center mt-[32px] mb-[32px]">
+                    <Text className="text-black text-[16px] leading-[24px]">
+                        Para começar, enviamos uma senha provisória para garantir que você tenha acesso rápido e seguro à sua conta.
+                    </Text>
+                    <Text className="text-black text-[16px] leading-[24px]">
+                        Aqui estão os detalhes da sua conta:
+                    </Text>
+                    <Text className="text-black text-[16px] leading-[24px]">
+                        E-mail: 
+                        <Button
+                            pX={12}
+                            pY={10}
+                            className="bg-[#f5874f] mx-[10px] rounded text-white text-[16px] font-semibold no-underline text-center"
+                        >
+                            {email}
+                        </Button>
+                    </Text>
+                    <Text className="text-black text-[16px] leading-[24px]">
+                        Senha: 
+                        <Button
+                            pX={12}
+                            pY={10}
+                            className="bg-[#f5874f] mx-[10px] rounded text-white text-[16px] font-semibold no-underline text-center"
+                        >
+                            {password}
+                        </Button>
+                    </Text>
+                    {/* <Section className="text-center mt-[32px] mb-[32px]">
                         <Button
                             pX={20}
                             pY={12}
                             className="bg-[#f5874f] rounded text-white text-[24px] font-semibold no-underline text-center"
                         >
-                            {code}
+                            {email} {password}
                         </Button>
-                    </Section>
+                    </Section> */}
+                    <Text className="text-black text-[16px] leading-[24px]">
+                        Por favor, faça login na sua conta usando essas credenciais. Assim que entrar, recomendamos que altere sua senha para uma de sua escolha para garantir a segurança da sua conta.
+                    </Text>
                     <Hr className="border border-solid border-[#eaeaea] my-[26px] mx-0 w-full" />
                     <Text className="text-[#666666] text-[12px] leading-[24px]">
                         ©2023 Avalia Imobi <br />

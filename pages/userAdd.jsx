@@ -9,6 +9,11 @@ import Link from "next/link";
 import { SpinnerSM } from "../src/components/loading/Spinners"
 import { useDispatch } from "react-redux";
 import navbarHide from "../utils/navbarHide";
+import removeInputError from "../utils/removeInputError";
+import scrollTo from "../utils/scrollTo";
+import randomPassword from "../utils/randomPassword";
+import axios from "axios";
+import baseUrl from "../utils/baseUrl";
 
 
 
@@ -20,20 +25,24 @@ export default function userAdd() {
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     const [email, setEmail] = useState('')
-    const [userType, setUserType] = useState('')
+    const [userStatus, setUserStatus] = useState('')
+
+    const [firstNameError, setFirstNameError] = useState('')
+    const [emailError, setEmailError] = useState('')
+    const [userStatusError, setUserStatusError] = useState('')
 
     const [loadingSave, setLoadingSave] = useState(false)
 
     useEffect(() => {
         navbarHide(dispatch)
-        
+
     }, [])
 
 
     const handleDisableSave = () => {
 
-        if (!firstName || !email || !userType) {
-            return true
+        if (!firstName || !email || !userStatus) {
+            return false
         } else {
             return false
         }
@@ -41,8 +50,37 @@ export default function userAdd() {
 
     const validate = () => {
 
-        // removeInputError()
+        setFirstNameError('')
+        setEmailError('')
+        setUserStatusError('')
 
+        let firstNameError = ''
+        let emailError = ''
+        let userStatusError = ''
+
+        removeInputError()
+
+        if (!firstName) firstNameError = 'Escreva o nome do usuário'
+        if (!email || !email.includes('@')) emailError = "E-mail inválido"
+        if (!userStatus) userStatusError = "Escolha uma das opções"
+
+
+        if (firstNameError || emailError || userStatusError) {
+            if (firstNameError) { setFirstNameError(firstNameError); document.getElementById("firstName").classList.add('inputError') }
+            if (emailError) { setEmailError(emailError); document.getElementById("email").classList.add('inputError') }
+            if (userStatusError) { setUserStatusError(userStatusError) }
+
+            scrollTo('pageTop')
+            return false
+        } else {
+            setFirstNameError('')
+            setEmailError('')
+            setUserStatusError('')
+
+            removeInputError()
+
+            return true
+        }
     }
 
     const handleSave = async (company_id) => {
@@ -50,6 +88,35 @@ export default function userAdd() {
         setLoadingSave(true)
 
         const isValid = validate()
+
+        if (isValid) {
+
+            const data = {
+                company_id: token.company_id,
+                user_id: token.sub,
+                firstName,
+                lastName,
+                email,
+                userStatus: userStatus
+            }
+
+            await axios.post(`${baseUrl()}/api/userAdd`, data)
+                .then(res => {
+                    setLoadingSave(false)
+
+                })
+                .catch(e => {
+                    if (e.response.data.error === 'User already exists') {
+                        setEmailError('Este e-mail ja é utilizado.')
+                        document.getElementById("email").classList.add('inputError')
+                    }
+                    setLoadingSave(false)
+
+                })
+
+
+            setLoadingSave(false)
+        }
 
         setLoadingSave(false)
 
@@ -63,24 +130,28 @@ export default function userAdd() {
                 <div className="row d-flex ">
                     <label for="telefoneItem" className="form-label fw-bold">Informações do usuário</label>
                     <div className="col-12 col-lg-5 my-2">
-                        <label for="userNameItem" className="form-label ">Nome*</label>
-                        <input type="text" className="form-control form-control-sm" id="userNameItem" value={firstName} onChange={e => setFirstName(e.target.value)} placeholder="" />
+                        <label for="firstName" className="form-label ">Nome*</label>
+                        <input type="text" className="form-control form-control-sm" id="firstName" value={firstName} onChange={e => setFirstName(e.target.value)} placeholder="" />
+                        <small className="text-danger">{firstNameError}</small>
                     </div>
                     <div className="col-12 col-lg-5 my-2 fadelItem">
-                        <label for="userLastNameItem" className="form-label ">Sobrenome (opcional)</label>
-                        <input type="text" className="form-control form-control-sm" id="userLastNameItem" value={lastName} onChange={e => setLastName(e.target.value)} placeholder="" />
+                        <label for="lastName" className="form-label ">Sobrenome (opcional)</label>
+                        <input type="text" className="form-control form-control-sm" id="lastName" value={lastName} onChange={e => setLastName(e.target.value)} placeholder="" />
                     </div>
                     <div className="col-12 col-lg-10 my-2">
-                        <label for="emailItem" className="form-label ">E-mail*</label>
-                        <input type="text" className="form-control form-control-sm" id="emailItem" value={email} onChange={e => setEmail(e.target.value)} placeholder="" />
+                        <label for="email" className="form-label ">E-mail*</label>
+                        <input type="text" className="form-control form-control-sm" id="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="" />
+                        <small className="text-danger">{emailError}</small>
                     </div>
                 </div>
 
 
                 <div className="row d-flex mt-3">
                     <label for="telefoneItem" className="form-label fw-bold">Categoria*</label>
+                    <small className="text-danger">{userStatusError}</small>
+
                     <div className="col-12 col-lg-5 my-2">
-                        <div className={`card cardAnimation  ${userType === 'admin' ? 'border-selected' : ''}`} type="button" onClick={() => setUserType('admin')}>
+                        <div className={`card cardAnimation  ${userStatus === 'admin' ? 'border-selected' : ''}`} type="button" onClick={() => setUserStatus('admin')}>
                             <div className="card-body">
                                 <div className="row">
 
@@ -97,8 +168,9 @@ export default function userAdd() {
                             </div>
                         </div>
                     </div>
+
                     <div className="col-12 col-lg-5 my-2">
-                        <div className={`card cardAnimation  ${userType === 'user' ? 'border-selected' : ''}`} type="button" onClick={() => setUserType('user')}>
+                        <div className={`card cardAnimation  ${userStatus === 'user' ? 'border-selected' : ''}`} type="button" onClick={() => setUserStatus('user')}>
                             <div className="card-body">
                                 <div className="row">
 
@@ -113,6 +185,7 @@ export default function userAdd() {
                                 </div>
                             </div>
                         </div>
+
                     </div>
 
                 </div>
