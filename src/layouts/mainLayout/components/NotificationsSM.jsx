@@ -17,7 +17,7 @@ export default function NotificationsSM(props) {
                 <div className="row mb-2">
                     <div >
 
-                        <span className={`${styles.backButtom} px-3`} onClick={() => props.notificationOff()}>
+                        <span className={`${styles.backButtom} px-3`} onClick={() => {props.notificationOff(); props.handleNotificationCheck()}}>
                             {/* <FontAwesomeIcon icon={faXmark} className='icon' /> */}
                             <button type="button" class="btn-close"  aria-label="Close"></button>
                         </span>
