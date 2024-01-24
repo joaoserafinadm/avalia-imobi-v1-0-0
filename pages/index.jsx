@@ -98,7 +98,7 @@ export default function Home() {
                         </div>
 
                     </div>
-                    <button class=" btn btn-orange rounded-circle shadow border   d-flex align-items-center justify-content-center" style={{ width: '60px', height: '60px', borderRadius: "100%" }} type="button" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample">
+                    <button class=" btn text-white   d-flex align-items-center justify-content-center" style={{ width: '60px', height: '60px', borderRadius: "100%", backgroundColor: '#f5874f' }} type="button" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample">
                         <FontAwesomeIcon icon={faPlus} className='' style={{ height: '25px' }} />
                     </button>
                 </div>
