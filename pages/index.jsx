@@ -27,6 +27,17 @@ import { useState } from 'react'
 // }
 
 
+// import { IonContent, IonFab, IonFabButton, IonFabList, IonHeader, IonIcon, IonTitle, IonToolbar } from '@ionic/react';
+// import {
+//     chevronDownCircle,
+//     chevronForwardCircle,
+//     chevronUpCircle,
+//     colorPalette,
+//     document,
+//     globe,
+// } from 'ionicons/icons';
+
+
 export default function Home() {
 
     const token = jwt.decode(Cookie.get('auth'))
@@ -58,14 +69,32 @@ export default function Home() {
 
             <IndexNotifications /> */}
 
-            
+
             <span>
-                dsadsadsa
+                Página inicial
             </span>
 
 
+            {/* <IonContent className="ion-padding">
+                <IonFab slot="fixed" vertical="bottom" horizontal="end">
+                    <IonFabButton>
+                        <IonIcon icon={chevronUpCircle}></IonIcon>
+                    </IonFabButton>
+                    <IonFabList side="top">
+                        <IonFabButton>
+                            <IonIcon icon={document}></IonIcon>
+                        </IonFabButton>
+                        <IonFabButton>
+                            <IonIcon icon={colorPalette}></IonIcon>
+                        </IonFabButton>
+                        <IonFabButton>
+                            <IonIcon icon={globe}></IonIcon>
+                        </IonFabButton>
+                    </IonFabList>
+                </IonFab>
+            </IonContent> */}
 
 
-        </div>
+        </div >
     )
 }
