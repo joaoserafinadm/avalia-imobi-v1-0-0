@@ -101,10 +101,21 @@ export default function UsersCard(props) {
                 {props.idSelected === props.elem._id && (
                     <div className="slideLeft d-flex ms-2 bg-light h-100 align-items-center shadow">
                         <VerticalLine />
-                        <div className="d-flex justify-content-center align-items-center " style={{ width: '120px', height: '60px' }} >
+                        <div className="d-flex justify-content-center align-items-center " style={{ width: '150px', height: '60px' }} >
                             <div class="btn-group" role="group" aria-label="Basic example">
-                                <button type="button" class="btn btn-light border" id="viewClientButton"><FontAwesomeIcon icon={faEye} className="icon  text-secondary" /></button>
+                                <button 
+                                Ftype="button"
+                                    class="btn btn-light border"
+                                    id="viewClientButton">
+                                    <FontAwesomeIcon icon={faEye} className="icon  text-secondary" />
+                                </button>
 
+                                <button
+                                    type="button"
+                                    class="btn btn-light border"
+                                    id="deleteClientButton">
+                                    <FontAwesomeIcon icon={faWhatsapp} className="icon text-secondary" />
+                                </button>
                                 <button
                                     type="button"
                                     class="btn btn-light border"
