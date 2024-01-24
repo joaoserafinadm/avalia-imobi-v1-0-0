@@ -104,7 +104,7 @@ export default function UsersCard(props) {
                         <div className="d-flex justify-content-center align-items-center " style={{ width: '150px', height: '60px' }} >
                             <div class="btn-group" role="group" aria-label="Basic example">
                                 <button 
-                                Ftype="button"
+                                type="button"
                                     class="btn btn-light border"
                                     id="viewClientButton">
                                     <FontAwesomeIcon icon={faEye} className="icon  text-secondary" />

@@ -86,17 +86,21 @@ export default function UsersManagement() {
                     <hr />
                     <div className="row mt-3">
 
-                            {usersArray.map(elem => {
-                                return (
-                                    <div className="col-12 col-md-6 d-flex justify-content-center">
+                        {usersArray.map(elem => {
+                            return (
+                                <div className="col-12 col-xl-6 d-flex justify-content-center">
+                                    <div className="col-12">
+
+
 
 
                                         <UsersCard setIdSelected={value => setIdSelected(value)} idSelected={idSelected} elem={elem} />
                                     </div>
+                                </div>
 
-                                )
+                            )
 
-                            })}
+                        })}
                     </div>
                 </div>
             }
