@@ -28,10 +28,10 @@ export default function UsersCard(props) {
 
     return (
         <div className="card my-2 cardAnimation fadeItem" type="button" onClick={() => props.setIdSelected(props.elem._id)} style={{ overflowX: 'hidden' }}>
-            <div className="card-body d-flex  px-0">
-                <div className="row">
+            <div className="card-body ">
+                <div className="row d-flex">
 
-                    <div className="col-12 col-md-4 d-flex">
+                    <div className="col-12  d-flex">
 
                         <div className="d-flex justify-content-center align-items-center">
 
@@ -71,13 +71,11 @@ export default function UsersCard(props) {
                         </div>
 
                     </div>
-                    {isMobile() &&
-                        <div className="col-12">
+                    <div className="col-12">
 
-                            <hr />
-                        </div>
-                    }
-                    <div className="col-12 col-md-6 d-flex justify-content-evenly align-items-center text-secondary">
+                        <hr />
+                    </div>
+                    <div className="col-12  d-flex justify-content-evenly align-items-center text-secondary">
                         <div>
                             <div className="fs-5  text-center">
                                 <b>12</b>
@@ -110,9 +108,7 @@ export default function UsersCard(props) {
                                 <button
                                     type="button"
                                     class="btn btn-light border"
-                                    id="deleteClientButton"
-                                    data-bs-toggle="modal"
-                                    data-bs-target={"#deleteClientModal" + props.elem._id}>
+                                    id="deleteClientButton">
                                     <FontAwesomeIcon icon={faTrashAlt} className="icon text-secondary" />
                                 </button>
                             </div>

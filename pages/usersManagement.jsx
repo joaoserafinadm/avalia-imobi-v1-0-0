@@ -85,11 +85,11 @@ export default function UsersManagement() {
                     </div>
                     <hr />
                     <div className="row mt-3">
-                        <div className="col-12">
 
                             {usersArray.map(elem => {
                                 return (
-                                    <div className="row">
+                                    <div className="col-12 col-md-6 d-flex">
+
 
                                         <UsersCard setIdSelected={value => setIdSelected(value)} idSelected={idSelected} elem={elem} />
                                     </div>
@@ -97,7 +97,6 @@ export default function UsersManagement() {
                                 )
 
                             })}
-                        </div>
                     </div>
                 </div>
             }
