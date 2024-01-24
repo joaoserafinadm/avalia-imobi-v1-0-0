@@ -77,18 +77,18 @@ export default function UsersCard(props) {
                     </div>
                     <div className="col-12  d-flex justify-content-evenly align-items-center text-secondary">
                         <div>
-                            <div className="fs-5  text-center">
+                            <div className="  text-center">
                                 <b>12</b>
                             </div>
-                            <div className="fs-5 small bold text-center">
+                            <div className=" small bold text-center">
                                 Avaliações
                             </div>
                         </div>
                         <div>
-                            <div className="fs-5  text-center">
+                            <div className="  text-center">
                                 <b>7</b>
                             </div>
-                            <div className="fs-5 small bold text-center">
+                            <div className=" small bold text-center">
                                 Vendas
                             </div>
                         </div>
