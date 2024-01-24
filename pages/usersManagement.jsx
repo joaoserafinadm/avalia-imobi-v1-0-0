@@ -88,7 +88,7 @@ export default function UsersManagement() {
 
                             {usersArray.map(elem => {
                                 return (
-                                    <div className="col-12 col-md-6 d-flex">
+                                    <div className="col-12 col-md-6 d-flex justify-content-center">
 
 
                                         <UsersCard setIdSelected={value => setIdSelected(value)} idSelected={idSelected} elem={elem} />
