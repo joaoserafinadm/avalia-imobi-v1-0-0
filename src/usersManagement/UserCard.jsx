@@ -29,41 +29,75 @@ export default function UsersCard(props) {
     return (
         <div className="card my-2 cardAnimation fadeItem" type="button" onClick={() => props.setIdSelected(props.elem._id)} style={{ overflowX: 'hidden' }}>
             <div className="card-body d-flex  px-0">
-                <div className="d-flex justify-content-center align-items-center">
+                <div className="row">
 
-                    <img src={user.profileImageUrl} alt="" height={80} className="rounded-circle " />
-                </div>
-                <div className="ms-3 col  ">
-                    <div className="row">
-                        <div className="col-12 d-flex align-items-center">
+                    <div className="col-12 col-md-4 d-flex">
 
-                            <FontAwesomeIcon
-                                icon={user.userStatus === 'admGlobal' ? faUserGear : user.userStatus === 'user' ? faUserTie : ''}
-                                className="icon text-secondary me-2" />
-                            <span className="bold">
+                        <div className="d-flex justify-content-center align-items-center">
 
-                                {user.firstName} {user.lastName}
-                            </span>
+                            <img src={user.profileImageUrl} alt="" height={80} className="rounded-circle " />
                         </div>
-                    </div>
-                    <div className="row">
-                        <span className="small">
-                            {user.userStatus === 'admGlobal' ? 'Administrador ' : user.userStatus === 'user' ? 'Corretor' : ''}
-                        </span>
-                    </div>
-                    {/* <div className="row">
-                        <span className="small d-flex align-items-center">
-                            <FontAwesomeIcon icon={faEnvelope} className=" icon-small text-secondary me-2" /> {user.email}
-                        </span>
-                    </div>
-                    <div className="row">
-                        <span className="small d-flex align-items-center">
-                            <FontAwesomeIcon icon={faWhatsapp} className=" icon-small text-secondary me-2" /> {user.celular}
-                        </span>
-                    </div> */}
+                        <div className="ms-3 col  ">
+                            <div className="row">
+                                <div className="col-12 d-flex align-items-center">
 
+                                    <FontAwesomeIcon
+                                        icon={user.userStatus === 'admGlobal' ? faUserGear : user.userStatus === 'user' ? faUserTie : ''}
+                                        className="icon text-secondary me-2" />
+                                    <span className="bold">
+
+                                        {user.firstName} {user.lastName}
+                                    </span>
+                                </div>
+                            </div>
+                            <div className="row">
+                                <span className="small">
+                                    {user.userStatus === 'admGlobal' ? 'Administrador ' : user.userStatus === 'user' ? 'Corretor' : ''}
+                                </span>
+                            </div>
+                            <div className="row mt-2">
+                                <span className="small d-flex align-items-center">
+                                    {user.email}
+                                    {/* <FontAwesomeIcon icon={faEnvelope} className=" icon-small text-secondary me-2" /> {user.email} */}
+                                </span>
+                            </div>
+                            <div className="row">
+                                <span className="small d-flex align-items-center">
+                                    {user.celular ? user.celular : '-'}
+                                    {/* <FontAwesomeIcon icon={faWhatsapp} className=" icon-small text-secondary me-2" /> {user.celular ? user.celular : '-'} */}
+                                </span>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    {isMobile() &&
+                        <div className="col-12">
+
+                            <hr />
+                        </div>
+                    }
+                    <div className="col-12 col-md-6 d-flex justify-content-evenly align-items-center text-secondary">
+                        <div>
+                            <div className="fs-5  text-center">
+                                <b>12</b>
+                            </div>
+                            <div className="fs-5 small bold text-center">
+                                Avaliações
+                            </div>
+                        </div>
+                        <div>
+                            <div className="fs-5  text-center">
+                                <b>7</b>
+                            </div>
+                            <div className="fs-5 small bold text-center">
+                                Vendas
+                            </div>
+                        </div>
+
+
+                    </div>
                 </div>
-
 
 
                 {props.idSelected === props.elem._id && (
