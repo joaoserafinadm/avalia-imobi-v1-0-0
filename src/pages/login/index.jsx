@@ -7,9 +7,37 @@ import SignIn from "./SignIn";
 import RescuePassword from "./RescuePassword";
 import SignUp from "./SignUp";
 import AuthModal from "./AuthModal";
+import { useSession } from "next-auth/react";
+import { SpinnerLG } from "../../components/loading/Spinners";
 
 export default function Login() {
   const [section, setSection] = useState("signIn");
+
+  const session = useSession()
+
+  const handleSocialAAuth = (user) => {
+
+    console.log("user", user)
+
+
+  }
+
+  if (session.status === "loading") {
+    return (
+      <div className={`${styles.container} container-fluid`}>
+        <SpinnerLG />
+      </div>
+    )
+  }
+
+  if(session.status === "authenticated") {
+    handleSocialAAuth(session?.data?.user)
+    return (
+      <div className={`${styles.container} container-fluid`}>
+        <SpinnerLG />
+      </div>
+    )
+  }
 
   return (
     <>

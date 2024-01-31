@@ -43,6 +43,7 @@ import Login from "../src/pages/login";
 import PasswordRecover from "../src/pages/login/PasswordRecovery";
 import jwt from "jsonwebtoken";
 import NewClient from "../src/pages/newClient/index.jsx";
+import { SessionProvider } from "next-auth/react"
 
 
 // import SignUp from '../src/components/signUp/SignUp'
@@ -119,9 +120,24 @@ export default function MyApp({ Component, pageProps }) {
             return (
                 <Provider store={store}>
                     <PersistGate persistor={persistedStore}>
+                        <SessionProvider>
 
-                        <Login onChange={(token) => setToken(token)} />
+                            <Head>
+                                <title>Avalia Imobi</title>
+                                <meta
+                                    name="viewport"
+                                    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+                                />
+                                <link rel="icon" href="favicon.ico" />
 
+                                <link rel="manifest" href="/manifest.json" />
+                                <link rel="apple-touch-icon" href="/icon.png" />
+                                <meta name="theme-color" content="#5a5a5a" />
+                            </Head>
+
+                            <Login onChange={(token) => setToken(token)} />
+
+                        </SessionProvider>
                     </PersistGate>
                 </Provider>
             );

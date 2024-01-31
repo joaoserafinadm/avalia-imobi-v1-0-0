@@ -8,8 +8,9 @@ import baseUrl from "../../../utils/baseUrl";
 import router from "next/router";
 import { SpinnerSM } from "../../components/loading/Spinners";
 import Cookies from "js-cookie";
+import { signIn } from 'next-auth/react'
 
-export default function signIn(props) {
+export default function signInPage(props) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -204,7 +205,7 @@ export default function signIn(props) {
                                         </div>
                                     </div>
                                     <div className="row">
-                                        <span className="card py-2 px-1 my-2 cardAnimation" type="button" >
+                                        <span className="card py-2 px-1 my-2 cardAnimation" type="button" onClick={() => signIn('google')}>
                                             <div className="row ">
                                                 <div className="col-12 d-flex justify-content-center">
                                                     <div className="icon-start">

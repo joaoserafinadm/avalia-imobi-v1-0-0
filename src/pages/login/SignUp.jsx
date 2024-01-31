@@ -11,6 +11,7 @@ import PolicyModal from "./PolicyModal";
 import AuthModal from "./AuthModal";
 import { SpinnerSM } from "../../components/loading/Spinners";
 import SignUpSuccessModal from "./SignUpSuccessModal";
+import { signIn } from 'next-auth/react'
 
 export default function SignUp(props) {
     const router = useRouter();
@@ -311,7 +312,7 @@ export default function SignUp(props) {
                                     </div>
                                 </div>
                                 <div className="row">
-                                    <span className="card py-2 px-1 my-2 cardAnimation" type="button" >
+                                    <span className="card py-2 px-1 my-2 cardAnimation" type="button" onClick={() => signIn('google')}>
                                         <div className="row ">
                                             <div className="col-12 d-flex justify-content-center">
                                                 <div className="icon-start">
