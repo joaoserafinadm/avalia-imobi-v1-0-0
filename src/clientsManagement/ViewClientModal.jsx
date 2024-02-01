@@ -14,31 +14,29 @@ export default function ViewClientModal(props) {
     const client = props.clientSelected
 
 
-
-
     return (
         <div class="modal fade" id="viewClientModal" tabindex="-1" aria-labelledby="Modal" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title title-dark bold">{client.clientName} {client.clientLastName}</h5>
+                        <h5 class="modal-title title-dark bold">{client?.clientName} {client?.clientLastName}</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div className="modal-body">
                         <div className="row">
                             <div className="col-12  col-md-6 d-flex  justify-content-center my-2">
-                                <PropertyTypeCard type={client.propertyType} />
+                                <PropertyTypeCard type={client?.propertyType} />
                             </div>
                             <div className="col-12  col-md-6 d-flex  justify-content-center my-2">
                                 <div className="row">
                                     <div className="col-12 ">
-                                        <span className="fs-2">{client.clientName} {client.clientLastName}</span>
+                                        <span className="fs-2">{client?.clientName} {client?.clientLastName}</span>
                                     </div>
                                     <div className="col-12">
-                                        <span>{client.email}</span>
+                                        <span>{client?.email}</span>
                                     </div>
                                     <div className="col-12">
-                                        <span>{client.celular}</span>
+                                        <span>{client?.celular}</span>
                                     </div>
                                 </div>
                             </div>
@@ -50,7 +48,7 @@ export default function ViewClientModal(props) {
                                     Área Total:
                                 </div>
                                 <div>
-                                    {client.areaTotal} m²
+                                    {client?.areaTotal} m²
                                 </div>
                             </div>
                             <div className="col-12 col-md-6 my-2 d-flex">
@@ -58,69 +56,69 @@ export default function ViewClientModal(props) {
                                     Área Total Privativa:
                                 </div>
                                 <div>
-                                    {client.areaTotalPrivativa} m²
+                                    {client?.areaTotalPrivativa} m²
                                 </div>
 
                             </div>
                             <div className="col-12 col-md-4 my-2 d-flex">
                                 <div>
-                                    {client.quartos}
+                                    {client?.quartos}
 
                                 </div>
                                 <div className="ms-1 bold">
 
-                                    quarto{client.quartos > 1 ? 's' : ''}
+                                    quarto{client?.quartos > 1 ? 's' : ''}
                                 </div>
                             </div>
                             <div className="col-12 col-md-4 my-2 d-flex">
                                 <div>
 
-                                    {client.suites}
+                                    {client?.suites}
                                 </div>
                                 <div className="ms-1 bold">
 
-                                    suíte{client.suites > 1 ? 's' : ''}
+                                    suíte{client?.suites > 1 ? 's' : ''}
                                 </div>
                             </div>
                             <div className="col-12 col-md-4 my-2 d-flex">
                                 <div>
 
-                                    {client.banheiros}
+                                    {client?.banheiros}
                                 </div>
                                 <div className="ms-1 bold">
 
-                                    banheiro{client.banheiros > 1 ? 's' : ''}
+                                    banheiro{client?.banheiros > 1 ? 's' : ''}
                                 </div>
                             </div>
                             <div className="col-12 col-md-4 my-2 d-flex">
                                 <div>
 
-                                    {client.vagasGaragem}
+                                    {client?.vagasGaragem}
                                 </div>
                                 <div className="ms-1 bold">
 
-                                    vaga{client.vagasGaragem > 1 ? 's' : ''} de garagem
+                                    vaga{client?.vagasGaragem > 1 ? 's' : ''} de garagem
                                 </div>
                             </div>
                             <div className="col-12 col-md-4 my-2 d-flex">
                                 <div>
 
-                                    {client.sacadas}
+                                    {client?.sacadas}
                                 </div>
                                 <div className="ms-1 bold">
 
-                                    sacada{client.sacadas > 1 ? 's' : ''}
+                                    sacada{client?.sacadas > 1 ? 's' : ''}
                                 </div>
                             </div>
                             <div className="col-12 col-md-4 my-2 d-flex mb-4">
 
                                 <div>
 
-                                    {client.andar}º
+                                    {client?.andar}º
                                 </div>
                                 <div className="ms-1 bold">
 
-                                    andar{client.sacadas > 1 ? 's' : ''}
+                                    andar{client?.sacadas > 1 ? 's' : ''}
                                 </div>
 
 
@@ -203,16 +201,16 @@ export default function ViewClientModal(props) {
                             </div>
 
                             <div className="col-12 my-2">
-                                {client.logradouro}, {client.numero} - {client.bairro}, {client.cep}, {client.cidade} / {client.uf}
+                                {client?.logradouro}, {client?.numero} - {client?.bairro}, {client?.cep}, {client?.cidade} / {client?.uf}
                             </div>
 
 
                             <div className="col-12 my-2 mb-4" >
 
 
-                                {client.latitude && client.longitude && (
+                                {client?.latitude && client?.longitude && (
 
-                                    <Map location={{ lat: client.latitude, lng: client.longitude }} zoom={18} />
+                                    <Map location={{ lat: client?.latitude, lng: client?.longitude }} zoom={18} />
                                 )}
 
                             </div>

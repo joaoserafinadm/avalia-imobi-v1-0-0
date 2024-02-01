@@ -41,5 +41,59 @@ export default authenticated(async (req, res) => {
     }
 
 
+    else if (req.method === "DELETE") {
+
+        const { company_id, user_id, clientId } = req.query
+
+        console.log(company_id, user_id, clientId)
+
+        if (!company_id || !user_id || !clientId) {
+            res.status(400).json({ message: "Missing parameters on request body" })
+        } else {
+
+            const { db } = await connect()
+
+            const companyExist = await db.collection('companies').findOne({ _id: ObjectId(company_id) })
+
+            if (!companyExist) {
+                res.status(400).json({ message: "Company does not exist" })
+            } else {
+
+                const userExist = await db.collection('users').findOne({ _id: ObjectId(user_id) })
+
+                if (!userExist) {
+                    res.status(400).json({ message: "User does not exist" })
+                } else {
+
+                    const clientExist = companyExist.clients.find(elem => elem._id.toString() === clientId)
+
+                    if (!clientExist) {
+                        res.status(400).json({ message: "Client does not exist" })
+                    } else {
+
+                        const response = await db.collection('companies').updateOne(
+                            { _id: ObjectId(company_id) },
+                            { $pull: { clients: { _id: ObjectId(clientId) } } }
+                        )
+
+                        console.log(response)
+
+                        if (response.modifiedCount === 0) {
+                            res.status(400).json({ message: "Client does not exist" })
+                        } else {
+                            res.status(200).json({ message: "Client deleted" })
+                        }
+                    }
+                }
+
+
+            }
+        }
+
+
+
+    }
+
+
 
 })

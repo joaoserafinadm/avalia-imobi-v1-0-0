@@ -107,7 +107,7 @@ export default function signInPage(props) {
                     {window.innerWidth > 990 && (
                         <div className=" d-flex justify-content-center align-items-center">
                             <img
-                                src="/LOGO_06.png"
+                                src="/LOGO_05.png"
                                 alt=""
                                 className={`${styles.logoImg}`}
                                 onLoad={() => setLoadedImages(loadedImages + 1)}

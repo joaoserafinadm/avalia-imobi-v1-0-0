@@ -27,6 +27,7 @@ export default function addClient() {
     const token = jwt.decode(Cookies.get("auth"));
     const dispatch = useDispatch()
     const alertsArray = useSelector(state => state.alerts)
+    const router = useRouter()
 
     //states
     const [clientName, setClientName] = useState('')
@@ -86,7 +87,11 @@ export default function addClient() {
                 }
 
                 dispatch(addAlert(alertsArray, [alert]))
+
+
                 setLoadingSave(false)
+
+                router.push('/clientsManagement')
 
             })
 

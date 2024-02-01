@@ -2,7 +2,7 @@
     position: fixed;
     right: 0;
     top: calc(var(--header-height) + 10px);
-    width: calc(100vw - var(--aside-width));
+    width: calc(100vw - var(--aside-width) - 10px) ;
     // height: 100vh;
     padding: 0 10px;
   transition: ease-in-out .3s;

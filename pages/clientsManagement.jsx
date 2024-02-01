@@ -29,6 +29,8 @@ export default function clientsManagement() {
     const [allClients, setAllClients] = useState([])
     const [section, setSection] = useState('myClients')
     const [searchValue, setSearchValue] = useState('')
+    const [clientSelected, setClientSelected] = useState('')
+
 
     const dispatch = useDispatch()
 
@@ -44,7 +46,6 @@ export default function clientsManagement() {
 
     const dataFunction = async (company_id) => {
 
-        setLoadingPage(true)
         await axios.get(`${baseUrl()}/api/clientsManagement`, {
             params: {
                 company_id: company_id
@@ -110,7 +111,7 @@ export default function clientsManagement() {
                             </div>
                         </div>
                     </div>
-                    
+
                     {/* <hr /> */}
 
                     <div className="container carousel  " data-bs-touch="false" data-bs-interval='false' id="clientsManagementSection">
@@ -120,7 +121,11 @@ export default function clientsManagement() {
                             <div className="carousel-item active">
                                 <div className="row d-flex justify-content-center">
                                     <div className="col-12" >
-                                        <ClientsPage clients={clientsArray} section='myClients' user_id={token.sub} />
+                                        <ClientsPage
+                                            clients={clientsArray}
+                                            section='myClients'
+                                            user_id={token.sub}
+                                            setClientSelected={value => setClientSelected(value)} />
                                     </div>
                                 </div>
                             </div>
@@ -128,7 +133,11 @@ export default function clientsManagement() {
                                 <div className="row d-flex justify-content-center">
                                     <div className="col-12" >
 
-                                        <ClientsPage clients={clientsArray} section='allClients' user_id={token.sub} />
+                                        <ClientsPage
+                                            clients={clientsArray}
+                                            section='allClients'
+                                            user_id={token.sub}
+                                            setClientSelected={value => setClientSelected(value)} />
                                     </div>
 
                                 </div>
@@ -138,7 +147,10 @@ export default function clientsManagement() {
                     </div>
 
 
-                    <DeleteClientModal />
+
+                    
+            <ViewClientModal clientSelected={clientSelected} />
+            <DeleteClientModal clientSelected={clientSelected} dataFunction={() => dataFunction(token.company_id)} />
 
 
                 </div >

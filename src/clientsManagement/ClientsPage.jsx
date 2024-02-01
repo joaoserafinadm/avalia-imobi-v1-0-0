@@ -4,6 +4,7 @@ import Pagination from "./Pagination"
 import ClientCard_02 from "./ClientCard_02"
 import ViewClientModal from "./ViewClientModal"
 import ClientStatus from "./ClientStatus"
+import DeleteClientModal from "./DeleteClientModal"
 
 
 
@@ -76,8 +77,8 @@ export default function ClientsPage(props) {
 
                             return (
                                 <div className="col-12 col-sm-6 col-md-4 col-xl-3 d-flex justify-content-center">
-                                    <ClientCard_02
-                                        elem={elem} setClientSelected={value => setClientSelected(value)}
+                                    <ClientCard_02 section={props.section}
+                                        elem={elem} setClientSelected={value => props.setClientSelected(value)}
                                         setIdSelected={value => idSelected === value ? setIdSelected('') : setIdSelected(value)}
                                         idSelected={idSelected} />
                                 </div>
@@ -97,7 +98,7 @@ export default function ClientsPage(props) {
             }
 
 
-            <ViewClientModal clientSelected={clientSelected} />
+
 
         </>
     )

@@ -47,17 +47,22 @@ export default authenticated(async (req, res) => {
 
                 const response = await db.collection("companies").updateOne({ _id: ObjectId(company_id), },
                     {
-                        $addToSet: {
-                            "clients":
-                            {
-                                _id: newId,
-                                clientName: clientName,
-                                clientLastName: clientLastName,
-                                celular: celular,
-                                propertyType: propertyType,
-                                urlToken: urlToken,
-                            }
-                        }
+                        $push: {
+                            clients: {
+                                $each: [
+                                    {
+                                        _id: newId,
+                                        clientName: clientName,
+                                        clientLastName: clientLastName,
+                                        celular: celular,
+                                        propertyType: propertyType,
+                                        urlToken: urlToken,
+                                        user_id: userExist._id
+                                    },
+                                ],
+                                $position: 0, // Adiciona no início do array
+                            },
+                        },
                     })
 
                 console.log(response)

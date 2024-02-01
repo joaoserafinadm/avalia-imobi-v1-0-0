@@ -30,7 +30,7 @@ export default function Alerts() {
 
     const handleCopy = (url) => {
 
-        
+
         navigator.clipboard.writeText(url);
         setCopied(true)
 
@@ -59,7 +59,7 @@ export default function Alerts() {
                             <div className="row">
                                 <div className="col-12 d-flex">
 
-                                    
+
                                     <span className="mx-2 cardAnimation" type="button" >
                                         <Link href={`whatsapp://send?text=${replaceAmpersand(elem.link + "&userId=" + token.sub)}`} target="_blank">
                                             <div className="d-flex justify-content-center">
@@ -84,7 +84,7 @@ export default function Alerts() {
                                             </div>
                                         </a>
                                     </span>
-                                    
+
                                     <span className="mx-2 cardAnimation" type="button" onClick={() => handleCopy(elem.link + "&userId=" + token.sub)}>
                                         <div className="btn-round text-white bg-secondary mx-2 d-flex justify-content-center align-items-center" >
                                             {copied ? <FontAwesomeIcon icon={faCheck} className="icon fadeItem" /> : <FontAwesomeIcon icon={faCopy} className="icon fadeItem" />}
@@ -103,6 +103,18 @@ export default function Alerts() {
                     )
 
                 }
+
+                else {
+                    return (
+                        <div class="alert bg-orange alert-dismissible fade show fadeItem" role="alert" >
+                            <span> {elem.message} </span>
+                            <button type="button" class="btn-close" aria-label="Close" onClick={() => dispatch(removeAlert(alertsArray, index))}></button>
+                        </div>
+                    )
+
+                }
+
+
 
             })}
 

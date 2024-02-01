@@ -277,7 +277,8 @@ export default function ClientCard_02(props) {
                                         class="btn btn-light border"
                                         id={"deleteClientButton" + props.elem._id}
                                         data-bs-toggle="modal"
-                                        data-bs-target={"#deleteClientModal" + props.elem._id}>
+                                        data-bs-target={"#deleteClientModal"}
+                                        onClick={() => props.setClientSelected(props.elem)}>
                                         <FontAwesomeIcon icon={faTrashAlt} className="icon text-secondary" />
                                     </button>
                                 </div>
@@ -297,11 +298,11 @@ export default function ClientCard_02(props) {
                             <div className="col-12 d-flex justify-content-center">
                                 <div class="btn-group" role="group" aria-label="Basic example">
 
-                                    <button type="button" class="btn btn-light border" id={"shareClientButton" + props.elem._id}>
+                                    <button type="button" class="btn btn-light border" id={"shareClientButton" + props.elem._id + props.section}>
                                         <FontAwesomeIcon icon={faShare} className="icon  text-secondary" />
                                     </button>
 
-                                    <button type="button" class="btn btn-light border" id={"editClientButton" + props.elem._id}>
+                                    <button type="button" class="btn btn-light border" id={"editClientButton" + props.elem._id + props.section}>
                                         <FontAwesomeIcon icon={faEdit} className="icon  text-secondary" />
                                     </button>
 
@@ -310,7 +311,8 @@ export default function ClientCard_02(props) {
                                         class="btn btn-light border"
                                         id={"deleteClientButton" + props.elem._id}
                                         data-bs-toggle="modal"
-                                        data-bs-target={"#deleteClientModal" + props.elem._id}>
+                                        data-bs-target={"#deleteClientModal"}
+                                        onClick={() => props.setClientSelected(props.elem)}>
                                         <FontAwesomeIcon icon={faTrashAlt} className="icon text-secondary" />
                                     </button>
                                 </div>
