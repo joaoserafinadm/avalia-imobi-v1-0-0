@@ -16,10 +16,12 @@ import navbarHide from "../utils/navbarHide";
 import { useDispatch } from "react-redux";
 import DeleteClientModal from "../src/clientsManagement/DeleteClientModal";
 import ViewClientModal from "../src/clientsManagement/ViewClientModal";
+import { showModal } from "../utils/modalControl";
 
 
 
 export default function clientsManagement() {
+
 
     const token = jwt.decode(Cookies.get("auth"));
 
@@ -94,6 +96,7 @@ export default function clientsManagement() {
                                 </button>
                             </Link>
                         </div>
+
                     </div>
                     <div className="row mt-3">
                         <div className="col-12 col-md-3 d-flex justify-content-start">

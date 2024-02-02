@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleBarOff, toggleBarOn } from "../../../store/ToggleBarStatus/ToggleBarStatus.action";
 import window2Mobile from "../../../utils/window2Mobile";
+import { closeModal } from "../../../utils/modalControl";
 
 export default function MainLayout({ children }) {
 

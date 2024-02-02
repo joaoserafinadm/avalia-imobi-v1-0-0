@@ -52,7 +52,7 @@ export default function DeleteClientModal(props) {
     return (
 
         <div class="modal fade" id="deleteClientModal" tabindex="-1" aria-labelledby="deleteClienteModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title title-dark bold">Deletar Cliente</h5>
@@ -63,7 +63,7 @@ export default function DeleteClientModal(props) {
                             <div className="col-12">
                                 <p>Tem a certeza que deseja deletar <b className="bold">{client?.clientName}{" " + client?.clientLastName}</b>?</p>
                             </div>
-                        </div>
+                        </div>                
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Cancelar</button>

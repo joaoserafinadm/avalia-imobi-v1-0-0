@@ -85,7 +85,6 @@ export default function SignUp(props) {
 
         return new Promise(async resolve => {
 
-
             setAuthError('')
 
             if (!authCode || !code) {
@@ -93,12 +92,11 @@ export default function SignUp(props) {
                 resolve(false)
             }
 
-
             const data = {
                 authCode,
                 code
             }
-
+            
             const response = await axios.post(`${baseUrl()}/api/login/authCode`, data)
                 .then(res => {
 
