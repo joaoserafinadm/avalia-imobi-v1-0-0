@@ -7,31 +7,35 @@ import { useEffect, useState } from "react"
 import tippy from "tippy.js";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import ClientStatus from "./ClientStatus"
-
+import { replaceAmpersand } from "../../utils/replaceAmpersand"
+import Cookies from "js-cookie";
+import jwt from "jsonwebtoken";
 
 export default function ClientCard_02(props) {
+
+    const token = jwt.decode(Cookies.get('auth'))
 
 
     const client = props.elem
 
     useEffect(() => {
-        tippy("#viewClientButton" + props.elem._id, {
+        tippy("#viewClientButton" + props.elem._id + props.section, {
             content: "Visualizar",
             placement: 'bottom'
         });
-        tippy("#deleteClientButton" + props.elem._id, {
+        tippy("#deleteClientButton" + props.elem._id + props.section, {
             content: "Deletar",
             placement: 'bottom'
         });
-        tippy("#evaluateClientButton" + props.elem._id, {
+        tippy("#evaluateClientButton" + props.elem._id + props.section, {
             content: "Avaliar",
             placement: 'bottom'
         });
-        tippy("#editClientButton" + props.elem._id, {
+        tippy("#editClientButton" + props.elem._id + props.section, {
             content: "Editar",
             placement: 'bottom'
         });
-        tippy("#shareClientButton" + props.elem._id, {
+        tippy("#shareClientButton" + props.elem._id + props.section, {
             content: "Enviar formulário",
             placement: 'bottom'
         });
@@ -52,6 +56,19 @@ export default function ClientCard_02(props) {
     const handleNext = () => {
         setActiveIndex((prevIndex) => (prevIndex === client?.files.length - 1 ? 0 : prevIndex + 1));
     };
+
+    const handleShare = async (url) => {
+        try {
+            await navigator.share({
+                title: 'Título do Compartilhamento',
+                text: 'Texto para Compartilhar',
+                url: url
+            });
+            console.log('Conteúdo compartilhado com sucesso!');
+        } catch (error) {
+            console.error('Erro ao compartilhar:', error);
+        }
+    }
 
 
 
@@ -140,7 +157,7 @@ export default function ClientCard_02(props) {
             <div class="card-body">
 
 
-                <h5 class="card-title mt-1"><ClientStatus status={'active'} id={client?._id} /> {client?.clientName} {client.clientLastName} </h5>
+                <h5 class="card-title mt-1"><ClientStatus status={client?.status} id={client?._id} /> {client?.clientName} {client.clientLastName} </h5>
 
 
 
@@ -298,9 +315,18 @@ export default function ClientCard_02(props) {
                             <div className="col-12 d-flex justify-content-center">
                                 <div class="btn-group" role="group" aria-label="Basic example">
 
-                                    <button type="button" class="btn btn-light border" id={"shareClientButton" + props.elem._id + props.section}>
+                                    <button onClick={() => handleShare(props.elem.urlToken + "&userId=" + token.sub)}
+                                        type="button"
+                                        class="btn btn-light border"
+                                        id={"shareClientButton" + props.elem._id + props.section}>
                                         <FontAwesomeIcon icon={faShare} className="icon  text-secondary" />
                                     </button>
+                                    {/* <button onClick={() => navigator.clipboard.writeText(props.elem.urlToken + "&userId=" + token.sub)}
+                                        type="button"
+                                        class="btn btn-light border"
+                                        id={"shareClientButton" + props.elem._id + props.section}>
+                                        <FontAwesomeIcon icon={faShare} className="icon  text-secondary" />
+                                    </button> */}
 
                                     <button type="button" class="btn btn-light border" id={"editClientButton" + props.elem._id + props.section}>
                                         <FontAwesomeIcon icon={faEdit} className="icon  text-secondary" />

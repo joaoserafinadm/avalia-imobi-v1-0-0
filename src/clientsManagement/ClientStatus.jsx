@@ -29,7 +29,7 @@ export default function ClientStatus(props) {
                         props.status === 'active' ? 'text-warning' :
                             props.status === 'evaluated' ? 'text-primary' :
                                 props.status === 'sold' ? 'text-success' :
-                                    ''} style={{ height: "12px" }} />
+                                    'text-secondary'} style={{ height: "12px" }} />
             )}
         </>
     )

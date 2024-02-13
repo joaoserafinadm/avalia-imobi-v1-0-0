@@ -15,6 +15,7 @@ import {
     FacebookMessengerShareButton,
     FacebookMessengerIcon,
 } from 'next-share'
+import { replaceAmpersand } from "../../utils/replaceAmpersand"
 
 
 
@@ -40,11 +41,7 @@ export default function Alerts() {
     }
 
 
-    const replaceAmpersand = (url) => {
-        // Substituir "%26" por "&"
-        const updatedUrl = url.replace(/&/g, '%26');
-        return updatedUrl;
-    };
+
 
 
 

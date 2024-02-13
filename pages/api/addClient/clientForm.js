@@ -100,6 +100,7 @@ export default async function (req, res) {
                             ...clientExist,
                             ...dataFilter,
                             active: true,
+                            status: 'active',
                             dateUpdated: new Date()
                         }
 

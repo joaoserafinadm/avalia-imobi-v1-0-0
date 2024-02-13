@@ -48,19 +48,13 @@ export default function NewClient() {
 
     useEffect(() => {
         dataFunction(queryUserId, queryClientId)
-        if (initialSlide === 0) {
-            setTimeout(() => {
-                setShowStartBtn(true)
-            }, 8000)
-        } else {
-            setShowStartBtn(true)
-        }
-
     }, [])
 
     const dataFunction = async (user_id, client_id) => {
 
         if (newClientForm.client_id !== client_id) {
+
+            dispatch(initialValues())
 
             const data = {
                 user_id,
@@ -72,6 +66,12 @@ export default function NewClient() {
             })
                 .then(res => {
 
+                    setTimeout(() => {
+                        setShowStartBtn(true)
+                    }, 8000)
+
+
+                    dispatch(initialValues())
                     dispatch(setClient_id(res.data.client_id))
                     dispatch(setClientName(res.data.clientName))
                     dispatch(setClientLastName(res.data.clientLastName))
@@ -92,6 +92,8 @@ export default function NewClient() {
                 })
         } else {
             setLoadingPage(false)
+            setShowStartBtn(true)
+
         }
 
 

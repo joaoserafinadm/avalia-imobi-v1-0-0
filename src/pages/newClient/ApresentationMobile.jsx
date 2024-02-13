@@ -29,7 +29,7 @@ export default function ApresentationMobile(props) {
                                 500,
                                 `Olá ${newClientForm.clientName}.\nMe chamo ${newClientForm.userFirstName}, e irei te ajudar a avaliar o seu imóvel.`,
                                 200,
-                                `Olá ${newClientForm.clientName}.\nMe chamo ${newClientForm.userFirstName}, e irei te ajudar a avaliar o seu imóvel.\nPreecha o formulário de cadastro para que possamos começar.`,
+                                `Olá ${newClientForm.clientName}.\nMe chamo ${newClientForm.userFirstName}, e irei te ajudar a avaliar o seu imóvel.\nPreencha o formulário de cadastro para que possamos começar.`,
                             ]}
                             wrapper="span"
                             speed={50}
