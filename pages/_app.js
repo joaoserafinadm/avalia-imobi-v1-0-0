@@ -78,7 +78,6 @@ export default function MyApp({ Component, pageProps }) {
         const queryClientId = urlSearchParams.get("clientId");
         const queryUserId = urlSearchParams.get("userId");
 
-        console.log(urlSearchParams, queryId, queryToken, queryClientId)
 
         if (queryId && queryToken) {
             setPasswordRecoverRoute(true);
@@ -119,7 +118,7 @@ export default function MyApp({ Component, pageProps }) {
                             <title>Cadastro do imóvel</title>
                             <meta property="og:title" content="Formulário de cadastro de imóvel" />
                             <meta property="og:description" content="Cadastre seu imóvel para avaliação" />
-                            <meta property="og:image" content="URL_DA_IMAGEM_A_SER_EXIBIDA" />
+                            <meta property="og:image" content="https://res.cloudinary.com/joaoserafinadm/image/upload/v1694998829/AVALIA%20IMOBI/LOGOS/LOGO_02_wkzqga.png" />
                         </Head>
 
 
