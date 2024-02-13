@@ -116,7 +116,7 @@ export default function MyApp({ Component, pageProps }) {
 
                         <Head>
                             <title>Cadastro do imóvel</title>
-                            <meta property="og:title" content="Formulário de cadastro de imóvel" />
+                            <meta property="og:title" content="Formulário de cadastro do imóvel" />
                             <meta property="og:description" content="Cadastre seu imóvel para avaliação" />
                             <meta property="og:image" content="https://res.cloudinary.com/joaoserafinadm/image/upload/v1694998829/AVALIA%20IMOBI/LOGOS/LOGO_02_wkzqga.png" />
                         </Head>
