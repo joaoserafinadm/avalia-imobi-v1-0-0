@@ -4,7 +4,7 @@ import { removeAlert } from "../../store/Alerts/Alerts.actions"
 import Link from "next/link"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faFacebookMessenger, faInstagram, faWhatsapp } from "@fortawesome/free-brands-svg-icons"
-import { faCheck, faCopy } from "@fortawesome/free-solid-svg-icons"
+import { faCheck, faCopy, faShare, faShareAlt } from "@fortawesome/free-solid-svg-icons"
 import { useState } from "react"
 import handleShare from "../../utils/handleShare"
 import Cookies from "js-cookie";
@@ -42,6 +42,21 @@ export default function Alerts() {
 
 
 
+    const handleShare = async (url) => {
+        try {
+            await navigator.share({
+                title: 'Formulário de Cadastro de Imóvel',
+                text: 'Formulário de Cadastro de Imóvel',
+                url: url
+            });
+            console.log('Conteúdo compartilhado com sucesso!');
+        } catch (error) {
+            console.error('Erro ao compartilhar:', error);
+        }
+    }
+
+
+
 
 
 
@@ -56,8 +71,15 @@ export default function Alerts() {
                             <div className="row">
                                 <div className="col-12 d-flex">
 
+                                    <button
+                                        className="mx-2 btn btn-sm btn-outline-light"
+                                        type="button"
+                                        onClick={() => handleShare(elem.link + "&userId=" + token.sub)}>
+                                        <FontAwesomeIcon icon={faShareAlt} className="icon" /> Compartilhar
+                                    </button>
 
-                                    <span className="mx-2 cardAnimation" type="button" >
+
+                                    {/* <span className="mx-2 cardAnimation" type="button" >
                                         <Link href={`whatsapp://send?text=${replaceAmpersand(elem.link + "&userId=" + token.sub)}`} target="_blank">
                                             <div className="d-flex justify-content-center">
                                                 <div className="btn-round text-light bg-whatsapp d-flex justify-content-center align-items-center">
@@ -89,7 +111,7 @@ export default function Alerts() {
                                         <div className="d-flex justify-content-center align-items-center mt-1">
                                             <span className={`${styles.small} text-center bold`}>Copiar<br />link</span>
                                         </div>
-                                    </span>
+                                    </span> */}
 
                                 </div>
                             </div>

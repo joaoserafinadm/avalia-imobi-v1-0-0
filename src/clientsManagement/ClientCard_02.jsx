@@ -60,8 +60,8 @@ export default function ClientCard_02(props) {
     const handleShare = async (url) => {
         try {
             await navigator.share({
-                title: 'Título do Compartilhamento',
-                text: 'Texto para Compartilhar',
+                title: 'Formulário de Cadastro de Imóvel',
+                text: 'Formulário de Cadastro de Imóvel',
                 url: url
             });
             console.log('Conteúdo compartilhado com sucesso!');

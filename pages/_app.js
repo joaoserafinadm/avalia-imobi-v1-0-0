@@ -114,6 +114,15 @@ export default function MyApp({ Component, pageProps }) {
             return (
                 <Provider store={store}>
                     <PersistGate persistor={persistedStore}>
+
+                        <Head>
+                            <title>Cadastro do imóvel</title>
+                            <meta property="og:title" content="Formulário de cadastro de imóvel" />
+                            <meta property="og:description" content="Cadastre seu imóvel para avaliação" />
+                            <meta property="og:image" content="URL_DA_IMAGEM_A_SER_EXIBIDA" />
+                        </Head>
+
+
                         <NewClient />;
                     </PersistGate>
                 </Provider>
