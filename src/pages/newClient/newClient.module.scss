@@ -1,47 +1,74 @@
 .profileImage {
-    height: 160px ;
-    border-radius: 80px ;
+  height: 160px;
+  border-radius: 80px;
 }
 
 .profileImagePosition {
-    position: absolute;
-    top: -10px;
-    right: 0px ;
-    z-index: 1;
+  position: absolute;
+  top: -10px;
+  right: 0px;
+  z-index: 1;
 }
 
 .logo {
-    max-height: 70px;
-    max-width: 50vw;
-    width: auto;
-    height: auto;
-  }
-  
+  max-height: 70px;
+  max-width: 50vw;
+  width: auto;
+  height: auto;
+}
+
 .logoEnd {
-    max-height: 100px;
+  max-height: 100px;
+  max-width: 70vw;
+  width: auto;
+  height: auto;
+}
+
+// .logoPosition {
+//   position: absolute;
+//   top: 70px;
+//   left: 35px ;
+//   z-index: 1;
+// }
+.logoEndPosition {
+  position: absolute;
+  bottom: 100px;
+  z-index: 1;
+}
+
+.logoBottom {
+  height: calc(100% - 320px);
+}
+
+.textPosition {
+  position: absolute;
+  top: 160px;
+}
+
+@media screen and (min-width:1100px) {
+
+  .logo {
+    max-height: 200px;
     max-width: 70vw;
     width: auto;
     height: auto;
   }
 
-  // .logoPosition {
-  //   position: absolute;
-  //   top: 70px;
-  //   left: 35px ;
-  //   z-index: 1;
-  // }
-  .logoEndPosition {
+  .logoPosition {
     position: absolute;
-    bottom: 100px;
-    z-index: 1;
+    bottom:50px;
   }
 
-  .logoBottom {
-    height: calc(100% - 320px);
+
+  .profileImagePosition {
+    position:relative;
+   display: flex;
+   justify-content: center;
   }
 
   .textPosition {
     position: absolute;
-    top: 160px;
+    top: 200px;
   }
 
+}

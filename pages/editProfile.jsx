@@ -190,7 +190,7 @@ export default function EditProfile() {
                 :
                 <>
 
-                    <CropperImageModal selectFile={selectFile} setResult={value => setProfileImageUrlReview(value)} />
+                    <CropperImageModal selectFile={selectFile} setResult={value => setProfileImageUrlReview(value)} aspect={1 / 1}/>
 
 
 

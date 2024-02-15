@@ -18,6 +18,7 @@ import { createImageUrl } from "../utils/createImageUrl";
 import ImageHeaderModal from "../src/companyEdit/ImageHeaderModal";
 import { FixedTopicsBottom } from "../src/components/fixedTopics";
 import removeInputError from "../utils/removeInputError";
+import CropperImageModal from "../src/companyEdit/CropperImageModal";
 
 
 
@@ -45,6 +46,9 @@ export default function companyEdit() {
     const [logoPreview, setLogoPreview] = useState('')
     const [headerImgPreview, setHeaderImgPreview] = useState('')
     const [backgroundImages, setBackgroundImages] = useState([])
+
+    //Image crop
+    const [selectFile, setSelectFile] = useState(null)
 
     //Loading
     const [loadingPage, setLoadingPage] = useState(true)
@@ -166,7 +170,10 @@ export default function companyEdit() {
 
         setLoadingSave(true)
 
-        const newLogo = logoPreview ? await createImageUrl([logoPreview], "AVALIAIMOBI_LOGO_IMG") : ''
+        const blobFile = await fetch(logoPreview).then(r => r.blob());
+
+
+        const newLogo = logoPreview ? await createImageUrl([blobFile], "AVALIAIMOBI_LOGO_IMG") : ''
         // const newHeaderImg = headerImgPreview ? await createImageUrl([headerImgPreview], "AVALIAIMOBI_HEADER_IMG") : ''
 
         const isValid = validate()
@@ -216,6 +223,21 @@ export default function companyEdit() {
 
     }
 
+    const handleFileChange = file => {
+
+
+        if (file) {
+            setSelectFile(URL.createObjectURL(file))
+            setTimeout(() => {
+                var modal = document.getElementById('cropperImageModal')
+                var cropperModal = new bootstrap.Modal(modal)
+                cropperModal.show()
+            }, 20)
+        } else {
+            return
+        }
+    }
+
 
 
     return (
@@ -225,6 +247,10 @@ export default function companyEdit() {
                 <SpinnerLG />
                 :
                 <>
+
+                    <CropperImageModal selectFile={selectFile} setResult={value => setLogoPreview(value)} />
+
+
                     <ImageHeaderModal backgroundImages={backgroundImages} backgroundImg_id={backgroundImg_id} setBackgroundImg_id={value => setBackgroundImg_id(value)} backgroundImagesData={() => backgroundImagesData(token.company_id)} />
 
                     <div className="pagesContent shadow fadeItem" id="pageTop">
@@ -239,12 +265,12 @@ export default function companyEdit() {
                                             <label className=" fw-bold">Logo</label>
                                             <label htmlFor="logoItem" className="span" type='button'>Editar</label>
                                         </div>
-                                        <StyledDropzone setFiles={array => { setLogoPreview(array[0]) }} img>
+                                        <StyledDropzone setFiles={array => { handleFileChange(array[0]) }} img>
                                             <div className="row mt-3 d-flex justify-content-center align-items-center" style={{ height: '150px' }}>
 
                                                 <div className="col-12 d-flex justify-content-center align-items-center" >
                                                     {logoPreview ?
-                                                        <img src={URL.createObjectURL(logoPreview)} alt="logo" id="logoItem" className="logoEdit fadeItem" />
+                                                        <img src={logoPreview} alt="logo" id="logoItem" className="logoEdit fadeItem" />
                                                         :
                                                         <>
                                                             {logo ?
@@ -289,7 +315,7 @@ export default function companyEdit() {
 
 
 
-                                        
+
                                     </div>
                                 </div>
                             </div>

@@ -23,16 +23,16 @@ export default function Slide02(props) {
                     <div className="row">
 
 
-                        <div className="my-2 col-lg-3 col-xxl-2 col-6 d-flex justify-content-center">
+                        <div className="my-2 col-xxl-3 col-6 d-flex justify-content-center">
                             <PropertyTypeCard type="Apartamento"  />
                         </div>
-                        <div className="my-2 col-lg-3 col-xxl-2 col-6 d-flex justify-content-center">
+                        <div className="my-2 col-xxl-3 col-6 d-flex justify-content-center">
                             <PropertyTypeCard type="Casa"  />
                         </div>
-                        <div className="my-2 col-lg-3 col-xxl-2 col-6 d-flex justify-content-center">
+                        <div className="my-2 col-xxl-3 col-6 d-flex justify-content-center">
                             <PropertyTypeCard type="Comercial"  />
                         </div>
-                        <div className="my-2 col-lg-3 col-xxl-2 col-6 d-flex justify-content-center">
+                        <div className="my-2 col-xxl-3 col-6 d-flex justify-content-center">
                             <PropertyTypeCard type="Terreno"  />
                         </div>
                     </div>

@@ -8,7 +8,7 @@ if (typeof window !== "undefined") {
 export default function CropperImageModal(props) {
 
     const [image, setImage] = useState(null)
-    const [crop, setCrop] = useState({ aspect: 1 / 1, unit: 'px', width: 100, height: 100, x: 50, y: 50 })
+    const [crop, setCrop] = useState({ aspect: props.aspect ? props.aspect : '', unit: 'px', width: 100, height: 100, x: 50, y: 50 })
 
 
     function getCroppedImg() {

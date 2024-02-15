@@ -1,6 +1,7 @@
 import { TypeAnimation } from 'react-type-animation';
 import styles from './newClient.module.scss'
 import { useSelector } from 'react-redux';
+import isMobile from '../../../utils/isMobile';
 
 
 export default function ApresentationMobile(props) {
@@ -10,16 +11,18 @@ export default function ApresentationMobile(props) {
 
     return (
         <>
-            <div>
-
-                <img src={newClientForm.profileImageUrl} alt="logo" id="logoItem" className={`${styles.profileImage} ${styles.profileImagePosition} fadeItem1s `} />
-
-            </div>
             <div className="card m-3 fadeItem1s" style={{ height: "90%" }}>
+                <div>
+
+                    <img src={newClientForm.profileImageUrl} alt="logo" id="logoItem" className={`${styles.profileImage} ${styles.profileImagePosition} fadeItem1s `} />
+
+                </div>
                 <div className="card-body">
                     <div style={{ width: '45vw', height: '90px' }} className="d-flex justify-content-center align-items-center">
+                        {isMobile() && (
 
-                        <img src={newClientForm.logo} alt="logo" id="logoItem" className={`${styles.logo} ${styles.logoPosition} fadeItem1s `} />
+                            <img src={newClientForm.logo} alt="logo" id="logoItem" className={`${styles.logo} ${styles.logoPosition} fadeItem1s `} />
+                        )}
                     </div>
                     <div className={`${styles.textPosition} px-1 fadeItem1s`}>
                         <TypeAnimation
@@ -35,6 +38,16 @@ export default function ApresentationMobile(props) {
                             speed={50}
                             style={{ fontSize: '1.5em', display: 'inline-block', whiteSpace: 'pre-line' }}
                         />
+                    </div>
+                    <div className="row">
+                        <div className="col-12 d-flex justify-content-center">
+
+
+                            {!isMobile() && (
+
+                                <img src={newClientForm.logo} alt="logo" id="logoItem" className={`${styles.logo} ${styles.logoPosition} fadeItem1s `} />
+                            )}
+                        </div>
                     </div>
                 </div>
             </div>
