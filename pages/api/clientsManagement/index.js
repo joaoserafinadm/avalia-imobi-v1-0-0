@@ -28,13 +28,17 @@ export default authenticated(async (req, res) => {
 
             const companyExist = await db.collection('companies').findOne({ _id: ObjectId(company_id) })
 
+            const usersArray = await db.collection('users').find({ company_id: company_id })
+                .project({ firstName: 1, lastName: 1, profileImageUrl: 1 }).toArray()
+
+
             if (!companyExist) {
                 res.status(400).json({ message: "Company does not exist" })
             } else {
 
 
                 const clients = companyExist.clients
-                res.status(200).json(clients)
+                res.status(200).json({clients, users: usersArray})
 
             }
         }

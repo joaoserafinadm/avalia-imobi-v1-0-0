@@ -10,10 +10,16 @@ import ClientStatus from "./ClientStatus"
 import { replaceAmpersand } from "../../utils/replaceAmpersand"
 import Cookies from "js-cookie";
 import jwt from "jsonwebtoken";
+import { useSelector } from "react-redux"
 
 export default function ClientCard_02(props) {
 
     const token = jwt.decode(Cookies.get('auth'))
+
+    const users = useSelector(state => state.users)
+
+
+
 
 
     const client = props.elem
@@ -143,12 +149,13 @@ export default function ClientCard_02(props) {
                 <span className="d-flex align-items-center">
                     <div className="small bold bg-white pe-3 ps-2" style={{ borderRadius: '5px 0 0 5px', position: 'relative', right: '-10px' }}>
 
-                        Juliane Kosloski
+                        {users?.find(elem => elem._id === client?.user_id)?.firstName}{' '}
+                        {users?.find(elem => elem._id === client?.user_id)?.lastName}
                     </div>
                     <div className="cardProfileImg">
 
                         <img className="cardProfileImg2 bold border border-4 border-white" style={{ position: 'relative' }}
-                            src="https://res.cloudinary.com/joaoserafinadm/image/upload/v1700622419/AVALIA%20IMOBI/USERS_IMG/xwsqidtdw3srsnjvom50.jpg" alt="" />
+                            src={users?.find(elem => elem._id === client?.user_id)?.profileImageUrl} alt="" />
 
                     </div>
                 </span>
@@ -279,20 +286,20 @@ export default function ClientCard_02(props) {
                                     <button
                                         type="button"
                                         class="btn btn-light border"
-                                        id={"viewClientButton" + props.elem._id}
+                                        id={"viewClientButton" + props.elem._id + props.section}
                                         data-bs-toggle="modal"
                                         data-bs-target="#viewClientModal"
                                         onClick={() => props.setClientSelected(props.elem)}>
                                         <FontAwesomeIcon icon={faEye} className="icon  text-secondary" />
                                     </button>
-                                    <button type="button" class="btn btn-light border" id={"evaluateClientButton" + props.elem._id}>
+                                    <button type="button" class="btn btn-light border" id={"evaluateClientButton" + props.elem._id + props.section}>
                                         <FontAwesomeIcon icon={faMoneyCheckDollar} className="icon  text-secondary" />
                                     </button>
 
                                     <button
                                         type="button"
                                         class="btn btn-light border"
-                                        id={"deleteClientButton" + props.elem._id}
+                                        id={"deleteClientButton" + props.elem._id + props.section}
                                         data-bs-toggle="modal"
                                         data-bs-target={"#deleteClientModal"}
                                         onClick={() => props.setClientSelected(props.elem)}>
@@ -335,7 +342,7 @@ export default function ClientCard_02(props) {
                                     <button
                                         type="button"
                                         class="btn btn-light border"
-                                        id={"deleteClientButton" + props.elem._id}
+                                        id={"deleteClientButton" + props.elem._id + props.section}
                                         data-bs-toggle="modal"
                                         data-bs-target={"#deleteClientModal"}
                                         onClick={() => props.setClientSelected(props.elem)}>

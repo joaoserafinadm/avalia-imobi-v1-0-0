@@ -177,7 +177,7 @@ export default function Nav(props) {
                                                 </li>
                                                 <li>
                                                     <Link href={`/usersManagement`}>
-                                                        <span>Gestão de clientes</span>
+                                                        <span>Gestão de usuário</span>
                                                     </Link>
                                                 </li>
                                             </ul>

@@ -14,6 +14,7 @@ import storage from 'redux-persist/lib/storage'
 import toggleBarStatus from './ToggleBarStatus/ToggleBarStatus.reducer'
 import alerts from './Alerts/Alerts.reducer'
 import newClientForm from './NewClientForm/NewClientForm.reducer'
+import usersArray from './Users/Users.reducer'
 
 const rootReducer = combineReducers({
     // inventoryList: inventoryList,
@@ -28,12 +29,14 @@ const rootReducer = combineReducers({
     // tool: akvoToolReducer,
     toggleStatus: toggleBarStatus,
     alerts: alerts,
-    newClientForm: newClientForm
+    newClientForm: newClientForm,
+    users:usersArray
 })
 
 const persistedReducer = persistReducer({
     key: 'root',
     storage,
+    // blacklist: ['usersArray']
     // blacklist: ['inventoryStates', 'inventoryDB', 'fatoresEmissao', 'userConfig', 'unidList']
 }, rootReducer)
 

@@ -17,6 +17,7 @@ import { useDispatch } from "react-redux";
 import DeleteClientModal from "../src/clientsManagement/DeleteClientModal";
 import ViewClientModal from "../src/clientsManagement/ViewClientModal";
 import { showModal } from "../utils/modalControl";
+import { usersArray } from "../store/users/users.actions";
 
 
 
@@ -24,6 +25,7 @@ export default function clientsManagement() {
 
 
     const token = jwt.decode(Cookies.get("auth"));
+    const dispatch = useDispatch()
 
 
     const [loadingPage, setLoadingPage] = useState(true)
@@ -34,7 +36,6 @@ export default function clientsManagement() {
     const [clientSelected, setClientSelected] = useState('')
 
 
-    const dispatch = useDispatch()
 
     useEffect(() => {
         dataFunction(token.company_id)
@@ -53,8 +54,9 @@ export default function clientsManagement() {
                 company_id: company_id
             }
         }).then(res => {
-            setAllClients(res.data)
-            setClientsArray(res.data)
+            setAllClients(res.data.clients)
+            setClientsArray(res.data.clients)
+            dispatch(usersArray(res.data.users))
             setLoadingPage(false)
         }).catch(e => {
             setLoadingPage(false)
@@ -151,9 +153,9 @@ export default function clientsManagement() {
 
 
 
-                    
-            <ViewClientModal clientSelected={clientSelected} />
-            <DeleteClientModal clientSelected={clientSelected} dataFunction={() => dataFunction(token.company_id)} />
+
+                    <ViewClientModal clientSelected={clientSelected} />
+                    <DeleteClientModal clientSelected={clientSelected} dataFunction={() => dataFunction(token.company_id)} />
 
 
                 </div >
