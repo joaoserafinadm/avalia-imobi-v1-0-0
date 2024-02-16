@@ -17,7 +17,7 @@ import { useDispatch } from "react-redux";
 import DeleteClientModal from "../src/clientsManagement/DeleteClientModal";
 import ViewClientModal from "../src/clientsManagement/ViewClientModal";
 import { showModal } from "../utils/modalControl";
-import { usersArray } from "../store/users/users.actions";
+import { usersArray } from "../store/Users/Users.actions";
 
 
 
