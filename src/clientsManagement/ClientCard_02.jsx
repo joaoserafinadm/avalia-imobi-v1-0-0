@@ -163,8 +163,16 @@ export default function ClientCard_02(props) {
             </div>
             <div class="card-body">
 
+                <div className="row ">
+                    <div className="col-12">
 
-                <h5 class="card-title mt-1"><ClientStatus status={client?.status} id={client?._id} /> {client?.clientName} {client.clientLastName} </h5>
+                        <h5 class="mb-0"> {client?.clientName} {client.clientLastName} </h5>
+                        <ClientStatus status={client?.status} id={client?._id} />
+                    </div>
+                </div>
+
+
+
 
 
 
