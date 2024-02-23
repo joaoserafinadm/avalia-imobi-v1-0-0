@@ -51,9 +51,7 @@ export const RecoverPasswordEmail: React.FC<Readonly<EmailTemplateProps>> = ({
                     </Text>
                     <Section className="text-center mt-[32px] mb-[32px]">
                         <Button href={link}
-                            pX={20}
-                            pY={12}
-                            className="bg-[#f5874f] rounded text-white text-[20px] font-semibold no-underline text-center"
+                            className="bg-[#f5874f] py-[12px] px-[20px] rounded text-white text-[20px] font-semibold no-underline text-center"
                         >
                             Alterar senha
                         </Button>
