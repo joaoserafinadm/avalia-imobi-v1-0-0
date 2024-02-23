@@ -29,7 +29,7 @@ export default function Map(props) {
 
     const containerStyle = {
         width: '100%',
-        height: '80vw'
+        height: props.height ? props.height : '80vw'
     };
 
     const center = { lat: -27.6347491, lng: -52.2747035 }
@@ -115,7 +115,7 @@ export default function Map(props) {
                 </div>
             </div> */}
 
-            <div className="row">
+            <div className="row fadeItem">
                 <div className="col-12" >
 
                     <GoogleMap

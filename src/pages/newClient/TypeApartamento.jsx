@@ -19,7 +19,7 @@ export default function TypeApartamento(props) {
 
                 <div className="row">
 
-                    <div className="col-12 my-3">
+                    <div className="col-12 col-lg-6 my-3">
                         <label for="areaTotalItem" className="form-label">Área total</label>
 
                         <div className="input-group  ">
@@ -33,7 +33,7 @@ export default function TypeApartamento(props) {
                             <span class="input-group-text" id="basic-addon1">m²</span>
                         </div>
                     </div>
-                    <div className="col-12 my-3">
+                    <div className="col-12 col-lg-6 my-3">
                         <label for="areaTotalPrivativaItem" className="form-label">Área total - Privativa</label>
 
                         <div className="input-group  ">
@@ -47,7 +47,7 @@ export default function TypeApartamento(props) {
                             <span class="input-group-text" id="basic-addon1">m²</span>
                         </div>
                     </div>
-                    <div className="col-12 my-3">
+                    <div className="col-12 col-lg-4  my-3">
                         <label for="quartosItem" className="form-label">Número de quartos</label>
 
                         <select id="quartosItem"
@@ -65,7 +65,7 @@ export default function TypeApartamento(props) {
                             <option value="6">6</option>
                         </select>
                     </div>
-                    <div className="col-12 my-3">
+                    <div className="col-12 col-lg-4 my-3">
                         <label for="suitesItem" className="form-label">Número de suítes</label>
 
                         <select id="suitesItem"
@@ -83,7 +83,7 @@ export default function TypeApartamento(props) {
                             <option value="6">6</option>
                         </select>
                     </div>
-                    <div className="col-12 my-3">
+                    <div className="col-12 col-lg-4 my-3">
                         <label for="suitesItem" className="form-label">Banheiros</label>
 
                         <select id="suitesItem"
@@ -101,7 +101,7 @@ export default function TypeApartamento(props) {
                             <option value="6">6</option>
                         </select>
                     </div>
-                    <div className="col-12 my-3">
+                    <div className="col-12 col-lg-4 my-3">
                         <label for="sacadasItem" className="form-label">Sacadas</label>
 
                         <select id="andarItem"
@@ -119,7 +119,7 @@ export default function TypeApartamento(props) {
                             <option value="6">6</option>
                         </select>
                     </div>
-                    <div className="col-12 my-3">
+                    <div className="col-12 col-lg-4 my-3">
                         <label for="andarItem" className="form-label">Andar</label>
 
                         <select id="andarItem"
@@ -149,9 +149,19 @@ export default function TypeApartamento(props) {
                             <option value="18">18</option>
                             <option value="19">19</option>
                             <option value="20">20</option>
+                            <option value="21">21</option>
+                            <option value="22">22</option>
+                            <option value="23">23</option>
+                            <option value="24">24</option>
+                            <option value="25">25</option>
+                            <option value="26">26</option>
+                            <option value="27">27</option>
+                            <option value="28">28</option>
+                            <option value="29">29</option>
+                            <option value="30">30</option>
                         </select>
                     </div>
-                    <div className="col-12 my-3">
+                    <div className="col-12 col-lg-4 my-3">
                         <label for="vagasGaragemItem" className="form-label">Vagas de garagem</label>
 
                         <select id="vagasGaragemItem"

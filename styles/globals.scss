@@ -3080,6 +3080,7 @@ h1 {
 .icon {
   height: 17px !important;
 }
+
 .icon-small {
   height: 12px !important;
 }
@@ -3120,6 +3121,17 @@ h1 {
   max-width: 60vw !important;
   width: auto !important;
   height: auto !important;
+}
+
+@media (min-width: 850px) {
+
+  .fileImgs {
+    max-height: 200px !important;
+    max-width: 60vw !important;
+    width: auto !important;
+    height: auto !important;
+  }
+
 }
 
 

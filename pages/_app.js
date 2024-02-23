@@ -26,11 +26,10 @@ if (typeof window !== "undefined") {
     require("bootstrap/dist/js/bootstrap.min.js")
 }
 
-import { config, dom } from "@fortawesome/fontawesome-svg-core";
+import "@fortawesome/fontawesome-svg-core/styles.css";
+import { config } from "@fortawesome/fontawesome-svg-core";
+// You should do that in a Layout file or in `gatsby-browser.js`.
 config.autoAddCss = false;
-const GlobalStyles = createGlobalStyle`
-    ${dom.css()}
-`;
 
 import baseUrl from "../utils/baseUrl";
 import { store, persistedStore } from "../store/store";

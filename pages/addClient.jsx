@@ -61,7 +61,7 @@ export default function addClient() {
     const handleSave = () => {
 
     }
-    const handleSaveLink = async(company_id) => {
+    const handleSaveLink = async (company_id) => {
 
         setLoadingSave(true)
 
@@ -82,7 +82,7 @@ export default function addClient() {
 
                 const alert = {
                     type: 'addUserLink',
-                    message: 'Cliente adicionado com sucesso! Compartilhar o formulário?',
+                    message: `Cliente ${clientName} adicionado com sucesso! Compartilhar o formulário?`,
                     link: res.data
                 }
 
