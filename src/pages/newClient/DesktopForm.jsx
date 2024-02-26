@@ -7,6 +7,7 @@ import Location from "./Location"
 import UploadFiles from "./UploadFiles"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons"
+import FinalizarButton from "./FinalizarButton"
 
 
 
@@ -125,26 +126,12 @@ export default function DesktopForm(props) {
                             <GeralFeatures />
                             <Location />
                             <UploadFiles setFiles={array => props.setFiles(array)} />
-
-                            <div className="row my-5">
-                                <div className="col-12 d-flex justify-content-center">
-
-
-                                    <span
-                                        type='button'
-                                        className="fs-3 text-secondary fadeItem1s cardAnimation"
-                                        data-bs-target="#clientFormCarouselDesktop"
-                                        data-bs-slide="next">
-                                        Finalizar <FontAwesomeIcon icon={faArrowRight} className="ms-1" />
-                                    </span>
-
-                                </div>
-                            </div>
+                            <FinalizarButton handleSave={() => props.handleSave()} loadingSave={props.loadingSave}/>
                         </>
                     )}
-                    {newClientForm.propertyType === "Terreno" && (
+                    {/* {newClientForm.propertyType === "Terreno" && (
                         <TypeTerreno />
-                    )}
+                    )} */}
 
 
                 </div >

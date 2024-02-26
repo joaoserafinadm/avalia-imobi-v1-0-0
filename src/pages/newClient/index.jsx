@@ -27,6 +27,7 @@ import slideNumber from "../../../utils/slideNumber";
 import isMobile from "../../../utils/isMobile";
 import DesktopForm from "./DesktopForm";
 import ApresentationDesktop from "./ApresentationDesktop";
+import FinalSlideDesktop from "./FinalSlideDesktop";
 
 
 export default function NewClient() {
@@ -125,15 +126,21 @@ export default function NewClient() {
             files: filesUrl
         }
 
-        var myCarousel = document.querySelector('#clientFormCarousel')
-        var carousel = new bootstrap.Carousel(myCarousel)
+        // var myCarousel = document.querySelector('#clientFormCarousel')
+        // var carousel = new bootstrap.Carousel(myCarousel)
+
+        if (!mobile) {
+
+            var myCarousel = document.getElementById('clientFormCarouselDesktop');
+            var carousel = new bootstrap.Carousel(myCarousel);
+        }
 
 
         await axios.post(`${baseUrl()}/api/addClient/clientForm`, data)
             .then(res => {
                 setLoadingSave(false)
                 carousel.next()
-                handleSlide('clientFormCarousel')
+                if (!mobile) handleSlide('clientFormCarousel')
             }).catch(e => {
                 setLoadingSave(false)
             })
@@ -291,7 +298,14 @@ export default function NewClient() {
                                     </div>
                                     <div class={`carousel-item `} style={{ height: '100vh' }} >
 
-                                        <DesktopForm setFiles={array => setFiles(array)}/>
+                                        <DesktopForm
+                                            setFiles={array => setFiles(array)}
+                                            handleSave={() => handleSave(newClientForm)}
+                                            loadingSave={loadingSave} />
+                                    </div>
+                                    <div class={`carousel-item `} style={{ height: '100vh' }} >
+
+                                        <FinalSlideDesktop />
                                     </div>
                                 </div>
 
