@@ -19,7 +19,7 @@ import navbarHide from "./navbarHide"
 
 export default function isMobile() {
 
-    const dispatch = useDispatch()
+    // const dispatch = useDispatch()
 
 
     
@@ -28,7 +28,7 @@ export default function isMobile() {
     if (window.innerWidth < 850) {
     
         
-            navbarHide(dispatch)
+            // navbarHide(dispatch)
     
     
         return true

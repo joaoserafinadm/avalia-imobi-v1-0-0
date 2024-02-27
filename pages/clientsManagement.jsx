@@ -97,7 +97,7 @@ export default function clientsManagement() {
             {loadingPage ?
                 <SpinnerLG />
                 :
-                <div className="pagesContent shadow fadeItem" id="pageTop">
+                <div className="pagesContent-lg shadow fadeItem" id="pageTop">
                     <div className="row">
                         <div className="col-12 d-flex justify-content-end ">
 

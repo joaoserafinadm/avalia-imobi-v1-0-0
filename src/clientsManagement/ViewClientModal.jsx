@@ -210,7 +210,7 @@ export default function ViewClientModal(props) {
 
                                 {client?.latitude && client?.longitude && (
 
-                                    <Map location={{ lat: client?.latitude, lng: client?.longitude }} zoom={18} />
+                                    <Map location={{ lat: client?.latitude, lng: client?.longitude }} zoom={18} height="300px"/>
                                 )}
 
                             </div>

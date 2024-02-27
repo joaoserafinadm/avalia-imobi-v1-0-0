@@ -34,7 +34,7 @@ export default function DeleteClientModal(props) {
         }).then(res => {
 
             const alert = {
-                type: 'clientDeleted',
+                type: 'alert',
                 message: 'Cliente deletado com sucesso.',
                 link: ''
             }

@@ -59,6 +59,7 @@ export default authenticated(async (req, res) => {
                                         urlToken: urlToken,
                                         user_id: userExist._id,
                                         dateAdded: new Date(),
+                                        status: 'outdated'
                                     },
                                 ],
                                 $position: 0, // Adiciona no início do array

@@ -1,6 +1,6 @@
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
+import { SpinnerLG } from "../../components/loading/Spinners";
 
 
 
@@ -22,7 +22,6 @@ export default function FinalizarButton(props) {
             <div className="col-12 d-flex justify-content-center">
                 {props.loadingSave ?
                     <span
-                        type='button' 
                         className="fs-3 text-secondary ">
                         Salvando Informações <SpinnerLG />
                     </span>
