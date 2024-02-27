@@ -76,7 +76,7 @@ export default function ClientsPage(props) {
                         {handleClientsArray(clients, page).map(elem => {
 
                             return (
-                                <div className="col-12 col-sm-6 col-md-4 col-xl-3 d-flex justify-content-center">
+                                <div className="col-12 col-sm-6 col-xl-4 col-xxl-3 d-flex justify-content-center">
                                     <ClientCard_02 section={props.section}
                                         elem={elem} setClientSelected={value => props.setClientSelected(value)}
                                         setIdSelected={value => idSelected === value ? setIdSelected('') : setIdSelected(value)}

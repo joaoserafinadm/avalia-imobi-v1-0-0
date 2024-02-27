@@ -11,7 +11,7 @@ import ClientsManagementSections from "../src/clientsManagement/ClientsManagemen
 import Pagination from "../src/clientsManagement/Pagination";
 import ClientsPage from "../src/clientsManagement/ClientsPage";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faSearch, faUserPlus } from "@fortawesome/free-solid-svg-icons";
 import navbarHide from "../utils/navbarHide";
 import { useDispatch } from "react-redux";
 import DeleteClientModal from "../src/clientsManagement/DeleteClientModal";
@@ -34,6 +34,7 @@ export default function clientsManagement() {
     const [section, setSection] = useState('myClients')
     const [searchValue, setSearchValue] = useState('')
     const [clientSelected, setClientSelected] = useState('')
+    const [clientsOrder, setClientsOrder] = useState('newest')
 
 
 
@@ -45,7 +46,7 @@ export default function clientsManagement() {
 
     useEffect(() => {
         handleClientsArray(allClients)
-    }, [searchValue])
+    }, [searchValue, clientsOrder])
 
     const dataFunction = async (company_id) => {
 
@@ -66,10 +67,18 @@ export default function clientsManagement() {
 
     const handleClientsArray = (clients) => {
 
+        let newCLientsArray = clients
+
+        console.log(clientsOrder,)
+
+        if (clientsOrder === 'newest') newCLientsArray = clients.slice().sort((a, b) => new Date(b.dateAdded) - new Date(a.dateAdded))
+        if (clientsOrder === 'oldest') newCLientsArray = clients.slice().sort((a, b) => new Date(a.dateAdded) - new Date(b.dateAdded))
+
+
         if (searchValue === '') {
-            setClientsArray(clients)
+            setClientsArray(newCLientsArray)
         } else {
-            setClientsArray(clients.filter(elem => elem.clientName.toLowerCase().includes(searchValue.toLowerCase())))
+            setClientsArray(newCLientsArray.filter(elem => elem.clientName.toLowerCase().includes(searchValue.toLowerCase())))
         }
 
 
@@ -94,14 +103,14 @@ export default function clientsManagement() {
 
                             <Link href='/addClient'>
                                 <button className="btn btn-sm btn-orange">
-                                    Adicionar Cliente
+                                   <FontAwesomeIcon icon={faUserPlus}/> Adicionar Cliente
                                 </button>
                             </Link>
                         </div>
 
                     </div>
                     <div className="row mt-3">
-                        <div className="col-12 col-md-3 d-flex justify-content-start">
+                        <div className="col-12 col-md-6 col-xl-4 d-flex justify-content-start">
 
                             <div class="input-group mb-3">
                                 <input type="text"
@@ -113,6 +122,15 @@ export default function clientsManagement() {
                                     onChange={e => setSearchValue(e.target.value)}
                                 />
                                 <span class="input-group-text" id="basic-addon1"><FontAwesomeIcon icon={faSearch} className="icon" /></span>
+                            </div>
+                        </div>
+                        <div className="col-12 col-md-6 col-xl-4">
+                            <div class="input-group mb-3">
+                                <label class="input-group-text" for="clientsOrderSelect">Ordenar por:</label>
+                                <select class="form-select" id="clientsOrderSelect" value={clientsOrder} onChange={e => setClientsOrder(e.target.value)}>
+                                    <option value="newest" selected>Mais recentes</option>
+                                    <option value="oldest">Mais antigos</option>
+                                </select>
                             </div>
                         </div>
                     </div>

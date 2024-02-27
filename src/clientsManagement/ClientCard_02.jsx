@@ -11,6 +11,7 @@ import { replaceAmpersand } from "../../utils/replaceAmpersand"
 import Cookies from "js-cookie";
 import jwt from "jsonwebtoken";
 import { useSelector } from "react-redux"
+import formatDate from "../../utils/formatDate"
 
 export default function ClientCard_02(props) {
 
@@ -365,6 +366,12 @@ export default function ClientCard_02(props) {
                 }
 
 
+                <hr />
+                <div>
+                    <small style={{ fontSize: '12px' }} className="text-secondary">
+                        {props.elem.dateAdded ? 'Data de cadastro: ' + formatDate(props.elem.dateAdded) : ''}
+                    </small>
+                </div>
 
             </div>
         </div >

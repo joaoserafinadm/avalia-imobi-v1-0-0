@@ -3,6 +3,9 @@
 
 // export default function isMobile() {
 
+import { useDispatch } from "react-redux"
+import navbarHide from "./navbarHide"
+
 //     let check = false;
 
 
@@ -16,7 +19,21 @@
 
 export default function isMobile() {
 
-    if (window.innerWidth < 850) return true
+    const dispatch = useDispatch()
+
+
+    
+
+
+    if (window.innerWidth < 850) {
+    
+        
+            navbarHide(dispatch)
+    
+    
+        return true
+    
+    }
     else return false
 
 }

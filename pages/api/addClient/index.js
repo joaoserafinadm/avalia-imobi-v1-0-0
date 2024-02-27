@@ -57,7 +57,8 @@ export default authenticated(async (req, res) => {
                                         celular: celular,
                                         propertyType: propertyType,
                                         urlToken: urlToken,
-                                        user_id: userExist._id
+                                        user_id: userExist._id,
+                                        dateAdded: new Date(),
                                     },
                                 ],
                                 $position: 0, // Adiciona no início do array
