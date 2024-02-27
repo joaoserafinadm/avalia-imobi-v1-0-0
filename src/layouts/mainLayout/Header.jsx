@@ -168,7 +168,7 @@ export default function Header(props) {
 
 
 
-                <div className={` dropdown `}>
+                {/* <div className={` dropdown `}>
                     <span type="button" className="" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <FontAwesomeIcon icon={faGear} className="text-light icon px-3 me-2" />
                     </span>
@@ -204,7 +204,7 @@ export default function Header(props) {
                             </li>
                         </small>
                     </ul>
-                </div>
+                </div> */}
             </div>
         </div>
     );
