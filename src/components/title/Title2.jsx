@@ -14,6 +14,7 @@ import {
 import baseUrl from '../../../utils/baseUrl'
 import { useEffect, useState } from 'react'
 import { AiOutlineLeft } from '@react-icons/all-files/ai/AiOutlineLeft'
+import isMobile from '../../../utils/isMobile'
 
 
 export default function Title(props) {
@@ -38,12 +39,12 @@ export default function Title(props) {
                         </>
                     )}
                 </div>
-                <div className={styles.headerSubtitle}>{props.subtitle}</div>
-                {props.backButton && (
-                    <Link href={props.backButton}>
-                        <span type="button" className={styles.backButton}><AiOutlineLeft className="me-2" />Voltar</span>
+                {props.backButton && isMobile() && (
+                    <Link href='/'>
+                        <span type="button" className={styles.backButton}><AiOutlineLeft className="me-2" />Início</span>
                     </Link>
                 )}
+                <div className={styles.headerSubtitle}>{props.subtitle}</div>
             </div>
         </div>
     )

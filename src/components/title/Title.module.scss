@@ -48,24 +48,24 @@ background-color:  var(--ai-bg-primary);
     font-weight: 400;
 }
 
-@media screen and (max-width: 991px) {
+@media screen and (max-width: 1100px) {
 
     .headerBox {
         // font-family: "Open Sans", sans-serif !important;
         position: relative;
         height: 100px;
         background-color: var(--ai-bg-primary);
-        margin-bottom: 3rem;
+        margin-bottom: 0rem;
     }
     
     .headerContent {
         position: relative;
         top: 15px;
-        left: 45px;
+        left: 20px;
     }
     
     .headerTitle {
-        font-size: 1rem;
+        font-size: 1.1rem;
         font-weight: 450;
         margin-bottom: 5px;
     }
@@ -75,10 +75,10 @@ background-color:  var(--ai-bg-primary);
         color: #fff;
     }
     .backButton {
-        margin-top: 10px;
+        margin-top: 2px;
         position: absolute;
-        right: 60px;
-        font-size: 0.8rem;
+        right: 40px;
+        font-size: 0.9rem;
         font-weight: 300;
         color: var(--gray-light);
         transition: 0.3s ease;

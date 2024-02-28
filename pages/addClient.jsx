@@ -82,7 +82,7 @@ export default function addClient() {
 
                 const alert = {
                     type: 'addUserLink',
-                    message: `Cliente ${clientName} adicionado com sucesso! Compartilhar o formulário?`,
+                    message: `${clientName} adicionado com sucesso! Compartilhar o formulário?`,
                     link: res.data
                 }
 

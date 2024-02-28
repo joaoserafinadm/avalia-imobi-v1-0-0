@@ -144,7 +144,7 @@ export default function Nav(props) {
                                         <Accordion.Collapse eventKey="2">
                                             <ul>
                                                 <li>
-                                                    <Link href={`/addClient`}>
+                                                    <Link href={`/clientAdd`}>
                                                         <span>Adicionar cliente</span>
                                                     </Link>
                                                 </li>
