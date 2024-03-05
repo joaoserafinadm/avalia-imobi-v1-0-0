@@ -15,7 +15,25 @@ const initialValues = {
     userLastName: '',
     profileImageUrl: '',
     propertyType: '',
-    features: []
+    areaTotal: '',
+    areaTotalPrivativa: '',
+    quartos: '',
+    suites: '',
+    banheiros: '',
+    vagasGaragem: '',
+    sacadas: '',
+    andar: '',
+    pavimentos: '',
+    cep: '',
+    cidade: '',
+    uf: '',
+    logradouro: '',
+    numero: '',
+    bairro: '',
+    latitude: '',
+    longitude: '',
+    features: [],
+    files: []
 }
 
 export default function inventoryStatesReducer(state = {
@@ -42,6 +60,7 @@ export default function inventoryStatesReducer(state = {
     vagasGaragem: '',
     sacadas: '',
     andar: '',
+    pavimentos: '',
     cep: '',
     cidade: '',
     uf: '',
@@ -102,6 +121,27 @@ export default function inventoryStatesReducer(state = {
         case 'SET_PROPERTY_TYPE':
             return { ...state, propertyType: action.payload }
 
+        case 'SET_TERRENO_IRREGULAR':
+            return { ...state, terrenoIrregular: action.payload }
+
+        case 'SET_LARGURA':
+            return { ...state, largura: action.payload }
+
+        case 'SET_COMPRIMENTO':
+            return { ...state, comprimento: action.payload }
+
+        case 'SET_FRENTE':
+            return { ...state, frente: action.payload }
+
+        case 'SET_FUNDOS':
+            return { ...state, fundos: action.payload }
+
+        case 'SET_LATERAL_ESQUERDA':
+            return { ...state, lateralEsquerda: action.payload }
+
+        case 'SET_LATERAL_DIREITA':
+            return { ...state, lateralDireita: action.payload }
+
         case 'SET_AREA_TOTAL':
             return { ...state, areaTotal: action.payload }
 
@@ -125,6 +165,9 @@ export default function inventoryStatesReducer(state = {
 
         case 'SET_ANDAR':
             return { ...state, andar: action.payload }
+
+        case 'SET_PAVIMENTOS':
+            return { ...state, pavimentos: action.payload }
 
         case 'SET_CEP':
             return { ...state, cep: action.payload }

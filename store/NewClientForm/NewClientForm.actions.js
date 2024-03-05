@@ -128,12 +128,60 @@ export function setPropertyType(data) {
     }
 }
 
+export function setTerrenoIrregular(data) {
+    return {
+        type: 'SET_TERRENO_IRREGULAR',
+        payload: data
+    }
+}
+export function setLargura(data) {
+    return {
+        type: 'SET_LARGURA',
+        payload: data
+    }
+}
+export function setComprimento(data) {
+    return {
+        type: 'SET_COMPRIMENTO',
+        payload: data
+    }
+}
+
+export function setFrente(data) {
+    return {
+        type: 'SET_FRENTE',
+        payload: data
+    }
+}
+
+export function setFundos(data) {
+    return {
+        type: 'SET_FUNDOS',
+        payload: data
+    }
+}
+export function setLateralEsquerda(data) {
+    return {
+        type: 'SET_LATERAL_ESQUERDA',
+        payload: data
+    }
+}
+
+export function setLateralDireita(data) {
+    return {
+        type: 'SET_LATERAL_DIREITA',
+        payload: data
+    }
+}
+
 export function setAreaTotal(data) {
     return {
         type: 'SET_AREA_TOTAL',
         payload: data
     }
 }
+
+
 
 export function setAreaTotalPrivativa(data) {
     return {
@@ -180,6 +228,13 @@ export function setSacadas(data) {
 export function setAndar(data) {
     return {
         type: 'SET_ANDAR',
+        payload: data
+    }
+}
+
+export function setPavimentos(data) {
+    return {
+        type: 'SET_PAVIMENTOS',
         payload: data
     }
 }
@@ -259,7 +314,7 @@ export function deleteFeature(features, data) {
 export function setFiles(files, data) {
 
     console.log('reduxFiles', files, data)
-    
+
     let newFiles = files.concat(data)
 
     console.log('newFiles', newFiles)

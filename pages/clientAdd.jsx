@@ -18,6 +18,9 @@ import axios from "axios"
 import Cookies from "js-cookie";
 import jwt from "jsonwebtoken";
 import { addAlert } from "../store/Alerts/Alerts.actions"
+import TypeCasa from "../src/pages/newClient/TypeCasa"
+import TypeComercial from "../src/pages/newClient/TypeComercial"
+import TypeTerreno from "../src/pages/newClient/TypeTerreno"
 
 
 
@@ -219,7 +222,31 @@ export default function clientAdd() {
                                 {newClientForm.propertyType === "Apartamento" && (
                                     <>
                                         <TypeApartamento />
-                                        <GeralFeatures />
+                                        <GeralFeatures type="Apartamento" />
+                                        <Location />
+                                        <UploadFiles setFiles={array => setFiles(array)} />
+                                    </>
+                                )}
+                                {newClientForm.propertyType === "Casa" && (
+                                    <>
+                                        <TypeCasa />
+                                        <GeralFeatures type="Casa" />
+                                        <Location />
+                                        <UploadFiles setFiles={array => setFiles(array)} />
+                                    </>
+                                )}
+                                {newClientForm.propertyType === "Comercial" && (
+                                    <>
+                                        <TypeComercial />
+                                        <GeralFeatures type="Comercial" />
+                                        <Location />
+                                        <UploadFiles setFiles={array => setFiles(array)} />
+                                    </>
+                                )}
+                                {newClientForm.propertyType === "Terreno" && (
+                                    <>
+                                        <TypeTerreno />
+                                        <GeralFeatures type="Terreno" />
                                         <Location />
                                         <UploadFiles setFiles={array => setFiles(array)} />
                                     </>

@@ -101,7 +101,7 @@ export default function clientsManagement() {
                     <div className="row">
                         <div className="col-12 d-flex justify-content-end ">
 
-                            <Link href='/addClient'>
+                            <Link href='/clientAdd'>
                                 <button className="btn btn-sm btn-orange">
                                    <FontAwesomeIcon icon={faUserPlus}/> Adicionar Cliente
                                 </button>
