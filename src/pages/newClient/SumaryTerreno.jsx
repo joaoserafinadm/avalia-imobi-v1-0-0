@@ -14,7 +14,7 @@ export default function SumaryTerreno(props) {
             <div className="col-12 d-flex  justify-content-center my-2">
                 <PropertyTypeCard type={newClientForm.propertyType} />
             </div>
-            <div className="col-12 my-2 d-flex">
+            <div className="col-12 my-2 d-flex justify-content-center">
                 <div className="bold me-1">
                     Área Total:
                 </div>
@@ -26,12 +26,34 @@ export default function SumaryTerreno(props) {
                 <>
                     <div className="col-12 my-2 d-flex">
                         <div className="bold me-1">
-                            Terreno Irregular:
+                            Frente:
+                        </div>
+                        <div>
+                            {newClientForm.frente} m
                         </div>
                     </div>
                     <div className="col-12 my-2 d-flex">
+                        <div className="bold me-1">
+                            Fundos:
+                        </div>
                         <div>
-                            {newClientForm.frente}m x {newClientForm.lateralEsquerda}m x {newClientForm.lateralDireita}m x {newClientForm.fundos}m
+                            {newClientForm.fundos} m
+                        </div>
+                    </div>
+                    <div className="col-12 my-2 d-flex">
+                        <div className="bold me-1">
+                            Lateral Esquerda:
+                        </div>
+                        <div>
+                            {newClientForm.lateralEsquerda} m
+                        </div>
+                    </div>
+                    <div className="col-12 my-2 d-flex">
+                        <div className="bold me-1">
+                            Lateral Direita:
+                        </div>
+                        <div>
+                            {newClientForm.lateralDireita} m
                         </div>
                     </div>
                 </>
@@ -41,12 +63,18 @@ export default function SumaryTerreno(props) {
                 <>
                     <div className="col-12 my-2 d-flex">
                         <div className="bold me-1">
-                            Terreno Irregular:
+                            Largura:
+                        </div>
+                        <div>
+                            {newClientForm.largura} m
                         </div>
                     </div>
                     <div className="col-12 my-2 d-flex">
+                        <div className="bold me-1">
+                            Comprimento:
+                        </div>
                         <div>
-                            {newClientForm.largura}m X {newClientForm.comprimento}m
+                            {newClientForm.comprimento} m
                         </div>
                     </div>
                 </>

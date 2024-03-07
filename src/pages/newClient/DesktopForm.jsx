@@ -8,6 +8,9 @@ import UploadFiles from "./UploadFiles"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons"
 import FinalizarButton from "./FinalizarButton"
+import TypeCasa from "./TypeCasa"
+import TypeComercial from "./TypeComercial"
+import TypeTerreno from "./TypeTerreno"
 
 
 
@@ -126,12 +129,39 @@ export default function DesktopForm(props) {
                             <GeralFeatures />
                             <Location />
                             <UploadFiles setFiles={array => props.setFiles(array)} />
-                            <FinalizarButton handleSave={() => props.handleSave()} loadingSave={props.loadingSave}/>
+                            <FinalizarButton handleSave={() => props.handleSave()} loadingSave={props.loadingSave} />
                         </>
                     )}
-                    {/* {newClientForm.propertyType === "Terreno" && (
-                        <TypeTerreno />
-                    )} */}
+                    {newClientForm.propertyType === "Casa" && (
+                        <>
+                            <TypeCasa />
+                            <GeralFeatures type="Casa" />
+                            <Location />
+                            <UploadFiles setFiles={array => props.setFiles(array)} />
+                            <FinalizarButton handleSave={() => props.handleSave()} loadingSave={props.loadingSave} />
+
+                        </>
+                    )}
+                    {newClientForm.propertyType === "Comercial" && (
+                        <>
+                            <TypeComercial />
+                            <GeralFeatures type="Comercial" />
+                            <Location />
+                            <UploadFiles setFiles={array => props.setFiles(array)} />
+                            <FinalizarButton handleSave={() => props.handleSave()} loadingSave={props.loadingSave} />
+
+                        </>
+                    )}
+                    {newClientForm.propertyType === "Terreno" && (
+                        <>
+                            <TypeTerreno />
+                            <GeralFeatures type="Terreno" />
+                            <Location />
+                            <UploadFiles setFiles={array => props.setFiles(array)} />
+                            <FinalizarButton handleSave={() => props.handleSave()} loadingSave={props.loadingSave} />
+
+                        </>
+                    )}
 
 
                 </div >

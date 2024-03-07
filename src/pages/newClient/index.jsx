@@ -141,7 +141,10 @@ export default function NewClient() {
             .then(res => {
                 setLoadingSave(false)
                 carousel.next()
-                if (!mobile) handleSlide('clientFormCarousel')
+                if (!mobile) {
+                    handleSlide('clientFormCarousel')
+                    carousel?.next()
+                }
             }).catch(e => {
                 setLoadingSave(false)
             })
