@@ -42,7 +42,45 @@ export default function FixedButtons(props) {
                 } else {
                     return false
                 }
-            } else {
+            } else if (form.propertyType === 'Casa') {
+                if (!form.areaTotal || !form.areaTotalPrivativa || !form.pavimentos || !form.quartos || !form.suites || !form.banheiros || !form.vagasGaragem) {
+                    return true
+                } else {
+                    return false
+                }
+            } else if (form.propertyType === 'Comercial') {
+                if (!form.areaTotal || !form.areaTotalPrivativa || !form.quartos || !form.suites || !form.banheiros || !form.vagasGaragem) {
+                    return true
+                } else {
+                    return false
+                }
+            } else if (form.propertyType === 'Terreno') {
+                if (!form.areaTotal) {
+
+                    if (!form.terrenoIrregular) {
+                        if (!form.largura || !form.comprimento) {
+                            return true
+                        } else {
+                            return false
+                        }
+                    } else {
+                        if (!form.frente || !form.fundos || !form.lateralEsquerda || !form.lateralDireita) {
+                            return true
+                        } else {
+                            return false
+                        }
+                    }
+
+
+
+                    return true
+                } else {
+                    return false
+                }
+            }
+
+
+            else {
                 return true
             }
         }

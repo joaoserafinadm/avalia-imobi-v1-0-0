@@ -2,6 +2,8 @@ import { useSelector } from "react-redux";
 import PropertyTypeCard from "../../addClient/PropertyTypeCard";
 import TypeApartamento from "./TypeApartamento";
 import TypeTerreno from "./TypeTerreno";
+import TypeCasa from "./TypeCasa";
+import TypeComercial from "./TypeComercial";
 
 
 
@@ -41,6 +43,12 @@ export default function Slide02(props) {
                 </div>
                 {newClientForm.propertyType === "Apartamento" && (
                     <TypeApartamento />
+                )}
+                {newClientForm.propertyType === "Casa" && (
+                    <TypeCasa />
+                )}
+                {newClientForm.propertyType === "Comercial" && (
+                    <TypeComercial />
                 )}
                 {newClientForm.propertyType === "Terreno" && (
                     <TypeTerreno />

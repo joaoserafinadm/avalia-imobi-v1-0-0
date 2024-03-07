@@ -61,6 +61,13 @@ export default function inventoryStatesReducer(state = {
     sacadas: '',
     andar: '',
     pavimentos: '',
+    terrenoIrregular: false,
+    largura: '',
+    comprimento: '',
+    frente: '',
+    fundos: '',
+    lateralEsquerda: '',
+    lateralDireita: '',
     cep: '',
     cidade: '',
     uf: '',
@@ -120,6 +127,9 @@ export default function inventoryStatesReducer(state = {
 
         case 'SET_PROPERTY_TYPE':
             return { ...state, propertyType: action.payload }
+
+        case 'PROPERTY_TYPE_CHANGE':
+            return { ...state, ...action.payload }
 
         case 'SET_TERRENO_IRREGULAR':
             return { ...state, terrenoIrregular: action.payload }

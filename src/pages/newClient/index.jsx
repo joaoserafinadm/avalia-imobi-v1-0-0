@@ -28,6 +28,7 @@ import isMobile from "../../../utils/isMobile";
 import DesktopForm from "./DesktopForm";
 import ApresentationDesktop from "./ApresentationDesktop";
 import FinalSlideDesktop from "./FinalSlideDesktop";
+import GeralFeatures from "./GeralFeatures";
 
 
 export default function NewClient() {
@@ -204,7 +205,7 @@ export default function NewClient() {
                                         <div className="card m-3 fadeItem1s" style={{ height: "90%", overflowY: 'scroll' }}>
                                             <div className="card-body pb-5">
 
-                                                <Slide03 />
+                                                <GeralFeatures type={newClientForm.propertyType} />
 
                                             </div>
                                         </div>

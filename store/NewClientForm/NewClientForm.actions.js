@@ -17,6 +17,58 @@ export function initialValues() {
             userLastName: '',
             profileImageUrl: '',
             propertyType: '',
+            areaTotal: '',
+            areaTotalPrivativa: '',
+            quartos: '',
+            suites: '',
+            banheiros: '',
+            vagasGaragem: '',
+            sacadas: '',
+            andar: '',
+            pavimentos: '',
+            cep: '',
+            cidade: '',
+            uf: '',
+            logradouro: '',
+            numero: '',
+            bairro: '',
+            latitude: '',
+            longitude: '',
+            features: [],
+            files: []
+        }
+    }
+}
+
+
+export function porpertyTypeChange(data) {
+    return {
+        type: 'PROPERTY_TYPE_CHANGE',
+        payload: {
+            areaTotal: '',
+            areaTotalPrivativa: '',
+            quartos: '',
+            suites: '',
+            banheiros: '',
+            vagasGaragem: '',
+            sacadas: '',
+            andar: '',
+            pavimentos: '',
+            terrenoIrregular: false,
+            largura: '',
+            comprimento: '',
+            frente: '',
+            fundos: '',
+            lateralEsquerda: '',
+            lateralDireita: '',
+            cep: '',
+            cidade: '',
+            uf: '',
+            logradouro: '',
+            numero: '',
+            bairro: '',
+            latitude: '',
+            longitude: '',
             features: [],
             files: []
         }

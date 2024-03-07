@@ -1,7 +1,8 @@
 import { faBuilding, faHome, faMapLocation, faStore } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useDispatch, useSelector } from "react-redux";
-import { setPropertyType } from "../../store/NewClientForm/NewClientForm.actions";
+import { porpertyTypeChange, setPropertyType } from "../../store/NewClientForm/NewClientForm.actions";
+import { useEffect } from "react";
 
 
 
@@ -11,6 +12,11 @@ export default function PropertyTypeCard(props) {
     const newClientForm = useSelector(state => state.newClientForm)
 
     const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(porpertyTypeChange())
+
+    }, [newClientForm.propertyType])
 
     return (
         <div className={`card cardSize cardAnimation ${props.type === newClientForm.propertyType ? 'border-selected' : ''} `}
