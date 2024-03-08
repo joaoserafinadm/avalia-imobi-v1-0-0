@@ -128,7 +128,7 @@ export default function ClientCard_02(props) {
 
             {client?.propertyType && (
 
-                <span className={`${styles.propertyTypeHeader} d-flex align-items-center  ${handleIconColor(props.elem.propertyType)}`}  >
+                <span className={`${styles.propertyTypeHeader} d-flex align-items-center text-white  ${handleIconColor(props.elem.propertyType)}`}  >
 
                     {!isMobile() ?
                         <div className="small  me-2" >

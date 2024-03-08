@@ -70,13 +70,16 @@ export default function clientAdd() {
 
         const data = {
             ...form,
+            user_id: token.sub,
             files: filesUrl
         }
 
-        await axios.post(`${baseUrl()}/api/addClient/clientForm`, data)
+        console.log(token.sub)
+
+        await axios.post(`${baseUrl()}/api/clientAdd`, data)
             .then(res => {
                 setLoadingSave(false)
-                router.push('/')
+                router.push('/clientsManagement')
             }).catch(e => {
                 setLoadingSave(false)
             })

@@ -54,12 +54,14 @@ export default function TypeCasa(props) {
                         <select id="andarItem"
                             class="form-select"
                             aria-label="Default select example"
-                            value={newClientForm.andar}
+                            value={newClientForm.pavimentos}
                             onChange={e => dispatch(setPavimentos(e.target.value))}>
                             <option value='' selected disabled>Escolha...</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
+                            <option value="3">4</option>
+                            <option value="3">5</option>
                         </select>
                     </div>
                     <div className="col-12 col-lg-4  my-3">

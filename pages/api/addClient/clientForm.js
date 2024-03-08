@@ -101,7 +101,8 @@ export default async function (req, res) {
                             ...dataFilter,
                             active: true,
                             status: 'active',
-                            dateUpdated: new Date()
+                            dateUpdated: new Date(),
+                            dateAdded: new Date()
                         }
 
 

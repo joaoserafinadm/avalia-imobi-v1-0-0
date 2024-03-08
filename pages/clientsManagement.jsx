@@ -35,6 +35,7 @@ export default function clientsManagement() {
     const [searchValue, setSearchValue] = useState('')
     const [clientSelected, setClientSelected] = useState('')
     const [clientsOrder, setClientsOrder] = useState('newest')
+    const [typeSearch, setTypeSearch] = useState('')
 
 
 
@@ -45,8 +46,10 @@ export default function clientsManagement() {
     }, [])
 
     useEffect(() => {
-        handleClientsArray(allClients)
-    }, [searchValue, clientsOrder])
+
+        const newClientsArray = handleClientsArray(allClients, clientsOrder)
+        setClientsArray(newClientsArray)
+    }, [searchValue, clientsOrder, typeSearch])
 
     const dataFunction = async (company_id) => {
 
@@ -55,31 +58,43 @@ export default function clientsManagement() {
                 company_id: company_id
             }
         }).then(res => {
-            setAllClients(res.data.clients)
-            setClientsArray(res.data.clients)
+
+            const newUnitsArray = handleClientsArray(res.data.clients, clientsOrder)
+
+
+            setAllClients(newUnitsArray)
+            setClientsArray(newUnitsArray)
             dispatch(usersArray(res.data.users))
             setLoadingPage(false)
+
+
+
         }).catch(e => {
             setLoadingPage(false)
             console.log(e)
         })
     }
 
-    const handleClientsArray = (clients) => {
+    const handleClientsArray = (clients, order) => {
 
         let newCLientsArray = clients
 
-        console.log(clientsOrder,)
 
-        if (clientsOrder === 'newest') newCLientsArray = clients.slice().sort((a, b) => new Date(b.dateAdded) - new Date(a.dateAdded))
-        if (clientsOrder === 'oldest') newCLientsArray = clients.slice().sort((a, b) => new Date(a.dateAdded) - new Date(b.dateAdded))
+        if (order === 'newest') newCLientsArray = clients.slice().sort((a, b) => new Date(b.dateAdded) - new Date(a.dateAdded))
+        if (order === 'oldest') newCLientsArray = clients.slice().sort((a, b) => new Date(a.dateAdded) - new Date(b.dateAdded))
 
 
-        if (searchValue === '') {
-            setClientsArray(newCLientsArray)
+        if (searchValue === '' && typeSearch === '') {
+            return newCLientsArray
+        } else if (searchValue !== '' && typeSearch === '') {
+            return newCLientsArray.filter(elem => elem.clientName.toLowerCase().includes(searchValue.toLowerCase()))
         } else {
-            setClientsArray(newCLientsArray.filter(elem => elem.clientName.toLowerCase().includes(searchValue.toLowerCase())))
+            return newCLientsArray.filter(elem => elem.clientName.toLowerCase().includes(searchValue.toLowerCase())).filter(elem => elem.propertyType === typeSearch)
         }
+
+
+
+
 
 
 
@@ -103,7 +118,7 @@ export default function clientsManagement() {
 
                             <Link href='/clientAdd'>
                                 <button className="btn btn-sm btn-orange">
-                                   <FontAwesomeIcon icon={faUserPlus}/> Adicionar Cliente
+                                    <FontAwesomeIcon icon={faUserPlus} /> Adicionar Cliente
                                 </button>
                             </Link>
                         </div>
@@ -130,6 +145,19 @@ export default function clientsManagement() {
                                 <select class="form-select" id="clientsOrderSelect" value={clientsOrder} onChange={e => setClientsOrder(e.target.value)}>
                                     <option value="newest" selected>Mais recentes</option>
                                     <option value="oldest">Mais antigos</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div className="col-12 col-md-6 col-xl-4">
+                            <div class="input-group mb-3">
+                                <label class="input-group-text" for="clientsOrderSelect">Filtrar por:</label>
+                                <select class="form-select" id="clientsOrderSelect" value={typeSearch} onChange={e => setTypeSearch(e.target.value)}>
+                                    <option value="" selected>Todos</option>
+                                    <option value="Apartamento" selected>Apartamento</option>
+                                    <option value="Casa" selected>Casa</option>
+                                    <option value="Comercial" selected>Comercial</option>
+                                    <option value="Terreno" selected>Terreno</option>
+
                                 </select>
                             </div>
                         </div>
