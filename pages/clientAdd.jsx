@@ -74,11 +74,20 @@ export default function clientAdd() {
             files: filesUrl
         }
 
-        console.log(token.sub)
 
         await axios.post(`${baseUrl()}/api/clientAdd`, data)
             .then(res => {
                 setLoadingSave(false)
+
+                const alert = {
+                    type: 'alert',
+                    message: `Cliente ${newClientForm.clientName} adicionado com sucesso!`,
+                    link: res.data
+                }
+
+                dispatch(addAlert(alertsArray, [alert]))
+
+
                 router.push('/clientsManagement')
             }).catch(e => {
                 setLoadingSave(false)

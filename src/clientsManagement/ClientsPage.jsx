@@ -37,32 +37,7 @@ export default function ClientsPage(props) {
 
     return (
         <>
-            {/* <div className="row mb-3">
-                <div className="col-12 col-sm-6 col-md-3 d-flex justify-content-start align-items-center my-1">
-                    <ClientStatus status='outdated' />
-                    <span className="small ms-1">
-                        Aguardando cadastro
-                    </span>
-                </div>
-                <div className="col-12 col-sm-6 col-md-3 d-flex justify-content-start align-items-center my-1">
-                    <ClientStatus status='active' />
-                    <span className="small ms-1">
-                        Aguardando avaliação
-                    </span>
-                </div>
-                <div className="col-12 col-sm-6 col-md-3 d-flex justify-content-start align-items-center my-1">
-                    <ClientStatus status='evaluated' />
-                    <span className="small ms-1">
-                        Avaliado
-                    </span>
-                </div>
-                <div className="col-12 col-sm-6 col-md-3 d-flex justify-content-start align-items-center my-1">
-                    <ClientStatus status='sold' />
-                    <span className="small ms-1">
-                        Vendido
-                    </span>
-                </div>
-            </div> */}
+            
             {clients.length === 0 ?
                 <div className="row my-5 scrollTop " id="clientsManagementList">
                     <div className="col-12  d-flex justify-content-center">

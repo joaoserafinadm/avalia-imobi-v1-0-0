@@ -26,6 +26,7 @@ export function initialValues() {
             sacadas: '',
             andar: '',
             pavimentos: '',
+            salas: '',
             cep: '',
             cidade: '',
             uf: '',
@@ -287,6 +288,13 @@ export function setAndar(data) {
 export function setPavimentos(data) {
     return {
         type: 'SET_PAVIMENTOS',
+        payload: data
+    }
+}
+
+export function setSalas(data) {
+    return {
+        type: 'SET_SALAS',
         payload: data
     }
 }

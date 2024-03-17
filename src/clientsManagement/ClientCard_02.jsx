@@ -12,6 +12,7 @@ import Cookies from "js-cookie";
 import jwt from "jsonwebtoken";
 import { useSelector } from "react-redux"
 import formatDate from "../../utils/formatDate"
+import ClientFeatures from "./ClientFeatures"
 
 export default function ClientCard_02(props) {
 
@@ -48,11 +49,7 @@ export default function ClientCard_02(props) {
         });
     }, [])
 
-    const handleShowClientInfo = (elem) => {
 
-        if (elem.propertyType) return true
-        else return false
-    }
 
     const [activeIndex, setActiveIndex] = useState(0);
 
@@ -75,6 +72,13 @@ export default function ClientCard_02(props) {
         } catch (error) {
             console.error('Erro ao compartilhar:', error);
         }
+    }
+
+
+    const handleShowClientInfo = (elem) => {
+
+        if (elem.propertyType) return true
+        else return false
     }
 
 
@@ -107,23 +111,7 @@ export default function ClientCard_02(props) {
                         </SwiperSlide>
                     ))}
                 </Swiper>
-                // <div id="clientImageCarousel" className="carousel slide" data-bs-ride="carousel" >
-                //     <div className="carousel-inner card-img-top  ">
-                //         {client?.files?.map((elem, index) => (
-                //             <div key={index} className={`carousel-item text-center bg-secondary  ${index === activeIndex ? 'active' : ''}`}>
-                //                 <img src={elem.url} className={`card-img-top  ${styles.clientCardImage}`} alt={`Slide ${index + 1}`} />
-                //             </div>
-                //         ))}
-                //     </div>
-                //     <button className="carousel-control-prev" type="button" data-bs-slide="prev" onClick={handlePrev} >
-                //         <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                //         <span className="visually-hidden">Previous</span>
-                //     </button>
-                //     <button className="carousel-control-next" type="button" data-bs-slide="next" onClick={handleNext} >
-                //         <span className="carousel-control-next-icon" aria-hidden="true"></span>
-                //         <span className="visually-hidden">Next</span>
-                //     </button>
-                // </div>
+
             }
 
             {client?.propertyType && (
@@ -172,198 +160,77 @@ export default function ClientCard_02(props) {
                     </div>
                 </div>
 
-
-
-
+                <ClientFeatures client={client} elem={props.elem} />
 
 
                 {handleShowClientInfo(client) ?
-                    <>
-                        <div className="row small">
+                    <div className="row d-flex justify-content-center mt-2">
+                        <div className="col-12 d-flex justify-content-center">
 
-                            <div className="col-12 my-2">
-                                {client?.bairro && client?.cidade && client?.uf && (
-                                    <>
-                                        {client?.bairro}, {client?.cidade} / {client?.uf}
-                                    </>
-                                )}
-                            </div>
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                                <button
+                                    type="button"
+                                    class="btn btn-light border"
+                                    id={"viewClientButton" + props.elem._id + props.section}
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#viewClientModal"
+                                    onClick={() => props.setClientSelected(props.elem)}>
+                                    <FontAwesomeIcon icon={faEye} className="icon  text-secondary" />
+                                </button>
+                                <button type="button" class="btn btn-light border" id={"evaluateClientButton" + props.elem._id + props.section}>
+                                    <FontAwesomeIcon icon={faMoneyCheckDollar} className="icon  text-secondary" />
+                                </button>
 
-
-                        </div>
-                        <hr />
-                        <div className="row  small d-flex align-items-center">
-
-                            <div className="col-6 text-center  my-2">
-                                {client?.areaTotal && (
-                                    <>
-                                        <div className="bold">
-                                            Área Total:
-                                        </div>
-                                        <div>
-
-                                            {client?.areaTotal} m²
-                                        </div>
-                                    </>
-                                )}
-                            </div>
-                            <div className="col-6  text-center   my-2">
-                                {client?.areaTotal && (
-                                    <>
-                                        <div className="bold">
-                                            Área Total Privativa:
-                                        </div>
-                                        <div>
-
-                                            {client?.areaTotalPrivativa} m²
-                                        </div>
-                                    </>
-                                )}
+                                <button
+                                    type="button"
+                                    class="btn btn-light border"
+                                    id={"deleteClientButton" + props.elem._id + props.section}
+                                    data-bs-toggle="modal"
+                                    data-bs-target={"#deleteClientModal"}
+                                    onClick={() => props.setClientSelected(props.elem)}>
+                                    <FontAwesomeIcon icon={faTrashAlt} className="icon text-secondary" />
+                                </button>
                             </div>
                         </div>
-                        <div className="row small d-flex justify-content-center ">
-
-                            <div className="col-6 justify-content-center d-flex  my-2">
-                                {client?.quartos && (
-                                    <>
-                                        <div>
-                                            {client.quartos}
-
-                                        </div>
-                                        <div className="ms-1 bold">
-
-                                            quarto{client.quartos > 1 ? 's' : ''}
-                                        </div>
-                                    </>
-                                )}
-                            </div>
-                            <div className="col-6 justify-content-center d-flex  my-2">
-
-                                {client?.banheiros && (
-                                    <>
-                                        <div>
-
-                                            {client.banheiros}
-                                        </div>
-                                        <div className="ms-1 bold">
-
-                                            banheiro{client.banheiros > 1 ? 's' : ''}
-                                        </div>
-                                    </>
-                                )}
-
-                            </div>
-                            <div className="col-6 justify-content-center d-flex  my-2">
-
-                                {client?.suites && (
-                                    <>
-                                        <div>
-
-                                            {client.suites}
-                                        </div>
-                                        <div className="ms-1 bold">
-
-                                            suíte{client.suites > 1 ? 's' : ''}
-                                        </div>
-                                    </>
-                                )}
-
-                            </div>
-                            <div className="col-6 justify-content-center d-flex  my-2">
-
-                                {client?.quartos && (
-                                    <>
-                                        <div>
-                                            {client.vagasGaragem}
-                                        </div>
-                                        <div className="ms-1 bold">
-
-                                            vaga{client.vagasGaragem > 1 ? 's' : ''}
-                                        </div>
-                                    </>
-                                )}
-
-                            </div>
-                        </div>
-
-
-
-                        <div className="row d-flex justify-content-center mt-2">
-                            <div className="col-12 d-flex justify-content-center">
-
-                                <div class="btn-group" role="group" aria-label="Basic example">
-                                    <button
-                                        type="button"
-                                        class="btn btn-light border"
-                                        id={"viewClientButton" + props.elem._id + props.section}
-                                        data-bs-toggle="modal"
-                                        data-bs-target="#viewClientModal"
-                                        onClick={() => props.setClientSelected(props.elem)}>
-                                        <FontAwesomeIcon icon={faEye} className="icon  text-secondary" />
-                                    </button>
-                                    <button type="button" class="btn btn-light border" id={"evaluateClientButton" + props.elem._id + props.section}>
-                                        <FontAwesomeIcon icon={faMoneyCheckDollar} className="icon  text-secondary" />
-                                    </button>
-
-                                    <button
-                                        type="button"
-                                        class="btn btn-light border"
-                                        id={"deleteClientButton" + props.elem._id + props.section}
-                                        data-bs-toggle="modal"
-                                        data-bs-target={"#deleteClientModal"}
-                                        onClick={() => props.setClientSelected(props.elem)}>
-                                        <FontAwesomeIcon icon={faTrashAlt} className="icon text-secondary" />
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </>
-
+                    </div>
                     :
-                    <>
-                        <div className="row my-5 ">
-                            <div className="col-12 d-flex justify-content-center">
-                                <span>Desatualizado</span>
+                    <div className="row">
+                        <div className="col-12 d-flex justify-content-center">
+                            <div class="btn-group" role="group" aria-label="Basic example">
 
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="col-12 d-flex justify-content-center">
-                                <div class="btn-group" role="group" aria-label="Basic example">
+                                <button onClick={() => handleShare(props.elem.urlToken + "&userId=" + token.sub)}
+                                    type="button"
+                                    class="btn btn-light border"
+                                    id={"shareClientButton" + props.elem._id + props.section}>
+                                    <FontAwesomeIcon icon={faShare} className="icon  text-secondary" />
+                                </button>
 
-                                    <button onClick={() => handleShare(props.elem.urlToken + "&userId=" + token.sub)}
-                                        type="button"
-                                        class="btn btn-light border"
-                                        id={"shareClientButton" + props.elem._id + props.section}>
-                                        <FontAwesomeIcon icon={faShare} className="icon  text-secondary" />
-                                    </button>
-                                    {/* <button onClick={() => navigator.clipboard.writeText(props.elem.urlToken + "&userId=" + token.sub)}
-                                        type="button"
-                                        class="btn btn-light border"
-                                        id={"shareClientButton" + props.elem._id + props.section}>
-                                        <FontAwesomeIcon icon={faShare} className="icon  text-secondary" />
-                                    </button> */}
+                                <button type="button" class="btn btn-light border" id={"editClientButton" + props.elem._id + props.section}>
+                                    <FontAwesomeIcon icon={faEdit} className="icon  text-secondary" />
+                                </button>
 
-                                    <button type="button" class="btn btn-light border" id={"editClientButton" + props.elem._id + props.section}>
-                                        <FontAwesomeIcon icon={faEdit} className="icon  text-secondary" />
-                                    </button>
-
-                                    <button
-                                        type="button"
-                                        class="btn btn-light border"
-                                        id={"deleteClientButton" + props.elem._id + props.section}
-                                        data-bs-toggle="modal"
-                                        data-bs-target={"#deleteClientModal"}
-                                        onClick={() => props.setClientSelected(props.elem)}>
-                                        <FontAwesomeIcon icon={faTrashAlt} className="icon text-secondary" />
-                                    </button>
-                                </div>
-
+                                <button
+                                    type="button"
+                                    class="btn btn-light border"
+                                    id={"deleteClientButton" + props.elem._id + props.section}
+                                    data-bs-toggle="modal"
+                                    data-bs-target={"#deleteClientModal"}
+                                    onClick={() => props.setClientSelected(props.elem)}>
+                                    <FontAwesomeIcon icon={faTrashAlt} className="icon text-secondary" />
+                                </button>
                             </div>
 
                         </div>
-                    </>
+
+                    </div>
                 }
+
+
+
+
+
+
+
 
 
                 <hr />

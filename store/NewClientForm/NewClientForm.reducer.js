@@ -179,6 +179,9 @@ export default function inventoryStatesReducer(state = {
         case 'SET_PAVIMENTOS':
             return { ...state, pavimentos: action.payload }
 
+        case 'SET_SALAS':
+            return { ...state, salas: action.payload }
+
         case 'SET_CEP':
             return { ...state, cep: action.payload }
 

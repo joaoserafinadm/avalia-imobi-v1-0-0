@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux"
-import { setAndar, setAreaTotal, setAreaTotalPrivativa, setBanheiros, setPavimentos, setQuartos, setSacadas, setSuites, setVagasGaragem } from "../../../store/NewClientForm/NewClientForm.actions"
+import { setAndar, setAreaTotal, setAreaTotalPrivativa, setBanheiros, setPavimentos, setQuartos, setSacadas, setSalas, setSuites, setVagasGaragem } from "../../../store/NewClientForm/NewClientForm.actions"
 
 
 
@@ -20,7 +20,7 @@ export default function TypeComercial(props) {
                 <div className="row">
 
                     <div className="col-12 col-lg-6 my-3">
-                        <label for="areaTotalItem" className="form-label">Área do terreno</label>
+                        <label for="areaTotalItem" className="form-label">Área total</label>
 
                         <div className="input-group  ">
                             <input
@@ -34,7 +34,7 @@ export default function TypeComercial(props) {
                         </div>
                     </div>
                     <div className="col-12 col-lg-6 my-3">
-                        <label for="areaTotalPrivativaItem" className="form-label">Área privativa - Casa</label>
+                        <label for="areaTotalPrivativaItem" className="form-label">Área total - Privativa</label>
 
                         <div className="input-group  ">
                             <input
@@ -49,54 +49,39 @@ export default function TypeComercial(props) {
                     </div>
 
                     <div className="col-12 col-lg-4 my-3">
-                        <label for="andarItem" className="form-label">Pavimentos</label>
+                        <label for="pavimentosItem" className="form-label">Pavimentos</label>
 
                         <select id="andarItem"
                             class="form-select"
                             aria-label="Default select example"
-                            value={newClientForm.andar}
+                            value={newClientForm.pavimentos}
                             onChange={e => dispatch(setPavimentos(e.target.value))}>
                             <option value='' selected disabled>Escolha...</option>
                             <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                        </select>
-                    </div>
-                    <div className="col-12 col-lg-4  my-3">
-                        <label for="quartosItem" className="form-label">Número de quartos</label>
-
-                        <select id="quartosItem"
-                            class="form-select"
-                            aria-label="Default select example"
-                            value={newClientForm.quartos}
-                            onChange={e => dispatch(setQuartos(e.target.value))}>
-                            <option value='' selected disabled>Escolha...</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
+                            <option value="2">2 - Mesanino</option>
                             <option value="3">3</option>
                             <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
                         </select>
                     </div>
                     <div className="col-12 col-lg-4 my-3">
-                        <label for="suitesItem" className="form-label">Número de suítes</label>
+                        <label for="salasItem" className="form-label">Nº de salas</label>
 
-                        <select id="suitesItem"
+                        <select id="salasItem"
                             class="form-select"
                             aria-label="Default select example"
-                            value={newClientForm.suites}
-                            onChange={e => dispatch(setSuites(e.target.value))}>
+                            value={newClientForm.salas}
+                            onChange={e => dispatch(setSalas(e.target.value))}>
                             <option value='' selected disabled>Escolha...</option>
-                            <option value="0">0</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
                             <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
+                            <option value="5">mais de 5</option>
+
                         </select>
                     </div>
+
+
                     <div className="col-12 col-lg-4 my-3">
                         <label for="suitesItem" className="form-label">Banheiros</label>
 
@@ -115,27 +100,10 @@ export default function TypeComercial(props) {
                             <option value="6">6</option>
                         </select>
                     </div>
-                    {/* <div className="col-12 col-lg-4 my-3">
-                        <label for="sacadasItem" className="form-label">Sacadas</label>
 
-                        <select id="andarItem"
-                            class="form-select"
-                            aria-label="Default select example"
-                            value={newClientForm.sacadas}
-                            onChange={e => dispatch(setSacadas(e.target.value))}>
-                            <option value='' selected disabled>Escolha...</option>
-                            <option value="0">0</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                        </select>
-                    </div> */}
 
                     <div className="col-12 col-lg-4 my-3">
-                        <label for="vagasGaragemItem" className="form-label">Vagas de garagem</label>
+                        <label for="vagasGaragemItem" className="form-label">Vagas de estacionamento</label>
 
                         <select id="vagasGaragemItem"
                             class="form-select"
@@ -150,6 +118,10 @@ export default function TypeComercial(props) {
                             <option value="4">4</option>
                             <option value="5">5</option>
                             <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">Mais de 10</option>
                         </select>
                     </div>
 

@@ -49,6 +49,7 @@ export default async function (req, res) {
                         ...dataFilter,
                         active: true,
                         status: 'active',
+                        dateAdded: new Date(),
                         dateUpdated: new Date()
                     }
 

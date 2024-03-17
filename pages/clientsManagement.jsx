@@ -109,107 +109,118 @@ export default function clientsManagement() {
     return (
         <div >
             <Title title={'Gestão de Clientes'} backButton='/' />
-            {loadingPage ?
-                <SpinnerLG />
-                :
-                <div className="pagesContent-lg shadow fadeItem" id="pageTop">
-                    <div className="row">
-                        <div className="col-12 d-flex justify-content-end ">
 
-                            <Link href='/clientAdd'>
-                                <button className="btn btn-sm btn-orange">
-                                    <FontAwesomeIcon icon={faUserPlus} /> Adicionar Cliente
-                                </button>
-                            </Link>
-                        </div>
+            <div className="pagesContent-lg shadow fadeItem" id="pageTop">
+                <div className="row">
+                    <div className="col-12 d-flex justify-content-end ">
 
-                    </div>
-                    <div className="row mt-3">
-                        <div className="col-12 col-md-6 col-xl-4 d-flex justify-content-start">
-
-                            <div class="input-group mb-3">
-                                <input type="text"
-                                    class="form-control"
-                                    placeholder="Pesquisar"
-                                    aria-label="Username"
-                                    aria-describedby="basic-addon1"
-                                    value={searchValue}
-                                    onChange={e => setSearchValue(e.target.value)}
-                                />
-                                <span class="input-group-text" id="basic-addon1"><FontAwesomeIcon icon={faSearch} className="icon" /></span>
-                            </div>
-                        </div>
-                        <div className="col-12 col-md-6 col-xl-4">
-                            <div class="input-group mb-3">
-                                <label class="input-group-text" for="clientsOrderSelect">Ordenar por:</label>
-                                <select class="form-select" id="clientsOrderSelect" value={clientsOrder} onChange={e => setClientsOrder(e.target.value)}>
-                                    <option value="newest" selected>Mais recentes</option>
-                                    <option value="oldest">Mais antigos</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div className="col-12 col-md-6 col-xl-4">
-                            <div class="input-group mb-3">
-                                <label class="input-group-text" for="clientsOrderSelect">Filtrar por:</label>
-                                <select class="form-select" id="clientsOrderSelect" value={typeSearch} onChange={e => setTypeSearch(e.target.value)}>
-                                    <option value="" selected>Todos</option>
-                                    <option value="Apartamento" selected>Apartamento</option>
-                                    <option value="Casa" selected>Casa</option>
-                                    <option value="Comercial" selected>Comercial</option>
-                                    <option value="Terreno" selected>Terreno</option>
-
-                                </select>
-                            </div>
-                        </div>
+                        <Link href='/clientAdd'>
+                            <button className="btn btn-sm btn-orange">
+                                <FontAwesomeIcon icon={faUserPlus} /> Adicionar Cliente
+                            </button>
+                        </Link>
                     </div>
 
-                    {/* <hr /> */}
+                </div>
+                <hr />
 
-                    <div className="container carousel  " data-bs-touch="false" data-bs-interval='false' id="clientsManagementSection">
-                        <ClientsManagementSections section={section} setSection={value => setSection(value)} />
+                {loadingPage ?
+                    <SpinnerLG />
+                    :
+                    <>
 
-                        <div className="carousel-inner ">
-                            <div className="carousel-item active">
-                                <div className="row d-flex justify-content-center">
-                                    <div className="col-12" >
-                                        <ClientsPage
-                                            clients={clientsArray}
-                                            section='myClients'
-                                            user_id={token.sub}
-                                            setClientSelected={value => setClientSelected(value)} />
-                                    </div>
+
+
+                        <div className="row mt-3">
+                            <div className="col-12 col-md-6 col-xl-4 d-flex justify-content-start">
+
+                                <div class="input-group mb-3">
+                                    <input type="text"
+                                        class="form-control"
+                                        placeholder="Pesquisar"
+                                        aria-label="Username"
+                                        aria-describedby="basic-addon1"
+                                        value={searchValue}
+                                        onChange={e => setSearchValue(e.target.value)}
+                                    />
+                                    <span class="input-group-text" id="basic-addon1"><FontAwesomeIcon icon={faSearch} className="icon" /></span>
                                 </div>
                             </div>
-                            <div className="carousel-item">
-                                <div className="row d-flex justify-content-center">
-                                    <div className="col-12" >
-
-                                        <ClientsPage
-                                            clients={clientsArray}
-                                            section='allClients'
-                                            user_id={token.sub}
-                                            setClientSelected={value => setClientSelected(value)} />
-                                    </div>
-
+                            <div className="col-12 col-md-6 col-xl-4">
+                                <div class="input-group mb-3">
+                                    <label class="input-group-text" for="clientsOrderSelect">Ordenar por:</label>
+                                    <select class="form-select" id="clientsOrderSelect" value={clientsOrder} onChange={e => setClientsOrder(e.target.value)}>
+                                        <option value="newest" selected>Mais recentes</option>
+                                        <option value="oldest">Mais antigos</option>
+                                    </select>
                                 </div>
+                            </div>
+                            <div className="col-12 col-md-6 col-xl-4">
+                                <div class="input-group mb-3">
+                                    <label class="input-group-text" for="clientsOrderSelect">Filtrar por:</label>
+                                    <select class="form-select" id="clientsOrderSelect" value={typeSearch} onChange={e => setTypeSearch(e.target.value)}>
+                                        <option value="" selected>Todos</option>
+                                        <option value="Apartamento" selected>Apartamento</option>
+                                        <option value="Casa" selected>Casa</option>
+                                        <option value="Comercial" selected>Comercial</option>
+                                        <option value="Terreno" selected>Terreno</option>
+
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* <hr /> */}
+
+                        <div className="container carousel  " data-bs-touch="false" data-bs-interval='false' id="clientsManagementSection">
+                            <ClientsManagementSections section={section} setSection={value => setSection(value)} />
+
+                            <div className="carousel-inner ">
+                                <div className="carousel-item active">
+                                    <div className="row d-flex justify-content-center">
+                                        <div className="col-12" >
+                                            <ClientsPage
+                                                clients={clientsArray}
+                                                section='myClients'
+                                                user_id={token.sub}
+                                                setClientSelected={value => setClientSelected(value)} />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="carousel-item">
+                                    <div className="row d-flex justify-content-center">
+                                        <div className="col-12" >
+
+                                            <ClientsPage
+                                                clients={clientsArray}
+                                                section='allClients'
+                                                user_id={token.sub}
+                                                setClientSelected={value => setClientSelected(value)} />
+                                        </div>
+
+                                    </div>
+                                </div>
+
                             </div>
 
                         </div>
-                    </div>
 
 
 
 
-                    <ViewClientModal clientSelected={clientSelected} />
-                    <DeleteClientModal clientSelected={clientSelected} dataFunction={() => dataFunction(token.company_id)} />
+                        <ViewClientModal clientSelected={clientSelected} />
+                        <DeleteClientModal clientSelected={clientSelected} dataFunction={() => dataFunction(token.company_id)} />
+
+                    </>
+
+                }
 
 
-                </div >
+            </div >
 
 
 
 
-            }
         </div>
     );
 }

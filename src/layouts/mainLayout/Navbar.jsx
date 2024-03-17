@@ -80,7 +80,7 @@ export default function Nav(props) {
                         <div className="row align-items-center">
                             <div className="d-flex justify-content-center">
                                 <small className={styles.userStatus}>
-                                    {token.userStatus === 'admGlobal' ? 'Administrador' : 'Consultor'}
+                                    {token.userStatus === 'admGlobal' ? 'Administrador' : 'Corretor'}
                                 </small>
                             </div>
                         </div>
