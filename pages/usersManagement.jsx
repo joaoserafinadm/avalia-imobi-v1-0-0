@@ -11,6 +11,7 @@ import jwt from "jsonwebtoken";
 import axios from "axios";
 import baseUrl from "../utils/baseUrl";
 import UsersCard from "../src/usersManagement/UserCard";
+import ViewUserModal from "../src/usersManagement/ViewUserModal";
 
 
 
@@ -23,7 +24,7 @@ export default function UsersManagement() {
     const [searchValue, setSearchValue] = useState('')
     const [loadingPage, setLoadingPage] = useState(true)
     const [usersArray, setUsersArray] = useState([])
-    const [idSelected, setIdSelected] = useState('')
+    const [userSelected, setUserSelected] = useState('')
 
     useEffect(() => {
         dataFunction(token.company_id)
@@ -52,58 +53,67 @@ export default function UsersManagement() {
     return (
         <div >
             <Title title={'Gestão de usuários'} backButton='/' />
-            {loadingPage ?
-                <SpinnerLG />
-                :
-
-                <div className="pagesContent shadow fadeItem" id="pageTop">
-                    <div className="row ">
-                        <div className="col-12 d-flex justify-content-end ">
-
-                            <Link href='/userAdd'>
-                                <button className="btn btn-sm btn-orange">
-                                    Adicionar usuário
-                                </button>
-                            </Link>
-                        </div>
-                    </div>
-                    <div className="row mt-3">
-                        <div className="col-12 col-md-3 d-flex justify-content-start">
-
-                            <div class="input-group mb-3">
-                                <input type="text"
-                                    class="form-control"
-                                    placeholder="Pesquisar"
-                                    aria-label="Username"
-                                    aria-describedby="basic-addon1"
-                                    value={searchValue}
-                                    onChange={e => setSearchValue(e.target.value)}
-                                />
-                                <span class="input-group-text" id="basic-addon1"><FontAwesomeIcon icon={faSearch} className="icon" /></span>
-                            </div>
-                        </div>
-                    </div>
-                    <hr />
-                    <div className="row mt-3">
-
-                        {usersArray.map(elem => {
-                            return (
-                                <div className="col-12 col-xl-6 d-flex justify-content-center">
-                                    <div className="col-12">
 
 
+            <div className="pagesContent shadow fadeItem" id="pageTop">
+                <div className="row ">
+                    <div className="col-12 d-flex justify-content-end ">
 
-
-                                        <UsersCard setIdSelected={value => setIdSelected(value)} idSelected={idSelected} elem={elem} />
-                                    </div>
-                                </div>
-
-                            )
-
-                        })}
+                        <Link href='/userAdd'>
+                            <button className="btn btn-sm btn-orange">
+                                Adicionar usuário
+                            </button>
+                        </Link>
                     </div>
                 </div>
-            }
+                <hr />
+                {loadingPage ?
+                    <SpinnerLG />
+                    :
+                    <>
+                        <div className="row mt-3">
+                            <div className="col-12 col-md-3 d-flex justify-content-start">
+
+                                <div class="input-group mb-3">
+                                    <input type="text"
+                                        class="form-control"
+                                        placeholder="Pesquisar"
+                                        aria-label="Username"
+                                        aria-describedby="basic-addon1"
+                                        value={searchValue}
+                                        onChange={e => setSearchValue(e.target.value)}
+                                    />
+                                    <span class="input-group-text" id="basic-addon1"><FontAwesomeIcon icon={faSearch} className="icon" /></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="row mt-3">
+
+                            {usersArray.filter(elem => {
+
+                                const name = elem.firstName + ' ' + elem.lastName
+
+                                return name.toLowerCase().includes(searchValue.toLowerCase())
+                            }).map(elem => {
+                                return (
+                                    <UsersCard setUserSelected={value => setUserSelected(value)} elem={elem} />
+                                )
+
+                            })}
+                        </div>
+
+
+                        <ViewUserModal userSelected={userSelected} />
+
+                    </>
+
+                }
+
+
+
+            </div>
+
+
         </div>
 
     )

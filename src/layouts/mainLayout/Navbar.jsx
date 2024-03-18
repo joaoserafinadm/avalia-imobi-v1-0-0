@@ -10,7 +10,7 @@ import { Accordion } from "react-bootstrap";
 import { useAccordionButton } from "react-bootstrap/AccordionButton";
 import { AccordionContext } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleRight, faGear, faHome, faHouseUser, faUsers } from "@fortawesome/free-solid-svg-icons";
+import { faAngleRight, faGear, faHome, faHouseUser, faUserGear, faUserTie, faUsers } from "@fortawesome/free-solid-svg-icons";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
@@ -79,8 +79,8 @@ export default function Nav(props) {
                         </div>
                         <div className="row align-items-center">
                             <div className="d-flex justify-content-center">
-                                <small className={styles.userStatus}>
-                                    {token.userStatus === 'admGlobal' ? 'Administrador' : 'Corretor'}
+                                <small className={`${styles.userStatus}`}>
+                                    {token.userStatus === "admGlobal" ? <FontAwesomeIcon icon={faUserGear} /> : <FontAwesomeIcon icon={faUserTie} />} {token.userStatus === 'admGlobal' ? 'Administrador' : 'Corretor'}
                                 </small>
                             </div>
                         </div>

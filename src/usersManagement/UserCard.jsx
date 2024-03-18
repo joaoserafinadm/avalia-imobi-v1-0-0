@@ -1,134 +1,93 @@
+import tippy from "tippy.js"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import VerticalLine from "../../utils/VerticalLine";
-import { faBuilding, faCheck, faEnvelope, faEye, faHouse, faMailBulk, faMapLocation, faStore, faTrashAlt, faUserGear, faUserTie } from "@fortawesome/free-solid-svg-icons";
-import { useEffect, useState } from "react";
-import isMobile from "../../utils/isMobile";
-import tippy from "tippy.js";
+import { faEdit, faEnvelope, faEye, faSearch, faTrash, faUser, faUserGear, faUserTie, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
+import { useEffect } from "react";
+import Link from "next/link";
+import { userStatusName } from "../../utils/permissions";
 
 
 
-
-export default function UsersCard(props) {
+export default function UserCard(props) {
 
     useEffect(() => {
-        tippy('#viewClientButton', {
-            content: "Visualizar",
-            placement: 'bottom'
-        });
-        tippy('#deleteClientButton', {
-            content: "Deletar",
-            placement: 'bottom'
-        });
-    }, [props.idSelected])
 
-    const user = props.elem
+        setTimeout(() => {
+            tippy('#viewUserBtn' + props.elem._id, {
+                content: 'Visualizar',
+                placement: 'bottom'
+            })
+            tippy('#whatsappUserBtn' + props.elem._id, {
+                content: 'Conversar pelo Whatsapp',
+                placement: 'bottom'
+            })
+        }, 1000)
+    }, [])
 
+
+    const handleWhatsapp = (celular) => {
+
+        const formattedPhoneNumber = celular.replace(/\D/g, '')
+        const whatsappURL = `https://api.whatsapp.com/send?phone=${formattedPhoneNumber}`;
+        window.open(whatsappURL, '_blank');
+
+    }
 
 
     return (
-        <div className="card my-2 cardAnimation fadeItem" type="button" onClick={() => props.setIdSelected(props.elem._id)} style={{ overflowX: 'hidden' }}>
-            <div className="card-body ">
-                <div className="row d-flex">
+        <div className="col-12 col-lg-6" key={props.elem._id} >
+            <div className="card my-2 shadow">
+                <div className="card-body">
+                    <div className="row d-flex">
 
-                    <div className="col-12  d-flex">
-
-                        <div className="d-flex justify-content-center align-items-center">
-
-                            <img src={user.profileImageUrl} alt="" height={80} className="rounded-circle " />
+                        <div style={{ width: "50px" }}>
+                            <img src={props.elem.profileImageUrl} alt="Profile Image" className="akvo-sm-profile-img me-2" />
                         </div>
-                        <div className="ms-3 col  ">
+                        <div className="col">
                             <div className="row">
-                                <div className="col-12 d-flex align-items-center">
-
-                                    <FontAwesomeIcon
-                                        icon={user.userStatus === 'admGlobal' ? faUserGear : user.userStatus === 'user' ? faUserTie : ''}
-                                        className="icon text-secondary me-2" />
-                                    <span className="bold">
-
-                                        {user.firstName} {user.lastName}
-                                    </span>
+                                <div className="col-12 col-lg-6 bold">
+                                    {!props.elem.lastName && !props.elem.firstName ? "-" : props.elem.firstName + ' ' + props.elem.lastName}
+                                </div>
+                                <div className="col-12 col-lg-6 text-lg-end small text-secondary">
+                                    {props.elem.userStatus === "admGlobal" ? <FontAwesomeIcon icon={faUserGear} className="icon" /> : <FontAwesomeIcon icon={faUserTie} className="icon" />} {userStatusName(props.elem.userStatus) ? userStatusName(props.elem.userStatus) : '-'}
+                                </div>
+                                <div className="col-12 small">
+                                    <FontAwesomeIcon icon={faEnvelope} className={`me-1 text-secondary`} /> {props.elem.email}
+                                </div>
+                                <div className="col-12 small">
+                                    <FontAwesomeIcon icon={faWhatsapp} className={`me-1 text-secondary`} /> {props.elem.celular ? props.elem.celular : 'Não informado'}
                                 </div>
                             </div>
-                            <div className="row">
-                                <span className="small">
-                                    {user.userStatus === 'admGlobal' ? 'Administrador ' : user.userStatus === 'user' ? 'Corretor' : ''}
-                                </span>
-                            </div>
-                            <div className="row mt-2">
-                                <span className="small d-flex align-items-center">
-                                    {user.email}
-                                    {/* <FontAwesomeIcon icon={faEnvelope} className=" icon-small text-secondary me-2" /> {user.email} */}
-                                </span>
-                            </div>
-                            <div className="row">
-                                <span className="small d-flex align-items-center">
-                                    {user.celular ? user.celular : '-'}
-                                    {/* <FontAwesomeIcon icon={faWhatsapp} className=" icon-small text-secondary me-2" /> {user.celular ? user.celular : '-'} */}
-                                </span>
-                            </div>
 
                         </div>
 
                     </div>
-                    <div className="col-12">
-
-                        <hr />
-                    </div>
-                    <div className="col-12  d-flex justify-content-evenly align-items-center text-secondary">
-                        <div>
-                            <div className="  text-center">
-                                <b>12</b>
-                            </div>
-                            <div className=" small bold text-center">
-                                Avaliações
-                            </div>
-                        </div>
-                        <div>
-                            <div className="  text-center">
-                                <b>7</b>
-                            </div>
-                            <div className=" small bold text-center">
-                                Vendas
-                            </div>
-                        </div>
-
-
-                    </div>
-                </div>
-
-
-                {props.idSelected === props.elem._id && (
-                    <div className="slideLeft d-flex ms-2 bg-light h-100 align-items-center shadow">
-                        <VerticalLine />
-                        <div className="d-flex justify-content-center align-items-center " style={{ width: '150px', height: '60px' }} >
+                    <hr />
+                    <div className="row">
+                        <div className="col-12 d-flex justify-content-center">
                             <div class="btn-group" role="group" aria-label="Basic example">
-                                <button 
-                                type="button"
-                                    class="btn btn-light border"
-                                    id="viewClientButton">
-                                    <FontAwesomeIcon icon={faEye} className="icon  text-secondary" />
-                                </button>
-
                                 <button
                                     type="button"
-                                    class="btn btn-light border"
-                                    id="deleteClientButton">
-                                    <FontAwesomeIcon icon={faWhatsapp} className="icon text-secondary" />
+                                    class="btn btn-outline-secondary"
+                                    id={"viewUserBtn" + props.elem._id}
+                                    onClick={() => props.setUserSelected(props.elem)}
+                                    data-bs-toggle="modal" data-bs-target="#viewUserModal">
+                                    <FontAwesomeIcon icon={faEye} />
                                 </button>
                                 <button
                                     type="button"
-                                    class="btn btn-light border"
-                                    id="deleteClientButton">
-                                    <FontAwesomeIcon icon={faTrashAlt} className="icon text-secondary" />
+                                    class="btn btn-outline-secondary"
+                                    id={"whatsappUserBtn" + props.elem._id}
+                                    disabled={!props.elem.celular}
+                                    onClick={() => handleWhatsapp(props.elem.celular)}
+                                >
+                                    <FontAwesomeIcon icon={faWhatsapp} />
                                 </button>
                             </div>
-
                         </div>
-
                     </div>
-                )}
 
+                </div>
             </div>
         </div>
     )
