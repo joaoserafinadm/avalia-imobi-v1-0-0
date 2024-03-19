@@ -177,7 +177,7 @@ export default function ClientCard_02(props) {
                                     onClick={() => props.setClientSelected(props.elem)}>
                                     <FontAwesomeIcon icon={faEye} className="icon  text-secondary" />
                                 </button>
-                               
+
 
                                 <button
                                     type="button"

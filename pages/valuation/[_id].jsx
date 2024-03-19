@@ -1,5 +1,8 @@
 import { useRouter } from "next/router";
 import Title from "../../src/components/title/Title2";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import navbarHide from "../../utils/navbarHide";
 
 
 
@@ -7,10 +10,31 @@ import Title from "../../src/components/title/Title2";
 export default function ValuationPage(props) {
 
     const router = useRouter();
+    const dispatch = useDispatch()
+
 
     const { _id } = router.query;
 
-    console.log("_id", _id)
+    useEffect(() => {
+        navbarHide(dispatch)
+
+    }, [])
+
+    useEffect(() => {
+        if (_id) {
+
+            dataFunction(_id)
+        }
+    }, [_id])
+
+    const dataFunction = async (_id) => {
+
+
+        console.log("_id", _id)
+
+
+
+    }
 
 
     return (

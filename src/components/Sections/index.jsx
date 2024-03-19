@@ -6,7 +6,7 @@ export default function Sections(props) {
                 {props.sections.map((elem, index) => {
                     return (
                         <span
-                            className={`px-4 py-3 text-center ${isMobile() ? 'small px-4' : ' px-5'} ${props.section === elem ? 'fw-bold text-orange  border-bottom border-2 ' : ''}`} type="button"
+                            className={`px-4 py-3 text-center ${isMobile() ? 'fs-small px-4' : ' px-5'} ${props.section === elem ? 'fw-bold text-orange  border-bottom border-2 ' : ''}`} type="button"
                             onClick={() => props.setSection(elem)} data-bs-target={"#" + props.idTarget} data-bs-slide-to={index}>
                             {elem}
                         </span>

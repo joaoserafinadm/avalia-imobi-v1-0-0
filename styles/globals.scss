@@ -3257,3 +3257,10 @@ h1 {
   overflow-y: scroll;
   max-height: calc(100vh - 3.5rem);
 }
+
+.imovel-img {
+  max-height: 350px;
+  max-width: 100%;
+  width: auto;
+  height: auto;
+}

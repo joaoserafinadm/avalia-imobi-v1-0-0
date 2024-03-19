@@ -177,7 +177,7 @@ export default function ClientInfo(props) {
 
 
 
-                                        <img src={elem.url} className={``} alt={`Slide ${index + 1}`} height={350} style={{ objectFit: 'cover' }} />
+                                        <img src={elem.url} className={`imovel-img`} alt={`Slide ${index + 1}`}/>
 
                                     </SwiperSlide>
                                 ))}
