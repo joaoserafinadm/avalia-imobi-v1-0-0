@@ -18,6 +18,7 @@ import DeleteClientModal from "../src/clientsManagement/DeleteClientModal";
 import ViewClientModal from "../src/clientsManagement/ViewClientModal";
 import { showModal } from "../utils/modalControl";
 import { usersArray } from "../store/Users/Users.actions";
+import Sections from "../src/components/Sections";
 
 
 
@@ -31,7 +32,7 @@ export default function clientsManagement() {
     const [loadingPage, setLoadingPage] = useState(true)
     const [clientsArray, setClientsArray] = useState([])
     const [allClients, setAllClients] = useState([])
-    const [section, setSection] = useState('myClients')
+    const [section, setSection] = useState('Meus Clientes')
     const [searchValue, setSearchValue] = useState('')
     const [clientSelected, setClientSelected] = useState('')
     const [clientsOrder, setClientsOrder] = useState('newest')
@@ -131,7 +132,7 @@ export default function clientsManagement() {
 
 
 
-                        <div className="row mt-3">
+                        <div className="row mt-3 fadeItem">
                             <div className="col-12 col-md-6 col-xl-4 d-flex justify-content-start">
 
                                 <div class="input-group mb-3">
@@ -173,7 +174,11 @@ export default function clientsManagement() {
                         {/* <hr /> */}
 
                         <div className="container carousel  " data-bs-touch="false" data-bs-interval='false' id="clientsManagementSection">
-                            <ClientsManagementSections section={section} setSection={value => setSection(value)} />
+                            <Sections
+                                section={section} idTarget="clientsManagementSection"
+                                setSection={value => setSection(value)}
+                                sections={["Meus Clientes", "Todos Clientes"]} />
+
 
                             <div className="carousel-inner ">
                                 <div className="carousel-item active">
@@ -181,7 +186,7 @@ export default function clientsManagement() {
                                         <div className="col-12" >
                                             <ClientsPage
                                                 clients={clientsArray}
-                                                section='myClients'
+                                                section='Meus Clientes'
                                                 user_id={token.sub}
                                                 setClientSelected={value => setClientSelected(value)} />
                                         </div>
@@ -193,7 +198,7 @@ export default function clientsManagement() {
 
                                             <ClientsPage
                                                 clients={clientsArray}
-                                                section='allClients'
+                                                section='Todos Clientes'
                                                 user_id={token.sub}
                                                 setClientSelected={value => setClientSelected(value)} />
                                         </div>

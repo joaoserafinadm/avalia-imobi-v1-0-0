@@ -28,6 +28,8 @@ export default function DeleteClientModal(props) {
             clientId: id,
         }
 
+        console.log("data",client, data)
+
 
         await axios.delete(`${baseUrl()}/api/clientsManagement`, {
             params: data

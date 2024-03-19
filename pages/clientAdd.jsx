@@ -29,6 +29,7 @@ export default function clientAdd() {
     const token = jwt.decode(Cookies.get("auth"));
 
 
+
     const alertsArray = useSelector(state => state.alerts)
     const newClientForm = useSelector(state => state.newClientForm)
     const dispatch = useDispatch()
@@ -41,6 +42,7 @@ export default function clientAdd() {
     const [loadingSave, setLoadingSave] = useState(false)
 
     const [files, setFiles] = useState([])
+
 
 
     useEffect(() => {
@@ -60,6 +62,9 @@ export default function clientAdd() {
             .replace(/(-\d{4})\d+?$/, '$1'))
         )
     }
+
+
+
 
     const handleSave = async (form) => {
 
@@ -300,7 +305,7 @@ export default function clientAdd() {
                                 :
                                 <>
                                     {manualRegister ?
-                                        <button className="ms-2 btn btn-sm btn-orange fadeItem" disabled={!newClientForm.clientName} onClick={() => handleSave(newClientForm)}>Cadastrar</button>
+                                        <button className="ms-2 btn btn-sm btn-orange fadeItem" disabled={!newClientForm.clientName || !newClientForm.propertyType} onClick={() => handleSave(newClientForm)}>Salvar</button>
                                         :
                                         <button className="ms-2 btn btn-sm btn-orange fadeItem" disabled={!newClientForm.clientName} onClick={() => handleSaveLink(token.company_id)}>Salvar</button>
                                     }

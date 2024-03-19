@@ -1,4 +1,7 @@
+import axios from "axios"
 import { useState } from "react"
+import { SpinnerSM } from "../components/loading/Spinners"
+import baseUrl from "../../utils/baseUrl"
 
 
 
@@ -6,9 +9,32 @@ import { useState } from "react"
 export default function EditUserStatus(props) {
 
     const user = props.user
+    const token = props.token
 
 
     const [userStatusEdit, setUserStatusEdit] = useState(user.userStatus)
+    const [saveError, setSaveError] = useState('')
+
+    const [loadingSave, setLoadingSave] = useState(false)
+
+    const handleSave = async () => {
+
+        setLoadingSave(true)
+        setSaveError('')
+
+        await axios.patch(`${baseUrl()}/api/usersManagement`, {
+            company_id: token.company_id,
+            user_id: token.sub,
+            userSelected: user._id,
+            userStatus: userStatusEdit
+        }).then(res => {
+            props.setEditStatus(false)
+            props.dataFunction()
+        }).catch(e => {
+            setSaveError('O usuário não pode ser editado')
+            // setSaveError(e.response.data.message)
+        })
+    }
 
 
     return (
@@ -31,6 +57,7 @@ export default function EditUserStatus(props) {
                                         <option value="admGlobal">Administrador</option>
                                         <option value="user">Corretor</option>
                                     </select>
+                                    <small className="text-danger">{saveError}</small>
                                 </div>
                             </div>
                         </div>
@@ -38,8 +65,15 @@ export default function EditUserStatus(props) {
                 </div>
             </div>
             <div className="modal-footer">
-                <button className="btn btn-sm btn-outline-secondary" onClick={() => props.setEditStatus(false)}>Cancelar</button>
-                <button className="btn btn-sm btn-outline-orange" onClick={() => props.setEditStatus(false)}>Salvar</button>
+                <button className="btn btn-sm btn-outline-secondary" onClick={() => props.setEditStatus(false)} disabled={loadingSave}>Cancelar</button>
+                {loadingSave ?
+                    <button className="btn btn-sm btn-outline-orange px-4" disabled>
+
+                        <SpinnerSM />
+                    </button>
+                    :
+                    <button className="btn btn-sm btn-outline-orange" onClick={() => handleSave()}>Salvar</button>
+                }
 
             </div>
         </>

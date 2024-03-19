@@ -50,6 +50,99 @@ export default authenticated(async (req, res) => {
 
             }
         }
+    } else if (req.method === "PATCH") {
+
+        const { company_id, user_id, userSelected, userStatus } = req.body
+
+        if (!company_id || !user_id || !userSelected || !userStatus) {
+            res.status(400).json({ message: "Missing parameters on request body" })
+        } else {
+
+            const { db } = await connect()
+
+            const companyExist = await db.collection('companies').findOne({ _id: ObjectId(company_id) })
+
+            const userExist = await db.collection('users').findOne({ _id: ObjectId(user_id) })
+
+            if (!companyExist) {
+                res.status(400).json({ message: "Company does not exist" })
+            } else if (!userExist) {
+                res.status(400).json({ message: "User does not exist" })
+            } else {
+
+                const userSelectedExist = await db.collection('users').findOne({ _id: ObjectId(userSelected) })
+
+                if (!userSelectedExist) {
+                    res.status(400).json({ message: "User selected does not exist" })
+                } else {
+
+                    const response = await db.collection('users').updateOne(
+                        { _id: ObjectId(userSelected) },
+                        { $set: { userStatus: userStatus } }
+                    )
+
+                    if (response.matchedCount) {
+                        res.status(200).json({ message: "User updated" })
+                    } else {
+                        res.status(400).json({ message: "Cant update user" })
+                    }
+
+
+                }
+
+
+            }
+
+        }
+
+
+    } else if (req.method === "DELETE") {
+
+
+        const { company_id, user_id, userSelected } = req.body
+
+        if (!company_id || !user_id || !userSelected) {
+            res.status(400).json({ message: "Missing parameters on request body" })
+        } else {
+
+            const { db } = await connect()
+
+            const companyExist = await db.collection('companies').findOne({ _id: ObjectId(company_id) })
+
+            const userExist = await db.collection('users').findOne({ _id: ObjectId(user_id) })
+
+            if (!companyExist) {
+                res.status(400).json({ message: "Company does not exist" })
+            } else if (!userExist) {
+                res.status(400).json({ message: "User does not exist" })
+            } else {
+
+                const userSelectedExist = await db.collection('users').findOne({ _id: ObjectId(userSelected) })
+
+                if (!userSelectedExist) {
+                    res.status(400).json({ message: "User selected does not exist" })
+                } else {
+
+                    const response = await db.collection('users').deleteOne(
+                        { _id: ObjectId(userSelected) }
+                    )
+
+                    if (response.deletedCount) {
+                        res.status(200).json({ message: "User deleted" })
+                    } else {
+                        res.status(400).json({ message: "Cant delete user" })
+                    }
+
+
+                }
+
+
+            }
+
+
+        }
+
+
     }
 
 

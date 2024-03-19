@@ -18,8 +18,8 @@ export default function ClientsPage(props) {
 
 
     const clients = props.clients.filter(elem => {
-        if (props.section === 'myClients') return elem.user_id === props.user_id
-        if (props.section === 'allClients') return elem
+        if (props.section === 'Meus Clientes') return elem.user_id === props.user_id
+        if (props.section === 'Todos Clientes') return elem
     })
 
 

@@ -22,19 +22,22 @@ export default function PropertyTypeCard(props) {
         <div className={`card cardSize cardAnimation ${props.type === newClientForm.propertyType ? 'border-selected' : ''} `}
             type='button'
             onClick={() => dispatch(setPropertyType(props.type))}>
-            <div className="card-body">
+            <div className="card-body d-flex justify-content-center align-items-center">
+                <div>
 
-                <div className="row  d-flex justify-content-center align-items-center">
-                    <FontAwesomeIcon className={`icon ${props.type === newClientForm.propertyType ? 'title-color' : 'text-secondary'}`}
-                        icon={props.type === 'Apartamento' ? faBuilding :
-                            props.type === 'Casa' ? faHome :
-                                props.type === 'Comercial' ? faStore :
-                                    props.type === 'Terreno' ? faMapLocation : faHome} />
-                </div>
-                <div className="row mt-1 d-flex">
-                    <div className="col-12 d-flex justify-content-center align-items-center">
 
-                        <span className={` ${props.type === newClientForm.propertyType ? 'title-color' : 'text-secondary'}`}>{props.type}</span>
+                    <div className="row  d-flex justify-content-center align-items-center">
+                        <FontAwesomeIcon className={`icon ${props.type === newClientForm.propertyType ? 'title-color' : 'text-secondary'}`}
+                            icon={props.type === 'Apartamento' ? faBuilding :
+                                props.type === 'Casa' ? faHome :
+                                    props.type === 'Comercial' ? faStore :
+                                        props.type === 'Terreno' ? faMapLocation : faHome} />
+                    </div>
+                    <div className="row mt-1 d-flex">
+                        <div className="col-12 d-flex justify-content-center align-items-center">
+
+                            <span className={` ${props.type === newClientForm.propertyType ? 'title-color' : 'text-secondary'}`}>{props.type}</span>
+                        </div>
                     </div>
                 </div>
             </div>

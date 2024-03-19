@@ -44,9 +44,13 @@ export default async function (req, res) {
                         ...dataFilter
                     } = data
 
+                const newId = ObjectId()
+
+
                     const newData = {
                         // ...clientExist,
                         ...dataFilter,
+                        _id: newId,
                         active: true,
                         status: 'active',
                         dateAdded: new Date(),

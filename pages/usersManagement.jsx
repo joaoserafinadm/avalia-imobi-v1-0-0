@@ -34,16 +34,16 @@ export default function UsersManagement() {
 
     const dataFunction = async (company_id) => {
 
-        setLoadingPage(true)
 
         await axios.get(`${baseUrl()}/api/usersManagement`, {
             params: {
                 company_id: company_id
             }
         }).then(res => {
-            console.log(res.data)
             setUsersArray(res.data)
             setLoadingPage(false)
+            const selected = userSelected && res.data?.find(elem => elem._id === userSelected._id)
+            setUserSelected(selected)
         }).catch(e => {
             setLoadingPage(false)
             console.log(e)
@@ -71,7 +71,7 @@ export default function UsersManagement() {
                     <SpinnerLG />
                     :
                     <>
-                        <div className="row mt-3">
+                        <div className="row mt-3 fadeItem">
                             <div className="col-12 col-md-3 d-flex justify-content-start">
 
                                 <div class="input-group mb-3">
@@ -103,7 +103,9 @@ export default function UsersManagement() {
                         </div>
 
 
-                        <ViewUserModal userSelected={userSelected} />
+                        <ViewUserModal userSelected={userSelected}
+                            dataFunction={() => dataFunction(token.company_id)}
+                            setUserSelected={value => setUserSelected(value)} />
 
                     </>
 

@@ -7,20 +7,26 @@ import Cookies from "js-cookie";
 import jwt from "jsonwebtoken";
 import Link from "next/link";
 import { SpinnerSM } from "../src/components/loading/Spinners"
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import navbarHide from "../utils/navbarHide";
 import removeInputError from "../utils/removeInputError";
 import scrollTo from "../utils/scrollTo";
 import randomPassword from "../utils/randomPassword";
 import axios from "axios";
 import baseUrl from "../utils/baseUrl";
+import { addAlert } from "../store/Alerts/Alerts.actions";
+import { useRouter } from "next/router";
 
 
 
 export default function userAdd() {
 
+    const router = useRouter()
+
     const token = jwt.decode(Cookies.get("auth"));
     const dispatch = useDispatch()
+    const alertsArray = useSelector(state => state.alerts)
+
 
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
@@ -102,7 +108,19 @@ export default function userAdd() {
 
             await axios.post(`${baseUrl()}/api/userAdd`, data)
                 .then(res => {
+
+                    const alert = {
+                        type: 'alert',
+                        message: `${firstName} adicionado com sucesso!`,
+                        link: res.data
+                    }
+
+                    dispatch(addAlert(alertsArray, [alert]))
+
                     setLoadingSave(false)
+
+                    router.push('/usersManagement')
+
 
                 })
                 .catch(e => {
@@ -151,7 +169,7 @@ export default function userAdd() {
                     <small className="text-danger">{userStatusError}</small>
 
                     <div className="col-12 col-lg-5 my-2">
-                        <div className={`card cardAnimation  ${userStatus === 'admin' ? 'border-selected' : ''}`} type="button" onClick={() => setUserStatus('admin')}>
+                        <div className={`card cardAnimation  ${userStatus === 'admGlobal' ? 'border-selected' : ''}`} type="button" onClick={() => setUserStatus('admGlobal')}>
                             <div className="card-body">
                                 <div className="row">
 

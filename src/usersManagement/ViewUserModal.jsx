@@ -25,6 +25,7 @@ export default function ViewUserModal(props) {
 
         setEditStatus(false)
         setDeleteStatus(false)
+        props.setUserSelected('')
 
         setSaveError('')
         setDeleteError(false)
@@ -49,14 +50,18 @@ export default function ViewUserModal(props) {
                         <UserInfo user={user} token={token}
                             setDeleteStatus={value => setDeleteStatus(value)}
                             setEditStatus={value => setEditStatus(value)}
-                            handleCloseModal={handleCloseModal} />
+                            handleCloseModal={() => handleCloseModal()} />
                     )}
                     {editStatus && (
-                        <EditUserStatus user={user}
-                            setEditStatus={value => setEditStatus(value)} />
+                        <EditUserStatus user={user} token={token}
+                            setEditStatus={value => setEditStatus(value)}
+                            dataFunction={() =>props.dataFunction()} />
                     )}
                     {deleteStatus && (
-                        <DeleteUserStatus user={user} setDeleteStatus={value => setDeleteStatus(value)} />
+                        <DeleteUserStatus user={user} token={token}
+                            setDeleteStatus={value => setDeleteStatus(value)}
+                            handleCloseModal={() => handleCloseModal()}
+                            dataFunction={() => props.dataFunction()}/>
                     )}
                 </div>
             </div>

@@ -15,7 +15,7 @@ export default function UserInfo(props) {
     return (
         <>
         <div className="modal-body">
-            {permissionShow(token?.userStatus, user._id, token?.sub, true) && (
+            {permissionShow(token?.userStatus, user?._id, token?.sub, true) && (
 
                 <div className="row">
                     <div className="col-12 d-flex justify-content-end">
@@ -46,28 +46,28 @@ export default function UserInfo(props) {
 
             <div className="row d-flex justify-content-center fadeItem">
                 <div className="text-center col-12" style={{ width: '170px' }}>
-                    <img src={user.profileImageUrl} alt="" className="rounded-circle" height={150} />
+                    <img src={user?.profileImageUrl} alt="" className="rounded-circle" height={150} />
                 </div>
                 <div className="col-sm col-12">
                     <div className="row ">
                         <div className="col-12 text-sm-start text-center">
-                            <span className="fs-5 bold"> {user.firstName} {user.lastName}</span>
+                            <span className="fs-5 bold"> {user?.firstName} {user?.lastName}</span>
                         </div>
                         <div className="col-12 text-secondary text-sm-start text-center">
-                            {user.userStatus === "admGlobal" ? <FontAwesomeIcon icon={faUserGear} /> : <FontAwesomeIcon icon={faUserTie} />} {userStatusName(user.userStatus) ? userStatusName(user.userStatus) : '-'}
+                            {user?.userStatus === "admGlobal" ? <FontAwesomeIcon icon={faUserGear} /> : <FontAwesomeIcon icon={faUserTie} />} {userStatusName(user?.userStatus) ? userStatusName(user?.userStatus) : '-'}
 
                         </div>
                         <div className="col-12 text-secondary">
-                            Creci: {user.creci}
+                            Creci: {user?.creci}
                         </div>
                         <div className="col-12 text-secondary mt-3">
-                            <FontAwesomeIcon icon={faEnvelope} className={`me-1`} /> {user.workEmail}
+                            <FontAwesomeIcon icon={faEnvelope} className={`me-1`} /> {user?.workEmail}
                         </div>
                         <div className="col-12 text-secondary">
-                            <FontAwesomeIcon icon={faWhatsapp} className={`me-1`} /> {user.celular ? user.celular : 'Não informado'}
+                            <FontAwesomeIcon icon={faWhatsapp} className={`me-1`} /> {user?.celular ? user?.celular : 'Não informado'}
                         </div>
                         <div className="col-12 text-secondary">
-                            <FontAwesomeIcon icon={faPhone} className={`me-1`} /> {user.telefone ? user.telefone : 'Não informado'}
+                            <FontAwesomeIcon icon={faPhone} className={`me-1`} /> {user?.telefone ? user?.telefone : 'Não informado'}
                         </div>
                     </div>
                 </div>

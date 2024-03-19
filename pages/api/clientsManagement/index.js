@@ -38,6 +38,7 @@ export default authenticated(async (req, res) => {
 
 
                 const clients = companyExist.clients
+
                 res.status(200).json({clients, users: usersArray})
 
             }

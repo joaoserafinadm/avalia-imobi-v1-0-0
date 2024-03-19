@@ -39,7 +39,7 @@ export const newUserEmail: React.FC<Readonly<EmailTemplateProps>> = ({
                     <Section className="mt-[25px]">
                         <Img
                             height="80"
-                            alt="Avalia Imboi"
+                            alt="Avalia Imobi"
                             src='https://res.cloudinary.com/joaoserafinadm/image/upload/v1694998829/AVALIA%20IMOBI/LOGOS/LOGO_02_wkzqga.png'
                             className="my-0 mx-auto"
                         />
