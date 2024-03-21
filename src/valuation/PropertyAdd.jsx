@@ -22,6 +22,7 @@ import { addAlert } from "../../store/Alerts/Alerts.actions"
 import TypeCasa from "../pages/newClient/TypeCasa"
 import TypeComercial from "../pages/newClient/TypeComercial"
 import TypeTerreno from "../pages/newClient/TypeTerreno"
+import UploadFilesValuation from "./UploadFilesValuation"
 
 export default function PropertyAdd(props) {
 
@@ -37,10 +38,7 @@ export default function PropertyAdd(props) {
 
     const router = useRouter()
 
-    useEffect(() => {
 
-        dispatch(setPropertyType(props.client.propertyType))
-    }, [])
 
 
 
@@ -51,25 +49,31 @@ export default function PropertyAdd(props) {
 
     const [files, setFiles] = useState([])
 
+    useEffect(() => {
+        console.log("files", files)
+    }, [files.length])
+
 
 
     useEffect(() => {
         dispatch(initialValues())
+        dispatch(setPropertyType(props.client.propertyType))
+
         navbarHide(dispatch)
 
     }, [])
 
 
+    const handleLinkImages = async (link) => {
 
-    const maskTelefone = (value) => {
-        return dispatch(setCelular(value
-            .replace(/\D/g, '')
-            .replace(/(\d{2})(\d)/, '($1) $2')
-            .replace(/(\d{4})(\d)/, '$1-$2')
-            .replace(/(\d{4})-(\d)(\d{4})/, '$1$2-$3')
-            .replace(/(-\d{4})\d+?$/, '$1'))
-        )
+        await axios.post(`${baseUrl()}/api/valuation/linkImages`, { link: newClientForm.propertyLink })
+            .then(res => {
+                setFiles(res.data)
+            }).catch(e => {
+                console.log(e)
+            })
     }
+
 
 
     return (
@@ -107,6 +111,7 @@ export default function PropertyAdd(props) {
                                             className="form-control"
                                             name="propertyLinkItem"
                                             id="propertyLinkItem"
+                                            onBlur={e => handleLinkImages(e.target.value)}
                                             value={newClientForm.propertyLink}
                                             onChange={e => dispatch(setPropertyLink(e.target.value))} />
                                     </div>
@@ -150,7 +155,7 @@ export default function PropertyAdd(props) {
                                         <TypeApartamento />
                                         <GeralFeatures type="Apartamento" />
                                         <Location />
-                                        <UploadFiles setFiles={array => setFiles(array)} />
+                                        <UploadFilesValuation setFiles={array => setFiles(array)} files={files} />
                                     </>
                                 )}
                                 {newClientForm.propertyType === "Casa" && (
@@ -158,7 +163,7 @@ export default function PropertyAdd(props) {
                                         <TypeCasa />
                                         <GeralFeatures type="Casa" />
                                         <Location />
-                                        <UploadFiles setFiles={array => setFiles(array)} />
+                                        <UploadFilesValuation setFiles={array => setFiles(array)} files={files} />
                                     </>
                                 )}
                                 {newClientForm.propertyType === "Comercial" && (
@@ -166,7 +171,7 @@ export default function PropertyAdd(props) {
                                         <TypeComercial />
                                         <GeralFeatures type="Comercial" />
                                         <Location />
-                                        <UploadFiles setFiles={array => setFiles(array)} />
+                                        <UploadFilesValuation setFiles={array => setFiles(array)} files={files} />
                                     </>
                                 )}
                                 {newClientForm.propertyType === "Terreno" && (
@@ -174,7 +179,7 @@ export default function PropertyAdd(props) {
                                         <TypeTerreno />
                                         <GeralFeatures type="Terreno" />
                                         <Location />
-                                        <UploadFiles setFiles={array => setFiles(array)} />
+                                        <UploadFilesValuation setFiles={array => setFiles(array)} files={files} />
                                     </>
                                 )}
 
