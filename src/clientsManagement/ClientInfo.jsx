@@ -201,7 +201,7 @@ export default function ClientInfo(props) {
                 </div>
 
                 <div className="col-12 my-2">
-                    {client?.logradouro ? client?.logradouro + ', ' : ''} {client?.numero ? client?.numero + ', ' : ''} {client?.cep ? client?.cep + ', ' : ''} {client?.cidade} / {client?.estado}
+                    {client?.logradouro ? client?.logradouro + ', ' : ''} {client?.numero ? client?.numero + ', ' : ''} {client?.cep ? client?.cep + ', ' : ''} {client?.cidade} / {client?.uf}
                 </div>
 
 

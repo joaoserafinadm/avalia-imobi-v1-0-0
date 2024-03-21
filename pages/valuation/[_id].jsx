@@ -11,6 +11,7 @@ import { SpinnerLG } from "../../src/components/loading/Spinners";
 import ClientInfo from "../../src/clientsManagement/ClientInfo";
 import Sections from "../../src/components/Sections";
 import ValuationConfig from "../../src/valuation/ValuationConfig";
+import PropertyAdd from "../../src/valuation/PropertyAdd";
 
 
 
@@ -89,6 +90,9 @@ export default function ValuationPage(props) {
                             </div>
                         </div>
                     </div>
+
+
+                    <PropertyAdd client={client} />
                 </div>
 
 

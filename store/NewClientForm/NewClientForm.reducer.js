@@ -52,6 +52,8 @@ export default function inventoryStatesReducer(state = {
     userLastName: '',
     profileImageUrl: '',
     propertyType: '',
+    propertyName: '',
+    propertyLink: '',
     areaTotal: '',
     areaTotalPrivativa: '',
     quartos: '',
@@ -127,6 +129,12 @@ export default function inventoryStatesReducer(state = {
 
         case 'SET_PROPERTY_TYPE':
             return { ...state, propertyType: action.payload }
+
+        case 'SET_PROPERTY_NAME':
+            return { ...state, propertyName: action.payload }
+
+        case 'SET_PROPERTY_LINK':
+            return { ...state, propertyLink: action.payload }
 
         case 'PROPERTY_TYPE_CHANGE':
             return { ...state, ...action.payload }

@@ -17,6 +17,8 @@ export function initialValues() {
             userLastName: '',
             profileImageUrl: '',
             propertyType: '',
+            propertyName: '',
+            propertyLink: '',
             areaTotal: '',
             areaTotalPrivativa: '',
             quartos: '',
@@ -46,6 +48,8 @@ export function porpertyTypeChange(data) {
     return {
         type: 'PROPERTY_TYPE_CHANGE',
         payload: {
+            propertyName: '',
+            propertyLink: '',
             areaTotal: '',
             areaTotalPrivativa: '',
             quartos: '',
@@ -177,6 +181,20 @@ export function setProfileImageUrl(data) {
 export function setPropertyType(data) {
     return {
         type: 'SET_PROPERTY_TYPE',
+        payload: data
+    }
+}
+
+export function setPropertyName(data) {
+    return {
+        type: 'SET_PROPERTY_NAME',
+        payload: data
+    }
+}
+
+export function setPropertyLink(data) {
+    return {
+        type: 'SET_PROPERTY_LINK',
         payload: data
     }
 }
