@@ -20,6 +20,7 @@ export default authenticated(async (req, res) => {
     if (req.method === "POST") {
         const { link } = req.body;
 
+        try {
             const browser = await puppeteer.launch();
             const page = await browser.newPage();
 
@@ -46,7 +47,10 @@ export default authenticated(async (req, res) => {
             res.send(imagesArray);
 
 
-        
+        } catch (error) {
+            console.error(error);
+            res.status(500).send({ error: 'Could not fetch images' });
+        }
     }
 
 
