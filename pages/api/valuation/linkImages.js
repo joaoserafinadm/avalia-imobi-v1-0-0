@@ -1,15 +1,7 @@
-import { connect } from '../../../utils/db'
+
 import { verify, sign } from 'jsonwebtoken'
-import { ObjectId, ObjectID } from 'bson'
-import cookie from 'cookie'
-import baseUrl from '../../../utils/baseUrl'
-import bcrypt from 'bcrypt'
-import randomPassword from '../../../utils/randomPassword'
-import { Resend } from 'resend';
-import { newUserEmail } from '../../../src/emails/newUserEmail';
 import puppeteer from 'puppeteer';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
 
 
 const authenticated = fn => async (req, res) => {
