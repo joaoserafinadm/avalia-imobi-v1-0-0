@@ -14,7 +14,8 @@ const authenticated = fn => async (req, res) => {
 }
 
 
-export default authenticated(async (req, res) => {
+export default async (req, res) => {
+// export default authenticated(async (req, res) => {
 
 
     if (req.method === "POST") {
@@ -59,4 +60,4 @@ export default authenticated(async (req, res) => {
 
 
 
-})
+}
