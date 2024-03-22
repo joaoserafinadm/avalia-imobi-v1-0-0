@@ -19,6 +19,7 @@ export function initialValues() {
             propertyType: '',
             propertyName: '',
             propertyLink: '',
+            propertyPrice: '',
             areaTotal: '',
             areaTotalPrivativa: '',
             quartos: '',
@@ -195,6 +196,13 @@ export function setPropertyName(data) {
 export function setPropertyLink(data) {
     return {
         type: 'SET_PROPERTY_LINK',
+        payload: data
+    }
+}
+
+export function setPropertyPrice(data) {
+    return {
+        type: 'SET_PROPERTY_PRICE',
         payload: data
     }
 }

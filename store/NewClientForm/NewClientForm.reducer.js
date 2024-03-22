@@ -54,6 +54,7 @@ export default function inventoryStatesReducer(state = {
     propertyType: '',
     propertyName: '',
     propertyLink: '',
+    propertyPrice: '',
     areaTotal: '',
     areaTotalPrivativa: '',
     quartos: '',
@@ -135,6 +136,9 @@ export default function inventoryStatesReducer(state = {
 
         case 'SET_PROPERTY_LINK':
             return { ...state, propertyLink: action.payload }
+
+        case 'SET_PROPERTY_PRICE':
+            return { ...state, propertyPrice: action.payload }
 
         case 'PROPERTY_TYPE_CHANGE':
             return { ...state, ...action.payload }

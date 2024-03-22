@@ -5,7 +5,7 @@ import { useEffect, useState } from "react"
 import { FixedTopicsBottom } from "../components/fixedTopics"
 import Link from "next/link"
 import { SpinnerSM } from "../components/loading/Spinners"
-import { initialValues, setCelular, setClientLastName, setClientName, setEmail, setPropertyLink, setPropertyName, setPropertyType } from "../../store/NewClientForm/NewClientForm.actions"
+import { initialValues, setCelular, setClientLastName, setClientName, setEmail, setPropertyLink, setPropertyName, setPropertyPrice, setPropertyType } from "../../store/NewClientForm/NewClientForm.actions"
 import TypeApartamento from "../pages/newClient/TypeApartamento"
 import GeralFeatures from "../pages/newClient/GeralFeatures"
 import UploadFiles from "../pages/newClient/UploadFiles"
@@ -23,6 +23,8 @@ import TypeCasa from "../pages/newClient/TypeCasa"
 import TypeComercial from "../pages/newClient/TypeComercial"
 import TypeTerreno from "../pages/newClient/TypeTerreno"
 import UploadFilesValuation from "./UploadFilesValuation"
+import Info from "../components/info"
+import { maskMoney } from "../../utils/mask"
 
 export default function PropertyAdd(props) {
 
@@ -76,6 +78,7 @@ export default function PropertyAdd(props) {
 
 
 
+
     return (
         <div class="modal fade" id="propertyAddModal" tabindex="-1" aria-labelledby="Modal" aria-hidden="true">
             <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
@@ -93,8 +96,12 @@ export default function PropertyAdd(props) {
                                 <div className="row">
 
                                     <div className="col-12 my-2  pe-1">
+                                        <div className="d-flex align-items-bottom">
 
-                                        <label for="propertyNameItem" className="form-label">Nome do Imóvel</label>
+                                            <label for="propertyNameItem" className="form-label">Nome do Imóvel</label>
+                                            <Info className='ms-1' id='propertyNameInfo'
+                                                content='Insira o nome que consta no anúncio, ou um nome contendo as características gerais do imóvel.' />
+                                        </div>
                                         <input
                                             type="text"
                                             className="form-control"
@@ -104,8 +111,12 @@ export default function PropertyAdd(props) {
                                             onChange={e => dispatch(setPropertyName(e.target.value))} />
                                     </div>
                                     <div className="col-12 my-2  pe-1">
+                                        <div className="d-flex align-items-bottom">
 
-                                        <label for="propertyLinkItem" className="form-label">Link do Imóvel</label>
+                                            <label for="propertyLinkItem" className="form-label">Link do Imóvel</label>
+                                            <Info className='ms-1' id='linkImagesInfo'
+                                                content='Ao inserir o link, o sistema irá buscar pelas imagens do imóvel.' />
+                                        </div>
                                         <input
                                             type="text"
                                             className="form-control"
@@ -114,6 +125,24 @@ export default function PropertyAdd(props) {
                                             onBlur={e => handleLinkImages(e.target.value)}
                                             value={newClientForm.propertyLink}
                                             onChange={e => dispatch(setPropertyLink(e.target.value))} />
+                                    </div>
+
+                                    <div className="col-12 my-2  pe-1">
+
+                                        <label for="propertyPriceItem" className="form-label">Valor do Imóvel</label>
+                                        <div class="input-group mb-3">
+                                            <span className="input-group-text">R$</span>
+                                            <input
+                                                type="text"
+                                                className="form-control text-end"
+                                                name="propertyPriceItem"
+                                                id="propertyPriceItem"
+                                                value={newClientForm.propertyPrice}
+                                                onChange={e => dispatch(setPropertyPrice(maskMoney(e.target.value)))} />
+                                            <span className="input-group-text">,00</span>
+
+
+                                        </div>
                                     </div>
 
 
