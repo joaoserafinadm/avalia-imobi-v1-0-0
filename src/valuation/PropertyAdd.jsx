@@ -66,14 +66,25 @@ export default function PropertyAdd(props) {
     }, [])
 
 
-    const handleLinkImages = async (link) => {
+    // const handleLinkImages = async (link) => {
 
-        await axios.post(`${baseUrl()}/api/valuation/linkImages`, { link: newClientForm.propertyLink })
-            .then(res => {
-                setFiles(res.data)
-            }).catch(e => {
-                console.log(e)
-            })
+    //     await axios.post(`${baseUrl()}/api/valuation/linkImages`, { link: newClientForm.propertyLink })
+    //         .then(res => {
+    //             setFiles(res.data)
+    //         }).catch(e => {
+    //             console.log(e)
+    //         })
+    // }
+
+    const handlePropertyAdd = (property) => {
+
+        const newPropertyArray = props.propertyArray
+
+        newPropertyArray.push(property)
+
+        props.setPropertyArray(newPropertyArray)
+        props.setForceUpdate()
+
     }
 
 
@@ -122,7 +133,7 @@ export default function PropertyAdd(props) {
                                             className="form-control"
                                             name="propertyLinkItem"
                                             id="propertyLinkItem"
-                                            onBlur={e => handleLinkImages(e.target.value)}
+                                            // onBlur={e => handleLinkImages(e.target.value)}
                                             value={newClientForm.propertyLink}
                                             onChange={e => dispatch(setPropertyLink(e.target.value))} />
                                     </div>
@@ -225,7 +236,7 @@ export default function PropertyAdd(props) {
                     </div>
                     <div className="modal-footer">
                         <button type="button" className="btn btn-sm btn-secondary" data-bs-dismiss="modal" >Cancelar</button>
-                        <button type="button" className="btn btn-sm btn-orange" data-bs-dismiss="modal" >Salvar</button>
+                        <button type="button" className="btn btn-sm btn-orange" data-bs-dismiss="modal" onClick={() => handlePropertyAdd(newClientForm)}>Salvar</button>
                     </div>
                 </div>
             </div>

@@ -12,6 +12,7 @@ import ClientInfo from "../../src/clientsManagement/ClientInfo";
 import Sections from "../../src/components/Sections";
 import ValuationConfig from "../../src/valuation/ValuationConfig";
 import PropertyAdd from "../../src/valuation/PropertyAdd";
+import { closeModal } from "../../utils/modalControl";
 
 
 
@@ -27,6 +28,7 @@ export default function ValuationPage(props) {
 
     const [loadingPage, setLoadingPage] = useState(true)
     const [section, setSection] = useState('Informações do imóvel')
+
 
 
     const { _id } = router.query;
@@ -76,23 +78,23 @@ export default function ValuationPage(props) {
 
                         <Sections section={section} idTarget="clientManage"
                             setSection={value => setSection(value)}
-                            sections={["Informações do imóvel", "Configurar avaliação"]} />
+                            sections={[ "Configurar avaliação", "Informações do imóvel"]} />
 
 
                         <div className="carousel-inner ">
                             <div className="carousel-item active">
-                                <ClientInfo client={client} />
+                                <ValuationConfig client={client} />
+
                             </div>
                         </div>
                         <div className="carousel-inner ">
                             <div className="carousel-item ">
-                                <ValuationConfig client={client} />
+                                <ClientInfo client={client} />
                             </div>
                         </div>
                     </div>
 
 
-                    <PropertyAdd client={client} />
                 </div>
 
 
