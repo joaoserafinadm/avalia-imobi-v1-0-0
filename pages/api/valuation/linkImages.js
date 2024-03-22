@@ -57,7 +57,7 @@ export default authenticated(async (req, res) => {
 
         } catch (error) {
             console.error(error);
-            res.status(500).send({ error: 'Could not fetch images' });
+            res.status(500).send({ error: error });
         }
     }
 
