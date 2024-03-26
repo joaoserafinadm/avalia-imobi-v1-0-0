@@ -6,7 +6,6 @@ import { faEdit, faEye, faMoneyCheckDollar, faShare, faTrashAlt } from "@fortawe
 import { useEffect, useState } from "react"
 import tippy from "tippy.js";
 import { Swiper, SwiperSlide } from 'swiper/react';
-import ClientStatus from "./ClientStatus"
 import { replaceAmpersand } from "../../utils/replaceAmpersand"
 import Cookies from "js-cookie";
 import jwt from "jsonwebtoken";
@@ -14,7 +13,7 @@ import { useSelector } from "react-redux"
 import formatDate from "../../utils/formatDate"
 import ClientFeatures from "./ClientFeatures"
 
-export default function ClientCard_02(props) {
+export default function PropertyCard(props) {
 
     const token = jwt.decode(Cookies.get('auth'))
 
@@ -99,9 +98,9 @@ export default function ClientCard_02(props) {
                         '--swiper-navigation-size': '25px',
                         zIndex: 0
                     }}
+                    autoplay={{ delay: 3000, disableOnInteraction: false }}
                     slidesPerView={1}
-                    pagination={{ clickable: false }}
-                    navigation>
+                    pagination={{ clickable: true }}>
                     {client?.files?.map((elem, index) => (
                         <SwiperSlide key={index} className="text-center bg-secondary ">
 
@@ -133,7 +132,7 @@ export default function ClientCard_02(props) {
             )}
 
             {/* </div> */}
-            <div className={`row d-flex justify-content-end ${styles.profilePosition}`}>
+            {/* <div className={`row d-flex justify-content-end ${styles.profilePosition}`}>
 
                 <span className="d-flex align-items-center">
                     <div className="small bold bg-white pe-3 ps-2" style={{ borderRadius: '5px 0 0 5px', position: 'relative', right: '-10px' }}>
@@ -149,14 +148,13 @@ export default function ClientCard_02(props) {
                     </div>
                 </span>
 
-            </div>
+            </div> */}
             <div class="card-body">
 
                 <div className="row ">
                     <div className="col-12">
 
-                        <h5 class="mb-0"> {client?.clientName} {client.clientLastName} </h5>
-                        <ClientStatus status={client?.status} id={client?._id} />
+                        <h5 class="mb-0"> {client?.propertyName}  </h5>
                     </div>
                 </div>
 

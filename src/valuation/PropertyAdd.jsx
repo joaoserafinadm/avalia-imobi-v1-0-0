@@ -51,9 +51,7 @@ export default function PropertyAdd(props) {
 
     const [files, setFiles] = useState([])
 
-    useEffect(() => {
-        console.log("files", files)
-    }, [files.length])
+
 
 
 
@@ -80,7 +78,7 @@ export default function PropertyAdd(props) {
 
         const newPropertyArray = props.propertyArray
 
-        newPropertyArray.push(property)
+        newPropertyArray.push({ ...property, files, dateAdded: new Date() })
 
         props.setPropertyArray(newPropertyArray)
         props.setForceUpdate()

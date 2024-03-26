@@ -10,7 +10,7 @@ export default function Info(props) {
         setTimeout(() => {
             tippy(`#${props.id}`, {
                 content: props.content,
-                placement: props.placement,
+                placement: props.placement ? props.placement : 'bottom',
             })
 
         }, 1000)

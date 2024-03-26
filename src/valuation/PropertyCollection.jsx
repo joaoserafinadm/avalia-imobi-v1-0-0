@@ -3,6 +3,7 @@ import isMobile from "../../utils/isMobile"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faHouseMedical } from "@fortawesome/free-solid-svg-icons"
 import ClientCard_02 from "../clientsManagement/ClientCard_02"
+import PropertyCard from "./PropertyCard"
 
 
 
@@ -32,7 +33,7 @@ export default function PropertyCollection(props) {
                             return (
                                 <SwiperSlide key={index + 1} className="col-12 col-sm-6 col-xl-4 col-xxl-3 d-flex justify-content-center ">
 
-                                    <ClientCard_02 section={'Todos Clientes'}
+                                    <PropertyCard section={'Todos Clientes'}
                                         elem={elem} />
 
                                 </SwiperSlide>
@@ -74,7 +75,7 @@ export default function PropertyCollection(props) {
                         return (
                             <div className="col-12 col-sm-6 col-xl-4 col-xxl-3 d-flex justify-content-center px-1 py-2">
 
-                                <ClientCard_02 section={'Todos Clientes'}
+                                <PropertyCard section={'Todos Clientes'}
                                     elem={elem} />
                             </div>
 

@@ -14,7 +14,6 @@ export default function ValuationConfig(props) {
 
     const client = props.client
 
-    const [propertyArray, setPropertyArray] = useState([])
     const [forceUpdate, setForceUpdate] = useState(0)
 
 
@@ -26,15 +25,15 @@ export default function ValuationConfig(props) {
             <div className="col-12">
                 <label htmlFor="" className="fw-bold mb-2">Imóveis para comparação</label>
 
-                <PropertyCollection propertyArray={propertyArray} />
+                <PropertyCollection propertyArray={props.propertyArray} />
 
 
 
                 <PropertyAdd
                     client={client}
-                    setPropertyArray={value => setPropertyArray(value)}
+                    setPropertyArray={value => props.setPropertyArray(value)}
                     setForceUpdate={() => setForceUpdate(forceUpdate + 1)}
-                    propertyArray={propertyArray} />
+                    propertyArray={props.propertyArray} />
             </div>
 
             <div className="col-12 mt-5">

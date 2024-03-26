@@ -13,6 +13,9 @@ import Sections from "../../src/components/Sections";
 import ValuationConfig from "../../src/valuation/ValuationConfig";
 import PropertyAdd from "../../src/valuation/PropertyAdd";
 import { closeModal } from "../../utils/modalControl";
+import { FixedTopicsBottom } from "../../src/components/fixedTopics";
+import Link from "next/link";
+import isMobile from "../../utils/isMobile";
 
 
 
@@ -27,7 +30,10 @@ export default function ValuationPage(props) {
     const [client, setClient] = useState()
 
     const [loadingPage, setLoadingPage] = useState(true)
-    const [section, setSection] = useState('Informações do imóvel')
+    const [section, setSection] = useState('Configurar avaliação')
+
+    const [propertyArray, setPropertyArray] = useState([])
+
 
 
 
@@ -66,6 +72,13 @@ export default function ValuationPage(props) {
     }
 
 
+    const handleSave = async (company_id) => {
+
+        console.log(client, propertyArray)
+
+    }
+
+
     return (
         <div >
             <Title title={client && client?.clientName + " " + client?.clientLastName} subtitle="Avaliação do imóvel" backButton='/' />
@@ -78,12 +91,15 @@ export default function ValuationPage(props) {
 
                         <Sections section={section} idTarget="clientManage"
                             setSection={value => setSection(value)}
-                            sections={[ "Configurar avaliação", "Informações do imóvel"]} />
+                            sections={["Configurar avaliação", "Informações do imóvel"]} />
 
 
                         <div className="carousel-inner ">
                             <div className="carousel-item active">
-                                <ValuationConfig client={client} />
+                                <ValuationConfig
+                                    client={client}
+                                    propertyArray={propertyArray}
+                                    setPropertyArray={value => setPropertyArray(value)} />
 
                             </div>
                         </div>
@@ -93,6 +109,48 @@ export default function ValuationPage(props) {
                             </div>
                         </div>
                     </div>
+
+                    {!isMobile() && <hr />}
+
+
+
+                    <FixedTopicsBottom >
+
+                        <div className="row">
+                            <div className="col-12 d-flex justify-content-end align-items-center">
+                                <Link href="/clientsManagement">
+                                    <button className="btn btn-sm btn-secondary">Cancelar</button>
+                                </Link>
+
+                                <button className="btn btn-sm btn-orange ms-2"
+                                    onClick={() => handleSave(token.company_id)}>
+                                    Salvar
+                                </button>
+
+
+
+
+                                {/* {manualRegister ?
+
+                                    <button className="btn btn-sm btn-secondary ms-2 fadeItem" onClick={() => setManualRegister(false)}>Cadastro simplificado</button>
+                                    :
+                                    <button className="btn btn-sm btn-secondary ms-2 fadeItem" onClick={() => setManualRegister(true)}>Cadastro manual</button>
+
+                                }
+                                {loadingSave ?
+                                    <button className="ms-2 btn btn-sm btn-orange px-5" disabled><SpinnerSM /></button>
+                                    :
+                                    <>
+                                        {manualRegister ?
+                                            <button className="ms-2 btn btn-sm btn-orange fadeItem" disabled={!newClientForm.clientName || !newClientForm.propertyType} onClick={() => handleSave(newClientForm)}>Salvar</button>
+                                            :
+                                            <button className="ms-2 btn btn-sm btn-orange fadeItem" disabled={!newClientForm.clientName} onClick={() => handleSaveLink(token.company_id)}>Salvar</button>
+                                        }
+                                    </>
+                                } */}
+                            </div>
+                        </div>
+                    </FixedTopicsBottom>
 
 
                 </div>
