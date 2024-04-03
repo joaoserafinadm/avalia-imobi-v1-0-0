@@ -25,31 +25,23 @@ import TypeTerreno from "../pages/newClient/TypeTerreno"
 import UploadFilesValuation from "./UploadFilesValuation"
 import Info from "../components/info"
 import { maskMoney } from "../../utils/mask"
+import htmlInfo from "../../utils/htmlInfo"
+import LocationValuation from "./LocationValuation"
 
-export default function PropertyAdd(props) {
-
-
-    const token = jwt.decode(Cookies.get("auth"));
-
+export default function PropertyAddModal(props) {
 
 
-
-    const alertsArray = useSelector(state => state.alerts)
     const newClientForm = useSelector(state => state.newClientForm)
     const dispatch = useDispatch()
 
     const router = useRouter()
 
+    const [imageUrl, setImageUrl] = useState('')
+    const [linkError, setLinkError] = useState('')
+    const [loadingImage, setLoadingImage] = useState(false)
 
 
 
-
-
-    const [manualRegister, setManualRegister] = useState(false)
-
-    const [loadingSave, setLoadingSave] = useState(false)
-
-    const [files, setFiles] = useState([])
 
 
 
@@ -64,24 +56,76 @@ export default function PropertyAdd(props) {
     }, [])
 
 
-    // const handleLinkImages = async (link) => {
-
-    //     await axios.post(`${baseUrl()}/api/valuation/linkImages`, { link: newClientForm.propertyLink })
-    //         .then(res => {
-    //             setFiles(res.data)
-    //         }).catch(e => {
-    //             console.log(e)
-    //         })
-    // }
 
     const handlePropertyAdd = (property) => {
 
         const newPropertyArray = props.propertyArray
 
-        newPropertyArray.push({ ...property, files, dateAdded: new Date() })
+        const data = {
+            propertyName: property.propertyName,
+            propertyPrice: property.propertyPrice,
+            propertyType: property.propertyType,
+            propertyLink: property.propertyLink,
+            imageUrl: imageUrl,
+            areaTotal: property.areaTotal,
+            areaTotalPrivativa: property.areaTotalPrivativa,
+            quartos: property.quartos,
+            suites: property.suites,
+            banheiros: property.banheiros,
+            sacadas: property.sacadas,
+            andar: property.andar,
+            vagasGaragem: property.vagasGaragem,
+            terrenoIrregular: property.terrenoIrregular,
+            largura: property.largura,
+            comprimento: property.comprimento,
+            frente: property.frente,
+            fundos: property.fundos,
+            lateralEsquerda: property.lateralEsquerda,
+            lateralDireita: property.lateralDireita,
+            pavimentos: property.pavimentos,
+            salas: property.salas,
+            cidade: property.cidade,
+            uf: property.uf,
+            logradouro: property.logradouro,
+            bairro: property.bairro,
+            latitude: property.latitude,
+            longitude: property.longitude,
+            dateAdded: new Date()
+        }
+
+        newPropertyArray.push(data)
 
         props.setPropertyArray(newPropertyArray)
         props.setForceUpdate()
+        dispatch(initialValues())
+
+
+    }
+
+
+    const handleGetInfo = async (e) => {
+        setLinkError('')
+        setLoadingImage(true)
+        setImageUrl('')
+
+        e.preventDefault();
+
+        await axios.get(`${baseUrl()}/api/valuation/htmlInfo`, {
+            params: {
+                url: newClientForm.propertyLink
+            }
+        }).then(res => {
+            if (!res.data.image && !res.data.title) {
+                setLinkError('Link inválido')
+            }
+            setImageUrl(res.data.image)
+            dispatch(setPropertyName(res.data.title))
+            setLoadingImage(false)
+
+        }).catch(e => {
+            setLinkError('Link inválido')
+            setLoadingImage(false)
+        })
 
     }
 
@@ -90,7 +134,7 @@ export default function PropertyAdd(props) {
 
     return (
         <div class="modal fade" id="propertyAddModal" tabindex="-1" aria-labelledby="Modal" aria-hidden="true">
-            <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title title-dark bold">Adicionar imóvel</h5>
@@ -99,125 +143,125 @@ export default function PropertyAdd(props) {
                     <div className="modal-body">
                         <div className="row mt-3">
                             <label for="geralForm" className="form-label fw-bold">Informações de Cadastro</label>
+                            <span className="small mt-3">*Campos obrigatórios</span>
+
+                            <div className="col-12 col-lg-8">
 
 
-                            <div className="col-12 fadeItem">
-                                <div className="row">
 
-                                    <div className="col-12 my-2  pe-1">
-                                        <div className="d-flex align-items-bottom">
+                                <div className="col-12 fadeItem">
+                                    <div className="row">
 
-                                            <label for="propertyNameItem" className="form-label">Nome do Imóvel</label>
-                                            <Info className='ms-1' id='propertyNameInfo'
-                                                content='Insira o nome que consta no anúncio, ou um nome contendo as características gerais do imóvel.' />
-                                        </div>
-                                        <input
-                                            type="text"
-                                            className="form-control"
-                                            name="propertyNameItem"
-                                            id="propertyNameItem"
-                                            value={newClientForm.propertyName}
-                                            onChange={e => dispatch(setPropertyName(e.target.value))} />
-                                    </div>
-                                    <div className="col-12 my-2  pe-1">
-                                        <div className="d-flex align-items-bottom">
+                                        <div className="col-12 my-2  pe-1">
+                                            <div className="d-flex align-items-bottom">
 
-                                            <label for="propertyLinkItem" className="form-label">Link do Imóvel</label>
-                                            <Info className='ms-1' id='linkImagesInfo'
-                                                content='Ao inserir o link, o sistema irá buscar pelas imagens do imóvel.' />
-                                        </div>
-                                        <input
-                                            type="text"
-                                            className="form-control"
-                                            name="propertyLinkItem"
-                                            id="propertyLinkItem"
-                                            // onBlur={e => handleLinkImages(e.target.value)}
-                                            value={newClientForm.propertyLink}
-                                            onChange={e => dispatch(setPropertyLink(e.target.value))} />
-                                    </div>
-
-                                    <div className="col-12 my-2  pe-1">
-
-                                        <label for="propertyPriceItem" className="form-label">Valor do Imóvel</label>
-                                        <div class="input-group mb-3">
-                                            <span className="input-group-text">R$</span>
+                                                <label for="propertyLinkItem" className="form-label">Link do Imóvel<b>*</b></label>
+                                                <Info className='ms-1' id='linkImagesInfo'
+                                                    content='Ao inserir o link, o sistema irá buscar pela descrição e imagem do imóvel.' />
+                                            </div>
                                             <input
                                                 type="text"
-                                                className="form-control text-end"
-                                                name="propertyPriceItem"
-                                                id="propertyPriceItem"
-                                                value={newClientForm.propertyPrice}
-                                                onChange={e => dispatch(setPropertyPrice(maskMoney(e.target.value)))} />
-                                            <span className="input-group-text">,00</span>
-
-
+                                                className="form-control"
+                                                name="propertyLinkItem"
+                                                id="propertyLinkItem"
+                                                // onBlur={e => handleLinkImages(e.target.value)}
+                                                onBlur={handleGetInfo}
+                                                value={newClientForm.propertyLink}
+                                                onChange={e => dispatch(setPropertyLink(e.target.value))} />
+                                            <small className="text-danger">{linkError}</small>
                                         </div>
+
+                                        <div className="col-12 my-2  pe-1">
+                                            <div className="d-flex align-items-bottom">
+
+                                                <label for="propertyNameItem" className="form-label">Nome do Imóvel<b>*</b></label>
+                                                <Info className='ms-1' id='propertyNameInfo'
+                                                    content='Insira o nome que consta no anúncio, ou um nome contendo as características gerais do imóvel.' />
+                                                {loadingImage && (
+                                                    <span className="text-secondary ms-3">
+                                                        <SpinnerSM />
+                                                    </span>
+                                                )}
+                                            </div>
+                                            <input
+                                                type="text"
+                                                className="form-control"
+                                                name="propertyNameItem"
+                                                id="propertyNameItem"
+                                                value={newClientForm.propertyName}
+                                                onChange={e => dispatch(setPropertyName(e.target.value))} />
+                                        </div>
+
+
+                                        <div className="col-12 my-2  pe-1">
+
+                                            <label for="propertyPriceItem" className="form-label">Valor do Imóvel<b>*</b></label>
+                                            <div class="input-group mb-3">
+                                                <span className="input-group-text">R$</span>
+                                                <input
+                                                    type="text"
+                                                    className="form-control text-end"
+                                                    name="propertyPriceItem"
+                                                    id="propertyPriceItem" placeholder="0"
+                                                    value={newClientForm.propertyPrice}
+                                                    onChange={e => dispatch(setPropertyPrice(maskMoney(e.target.value)))} />
+                                                <span className="input-group-text">,00</span>
+
+
+                                            </div>
+                                        </div>
+
+
                                     </div>
 
-
                                 </div>
+                            </div>
+                            <div className="col-12 col-lg-4 my-2  pe-1 d-flex justify-content-center align-items-center">
+                                {!imageUrl ?
+                                    <div className="fadeItem border rounded-1 d-flex justify-content-center align-items-center py-5" style={{ width: '80%', height: '80%', border: '1px dashed' }}>
+                                        <span className="text-secondary text-center">
+                                            {loadingImage ? <SpinnerSM /> : 'Imovél sem imagem'}
+                                        </span>
+                                    </div>
+                                    :
+                                    <img src={imageUrl} alt="" className="rounded-1 fadeItem" style={{ width: '80%' }} />
+                                }
 
                             </div>
-                            <span className="small mt-3">*Campos obrigatórios</span>
+
+
 
 
 
                             <div className="col-12 fadeItem mt-3 pb-5">
 
-                                <label for="geralForm" className="form-label fw-bold">Informações do Imóvel</label>
 
-                                <div className="col-12  my-2">
-                                    <label for="clientNameItem" className="form-label ">Selecione o tipo de imóvel:</label>
-
-                                    <div className="row">
-
-
-                                        <div className="my-2 col-xxl-3 col-6 d-flex justify-content-center">
-                                            <PropertyTypeCard type="Apartamento" />
-                                        </div>
-                                        <div className="my-2 col-xxl-3 col-6 d-flex justify-content-center">
-                                            <PropertyTypeCard type="Casa" />
-                                        </div>
-                                        <div className="my-2 col-xxl-3 col-6 d-flex justify-content-center">
-                                            <PropertyTypeCard type="Comercial" />
-                                        </div>
-                                        <div className="my-2 col-xxl-3 col-6 d-flex justify-content-center">
-                                            <PropertyTypeCard type="Terreno" />
-                                        </div>
-                                    </div>
-
-
-                                </div>
                                 {newClientForm.propertyType === "Apartamento" && (
                                     <>
-                                        <TypeApartamento />
-                                        <GeralFeatures type="Apartamento" />
-                                        <Location />
-                                        <UploadFilesValuation setFiles={array => setFiles(array)} files={files} />
+                                        <TypeApartamento propertyAndar />
+                                        <LocationValuation />
+                                        {/* <UploadFilesValuation setFiles={array => setFiles(array)} files={files} /> */}
                                     </>
                                 )}
                                 {newClientForm.propertyType === "Casa" && (
                                     <>
                                         <TypeCasa />
-                                        <GeralFeatures type="Casa" />
-                                        <Location />
-                                        <UploadFilesValuation setFiles={array => setFiles(array)} files={files} />
+                                        <LocationValuation />
+                                        {/* <UploadFilesValuation setFiles={array => setFiles(array)} files={files} /> */}
                                     </>
                                 )}
                                 {newClientForm.propertyType === "Comercial" && (
                                     <>
                                         <TypeComercial />
-                                        <GeralFeatures type="Comercial" />
-                                        <Location />
-                                        <UploadFilesValuation setFiles={array => setFiles(array)} files={files} />
+                                        <LocationValuation />
+                                        {/* <UploadFilesValuation setFiles={array => setFiles(array)} files={files} /> */}
                                     </>
                                 )}
                                 {newClientForm.propertyType === "Terreno" && (
                                     <>
                                         <TypeTerreno />
-                                        <GeralFeatures type="Terreno" />
-                                        <Location />
-                                        <UploadFilesValuation setFiles={array => setFiles(array)} files={files} />
+                                        <LocationValuation />
+                                        {/* <UploadFilesValuation setFiles={array => setFiles(array)} files={files} /> */}
                                     </>
                                 )}
 

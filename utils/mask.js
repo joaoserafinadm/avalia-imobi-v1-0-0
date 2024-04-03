@@ -10,10 +10,15 @@ export function maskCep(value) {
 
 
 export function maskMoney(value) {
-    const inputNumero = parseFloat(value.replace(/[^\d]/g, ''));
-    const formatoMonetario = inputNumero.toLocaleString('pt-BR', {
-        style: 'decimal',
-        // currency: 'BRL',
-    });
-    return formatoMonetario;
+    if (value) {
+
+        const inputNumero = parseFloat(value.replace(/[^\d]/g, ''));
+        const formatoMonetario = inputNumero.toLocaleString('pt-BR', {
+            style: 'decimal',
+            // currency: 'BRL',
+        });
+        return formatoMonetario;
+    } else {
+        return ''
+    }
 };

@@ -86,87 +86,58 @@ export default function PropertyCard(props) {
         <div class="card my-2 cardAnimation shadow" style={{ width: "100%" }} >
 
 
-            {!client?.files?.length ?
+            {!client?.imageUrl?
                 <div className=" d-flex card-img-top justify-content-center align-items-center bg-light bg-gradient" style={{ height: '170px' }}>
                     <span className="text-secondary">Sem fotos</span>
                 </div>
                 :
-                <Swiper className="card-img-top "
-                    style={{
-                        '--swiper-navigation-color': '#fff',
-                        '--swiper-pagination-color': '#fff',
-                        '--swiper-navigation-size': '25px',
-                        zIndex: 0
-                    }}
-                    autoplay={{ delay: 3000, disableOnInteraction: false }}
-                    slidesPerView={1}
-                    pagination={{ clickable: true }}>
-                    {client?.files?.map((elem, index) => (
-                        <SwiperSlide key={index} className="text-center bg-secondary ">
+                <div className="card-img-top text-center bg-secondary ">
 
 
-                            <img src={elem.url ? elem.url : URL.createObjectURL(elem)} className={`card-img-top  ${styles.clientCardImage}`} alt={`Slide ${index + 1}`} />
+                    <img src={client?.imageUrl} className={`card-img-top  ${styles.clientCardImage}`}  />
 
-                        </SwiperSlide>
-                    ))}
-                </Swiper>
+                </div>
 
             }
 
-            {client?.propertyType && (
+            {
+                client?.propertyType && (
 
-                <span className={`${styles.propertyTypeHeader} d-flex align-items-center text-white  ${handleIconColor(props.elem.propertyType)}`}  >
+                    <span className={`${styles.propertyTypeHeader} d-flex align-items-center text-white  ${handleIconColor(props.elem.propertyType)}`}  >
 
-                    {!isMobile() ?
-                        <div className="small  me-2" >
-                            {client?.propertyType}
-                        </div>
-                        :
-                        <div className="small  me-1" style={{ fontSize: '12px' }} >
-                            {client?.propertyType}
-                        </div>
+                        {!isMobile() ?
+                            <div className="small  me-2" >
+                                {client?.propertyType}
+                            </div>
+                            :
+                            <div className="small  me-1" style={{ fontSize: '12px' }} >
+                                {client?.propertyType}
+                            </div>
 
-                    }
-                    <FontAwesomeIcon icon={handleIcon(client?.propertyType)} className={`icon`} />
-                </span>
-            )}
+                        }
+                        <FontAwesomeIcon icon={handleIcon(client?.propertyType)} className={`icon`} />
+                    </span>
+                )
+            }
 
-            {/* </div> */}
-            {/* <div className={`row d-flex justify-content-end ${styles.profilePosition}`}>
-
-                <span className="d-flex align-items-center">
-                    <div className="small bold bg-white pe-3 ps-2" style={{ borderRadius: '5px 0 0 5px', position: 'relative', right: '-10px' }}>
-
-                        {users?.find(elem => elem._id === client?.user_id)?.firstName}{' '}
-                        {users?.find(elem => elem._id === client?.user_id)?.lastName}
-                    </div>
-                    <div className="cardProfileImg">
-
-                        <img className="cardProfileImg2 bold border border-4 border-white" style={{ position: 'relative' }}
-                            src={users?.find(elem => elem._id === client?.user_id)?.profileImageUrl} alt="" />
-
-                    </div>
-                </span>
-
-            </div> */}
+           
             <div class="card-body">
 
                 <div className="row ">
                     <div className="col-12">
 
-                        <h5 class="mb-0"> {client?.propertyName}  </h5>
+                        <h6 class="mb-0 text-center"> {client?.propertyName}  </h6>
                     </div>
                 </div>
 
-                <ClientFeatures client={client} elem={props.elem} />
+                <ClientFeatures client={client} elem={props.elem} propertyAdd/>
 
 
-                {handleShowClientInfo(client) ?
                     <div className="row d-flex justify-content-center mt-2">
                         <div className="col-12 d-flex justify-content-center">
 
                             <div class="btn-group" role="group" aria-label="Basic example">
-                                <button
+                                {/* <button
                                     type="button"
                                     class="btn btn-light border"
                                     id={"viewClientButton" + props.elem._id + props.section}
@@ -174,7 +145,7 @@ export default function PropertyCard(props) {
                                     data-bs-target="#viewClientModal"
                                     onClick={() => props.setClientSelected(props.elem)}>
                                     <FontAwesomeIcon icon={faEye} className="icon  text-secondary" />
-                                </button>
+                                </button> */}
 
 
                                 <button
@@ -188,53 +159,7 @@ export default function PropertyCard(props) {
                                 </button>
                             </div>
                         </div>
-                    </div>
-                    :
-                    <div className="row">
-                        <div className="col-12 d-flex justify-content-center">
-                            <div class="btn-group" role="group" aria-label="Basic example">
-
-                                <button onClick={() => handleShare(props.elem.urlToken + "&userId=" + token.sub)}
-                                    type="button"
-                                    class="btn btn-light border"
-                                    id={"shareClientButton" + props.elem._id + props.section}>
-                                    <FontAwesomeIcon icon={faShare} className="icon  text-secondary" />
-                                </button>
-
-                                <button type="button" class="btn btn-light border" id={"editClientButton" + props.elem._id + props.section}>
-                                    <FontAwesomeIcon icon={faEdit} className="icon  text-secondary" />
-                                </button>
-
-                                <button
-                                    type="button"
-                                    class="btn btn-light border"
-                                    id={"deleteClientButton" + props.elem._id + props.section}
-                                    data-bs-toggle="modal"
-                                    data-bs-target={"#deleteClientModal"}
-                                    onClick={() => props.setClientSelected(props.elem)}>
-                                    <FontAwesomeIcon icon={faTrashAlt} className="icon text-secondary" />
-                                </button>
-                            </div>
-
-                        </div>
-
-                    </div>
-                }
-
-
-
-
-
-
-
-
-
-                <hr />
-                <div>
-                    <small style={{ fontSize: '12px' }} className="text-secondary">
-                        {props.elem.dateAdded ? 'Data de cadastro: ' + formatDate(props.elem.dateAdded) : ''}
-                    </small>
-                </div>
+                    </div> 
 
             </div>
         </div >

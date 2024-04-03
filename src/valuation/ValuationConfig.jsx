@@ -3,8 +3,9 @@ import isMobile from "../../utils/isMobile"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faHouseMedical } from "@fortawesome/free-solid-svg-icons"
 import PropertyCollection from "./PropertyCollection"
-import PropertyAdd from "./PropertyAdd"
+import PropertyAddModal from "./PropertyAdd"
 import { useState } from "react"
+import { maskMoney } from "../../utils/mask"
 
 
 
@@ -13,8 +14,21 @@ import { useState } from "react"
 export default function ValuationConfig(props) {
 
     const client = props.client
+    const propertyArray = props.propertyArray
 
     const [forceUpdate, setForceUpdate] = useState(0)
+
+    const priceAverage = (array) => {
+        console.log(array)
+
+        const average = array.reduce((a, b) => a + +b.propertyPrice.replace(/\./g, ''), 0) / array.length
+
+        console.log(average.toString())
+
+        return maskMoney(average.toString())
+    }
+
+
 
 
 
@@ -25,22 +39,22 @@ export default function ValuationConfig(props) {
             <div className="col-12">
                 <label htmlFor="" className="fw-bold mb-2">Imóveis para comparação</label>
 
-                <PropertyCollection propertyArray={props.propertyArray} />
+                <PropertyCollection propertyArray={propertyArray} />
 
 
 
-                <PropertyAdd
+                <PropertyAddModal
                     client={client}
                     setPropertyArray={value => props.setPropertyArray(value)}
                     setForceUpdate={() => setForceUpdate(forceUpdate + 1)}
-                    propertyArray={props.propertyArray} />
+                    propertyArray={propertyArray} />
             </div>
 
             <div className="col-12 mt-5">
                 <label htmlFor="" className="fw-bold mb-2">Preço médio dos imóveis</label>
                 <div className="col-12 d-flex justify-content-center align-items-center fs-1 my-3">
                     <span className="text-orange me-1">R$</span>
-                    <span className="text-secondary bold">132.456,00</span>
+                    <span className="text-secondary bold">{priceAverage(propertyArray) !== 'NaN' ? priceAverage(propertyArray)+',00' : 0}</span>
                 </div>
 
 

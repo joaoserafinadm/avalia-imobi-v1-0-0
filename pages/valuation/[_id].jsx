@@ -130,24 +130,7 @@ export default function ValuationPage(props) {
 
 
 
-                                {/* {manualRegister ?
-
-                                    <button className="btn btn-sm btn-secondary ms-2 fadeItem" onClick={() => setManualRegister(false)}>Cadastro simplificado</button>
-                                    :
-                                    <button className="btn btn-sm btn-secondary ms-2 fadeItem" onClick={() => setManualRegister(true)}>Cadastro manual</button>
-
-                                }
-                                {loadingSave ?
-                                    <button className="ms-2 btn btn-sm btn-orange px-5" disabled><SpinnerSM /></button>
-                                    :
-                                    <>
-                                        {manualRegister ?
-                                            <button className="ms-2 btn btn-sm btn-orange fadeItem" disabled={!newClientForm.clientName || !newClientForm.propertyType} onClick={() => handleSave(newClientForm)}>Salvar</button>
-                                            :
-                                            <button className="ms-2 btn btn-sm btn-orange fadeItem" disabled={!newClientForm.clientName} onClick={() => handleSaveLink(token.company_id)}>Salvar</button>
-                                        }
-                                    </>
-                                } */}
+                                
                             </div>
                         </div>
                     </FixedTopicsBottom>

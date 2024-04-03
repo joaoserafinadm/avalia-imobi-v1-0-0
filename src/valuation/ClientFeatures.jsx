@@ -10,6 +10,7 @@ export default function ClientFeatures(props) {
 
 
     const client = props.client
+    console.log(client)
 
     const handleShowClientInfo = (elem) => {
 
@@ -36,6 +37,9 @@ export default function ClientFeatures(props) {
                         </div>
 
 
+                    </div>
+                    <div className="col-12 d-flex justify-content-center text-center">
+                        <span className="fs-4 text-orange me-1">R$</span> <span className="fs-4 text-secondary">{client?.propertyPrice},00</span>
                     </div>
                     <hr />
 
@@ -122,6 +126,52 @@ export default function ClientFeatures(props) {
                                     {/* )} */}
 
                                 </div>
+                                <div className="col-6 justify-content-center d-flex  my-2">
+
+                                    {/* {client?.suites && ( */}
+                                    <>
+                                        <div>
+
+                                            {client.sacadas ? client.sacadas : 0}
+                                        </div>
+                                        <div className="ms-1 bold">
+
+                                            sacada{client.sacadas != 1 ? 's' : ''}
+                                        </div>
+                                    </>
+                                    {/* )} */}
+
+                                </div>
+                                {client.andar !== "Não sei" && (
+                                    <div className="col-6 justify-content-center d-flex  my-2">
+
+                                        {/* {client?.suites && ( */}
+                                        {!props.propertyAdd ?
+                                            <>
+                                                <div>
+
+                                                    {client.andar ? client.andar : 0}
+                                                </div>
+                                                <div className="ms-1 bold">
+
+                                                    {client.andar != 1 ? 'º' : ''} Andar
+                                                </div>
+                                            </>
+                                            :
+                                            <>
+                                                <div>
+                                                    Andar
+                                                </div>
+                                                <div className="ms-1 bold">
+                                                    {client.andar}
+                                                </div>
+                                            </>
+                                        }
+
+                                        {/* )} */}
+
+                                    </div>
+                                )}
                                 <div className="col-6 justify-content-center d-flex  my-2">
 
                                     {/* {client?.vagasGaragem && ( */}

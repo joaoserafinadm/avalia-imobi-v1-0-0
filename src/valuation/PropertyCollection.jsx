@@ -21,46 +21,53 @@ export default function PropertyCollection(props) {
                         '--swiper-navigation-color': '#5a5a5a',
                         '--swiper-pagination-color': '#5a5a5a',
                         '--swiper-navigation-size': '25px',
-                        zIndex: 0
+                        zIndex: 0,
+
                     }}
                     slidesPerView={1}
                     pagination={{ clickable: false }}
                     navigation>
-                    <div className="row px-2 d-flex">
+                    <div className="row px-2 d-flex" style={{ height: '100%' }}>
 
 
                         {propertyArray.map((elem, index) => {
                             return (
-                                <SwiperSlide key={index + 1} className="col-12 col-sm-6 col-xl-4 col-xxl-3 d-flex justify-content-center ">
+                                <div className="col-12 col-sm-6 col-xl-4 col-xxl-3 d-flex justify-content-center ">
 
-                                    <PropertyCard section={'Todos Clientes'}
-                                        elem={elem} />
+                                    <SwiperSlide key={index + 1}  >
 
-                                </SwiperSlide>
+                                        <PropertyCard section={'Todos Clientes'}
+                                            elem={elem} />
+
+                                    </SwiperSlide>
+                                </div>
                             )
                         })}
-                        <SwiperSlide key={0} className="col-12 col-sm-6 col-xl-4 col-xxl-3 d-flex justify-content-center">
+                        <div className="col-12 col-sm-6 col-xl-4 col-xxl-3 d-flex justify-content-center " >
+
+                            <SwiperSlide key={0} >
 
 
-                            <div className="card cardAnimation shadow mx-1  my-2" type="button"  data-bs-toggle="modal" data-bs-target="#propertyAddModal">
-                                <div className="card-body" >
-                                    <div className="row">
-                                        <div className="col-12 d-flex justify-content-center align-items-center text-center">
-                                            <div>
+                                <div className="card cardAnimation shadow mx-1 my-2" type="button"  data-bs-toggle="modal" data-bs-target="#propertyAddModal" style={{ height: '100%' }} >
+                                    <div className="card-body" style={{height: '550px '}} >
+                                        <div className="row" style={{ height: "100%" }}>
+                                            <div className="col-12 d-flex justify-content-center align-items-center text-center">
+                                                <div>
 
-                                                <div className="col-12">
-                                                    <FontAwesomeIcon icon={faHouseMedical} className="text-secondary fs-1" />
-                                                </div>
-                                                <div className="col-12">
-                                                    <span>Adicionar imóvel para comparação</span>
+                                                    <div className="col-12">
+                                                        <FontAwesomeIcon icon={faHouseMedical} className="text-secondary fs-1" />
+                                                    </div>
+                                                    <div className="col-12">
+                                                        <span>Adicionar imóvel para comparação</span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
-                        </SwiperSlide>
+                            </SwiperSlide>
+                        </div>
                     </div>
 
 
