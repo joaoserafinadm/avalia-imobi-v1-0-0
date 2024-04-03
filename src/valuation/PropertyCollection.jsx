@@ -37,7 +37,8 @@ export default function PropertyCollection(props) {
                                     <SwiperSlide key={index + 1}  >
 
                                         <PropertyCard section={'Todos Clientes'}
-                                            elem={elem} />
+                                            elem={elem} index={index} propertyArray={propertyArray}
+                                            setPropertyArray={value => props.setPropertyArray(value)} />
 
                                     </SwiperSlide>
                                 </div>

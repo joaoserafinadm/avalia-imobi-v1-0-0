@@ -55,6 +55,15 @@ export default function PropertyAddModal(props) {
 
     }, [])
 
+    const clearValues = () => {
+        dispatch(initialValues())
+        dispatch(setPropertyType(props.client.propertyType))
+        setImageUrl('')
+        setLinkError('')
+        setLoadingImage(false)
+
+    }
+
 
 
     const handlePropertyAdd = (property) => {
@@ -99,7 +108,7 @@ export default function PropertyAddModal(props) {
         props.setForceUpdate()
         dispatch(initialValues())
 
-
+        clearValues()
     }
 
 
@@ -277,7 +286,7 @@ export default function PropertyAddModal(props) {
 
                     </div>
                     <div className="modal-footer">
-                        <button type="button" className="btn btn-sm btn-secondary" data-bs-dismiss="modal" >Cancelar</button>
+                        <button type="button" className="btn btn-sm btn-secondary" data-bs-dismiss="modal" onClick={() => clearValues()}>Cancelar</button>
                         <button type="button" className="btn btn-sm btn-orange" data-bs-dismiss="modal" onClick={() => handlePropertyAdd(newClientForm)}>Salvar</button>
                     </div>
                 </div>

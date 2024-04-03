@@ -21,7 +21,7 @@ export default function ValuationConfig(props) {
     const priceAverage = (array) => {
         console.log(array)
 
-        const average = array.reduce((a, b) => a + +b.propertyPrice.replace(/\./g, ''), 0) / array.length
+        const average = (array.reduce((a, b) => a + +b.propertyPrice.replace(/\./g, ''), 0) / array.length).toFixed(0)
 
         console.log(average.toString())
 
@@ -39,7 +39,9 @@ export default function ValuationConfig(props) {
             <div className="col-12">
                 <label htmlFor="" className="fw-bold mb-2">Imóveis para comparação</label>
 
-                <PropertyCollection propertyArray={propertyArray} />
+                <PropertyCollection
+                    propertyArray={propertyArray}
+                    setPropertyArray={value => props.setPropertyArray(value)} />
 
 
 
@@ -52,9 +54,12 @@ export default function ValuationConfig(props) {
 
             <div className="col-12 mt-5">
                 <label htmlFor="" className="fw-bold mb-2">Preço médio dos imóveis</label>
-                <div className="col-12 d-flex justify-content-center align-items-center fs-1 my-3">
-                    <span className="text-orange me-1">R$</span>
-                    <span className="text-secondary bold">{priceAverage(propertyArray) !== 'NaN' ? priceAverage(propertyArray)+',00' : 0}</span>
+                <div className="col-12 card d-flex justify-content-center align-items-center fs-1 my-3">
+                    <div className="card-body">
+
+                        <span className="text-orange me-1">R$</span>
+                        <span className="text-secondary bold">{priceAverage(propertyArray) !== 'NaN' ? priceAverage(propertyArray) + ',00' : 0}</span>
+                    </div>
                 </div>
 
 

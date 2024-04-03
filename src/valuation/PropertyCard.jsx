@@ -80,6 +80,14 @@ export default function PropertyCard(props) {
         else return false
     }
 
+    const handleDeleteProperty = (index) => {
+
+        const newPropertyArray = props.propertyArray.filter((elem, i) => i !== index)
+
+        props.setPropertyArray(newPropertyArray)
+
+    }
+
 
 
     return (
@@ -151,10 +159,8 @@ export default function PropertyCard(props) {
                                 <button
                                     type="button"
                                     class="btn btn-light border"
-                                    id={"deleteClientButton" + props.elem._id + props.section}
-                                    data-bs-toggle="modal"
-                                    data-bs-target={"#deleteClientModal"}
-                                    onClick={() => props.setClientSelected(props.elem)}>
+                                    id={"deleteClientButton" + props.elem._id + props.section}                                    
+                                    onClick={() => handleDeleteProperty(props.index)}>
                                     <FontAwesomeIcon icon={faTrashAlt} className="icon text-secondary" />
                                 </button>
                             </div>
