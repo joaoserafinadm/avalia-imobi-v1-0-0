@@ -32,7 +32,6 @@ export default function ValuationPage(props) {
     const [loadingPage, setLoadingPage] = useState(true)
     const [section, setSection] = useState('Configurar avaliação')
 
-    const [propertyArray, setPropertyArray] = useState([])
 
 
 
@@ -96,10 +95,7 @@ export default function ValuationPage(props) {
 
                         <div className="carousel-inner ">
                             <div className="carousel-item active">
-                                <ValuationConfig
-                                    client={client}
-                                    propertyArray={propertyArray}
-                                    setPropertyArray={value => setPropertyArray(value)} />
+                                <ValuationConfig client={client} />
 
                             </div>
                         </div>
@@ -130,7 +126,7 @@ export default function ValuationPage(props) {
 
 
 
-                                
+
                             </div>
                         </div>
                     </FixedTopicsBottom>
