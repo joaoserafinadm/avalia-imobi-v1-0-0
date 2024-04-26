@@ -48,6 +48,68 @@ export default authenticated(async (req, res) => {
 
 
 
+    } else if (req.method === "POST") {
+
+        const { company_id, user_id, client_id, propertyArray, calcVariables, valuationCalc } = req.body
+
+
+        if (!company_id || !user_id || !client_id || !propertyArray?.length || !calcVariables || !valuationCalc) {
+
+            res.status(400).json({ message: "Missing parameters on request body" })
+
+
+        } else {
+
+
+            const { db } = await connect()
+
+
+            const companyExist = await db.collection('companies').findOne({ _id: ObjectId(company_id) })
+
+            const userExist = await db.collection('users').findOne({ _id: ObjectId(user_id) })
+
+
+            if (!companyExist || !userExist) {
+
+                res.status(400).json({ message: "Company or user does not exist" })
+
+            } else {
+
+                const clientExist = companyExist.clients.find(elem => elem._id.toString() === client_id)
+
+                if (!clientExist) {
+
+                    res.status(400).json({ message: "Client does not exist" })
+
+                } else {
+
+                    const data = {
+                        user_id,
+                        dateAdded: new Date(),
+                        dateUpdated: new Date(),
+                        status: "pending",
+                        propertyArray,
+                        calcVariables,
+                        valuationCalc
+                    }
+
+                    const result = await db.collection('companies').updateOne(
+                        { _id: ObjectId(company_id), "clients._id": ObjectId(client_id) },
+                        { $set: { "clients.$.valuation": data } }
+                    )
+
+                    if (result.modifiedCount > 0) {
+                        res.status(200).json({ message: "Valuation created" })
+                    } else {
+                        res.status(400).json({ message: "Valuation not created" })
+                    }
+                }
+
+
+            }
+        }
+
+
     }
 
 

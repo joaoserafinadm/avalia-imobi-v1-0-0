@@ -16,26 +16,8 @@ export default function ValuationConfig(props) {
 
     const client = props.client
 
-    const [propertyArray, setPropertyArray] = useState([])
-    const [areaTotalStatus, setAreaTotalStatus] = useState(false)
-    const [valorIdealRange, setValorIdealRange] = useState(0)
-    const [curtoPrazoRange, setCurtoPrazoRange] = useState(7)
-    const [longoPrazoRange, setLongoPrazoRange] = useState(7)
 
     const [forceUpdate, setForceUpdate] = useState(0)
-
-    const priceAverage = (array) => {
-        console.log(array)
-
-        const average = (array.reduce((a, b) => a + +b.propertyPrice.replace(/\./g, ''), 0) / array.length).toFixed(0)
-
-
-        return maskMoney(average.toString())
-    }
-
-
-
-
 
 
 
@@ -45,23 +27,26 @@ export default function ValuationConfig(props) {
                 <label htmlFor="" className="fw-bold mb-2">Imóveis para comparação</label>
 
                 <PropertyCollection
-                    propertyArray={propertyArray}
-                    setPropertyArray={value => setPropertyArray(value)} />
+                    propertyArray={props.propertyArray}
+                    setPropertyArray={value => props.setPropertyArray(value)} />
+                <small className="text-danger">{props.propertyArrayError}</small>
 
 
 
                 <PropertyAddModal
                     client={client}
-                    setPropertyArray={value => setPropertyArray(value)}
+                    setPropertyArray={value => props.setPropertyArray(value)}
                     setForceUpdate={() => setForceUpdate(forceUpdate + 1)}
-                    propertyArray={propertyArray} />
+                    propertyArray={props.propertyArray} />
             </div>
 
-            {propertyArray.length > 0 && (
+            {props.propertyArray.length > 0 && (
 
                 <PropertyCalc
+                    setCalcVariables={value => props.setCalcVariables(value)}
+                    setValuationCalc={value => props.setValuationCalc(value)}
                     client={client}
-                    propertyArray={propertyArray} />
+                    propertyArray={props.propertyArray} />
             )}
 
 

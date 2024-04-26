@@ -16,6 +16,7 @@ import { closeModal } from "../../utils/modalControl";
 import { FixedTopicsBottom } from "../../src/components/fixedTopics";
 import Link from "next/link";
 import isMobile from "../../utils/isMobile";
+import scrollTo from "../../utils/scrollTo";
 
 
 
@@ -28,9 +29,23 @@ export default function ValuationPage(props) {
     const dispatch = useDispatch()
 
     const [client, setClient] = useState()
+    const [propertyArray, setPropertyArray] = useState([])
+    const [valuationCalc, setValuationCalc] = useState('')
+    const [calcVariables, setCalcVariables] = useState('')
+
+    const [propertyArrayError, setPropertyArrayError] = useState('')
 
     const [loadingPage, setLoadingPage] = useState(true)
+    const [loadingSave, setLoadingSave] = useState(false)
     const [section, setSection] = useState('Configurar avaliação')
+
+
+
+
+    useEffect(() => {
+        if (propertyArray.length >= 2) setPropertyArrayError('')
+    }, [propertyArray.length])
+
 
 
 
@@ -71,9 +86,59 @@ export default function ValuationPage(props) {
     }
 
 
+    const validate = () => {
+
+        let propertyArrayError = ''
+
+        if (propertyArray?.length < 2) propertyArrayError = "Adicione pelo menos 2 imóveis para comparação"
+
+        if (propertyArrayError) {
+            setPropertyArrayError(propertyArrayError)
+            scrollTo("clientManage")
+            return false
+        } else {
+            return true
+        }
+    }
+
+
     const handleSave = async (company_id) => {
 
-        console.log(client, propertyArray)
+        setSection('Configurar avaliação')
+
+        const isValid = validate()
+
+        if (isValid) {
+
+            setLoadingSave(true)
+
+            const data = {
+                company_id,
+                user_id: token.sub,
+                client_id: _id,
+                propertyArray,
+                calcVariables,
+                valuationCalc
+            }
+
+
+            await axios.post(`${baseUrl()}/api/valuation`, data)
+                .then(res => {
+                    setLoadingSave(false)
+                    router.push('/')
+
+
+                }).catch(e => {
+                    console.log(e)
+                    setLoadingSave(false)
+                })
+
+
+
+        } else {
+            return
+        }
+
 
     }
 
@@ -95,7 +160,11 @@ export default function ValuationPage(props) {
 
                         <div className="carousel-inner ">
                             <div className="carousel-item active">
-                                <ValuationConfig client={client} />
+                                <ValuationConfig client={client} propertyArrayError={propertyArrayError}
+                                    setCalcVariables={value => setCalcVariables(value)}
+                                    propertyArray={propertyArray} setPropertyArray={value => setPropertyArray(value)}
+                                    setValuationCalc={value => setValuationCalc(value)}
+                                />
 
                             </div>
                         </div>
@@ -105,6 +174,11 @@ export default function ValuationPage(props) {
                             </div>
                         </div>
                     </div>
+
+                    {
+                        <>
+                        </>
+                    }
 
                     {!isMobile() && <hr />}
 
@@ -119,7 +193,7 @@ export default function ValuationPage(props) {
                                 </Link>
 
                                 <button className="btn btn-sm btn-orange ms-2"
-                                    onClick={() => handleSave(token.company_id)}>
+                                    onClick={() => handleSave(token.company_id)} disabled={propertyArray.length === 0}>
                                     Salvar
                                 </button>
 

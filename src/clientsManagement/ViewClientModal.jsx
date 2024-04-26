@@ -31,7 +31,7 @@ export default function ViewClientModal(props) {
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title title-dark bold">{client?.clientName} {client?.clientLastName}</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={() => setSection('Informações')}></button>
                     </div>
                     <div className="modal-body-lg">
                         <div className="container carousel  " data-bs-touch="false" data-bs-interval='false' id="clientManage">
@@ -64,7 +64,7 @@ export default function ViewClientModal(props) {
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Fechar</button>
+                        <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal" onClick={() => setSection('Informações')}>Fechar</button>
                     </div>
 
                 </div>

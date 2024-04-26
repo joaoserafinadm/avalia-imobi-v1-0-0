@@ -94,7 +94,7 @@ export default function PropertyCard(props) {
         <div class="card my-2 cardAnimation shadow" style={{ width: "100%" }} >
 
 
-            {!client?.imageUrl?
+            {!client?.imageUrl ?
                 <div className=" d-flex card-img-top justify-content-center align-items-center bg-light bg-gradient" style={{ height: '170px' }}>
                     <span className="text-secondary">Sem fotos</span>
                 </div>
@@ -102,7 +102,7 @@ export default function PropertyCard(props) {
                 <div className="card-img-top text-center bg-secondary ">
 
 
-                    <img src={client?.imageUrl} className={`card-img-top  ${styles.clientCardImage}`}  />
+                    <img src={client?.imageUrl} className={`card-img-top  ${styles.clientCardImage}`} />
 
                 </div>
 
@@ -128,7 +128,7 @@ export default function PropertyCard(props) {
                 )
             }
 
-           
+
             <div class="card-body">
 
                 <div className="row ">
@@ -138,7 +138,10 @@ export default function PropertyCard(props) {
                     </div>
                 </div>
 
-                <ClientFeatures client={client} elem={props.elem} propertyAdd/>
+                <ClientFeatures client={client} elem={props.elem} propertyAdd />
+
+                {!props.deleteHide && (
+
 
 
                     <div className="row d-flex justify-content-center mt-2">
@@ -159,13 +162,14 @@ export default function PropertyCard(props) {
                                 <button
                                     type="button"
                                     class="btn btn-light border"
-                                    id={"deleteClientButton" + props.elem._id + props.section}                                    
+                                    id={"deleteClientButton" + props.elem._id + props.section}
                                     onClick={() => handleDeleteProperty(props.index)}>
                                     <FontAwesomeIcon icon={faTrashAlt} className="icon text-secondary" />
                                 </button>
                             </div>
                         </div>
-                    </div> 
+                    </div>
+                )}
 
             </div>
         </div >

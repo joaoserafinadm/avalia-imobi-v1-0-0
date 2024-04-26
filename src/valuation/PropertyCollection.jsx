@@ -49,8 +49,8 @@ export default function PropertyCollection(props) {
                             <SwiperSlide key={0} >
 
 
-                                <div className="card cardAnimation shadow mx-1 my-2" type="button"  data-bs-toggle="modal" data-bs-target="#propertyAddModal" style={{ height: '100%' }} >
-                                    <div className="card-body" style={{height: '550px '}} >
+                                <div className="card cardAnimation shadow mx-1 my-2" type="button" data-bs-toggle="modal" data-bs-target="#propertyAddModal" style={{ height: '100%' }} >
+                                    <div className="card-body" style={{ height: '550px ' }} >
                                         <div className="row" style={{ height: "100%" }}>
                                             <div className="col-12 d-flex justify-content-center align-items-center text-center">
                                                 <div>
@@ -84,7 +84,8 @@ export default function PropertyCollection(props) {
                             <div className="col-12 col-sm-6 col-xl-4 col-xxl-3 d-flex justify-content-center px-1 py-2">
 
                                 <PropertyCard section={'Todos Clientes'}
-                                    elem={elem} />
+                                    elem={elem} index={index} propertyArray={propertyArray}
+                                    setPropertyArray={value => props.setPropertyArray(value)} />
                             </div>
 
                         )

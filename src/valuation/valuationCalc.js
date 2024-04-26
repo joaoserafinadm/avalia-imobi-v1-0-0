@@ -2,7 +2,7 @@ import { maskMoney } from "../../utils/mask"
 
 
 
-export default function valuationCalc(porpertyArray, client, valorIdealRange, curtoPrazoRange, longoPrazoRange) {
+export default function valuationCalc(porpertyArray, client, valorIdealRange, curtoPrazoRange, longoPrazoRange, calcPrivativa) {
 
     let result = {
         curtoPrazoValue: 0,
@@ -26,10 +26,16 @@ export default function valuationCalc(porpertyArray, client, valorIdealRange, cu
     //     clientAraeTotalPrivativa,
     //     clientAraeTotal)
 
-    
-    const valorideal = averagePrice * clientAraeTotalPrivativa * (1+valorIdealRange/100) / averageAreaTotal
-    const curtoPrazo = valorideal* (1-curtoPrazoRange/100)
-    const longoPrazo = valorideal* (1+longoPrazoRange/100)
+    let valorideal = 0
+
+    if (calcPrivativa) {
+        valorideal = averagePrice * clientAraeTotalPrivativa * (1 + valorIdealRange / 100) / averageAreaTotalPrivativa
+    } else {
+        valorideal = averagePrice * clientAraeTotal * (1 + valorIdealRange / 100) / averageAreaTotal
+    }
+
+    const curtoPrazo = valorideal * (1 - curtoPrazoRange / 100)
+    const longoPrazo = valorideal * (1 + longoPrazoRange / 100)
 
     result.curtoPrazoValue = maskMoney(curtoPrazo.toFixed(0))
     result.valorIdealValue = maskMoney(valorideal.toFixed(0))

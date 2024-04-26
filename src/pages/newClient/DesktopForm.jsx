@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux"
-import { setCelular, setClientLastName, setClientName } from "../../../store/NewClientForm/NewClientForm.actions"
+import { setCelular, setClientLastName, setClientName, setEmail } from "../../../store/NewClientForm/NewClientForm.actions"
 import PropertyTypeCard from "../../addClient/PropertyTypeCard"
 import TypeApartamento from "./TypeApartamento"
 import GeralFeatures from "./GeralFeatures"
