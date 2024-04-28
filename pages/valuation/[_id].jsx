@@ -12,11 +12,12 @@ import ClientInfo from "../../src/clientsManagement/ClientInfo";
 import Sections from "../../src/components/Sections";
 import ValuationConfig from "../../src/valuation/ValuationConfig";
 import PropertyAdd from "../../src/valuation/PropertyAdd";
-import { closeModal } from "../../utils/modalControl";
+import { closeModal, showModal } from "../../utils/modalControl";
 import { FixedTopicsBottom } from "../../src/components/fixedTopics";
 import Link from "next/link";
 import isMobile from "../../utils/isMobile";
 import scrollTo from "../../utils/scrollTo";
+import ShowValuationModal from "../../src/valuationPage/ShowValuationModal";
 
 
 
@@ -38,6 +39,8 @@ export default function ValuationPage(props) {
     const [loadingPage, setLoadingPage] = useState(true)
     const [loadingSave, setLoadingSave] = useState(false)
     const [section, setSection] = useState('Configurar avaliação')
+
+    const [valuationUrl, setValuationUrl] = useState('')
 
 
 
@@ -125,7 +128,8 @@ export default function ValuationPage(props) {
             await axios.post(`${baseUrl()}/api/valuation`, data)
                 .then(res => {
                     setLoadingSave(false)
-                    router.push('/')
+                    setValuationUrl(res.data.urlToken)
+                    showModal('showValuationModal')
 
 
                 }).catch(e => {
@@ -147,6 +151,8 @@ export default function ValuationPage(props) {
         <div >
             <Title title={client && client?.clientName + " " + client?.clientLastName} subtitle="Avaliação do imóvel" backButton='/' />
 
+
+            <ShowValuationModal valuationUrl={valuationUrl} token={token} />
             {loadingPage ?
                 <SpinnerLG />
                 :

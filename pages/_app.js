@@ -44,6 +44,7 @@ import jwt from "jsonwebtoken";
 import NewClient from "../src/pages/newClient/index.jsx";
 import { SessionProvider } from "next-auth/react"
 import { closeModal } from "../utils/modalControl.js";
+import ValuationPage from "../src/pages/valuation/index.jsx";
 
 
 // import SignUp from '../src/components/signUp/SignUp'
@@ -60,17 +61,21 @@ export default function MyApp({ Component, pageProps }) {
     const router = useRouter();
     const newRoute = router.asPath;
     const premiumAccount = newRoute === "/premiumAccount";
-    const newClient = newRoute === "/newClient";
+
+    const newClient = newRoute.includes('/newClient');
+    const valuation = newRoute.includes('/valuation')
 
 
     const [passwordRecoverRoute, setPasswordRecoverRoute] = useState(false);
-    const [newClientRoute, setNewClientRoute] = useState(false);
+    const [presentationRoute, setPresentationRoute] = useState(false);
 
     useEffect(() => {
         hrefVerify();
     }, []);
 
     const hrefVerify = async () => {
+
+
         const urlSearchParams = new URLSearchParams(window.location.search);
         const queryId = urlSearchParams.get("id");
         const queryToken = urlSearchParams.get("token");
@@ -84,14 +89,14 @@ export default function MyApp({ Component, pageProps }) {
         }
 
         if (queryClientId && queryUserId) {
-            setNewClientRoute(true);
-            var newClientRoute = true;
+            setPresentationRoute(true);
         }
 
         if (!Cookie.get("auth") &&
             window.location.href !== baseUrl() &&
             !passwordRecoverRoute &&
-            !newClientRoute) {
+            !newClient &&
+            !valuation) {
 
             setTimeout(async () => {
                 await Router.replace("/");
@@ -108,7 +113,7 @@ export default function MyApp({ Component, pageProps }) {
             return <PasswordRecover />;
         }
 
-        if (newClientRoute) {
+        if (newClient && presentationRoute) {
             return (
                 <Provider store={store}>
                     <PersistGate persistor={persistedStore}>
@@ -122,6 +127,25 @@ export default function MyApp({ Component, pageProps }) {
 
 
                         <NewClient />;
+                    </PersistGate>
+                </Provider>
+            )
+        }
+
+        if (valuation && presentationRoute) {
+            return (
+                <Provider store={store}>
+                    <PersistGate persistor={persistedStore}>
+
+                        <Head>
+                            <title>Cadastro do imóvel</title>
+                            <meta property="og:title" content="Formulário de cadastro do imóvel" />
+                            <meta property="og:description" content="Cadastre seu imóvel para avaliação" />
+                            <meta property="og:image" content="https://res.cloudinary.com/joaoserafinadm/image/upload/v1694998829/AVALIA%20IMOBI/LOGOS/LOGO_02_wkzqga.png" />
+                        </Head>
+
+
+                        <ValuationPage />
                     </PersistGate>
                 </Provider>
             )

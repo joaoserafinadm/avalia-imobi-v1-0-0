@@ -83,6 +83,9 @@ export default authenticated(async (req, res) => {
 
                 } else {
 
+                    const urlToken = `${baseUrl()}/valuation/params?clientId=${client_id}`
+
+
                     const data = {
                         user_id,
                         dateAdded: new Date(),
@@ -90,7 +93,8 @@ export default authenticated(async (req, res) => {
                         status: "pending",
                         propertyArray,
                         calcVariables,
-                        valuationCalc
+                        valuationCalc,
+                        urlToken
                     }
 
                     const result = await db.collection('companies').updateOne(
@@ -99,7 +103,7 @@ export default authenticated(async (req, res) => {
                     )
 
                     if (result.modifiedCount > 0) {
-                        res.status(200).json({ message: "Valuation created" })
+                        res.status(200).json({ urlToken })
                     } else {
                         res.status(400).json({ message: "Valuation not created" })
                     }
