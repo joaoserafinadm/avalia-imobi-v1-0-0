@@ -7,7 +7,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import jwt from "jsonwebtoken";
 import baseUrl from "../../utils/baseUrl";
-import { SpinnerLG } from "../../src/components/loading/Spinners";
+import { SpinnerLG, SpinnerSM } from "../../src/components/loading/Spinners";
 import ClientInfo from "../../src/clientsManagement/ClientInfo";
 import Sections from "../../src/components/Sections";
 import ValuationConfig from "../../src/valuation/ValuationConfig";
@@ -41,6 +41,7 @@ export default function ValuationPage(props) {
     const [section, setSection] = useState('Configurar avaliação')
 
     const [valuationUrl, setValuationUrl] = useState('')
+
 
 
 
@@ -199,8 +200,12 @@ export default function ValuationPage(props) {
                                 </Link>
 
                                 <button className="btn btn-sm btn-orange ms-2"
-                                    onClick={() => handleSave(token.company_id)} disabled={propertyArray.length === 0}>
-                                    Salvar
+                                    onClick={() => handleSave(token.company_id)} disabled={propertyArray.length === 0 || loadingSave}>
+                                    {loadingSave ?
+                                        <SpinnerSM />
+                                        :
+                                        "Salvar"
+                                    }
                                 </button>
 
 
