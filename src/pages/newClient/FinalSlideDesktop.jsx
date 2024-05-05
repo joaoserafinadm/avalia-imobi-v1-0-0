@@ -12,7 +12,6 @@ export default function FinalSlideDesktop(props) {
     const newClientForm = useSelector(state => state.newClientForm)
 
     const [showLogo, setShowLogo] = useState(false)
-    const [showStartButton, setShowStartButton] = useState(false)
 
     useEffect(() => {
 
@@ -21,6 +20,8 @@ export default function FinalSlideDesktop(props) {
         }, 9000)
 
     }, [])
+
+
 
 
 
@@ -64,23 +65,6 @@ export default function FinalSlideDesktop(props) {
                     {showLogo && (
 
                         <img src={newClientForm.logo} alt="logo" id="logoItem" className={`${styles.logo}  fadeItem1s `} />
-                    )}
-
-
-                </div>
-            </div>
-            <div className="row my-5">
-                <div className="col-12 d-flex justify-content-center">
-
-                    {showStartButton && (
-
-                        <span
-                            type='button'
-                            className="fs-5 text-secondary fadeItem1s cardAnimation"
-                            data-bs-target="#clientFormCarouselDesktop"
-                            data-bs-slide="next">
-                            Começar <FontAwesomeIcon icon={faArrowRight} className="ms-1" />
-                        </span>
                     )}
 
 

@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState, useCallback } from 'react'
-import { GoogleMap, Marker, useJsApiLoader, Autocomplete } from '@react-google-maps/api';
+import { GoogleMap, Marker, useJsApiLoader, Autocomplete, InfoWindow } from '@react-google-maps/api';
 import { useSelector } from 'react-redux';
 
 const libraries = ['places']
@@ -13,9 +13,9 @@ export default function Map(props) {
 
     const positionMarker = useRef()
     const [position, setPosition] = useState(null);
-    const [zoom, setZoom] = useState(15)
+    const [zoom, setZoom] = useState(props.valuationPage ? 14 : 15)
     const [map, setMap] = useState(null)
-
+    const [showInfo, setShowInfo] = useState(false)
 
 
 
@@ -124,16 +124,52 @@ export default function Map(props) {
                         zoom={zoom}
                         // zoom={props.zoom}
                         onLoad={onLoad}
-                        on
                         onUnmount={onUnmount}
                         options={{
                             zoomControl: false,
                             streetViewControl: false,
                             mapTypeControl: false,
-                            fullscreenControl: false
+                            fullscreenControl: false,
+
                         }}
                     >
-                        <Marker position={props.location} />
+                        <Marker position={props.location}
+                            label={{
+                                text: 'Seu imóvel',
+                                color: 'black', // Cor do texto do rótulo
+                                fontWeight: 'bold', // Peso da fonte do rótulo
+                                fontSize: '16px',
+
+                            }}
+                        />
+                        {props.porpertyLocations?.map((elem, index) => {
+                            return (
+                                <Marker
+                                    key={index}
+                                    icon={{
+                                        fillColor: 'blue', // Define a cor de preenchimento do ícone
+                                        fillOpacity: 1, // Opacidade do preenchimento
+                                        scale: 10, // Escala do ícone
+                                        strokeColor: 'white', // Cor da borda do ícone
+                                        strokeWeight: 2,
+                                    }}
+                                    position={{ lat: elem.latitude, lng: elem.longitude }}
+                                    onClick={() => setShowInfo(true)} />
+
+                            )
+                        })}
+
+                        {showInfo && (
+                            <InfoWindow
+                                anchor={1}
+                            // onCloseClick={() => setInfoOpen(false)}
+                            >
+                                <div>
+                                    <h3>dsaddsadsa</h3>
+                                    <div>This is your info window content</div>
+                                </div>
+                            </InfoWindow>
+                        )}
                     </GoogleMap>
 
                 </div>

@@ -59,7 +59,6 @@ export default function ValuationPage(props) {
 
     useEffect(() => {
         navbarHide(dispatch)
-
     }, [])
 
     useEffect(() => {
@@ -154,6 +153,8 @@ export default function ValuationPage(props) {
 
 
             <ShowValuationModal valuationUrl={valuationUrl} token={token} />
+
+
             {loadingPage ?
                 <SpinnerLG />
                 :

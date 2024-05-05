@@ -12,6 +12,7 @@ import jwt from "jsonwebtoken";
 import { useSelector } from "react-redux"
 import formatDate from "../../utils/formatDate"
 import ClientFeatures from "./ClientFeatures"
+import PropertyUrlModal from "../pages/valuation/PropertyUrlModal"
 
 export default function PropertyCard(props) {
 
@@ -67,9 +68,8 @@ export default function PropertyCard(props) {
                 text: 'Formulário de Cadastro de Imóvel',
                 url: url
             });
-            console.log('Conteúdo compartilhado com sucesso!');
         } catch (error) {
-            console.error('Erro ao compartilhar:', error);
+            console.log('Error sharing:', error);
         }
     }
 
@@ -92,6 +92,7 @@ export default function PropertyCard(props) {
 
     return (
         <div class="card my-2 cardAnimation shadow" style={{ width: "100%" }} >
+
 
 
             {!client?.imageUrl ?
@@ -158,14 +159,26 @@ export default function PropertyCard(props) {
                                     <FontAwesomeIcon icon={faEye} className="icon  text-secondary" />
                                 </button> */}
 
-
                                 <button
                                     type="button"
                                     class="btn btn-light border"
-                                    id={"deleteClientButton" + props.elem._id + props.section}
-                                    onClick={() => handleDeleteProperty(props.index)}>
-                                    <FontAwesomeIcon icon={faTrashAlt} className="icon text-secondary" />
+                                    data-bs-toggle="modal" data-bs-target="#propertyUrlModal"
+                                    id={"viewPropertyButton" + props.elem._id + props.section}
+                                    onClick={() => props.setPropertyUrl(props.elem.propertyLink)}>
+                                    <FontAwesomeIcon icon={faEye} className="icon text-secondary" />
                                 </button>
+                                {!props.valuationView && (
+                                    <button
+                                        type="button"
+                                        class="btn btn-light border"
+                                        id={"deleteClientButton" + props.elem._id + props.section}
+                                        onClick={() => handleDeleteProperty(props.index)}>
+                                        <FontAwesomeIcon icon={faTrashAlt} className="icon text-secondary" />
+                                    </button>
+
+                                )}
+
+
                             </div>
                         </div>
                     </div>

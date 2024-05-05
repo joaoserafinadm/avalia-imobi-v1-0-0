@@ -1,3 +1,5 @@
+import { useState } from "react";
+import Sections from "../components/Sections";
 
 
 
@@ -7,6 +9,8 @@ export default function ShowValuationModal(props) {
     const valuationUrl = props.valuationUrl
 
     const token = props.token
+
+    const [section, setSection] = useState('Apresentação')
 
     const handleShare = async (url) => {
         try {
@@ -33,12 +37,32 @@ export default function ShowValuationModal(props) {
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div className="modal-body-lg" style={{ height: "100vh" }}>
-                        <iframe src={valuationUrl + '&userId=' + token.sub + '&view=true'} width="100%" height="100%" frameborder="0" allowfullscreen></iframe>
+
+                        <div className="container carousel  " data-bs-touch="false" data-bs-interval='false' id="showValuationSection">
+
+                            <Sections section={section} idTarget="showValuationSection"
+                                setSection={value => setSection(value)}
+                                sections={["Apresentação", "PDF"]} />
+
+
+
+                            <div className="carousel-inner ">
+                                <div className="carousel-item active">
+
+                                    <iframe src={valuationUrl + '&userId=' + token.sub + '&disabled=true'} width="100%" height="100%" frameborder="0" allowfullscreen></iframe>
+                                </div>
+                            </div>
+                            <div className="carousel-inner ">
+                                <div className="carousel-item ">
+                                    dsadsa{valuationUrl}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div className="modal-footer">
                         <button type="button" class="btn btn-secondary btn-sm" >Fechar</button>
-                        <button type="button" class="btn btn-orange btn-sm">Gerar PDF</button>
-                        <button type="button" class="btn btn-orange btn-sm" onClick={() => handleShare(valuationUrl + '&userId=' + token.sub )}>Compartilhar</button>
+                        <button type="button" class="btn btn-orange btn-sm">Baixar PDF</button>
+                        <button type="button" class="btn btn-orange btn-sm" onClick={() => handleShare(valuationUrl + '&userId=' + token.sub)}>Compartilhar apresentação</button>
                     </div>
                 </div>
             </div>
