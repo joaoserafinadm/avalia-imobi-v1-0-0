@@ -228,7 +228,7 @@ export default function ValuationViewPage(props) {
                                                 <span className="small text-danger">Para continuar você deve selecionar o valor do imóvel </span>
                                             </>
                                             :
-                                            <button type="button" className="btn btn-secondary text-white fs-4" id="continueButton">
+                                            <button type="button" className="btn btn-secondary text-white fs-4" data-bs-target="#valuationCarousel" data-bs-slide="next" id="continueButton">
                                                 Continuar <Icons icon="a-r" />
                                             </button>
                                         }
