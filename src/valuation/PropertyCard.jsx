@@ -100,7 +100,7 @@ export default function PropertyCard(props) {
                     <span className="text-secondary">Sem fotos</span>
                 </div>
                 :
-                <div className="card-img-top text-center bg-secondary ">
+                <div className="card-img-top d-flex justify-content-center align-items-center bg-secondary " style={{overflow: 'hidden'}}>
 
 
                     <img src={client?.imageUrl} className={`card-img-top  ${styles.clientCardImage}`} />

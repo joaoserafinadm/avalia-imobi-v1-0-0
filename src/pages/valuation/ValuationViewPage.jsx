@@ -93,7 +93,7 @@ export default function ValuationViewPage(props) {
                                                 <span className="bold fs-5">Valor do m²</span>
                                                 <div className="d-flex justify-content-center align-items-center">
                                                     <span className="text-success me-1 fs-5">R$</span>
-                                                    <span className="text-secondary fs-3 fw-bold">4.000,00</span>
+                                                    <span className="text-secondary fs-3 fw-bold">{clientData?.valuation?.valuationCalc?.valorMetroQuadrado},00</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -128,7 +128,7 @@ export default function ValuationViewPage(props) {
                                                 <span className="bold fs-5">Valor</span>
                                                 <div className="d-flex justify-content-center align-items-center">
                                                     <span className="text-success me-1 fs-5">R$</span>
-                                                    <span className="text-secondary fs-3 fw-bold">4.000,00</span>
+                                                    <span className="text-secondary fs-3 fw-bold">{clientData?.valuation?.valuationCalc?.valorAvaliacao},00</span>
                                                 </div>
                                             </div>
                                         </div>

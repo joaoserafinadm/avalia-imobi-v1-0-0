@@ -99,7 +99,10 @@ export default authenticated(async (req, res) => {
 
                     const result = await db.collection('companies').updateOne(
                         { _id: ObjectId(company_id), "clients._id": ObjectId(client_id) },
-                        { $set: { "clients.$.valuation": data } }
+                        {
+                            $set: { "clients.$.valuation": data },
+                            $set: { "clients.$.status": "evaluated" }
+                        }
                     )
 
                     if (result.modifiedCount > 0) {

@@ -19,6 +19,7 @@ import ViewClientModal from "../src/clientsManagement/ViewClientModal";
 import { showModal } from "../utils/modalControl";
 import { usersArray } from "../store/Users/Users.actions";
 import Sections from "../src/components/Sections";
+import ViewValuationModal from "../src/clientsManagement/viewValuationModal";
 
 
 
@@ -215,7 +216,7 @@ export default function clientsManagement() {
 
                         <ViewClientModal clientSelected={clientSelected} />
                         <DeleteClientModal clientSelected={clientSelected} dataFunction={() => dataFunction(token.company_id)} />
-
+                        <ViewValuationModal clientSelected={clientSelected} token={token} setClientSelected={value => setClientSelected(value)} />
                     </>
 
                 }

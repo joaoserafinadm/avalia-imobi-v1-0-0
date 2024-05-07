@@ -156,7 +156,21 @@ export default function ClientCard_02(props) {
                     <div className="col-12">
 
                         <h5 class="mb-0"> {client?.clientName} {client.clientLastName} </h5>
-                        <ClientStatus status={client?.status} id={client?._id} />
+                        <div className="d-flex align-items-center">
+                            <div>
+
+
+                                <ClientStatus status={client?.status} id={client?._id} />
+                                {client?.status === 'evaluated' && (
+                                    <span className="badge rounded-pill btn btn-light border ms-2"
+                                        onClick={() => props.setClientSelected(props.elem)}
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#viewValuationModal">
+                                        <FontAwesomeIcon icon={faShare} className="icon text-secondary" />
+                                    </span>
+                                )}
+                            </div>
+                        </div>
                     </div>
                 </div>
 
