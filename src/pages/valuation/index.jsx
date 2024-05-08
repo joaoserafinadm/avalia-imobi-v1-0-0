@@ -10,6 +10,7 @@ import ValuationViewPage from "./ValuationViewPage";
 import PropertyUrlModal from "./PropertyUrlModal";
 import FinalPage from "./FinalPage";
 import tippy from "tippy.js";
+import ContentPage from "./ContentPage";
 
 
 export default function ValuationPage() {
@@ -69,12 +70,19 @@ export default function ValuationPage() {
                 <div className="col-12 fadeItem d-flex justify-content-center align-items-center" style={{ height: '100vh' }}>
 
 
-                    <div id="valuationCarousel" className="col-12 carousel slide" style={{ zIndex: 1 }}>
+                    <div id="valuationCarousel" className="col-12 carousel " data-bs-touch="false" data-bs-interval='false' style={{ zIndex: 1 }}>
                         <div class="carousel-inner">
                             <div class="carousel-item active">
                                 <StartPage
                                     userData={userData}
                                     clientData={clientData} />
+                            </div>
+                            <div class="carousel-item ">
+
+                                <ContentPage
+                                    clientData={clientData}
+                                    userData={userData} />
+
                             </div>
                             <div class="carousel-item ">
 

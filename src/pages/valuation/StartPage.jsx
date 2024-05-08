@@ -52,7 +52,7 @@ export default function StartPage(props) {
 
                             <div className="row mt-3 text-lg-start text-center fadeItem">
                                 <div>
-                                    <button className="btn btn-light" data-bs-target="#valuationCarousel" data-bs-slide="next">
+                                    <button className="btn btn-light" data-bs-target="#valuationCarousel" data-bs-slide-to={1}>
 
                                         Começar <Icons icon="a-r" className="icon ms-1" />
                                     </button>

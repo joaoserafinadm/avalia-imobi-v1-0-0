@@ -25,17 +25,17 @@ export default function PortraitCard(props) {
                     <span className='fs-4'>{props.firstName} {props.lastName}</span>
                 </div>
                 <div className="col-12 mt-2 d-flex justify-content-center">
-                    <span className='small'>
+                    <span className='small bold'>
 
                         Creci: {props.creci} | {props.celular}
                     </span>
                 </div>
                 <div className="col-12 mt-2 d-flex justify-content-center">
-                    <span className='small'>
+                    <span className='small bold'>
                         {props.email}
                     </span>
                 </div>
-                <div className="col-12 mt-5 d-flex justify-content-center">
+                <div className="col-12 mt-4 d-flex justify-content-center">
                     <img src={props.logo} alt="" style={{
                         maxHeight: "50px",
                         maxWidth: "130px",

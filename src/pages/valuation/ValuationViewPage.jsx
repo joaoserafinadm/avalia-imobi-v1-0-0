@@ -8,6 +8,8 @@ import Icons from "../../components/icons"
 import tippy from "tippy.js"
 import scrollTo from "../../../utils/scrollTo"
 import styles from './valuation.module.scss'
+import { Swiper, SwiperSlide } from "swiper/react"
+import ClientFeatures from "../../clientsManagement/ClientFeatures"
 
 
 
@@ -37,52 +39,115 @@ export default function ValuationViewPage(props) {
                 <div className="card " style={{ height: '98vh', width: '98vw', overflowY: 'scroll' }} >
                     <div className="row d-flex">
 
-
-                        <div className="col-12 d-flex justify-content-center my-5">
-                            <div className="col-12 col-lg-8 text-center">
-                                <span className="fs-4">
-                                    Com base nas informações fornecidades sobre o seu imóvel, coletamos {clientData?.valuation?.propertyArray?.length} imóveis semelhantes para ter uma base de valores, tendo como critério de seleção as suas localizações e características.
-                                </span>
+                        <div className="row mt-5">
+                            <div className="col-12 d-flex justify-content-center">
+                                <span className="fs-2 fw-bold text-main text-center me-3">Metodologia aplicada</span>
                             </div>
 
                         </div>
 
+                        <div className="row my-5">
+                            <div className="col-12  d-flex justify-content-center">
+                                <div className="row px-5">
+
+                                    <span className="fs-5 mt-3 text-main">O estudo é feito a partir de uma amostra de {clientData?.valuation?.propertyArray?.length} imóveis com características similares ao seu que nos permite entender o posicionamento do seu imóvel no mercado. São imóveis com áreas privativas, região, tipologias, itens de infraestrutura, idade de construção e condições parecidas com a do imóvel analisado.</span>
+                                    <span className="fs-5 mt-3 text-main">As informações obtidas são cruzadas, sofrem ações de variáveis que influenciam diretamente no preço final do imóvel, para então chegarmos em uma sugestão de precificação mais assertiva.</span>
+
+                                </div>
 
 
-                        <div className="card col-12 col-lg-7 my-5 bg-secondary" style={{ overflowX: 'scroll' }}>
-                            <span className="text-white fw-bold">Imóveis de comparação</span>
-                            <div className="d-flex">
+                            </div>
+                        </div>
+
+                        <div className="row mt-3">
+                            <div className="col-12  d-flex justify-content-center">
+                                <div className="row ">
+                                    <span className="fs-4 fw-bold text-main">Características do seu imóvel</span>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="row">
+                            <div className="col-12  d-flex justify-content-center">
+                                <div className="card">
+                                    <div className="row">
+                                        <div className="col-12 col-lg-6">
+                                            <Swiper
+                                                style={{
+                                                    '--swiper-navigation-color': '#fff',
+                                                    '--swiper-pagination-color': '#fff',
+                                                    '--swiper-navigation-size': '25px',
+                                                    zIndex: 0
+                                                }}
+                                                slidesPerView={1}
+                                                pagination={{ clickable: false }}
+                                                navigation>
+                                                {clientData?.files?.map((elem, index) => (
+                                                    <SwiperSlide key={index} className="text-center bg-secondary ">
 
 
+
+                                                        <img src={elem.url} className={`imovel-img`} alt={`Slide ${index + 1}`} />
+
+                                                    </SwiperSlide>
+                                                ))}
+                                            </Swiper>
+                                        </div>
+                                        <div className="col-12 col-lg-6 text-center my-5">
+                                            <ClientFeatures client={clientData} propertyAdd />
+
+
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div className="row mt-5">
+                            <div className="col-12  d-flex justify-content-center">
+                                <div className="row px-5">
+                                    <span className="fs-4 fw-bold text-main">Imóveis de comparação</span>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div className="row ">
+                            <div className=" d-flex col-12 " style={{ overflowX: 'scroll', width: '100%' }}>
 
                                 {clientData?.valuation?.propertyArray?.map((elem, index) => {
                                     return (
-                                        <span className="mx-2" style={{ width: '330px' }}>
+                                        <div className="mx-1" style={{ width: '300px' }}>
 
                                             <PropertyCard section={'Todos Clientes'} valuationView
                                                 elem={elem} index={index} setPropertyUrl={value => props.setPropertyUrl(value)}
                                             />
-                                        </span>
+                                        </div>
                                     )
                                 })}
                             </div>
-
                         </div>
-                        <div className="col-12 col-lg-5 my-5 ">
-                            <span className=" fw-bold">Localização</span>
-
-                            <div className="">
+                        <div className="row d-flex justify-content-center mb-5">
+                            <div className="col-11 col-lg-8 ">
                                 <Map location={{ lat: clientData.latitude, lng: clientData.longitude }}
-                                    zoom={30} height="450px" valuationPage
+                                    zoom={30} height="350px" valuationPage
                                     porpertyLocations={clientData?.valuation?.propertyArray} />
                             </div>
                         </div>
 
 
-                        <div className="col-12 text-center mt-5">
-                            <span className="fw-bold fs-4">Valor de Avaliação</span>
-                        </div>
 
+
+                        <hr />
+
+
+                        <div className="row mt-5">
+                            <div className="col-12 d-flex justify-content-center">
+                                <span className="fs-2 fw-bold text-main text-center me-3">Valor de avaliação</span>
+                            </div>
+
+                        </div>
                         <div className="row d-flex justify-content-center mb-5">
                             <div className="col-12 col-lg-8">
                                 <div className="row d-flex">
@@ -139,19 +204,14 @@ export default function ValuationViewPage(props) {
                         </div>
 
 
-                        <div className="col-12 d-flex justify-content-center mt-5 mb-3">
-                            <div className="col-12 col-lg-8 text-center">
-
-                                <span className="fs-4">
-                                    Analisando os imóveis de comparação, chegamos nos seguintes valores de anúncio:
-                                </span>
-                            </div>
-
+                        <div className="col-12 d-flex justify-content-center">
+                            <span className="fs-2 fw-bold text-main text-center me-3">Valor de anúncio</span>
                         </div>
-                        <span className="fw-bold text-center">Escolha o valor de sua preferência</span>
-                        <div className="col-12 mb-5">
 
-                            <div className="row d-flex justify-content-center ">
+                        <span className="fw-bold text-center text-main">Escolha o valor de sua preferência</span>
+                        <div className="col-12 mb-5 ">
+
+                            <div className="row d-flex justify-content-center px-2">
                                 <div className="col-12 col-xxl-4 px-1 my-1">
 
                                     <span className={`card rounded-pill shadow cardAnimation ${valueSelected === 'curtoPrazoValue' ? 'border border-3 border-success shadow' : ''}`} type="button" onClick={() => setValueSelected('curtoPrazoValue')}>
@@ -221,14 +281,14 @@ export default function ValuationViewPage(props) {
                                     <div className="text-center">
                                         {!valueSelected ?
                                             <>
-                                                <button type="button" className="btn btn-secondary text-white fs-4" disabled >
+                                                <button type="button" className="btn btn-light btn-lg  fs-4" disabled >
                                                     Continuar <Icons icon="a-r" />
                                                 </button>
                                                 <br />
                                                 <span className="small text-danger">Para continuar você deve selecionar o valor do imóvel </span>
                                             </>
                                             :
-                                            <button type="button" className="btn btn-secondary text-white fs-4" data-bs-target="#valuationCarousel" data-bs-slide="next" id="continueButton">
+                                            <button type="button" className="btn btn-light btn-lg fs-4" data-bs-target="#valuationCarousel" data-bs-slide-to={3} id="continueButton">
                                                 Continuar <Icons icon="a-r" />
                                             </button>
                                         }
