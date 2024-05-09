@@ -1,0 +1,14 @@
+.container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    height: 70px;
+    background-color: #5a5a5a;
+    width: 100%;
+}
+
+
+.pageSelected>* {
+    color: #e88a51;
+    font-weight: 650;
+}

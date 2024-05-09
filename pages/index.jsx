@@ -12,6 +12,7 @@ import Link from 'next/link.js'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHouseUser, faPlus, faUsers } from '@fortawesome/free-solid-svg-icons'
 import isMobile from '../utils/isMobile.js'
+import MenuBar from '../src/components/menuBar/index.jsx'
 // import Link from 'next/link'
 // import $ from 'jquery'
 // import axios from 'axios'
@@ -55,56 +56,63 @@ export default function Home() {
     }, [])
 
     return (
+        <>
 
-        <div className='fadeItem2s'>
-            {/* <Title title={`Olá, ${token.firstName}!`} subtitle={'Qual a sua meta de sustentabilidade para hoje?'} />
+            <div className='fadeItem2s'>
+                {/* <Title title={`Olá, ${token.firstName}!`} subtitle={'Qual a sua meta de sustentabilidade para hoje?'} />
 
             <div className='index_bg'></div> */}
 
-            {/* <IndexCards /> */}
-            {/* <div className="row">
+                {/* <IndexCards /> */}
+                {/* <div className="row">
                 <div className="col-12">
 
                     <h5 className=' ms-2 mt-4'>Qual ferramenta deseja usar?</h5>
                 </div>
             </div> */}
 
-            {/* <IndexCardsTools />
+                {/* <IndexCardsTools />
 
             <IndexNotifications /> */}
 
 
-            <span>
-                Página inicial
-            </span>
+                <span>
+                    Página inicial
+                </span>
 
-            {isMobile() && (
+                {isMobile() && (
 
-                <div style={{ position: 'fixed', bottom: '10px', right: '10px' }}>
-                    <div class="collapse collapse-vertical text-center" id="collapseWidthExample">
-                        <div className='my-2 d-flex justify-content-center'>
-                            <Link href={'/usersManagement'}>
-                                <button class=" btn shadow btn-white border d-flex align-items-center justify-content-center" style={{ width: '50px', height: '50px', borderRadius: "100%" }} type="button" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample">
-                                    <FontAwesomeIcon icon={faUsers} className='icon' />
-                                </button>
-                            </Link>
+                    <div style={{ position: 'fixed', bottom: '10px', right: '10px' }}>
+                        <div class="collapse collapse-vertical text-center" id="collapseWidthExample">
+                            <div className='my-2 d-flex justify-content-center'>
+                                <Link href={'/usersManagement'}>
+                                    <button class=" btn shadow btn-white border d-flex align-items-center justify-content-center" style={{ width: '50px', height: '50px', borderRadius: "100%" }} type="button" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample">
+                                        <FontAwesomeIcon icon={faUsers} className='icon' />
+                                    </button>
+                                </Link>
+                            </div>
+                            <div className='my-2  d-flex justify-content-center'>
+                                <Link href={'/clientsManagement'}>
+                                    <button class=" btn shadow btn-white border d-flex align-items-center justify-content-center" style={{ width: '50px', height: '50px', borderRadius: "100%" }} type="button" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample">
+                                        <FontAwesomeIcon icon={faHouseUser} className='icon' />
+                                    </button>
+                                </Link>
+                            </div>
+
                         </div>
-                        <div className='my-2  d-flex justify-content-center'>
-                            <Link href={'/clientsManagement'}>
-                                <button class=" btn shadow btn-white border d-flex align-items-center justify-content-center" style={{ width: '50px', height: '50px', borderRadius: "100%" }} type="button" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample">
-                                    <FontAwesomeIcon icon={faHouseUser} className='icon' />
-                                </button>
-                            </Link>
-                        </div>
-
+                        <button class=" btn text-white   d-flex align-items-center justify-content-center" style={{ width: '60px', height: '60px', borderRadius: "100%", backgroundColor: '#f5874f' }} type="button" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample">
+                            <FontAwesomeIcon icon={faPlus} className='' style={{ height: '25px' }} />
+                        </button>
                     </div>
-                    <button class=" btn text-white   d-flex align-items-center justify-content-center" style={{ width: '60px', height: '60px', borderRadius: "100%", backgroundColor: '#f5874f' }} type="button" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample">
-                        <FontAwesomeIcon icon={faPlus} className='' style={{ height: '25px' }} />
-                    </button>
-                </div>
-            )}
+                )}
 
 
-        </div >
+
+
+
+            </div >
+            <MenuBar />
+        </>
+
     )
 }

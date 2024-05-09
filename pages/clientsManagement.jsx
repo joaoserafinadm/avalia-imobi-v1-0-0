@@ -20,6 +20,7 @@ import { showModal } from "../utils/modalControl";
 import { usersArray } from "../store/Users/Users.actions";
 import Sections from "../src/components/Sections";
 import ViewValuationModal from "../src/clientsManagement/viewValuationModal";
+import MenuBar from "../src/components/menuBar";
 
 
 
@@ -225,6 +226,7 @@ export default function clientsManagement() {
             </div >
 
 
+            <MenuBar />
 
 
         </div>

@@ -12,6 +12,7 @@ import axios from "axios";
 import baseUrl from "../utils/baseUrl";
 import UsersCard from "../src/usersManagement/UserCard";
 import ViewUserModal from "../src/usersManagement/ViewUserModal";
+import MenuBar from "../src/components/menuBar";
 
 
 
@@ -115,7 +116,7 @@ export default function UsersManagement() {
 
             </div>
 
-
+<MenuBar />
         </div>
 
     )
