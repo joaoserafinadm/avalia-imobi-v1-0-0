@@ -91,7 +91,7 @@ export default function PropertyCard(props) {
 
 
     return (
-        <div class="card my-2 cardAnimation shadow" style={{ width: "100%" }} >
+        <div class="card my-2 cardAnimation shadow" style={{ width: "300px" }} >
 
 
 

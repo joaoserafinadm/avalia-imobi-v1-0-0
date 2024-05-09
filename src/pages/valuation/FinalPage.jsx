@@ -71,7 +71,23 @@ export default function FinalPage(props) {
 
                         </div>
 
-                        
+                        <div className="col-12 d-flex justify-content-center my-3 mb-5">
+                            <div className="col-12 col-lg-8 text-center">
+                                <span className="fs-4">
+                                    Clique o botão abaixo para fazer o download do PDF completo com a avaliação do seu imóvel
+                                </span>
+
+                            </div>
+                        </div>
+                        <div className="col-12 d-flex justify-content-center my-3 mb-5">
+                            <div className="col-12 col-lg-8 text-center">
+                                <button className="btn btn-secondary btn-lg">
+                                    Baixar PDF
+                                </button>
+                            </div>
+                        </div>
+
+
                     </div>
                 </div>
             </div>

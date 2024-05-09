@@ -70,7 +70,7 @@ export default function ValuationPage() {
                 <div className="col-12 fadeItem d-flex justify-content-center align-items-center" style={{ height: '100vh' }}>
 
 
-                    <div id="valuationCarousel" className="col-12 carousel " data-bs-touch="false" data-bs-interval='false' style={{ zIndex: 1 }}>
+                    <div id="valuationCarousel" className="col-12 carousel slide " data-bs-touch="false" data-bs-interval='false' style={{ zIndex: 1 }}>
                         <div class="carousel-inner">
                             <div class="carousel-item active">
                                 <StartPage
@@ -87,6 +87,8 @@ export default function ValuationPage() {
                             <div class="carousel-item ">
 
                                 <ValuationViewPage
+                                    queryClientId={queryClientId}
+                                    queryUserId={queryUserId}
                                     clientData={clientData}
                                     setPropertyUrl={value => setPropertyUrl(value)} />
 

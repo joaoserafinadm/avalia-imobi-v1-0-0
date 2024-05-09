@@ -49,6 +49,61 @@ export default async (req, res) => {
             }
         }
 
+    } else if (req.method === "POST") {
+
+        const { user_id, client_id, valueSelected, valueComment } = req.body
+
+        if (!user_id || !client_id || !valueSelected) {
+
+            res.status(400).json({ error: 'Missing parameters on request body.' })
+
+        } else {
+
+            const { db } = await connect()
+
+            const userExist = await db.collection('users').findOne({ _id: ObjectId(user_id) })
+
+            const company_id = userExist?.company_id
+
+            const companyExist = await db.collection('companies').findOne({ _id: ObjectId(company_id) })
+
+            const clientExist = companyExist?.clients?.find(elem => elem._id.toString() === client_id)
+
+            if (!userExist || !companyExist || !clientExist) {
+
+                res.status(400).json({ error: 'User or company or client does not exist' })
+
+            } else {
+
+                const result = await db.collection('companies').updateOne(
+                    { _id: ObjectId(company_id), "clients._id": ObjectId(client_id) },
+                    {
+
+                        $set: {
+                            "clients.$.valuation.valueSelected": valueSelected,
+                            "clients.$.valuation.valueComment": valueComment,
+                            "clients.$.status": 'answered'
+                        },
+
+
+                    })
+
+                if (result.modifiedCount > 0) {
+
+                    res.status(200).json({ message: "valuation updated" })
+                } else {
+
+                    res.status(400).json({ error: 'Error on updating valuation' })
+                }
+
+
+
+
+            }
+        }
+
+
+
     }
 
 

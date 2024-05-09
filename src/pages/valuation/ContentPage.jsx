@@ -25,7 +25,7 @@ export default function ContentPage(props) {
 
 
 
-                        <div className="col-12 col-lg-6 d-flex justify-content-center align-items-center my-5">
+                        <div className="col-12 col-lg-6 d-flex justify-content-center align-items-center my-5 px-0 px-lg-5">
                             <div className="row px-5">
 
                                 <span className="fs-3 fw-bold text-main">Olá, {clientData?.clientName}!</span>
@@ -33,7 +33,7 @@ export default function ContentPage(props) {
                                 <span className="fs-5 mt-3 text-main">O objetivo principal deste estudo é identificar qual o valor correto de venda. É este valor que irá posicionar o seu imóvel com destaque no mercado, não fazendo com que ele ajude a vender os imóveis concorrentes.</span>
                             </div>
                         </div>
-                        <div className="col-12 col-lg-6 d-flex justify-content-center align-items-center my-5">
+                        <div className="col-12 col-lg-6 d-flex justify-content-center align-items-center my-5  px-0 px-lg-5">
                             <div className="row">
                                 <div className="col-12 d-flex justify-content-center align-items-center">
 
@@ -60,13 +60,13 @@ export default function ContentPage(props) {
                     </div>
                     <hr />
                     <div className="row">
-                        <div className="col-12 d-flex justify-content-center">
+                        <div className="col-12 d-flex justify-content-center  px-0 px-lg-5">
                             <span className="fs-2 fw-bold text-main text-center me-3">Estudo de mercado</span>
                         </div>
 
                     </div>
                     <div className="row my-5">
-                        <div className="col-12 col-lg-6 d-flex justify-content-center">
+                        <div className="col-12 col-lg-6 d-flex justify-content-center  px-0 px-lg-5">
                             <div className="row px-5">
 
                                 <span className="fs-4 fw-bold text-main">Relação do preço com a velocidade de venda.</span>
@@ -78,7 +78,7 @@ export default function ContentPage(props) {
 
 
                         </div>
-                        <div className="col-12 col-lg-6 d-flex justify-content-center">
+                        <div className="col-12 col-lg-6 d-flex justify-content-center  px-0 px-lg-5">
                             <div className="row px-5 py-5">
 
                                 <span className="fs-5 my-1 text-main"><FontAwesomeIcon icon={faCheck} className="me-1" style={{ color: '#00c661' }} />Venda dentro de um prazo mais curto.</span>
@@ -96,21 +96,21 @@ export default function ContentPage(props) {
                     <hr />
 
                     <div className="row">
-                        <div className="col-12 d-flex justify-content-center">
+                        <div className="col-12 d-flex justify-content-center  px-0 px-lg-5">
                             <span className="fs-2 fw-bold text-main text-center me-3">Plano de Marketing</span>
                         </div>
 
                     </div>
 
                     <div className="row my-5">
-                        <div className="col-12 col-lg-6 d-flex justify-content-center">
+                        <div className="col-12 col-lg-6 d-flex justify-content-center  px-0 px-lg-5">
                             <div className="row px-5 py-4">
                                 <span className="fs-5 mt-3 text-main">Com nosso plano de marketing contemplamos todos os aspectos básicos necessários de divulgação e, através de um marketing digital de alta performance, colocarmos o seu imóvel para o maior número de clientes compradores possíveis.</span>
 
                             </div>
                         </div>
 
-                        <div className="col-12 col-lg-6 d-flex justify-content-center">
+                        <div className="col-12 col-lg-6 d-flex justify-content-center  px-0 px-lg-5">
                             <div className="row px-5 py-4">
                                 <div className="col-12 mt-4">
                                     <img src='/GIF_VALUATION_02.gif' alt="" className="w-100" />
@@ -120,7 +120,7 @@ export default function ContentPage(props) {
 
                     </div>
                     <div className="row my-5">
-                        <div className="col-12 d-flex justify-content-center">
+                        <div className="col-12 d-flex justify-content-center  px-0 px-lg-5">
 
                             <button className="btn btn-light btn-lg fw-bold"
                                 data-bs-target="#valuationCarousel" data-bs-slide-to={2}>

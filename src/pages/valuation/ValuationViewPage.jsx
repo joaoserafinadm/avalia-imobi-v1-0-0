@@ -10,6 +10,9 @@ import scrollTo from "../../../utils/scrollTo"
 import styles from './valuation.module.scss'
 import { Swiper, SwiperSlide } from "swiper/react"
 import ClientFeatures from "../../clientsManagement/ClientFeatures"
+import baseUrl from "../../../utils/baseUrl"
+import { SpinnerSM } from "../../components/loading/Spinners"
+import axios from "axios"
 
 
 
@@ -20,13 +23,46 @@ export default function ValuationViewPage(props) {
 
 
     const [valueSelected, setValueSelected] = useState('')
+    const [valueComment, setValueComment] = useState('')
+
+    const [loadingSave, setLoadingSave] = useState(false)
 
     useEffect(() => {
         if (valueSelected) scrollTo('continueButton')
     }, [valueSelected])
 
 
-    console.log('clientData', clientData)
+    const handleSave = async () => {
+
+        setLoadingSave(true)
+
+        if (valueSelected) {
+
+            const data = {
+                user_id: props.queryUserId,
+                client_id: props.queryClientId,
+                valueSelected,
+                valueComment
+            }
+
+            await axios.post(`${baseUrl()}/api/valuation/valuationView`, data)
+                .then(res => {
+
+                    var myCarousel = document.querySelector('#valuationCarousel')
+                    var carousel = new bootstrap.Carousel(myCarousel)
+                    carousel.next()
+
+                    setLoadingSave(false)
+                }).catch(e => {
+
+                    setLoadingSave(false)
+                })
+
+        }
+
+
+
+    }
 
 
 
@@ -47,7 +83,7 @@ export default function ValuationViewPage(props) {
                         </div>
 
                         <div className="row my-5">
-                            <div className="col-12  d-flex justify-content-center">
+                            <div className="col-12  d-flex justify-content-center px-0 px-lg-5">
                                 <div className="row px-5">
 
                                     <span className="fs-5 mt-3 text-main">O estudo é feito a partir de uma amostra de {clientData?.valuation?.propertyArray?.length} imóveis com características similares ao seu que nos permite entender o posicionamento do seu imóvel no mercado. São imóveis com áreas privativas, região, tipologias, itens de infraestrutura, idade de construção e condições parecidas com a do imóvel analisado.</span>
@@ -68,8 +104,8 @@ export default function ValuationViewPage(props) {
                             </div>
                         </div>
 
-                        <div className="row">
-                            <div className="col-12  d-flex justify-content-center">
+                        <div className="row d-flex justify-content-center">
+                            <div className="col-12 col-lg-12 col-xl-8 d-flex justify-content-center">
                                 <div className="card">
                                     <div className="row">
                                         <div className="col-12 col-lg-6">
@@ -275,23 +311,41 @@ export default function ValuationViewPage(props) {
                                         </div>
                                     </span>
                                 </div>
+                                {valueSelected && (
+
+                                    <div className=" col-12 col-xxl-8 px-1 my-5 fadeItem">
+                                        <div class="mb-3">
+                                            <label for="valueComentInput" class="form-label">Existe algum motivo pela escolha deste valor?</label>
+                                            <textarea
+                                                class="form-control"
+                                                id="valueComentInput" rows="4"
+                                                value={valueComment} onChange={e => setValueComment(e.target.value)}></textarea>
+                                        </div>
+                                    </div >
+                                )}
 
 
                                 <div className="col-12 d-flex justify-content-center my-5 mb-5">
                                     <div className="text-center">
-                                        {!valueSelected ?
-                                            <>
-                                                <button type="button" className="btn btn-light btn-lg  fs-4" disabled >
-                                                    Continuar <Icons icon="a-r" />
-                                                </button>
-                                                <br />
-                                                <span className="small text-danger">Para continuar você deve selecionar o valor do imóvel </span>
-                                            </>
-                                            :
-                                            <button type="button" className="btn btn-light btn-lg fs-4" data-bs-target="#valuationCarousel" data-bs-slide-to={3} id="continueButton">
-                                                Continuar <Icons icon="a-r" />
-                                            </button>
-                                        }
+
+
+                                        <button type="button" className="btn btn-light btn-lg fs-4" id="continueButton" disabled={!valueSelected} onClick={() => handleSave()}>
+                                            {/* <button type="button" className="btn btn-light btn-lg fs-4" data-bs-target="#valuationCarousel" data-bs-slide-to={3} id="continueButton" disabled={!valueSelected}> */}
+
+                                            {loadingSave ?
+
+                                                <SpinnerSM className="mx-5" />
+                                                :
+                                                <>
+                                                    Continuar < Icons icon="a-r" />
+                                                </>
+                                            }
+                                        </button> <br />
+                                        {!valueSelected && (
+
+                                            <span className="small text-danger">Para continuar você deve selecionar o valor do imóvel </span>
+                                        )}
+
                                     </div>
 
                                 </div>

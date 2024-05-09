@@ -36,12 +36,10 @@ export default function StartPage(props) {
                         <div className="row mt-3 fs-5 px-1">
                             <TypeAnimation
                                 sequence={[
-                                    200,
-                                    `Olá ${clientData.clientName}.`,
                                     500,
-                                    `Olá ${clientData.clientName}.\nA avaliação do seu imóvel foi concluída.`,
+                                    `A avaliação do seu imóvel foi concluída.`,
                                     200,
-                                    `Olá ${clientData.clientName}.\nA avaliação do seu imóvel foi concluída.\nClique no botão abaixo para começar.`,
+                                    `A avaliação do seu imóvel foi concluída.\nClique no botão abaixo para começar.`,
                                 ]}
                                 wrapper="span"
                                 speed={50}
