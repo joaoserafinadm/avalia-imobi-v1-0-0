@@ -88,7 +88,7 @@ export default async (req, res) => {
 
                     })
 
-                if (result.modifiedCount > 0) {
+                if (result.matchedCount > 0) {
 
                     res.status(200).json({ message: "valuation updated" })
                 } else {
