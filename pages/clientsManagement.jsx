@@ -226,7 +226,6 @@ export default function clientsManagement() {
             </div >
 
 
-            <MenuBar />
 
 
         </div>

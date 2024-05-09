@@ -116,7 +116,6 @@ export default function UsersManagement() {
 
             </div>
 
-<MenuBar />
         </div>
 
     )

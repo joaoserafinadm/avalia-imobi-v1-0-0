@@ -80,38 +80,13 @@ export default function Home() {
                     Página inicial
                 </span>
 
-                {isMobile() && (
-
-                    <div style={{ position: 'fixed', bottom: '10px', right: '10px' }}>
-                        <div class="collapse collapse-vertical text-center" id="collapseWidthExample">
-                            <div className='my-2 d-flex justify-content-center'>
-                                <Link href={'/usersManagement'}>
-                                    <button class=" btn shadow btn-white border d-flex align-items-center justify-content-center" style={{ width: '50px', height: '50px', borderRadius: "100%" }} type="button" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample">
-                                        <FontAwesomeIcon icon={faUsers} className='icon' />
-                                    </button>
-                                </Link>
-                            </div>
-                            <div className='my-2  d-flex justify-content-center'>
-                                <Link href={'/clientsManagement'}>
-                                    <button class=" btn shadow btn-white border d-flex align-items-center justify-content-center" style={{ width: '50px', height: '50px', borderRadius: "100%" }} type="button" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample">
-                                        <FontAwesomeIcon icon={faHouseUser} className='icon' />
-                                    </button>
-                                </Link>
-                            </div>
-
-                        </div>
-                        <button class=" btn text-white   d-flex align-items-center justify-content-center" style={{ width: '60px', height: '60px', borderRadius: "100%", backgroundColor: '#f5874f' }} type="button" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample">
-                            <FontAwesomeIcon icon={faPlus} className='' style={{ height: '25px' }} />
-                        </button>
-                    </div>
-                )}
+                
 
 
 
 
 
             </div >
-            <MenuBar />
         </>
 
     )

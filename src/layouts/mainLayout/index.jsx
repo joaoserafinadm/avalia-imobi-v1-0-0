@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { toggleBarOff, toggleBarOn } from "../../../store/ToggleBarStatus/ToggleBarStatus.action";
 import window2Mobile from "../../../utils/window2Mobile";
 import { closeModal } from "../../../utils/modalControl";
+import MenuBar from "../../components/menuBar";
 
 export default function MainLayout({ children }) {
 
@@ -45,6 +46,9 @@ export default function MainLayout({ children }) {
             <div className={`  pages`} >
                 {children}
             </div>
+
+
+            <MenuBar />
 
 
 

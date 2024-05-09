@@ -4,9 +4,13 @@ import { faHomeUser, faList, faUser, faUsers } from '@fortawesome/free-solid-svg
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { toggleBarChange } from '../../../store/ToggleBarStatus/ToggleBarStatus.action'
 
 
 export default function MenuBar(props) {
+
+    const dispatch = useDispatch()
 
     const router = useRouter()
 
@@ -18,12 +22,18 @@ export default function MenuBar(props) {
 
     }, [router.pathname])
 
+    const permitedPages = [
+        '/usersManagement',
+        '/clientsManagement',
+        '/'
+    ]
+
 
 
 
 
     return (
-        <div className={`${styles.container}`}>
+        <div className={` ${permitedPages.includes(pathname) ? styles.container : styles.containerHide}`}>
             <div className="row h-100 px-4">
                 <div className="col-3 d-flex justify-content-center align-items-center ">
 
@@ -52,13 +62,13 @@ export default function MenuBar(props) {
                     </Link>
 
                 </div>
-                <div className="col-3 d-flex justify-content-center align-items-center ">
+                <div className="col-3 d-flex justify-content-center align-items-center px-0">
 
-                    <Link href='/accountSetup'
+                    <span onClick={() =>dispatch(toggleBarChange(false))}
                         className={`text-center  ${pathname === '/accountSetup' ? `${styles.pageSelected}` : 'text-light'}`}>
                         <FontAwesomeIcon icon={faList} /> <br />
-                        <span style={{ fontSize: '10px' }}>Configurações</span>
-                    </Link>
+                        <span style={{ fontSize: '10px' }}>Mais opções</span>
+                    </span>
 
                 </div>
             </div>
