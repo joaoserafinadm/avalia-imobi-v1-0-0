@@ -161,7 +161,7 @@ export default function ClientCard_02(props) {
 
 
                                 <ClientStatus status={client?.status} id={client?._id} />
-                                {client?.status === 'evaluated' && (
+                                {(client?.status === 'evaluated' || client?.status === 'answered') && (
                                     <span className="badge rounded-pill btn btn-light border ms-2"
                                         onClick={() => props.setClientSelected(props.elem)}
                                         data-bs-toggle="modal"

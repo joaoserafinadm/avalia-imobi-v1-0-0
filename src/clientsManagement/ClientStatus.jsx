@@ -29,14 +29,16 @@ export default function ClientStatus(props) {
                     className={'badge rounded-pill' + ' ' + props.status === 'outdated' ? 'badge rounded-pill bg-secondary' :
                         props.status === 'active' ? 'badge rounded-pill bg-warning' :
                             props.status === 'evaluated' ? 'badge rounded-pill bg-success ' :
-                                props.status === 'sold' ? 'badge rounded-pill bg-success' :
-                                    'badge rounded-pill bg-secondary'} style={{fontSize: '10px', fontWeight: '500', marginTop: '-10px'}}>
+                                props.status === 'answered' ? 'badge rounded-pill bg-secondary ' :
+                                    props.status === 'sold' ? 'badge rounded-pill bg-success' :
+                                        'badge rounded-pill bg-secondary'} style={{ fontSize: '10px', fontWeight: '500', marginTop: '-10px' }}>
 
                     {props.status === 'outdated' ? 'Aguardando cadastro do imóvel' :
                         props.status === 'active' ? 'Aguardando  avaliação' :
                             props.status === 'evaluated' ? 'Avaliado' :
-                                props.status === 'sold' ? 'Vendido' :
-                                    ''}
+                                props.status === 'answered' ? 'Respondido' :
+                                    props.status === 'sold' ? 'Vendido' :
+                                        ''}
 
                 </span>
 
