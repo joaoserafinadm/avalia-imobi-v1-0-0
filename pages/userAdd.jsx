@@ -214,7 +214,7 @@ export default function userAdd() {
 
                     <div className="row">
                         <div className="col-12 d-flex justify-content-end align-items-center">
-                            <Link href="/">
+                            <Link href="/usersManagement">
                                 <button className="btn btn-sm btn-secondary">Cancelar</button>
                             </Link>
 

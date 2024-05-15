@@ -1,7 +1,7 @@
 // import Head from 'next/head'
 // import Image from 'next/image'
 // import { useState, useEffect } from 'react'
-// import Title from '../src/components/title/Title2'
+import Title from '../src/components/title/Title2'
 import Cookie from 'js-cookie'
 import jwt from 'jsonwebtoken'
 import { useEffect } from 'react'
@@ -13,6 +13,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHouseUser, faPlus, faUsers } from '@fortawesome/free-solid-svg-icons'
 import isMobile from '../utils/isMobile.js'
 import MenuBar from '../src/components/menuBar/index.jsx'
+import ClientsCard from '../src/index/ClientsCard.jsx'
+import axios from 'axios'
+import baseUrl from '../utils/baseUrl.js'
 // import Link from 'next/link'
 // import $ from 'jquery'
 // import axios from 'axios'
@@ -49,38 +52,65 @@ export default function Home() {
 
     const dispatch = useDispatch()
 
+    const [clientsStatus, setClientsStatus] = useState({
+        outdated: 0,
+        active: 0,
+        evaluated: 0,
+        answered: 0
+    })
+
+    const [clientsArray, setClientsArray] = useState([])
+
+    const [loading, setLoading] = useState(true)
+
 
     useEffect(() => {
         navbarHide(dispatch)
 
+        dataFunction(token.company_id)
+
     }, [])
+
+    const dataFunction = async (company_id) => {
+
+        await axios.get(`${baseUrl()}/api/indexPage`, {
+            params: {
+                company_id
+            }
+        }).then((res) => {
+            setClientsStatus(res.data.clientsStatus)
+            setClientsArray(res.data.clientsArray)
+            setLoading(false)
+        }).catch((e) => {
+            setLoading(false)
+            console.log(e)
+        })
+    }
 
     return (
         <>
 
-            <div className='fadeItem2s'>
-                {/* <Title title={`Olá, ${token.firstName}!`} subtitle={'Qual a sua meta de sustentabilidade para hoje?'} />
+            <div className='fadeItem1s'>
+                {/* <Title title={`Olá, ${token.firstName}!`} subtitle={'O que faremos hoje?'} /> */}
 
-            <div className='index_bg'></div> */}
 
-                {/* <IndexCards /> */}
-                {/* <div className="row">
-                <div className="col-12">
 
-                    <h5 className=' ms-2 mt-4'>Qual ferramenta deseja usar?</h5>
+                {/*<IndexNotifications /> */}
+
+                <div className="row p-3 mb-5">
+                    <div className="col-12 my-2">
+                        <ClientsCard clientsStatus={clientsStatus} clientsArray={clientsArray} loading={loading}/>
+                    </div>
+                    <div className="col-12  my-2">
+                    {/* <ClientsCard clientsStatus={clientsStatus} clientsArray={clientsArray} loading={loading}/> */}
+
+                    </div>
                 </div>
-            </div> */}
-
-                {/* <IndexCardsTools />
-
-            <IndexNotifications /> */}
 
 
-                <span>
-                    Página inicial
-                </span>
 
-                
+
+
 
 
 

@@ -35,6 +35,7 @@ import baseUrl from "../utils/baseUrl";
 import { store, persistedStore } from "../store/store";
 
 import "../styles/globals.scss";
+import "../styles/bgColors.scss";
 import 'font-awesome/css/font-awesome.min.css'
 
 import MainLayout from "../src/layouts/mainLayout";

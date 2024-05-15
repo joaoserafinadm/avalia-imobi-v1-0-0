@@ -286,7 +286,7 @@ export default function clientAdd() {
 
                     <div className="row">
                         <div className="col-12 d-flex justify-content-end align-items-center">
-                            <Link href="/">
+                            <Link href="/clientsManagement">
                                 <button className="btn btn-sm btn-secondary">Cancelar</button>
                             </Link>
 

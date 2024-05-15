@@ -1,11 +1,12 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import styles from './menuBar.module.scss'
-import { faHomeUser, faList, faUser, faUsers } from '@fortawesome/free-solid-svg-icons'
+import { faHome, faHomeUser, faList, faUser, faUsers } from '@fortawesome/free-solid-svg-icons'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { toggleBarChange } from '../../../store/ToggleBarStatus/ToggleBarStatus.action'
+import isMobile from '../../../utils/isMobile'
 
 
 export default function MenuBar(props) {
@@ -33,14 +34,14 @@ export default function MenuBar(props) {
 
 
     return (
-        <div className={` ${permitedPages.includes(pathname) ? styles.container : styles.containerHide}`}>
+        <div className={` ${permitedPages.includes(pathname) && isMobile() ? styles.container : styles.containerHide}`}>
             <div className="row h-100 px-4">
                 <div className="col-3 d-flex justify-content-center align-items-center ">
 
-                    <Link href='/editProfile'
-                        className={`text-center  ${pathname === '/editProfile' ? `${styles.pageSelected}` : 'text-light'}`}>
-                        <FontAwesomeIcon icon={faUser} /> <br />
-                        <span style={{ fontSize: '10px' }}>Meu perfil</span>
+                    <Link href='/'
+                        className={`text-center  ${pathname === '/' ? `${styles.pageSelected}` : 'text-light'}`}>
+                        <FontAwesomeIcon icon={faHome} /> <br />
+                        <span style={{ fontSize: '10px' }}>Início</span>
                     </Link>
 
                 </div>
@@ -67,7 +68,7 @@ export default function MenuBar(props) {
                     <span onClick={() =>dispatch(toggleBarChange(false))}
                         className={`text-center  ${pathname === '/accountSetup' ? `${styles.pageSelected}` : 'text-light'}`}>
                         <FontAwesomeIcon icon={faList} /> <br />
-                        <span style={{ fontSize: '10px' }}>Mais opções</span>
+                        <span style={{ fontSize: '10px' }}>Opções</span>
                     </span>
 
                 </div>

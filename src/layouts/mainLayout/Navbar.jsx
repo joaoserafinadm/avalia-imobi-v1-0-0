@@ -10,7 +10,7 @@ import { Accordion } from "react-bootstrap";
 import { useAccordionButton } from "react-bootstrap/AccordionButton";
 import { AccordionContext } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleRight, faGear, faHome, faHouseUser, faUserGear, faUserTie, faUsers } from "@fortawesome/free-solid-svg-icons";
+import { faAngleRight, faComment, faCommentAlt, faGear, faHome, faHouseUser, faShop, faUser, faUserGear, faUserTie, faUsers } from "@fortawesome/free-solid-svg-icons";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
@@ -122,7 +122,7 @@ export default function Nav(props) {
                                     <li>
                                         <ContextAwareToggle eventKey="0" collapse="InicioItem">
                                             <div className="d-flex justify-content-start " type='button' onClick={() => router.push('/')}>
-                                                <div className="col-1 text-center me-3">
+                                                <div className="col-1 d-flex justify-content-center align-items-center me-3">
                                                     <FontAwesomeIcon icon={faHome} className="me-2 icon" />
                                                 </div>
                                                 <div className="col-9">Início</div>
@@ -130,9 +130,32 @@ export default function Nav(props) {
                                         </ContextAwareToggle>
                                     </li>
                                     <li>
-                                        <ContextAwareToggle eventKey="2" collapse="configuracoesCollapse">
+                                        <ContextAwareToggle eventKey="1" collapse="InicioItem">
+                                            <div className="d-flex justify-content-start " type='button' onClick={() => router.push('/editProfile')}>
+                                                <div className="col-1 d-flex justify-content-center align-items-center me-3">
+                                                    <FontAwesomeIcon icon={faUser} className="me-2 icon" />
+                                                </div>
+                                                <div className="col-9">Meu perfil</div>
+                                            </div>
+                                        </ContextAwareToggle>
+                                    </li>
+                                    {token.userStatus === "admGlobal" && (
+
+                                        <li>
+                                            <ContextAwareToggle eventKey="2" collapse="InicioItem">
+                                                <div className="d-flex justify-content-start " type='button' onClick={() => router.push('/companyEdit')}>
+                                                    <div className="col-1 d-flex justify-content-center align-items-center me-3">
+                                                        <FontAwesomeIcon icon={faShop} className="me-2 icon" />
+                                                    </div>
+                                                    <div className="col-9">Imobiliária</div>
+                                                </div>
+                                            </ContextAwareToggle>
+                                        </li>
+                                    )}
+                                    <li>
+                                        <ContextAwareToggle eventKey="3" collapse="configuracoesCollapse">
                                             <div className="d-flex">
-                                                <div className="col-1 text-center me-3">
+                                                <div className="col-1 d-flex justify-content-center align-items-center me-3">
                                                     <FontAwesomeIcon icon={faHouseUser} className="me-2 icon" />
                                                 </div>
                                                 <div className="col-9">Clientes</div>
@@ -141,7 +164,7 @@ export default function Nav(props) {
                                                 </div>
                                             </div>
                                         </ContextAwareToggle>
-                                        <Accordion.Collapse eventKey="2">
+                                        <Accordion.Collapse eventKey="3">
                                             <ul>
                                                 <li>
                                                     <Link href={`/clientAdd`}>
@@ -157,9 +180,9 @@ export default function Nav(props) {
                                         </Accordion.Collapse>
                                     </li>
                                     <li>
-                                        <ContextAwareToggle eventKey="3" collapse="configuracoesCollapse">
+                                        <ContextAwareToggle eventKey="4" collapse="configuracoesCollapse">
                                             <div className="d-flex">
-                                                <div className="col-1 text-center me-3">
+                                                <div className="col-1 d-flex justify-content-center align-items-center me-3">
                                                     <FontAwesomeIcon icon={faUsers} className="me-2 icon" />
                                                 </div>
                                                 <div className="col-9">Usuários</div>
@@ -168,13 +191,16 @@ export default function Nav(props) {
                                                 </div>
                                             </div>
                                         </ContextAwareToggle>
-                                        <Accordion.Collapse eventKey="3">
+                                        <Accordion.Collapse eventKey="4">
                                             <ul>
-                                                <li>
-                                                    <Link href={`/userAdd`}>
-                                                        <span>Adicionar usuário</span>
-                                                    </Link>
-                                                </li>
+                                                {token.userStatus === "admGlobal" && (
+
+                                                    <li>
+                                                        <Link href={`/userAdd`}>
+                                                            <span>Adicionar usuário</span>
+                                                        </Link>
+                                                    </li>
+                                                )}
                                                 <li>
                                                     <Link href={`/usersManagement`}>
                                                         <span>Gestão de usuário</span>
@@ -187,7 +213,7 @@ export default function Nav(props) {
                                     <li>
                                         <ContextAwareToggle eventKey="5" collapse="configuracoesCollapse">
                                             <div className="d-flex">
-                                                <div className="col-1 text-center me-3">
+                                                <div className="col-1 d-flex justify-content-center align-items-center me-3">
                                                     <FontAwesomeIcon icon={faGear} className="me-2 icon" />
                                                 </div>
                                                 <div className="col-9">Configurações</div>
@@ -198,16 +224,6 @@ export default function Nav(props) {
                                         </ContextAwareToggle>
                                         <Accordion.Collapse eventKey="5">
                                             <ul>
-                                                <li>
-                                                    <Link href={`/companyEdit`}>
-                                                        <span>Imobiliária</span>
-                                                    </Link>
-                                                </li>
-                                                <li>
-                                                    <Link href={`/editProfile`}>
-                                                        <span>Editar Cartão</span>
-                                                    </Link>
-                                                </li>
                                                 <li>
                                                     <Link href="/passwordChange">
                                                         <span>Alterar Senha</span>
@@ -221,6 +237,19 @@ export default function Nav(props) {
                                             </ul>
                                         </Accordion.Collapse>
                                     </li>
+
+                                    <li>
+                                        <ContextAwareToggle eventKey="6" collapse="InicioItem">
+                                            <div className="d-flex justify-content-start " type='button' onClick={() => router.push('/')}>
+                                                <div className="col-1 d-flex justify-content-center align-items-center me-3">
+                                                    <FontAwesomeIcon icon={faCommentAlt} className="me-2 icon" />
+                                                </div>
+                                                <div className="col-9">Fale Conosco</div>
+                                            </div>
+                                        </ContextAwareToggle>
+                                    </li>
+
+
                                 </Accordion>
                             </ul>
 
