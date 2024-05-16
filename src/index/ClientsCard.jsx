@@ -151,12 +151,34 @@ export default function ClientsCard(props) {
                                         <div className="col-12 col-lg-10">
 
                                             <div className="text-center" style={{ width: '100%' }}>
-                                                {/* <span className="fw-bold text-secondary" >Clientes</span> */}
+                                                <span className="fw-bold text-secondary" >Clientes</span> 
+
+
 
                                                 <div id="chart">
                                                     <Chart options={budgetsState.options} series={budgetsState.series} type="donut" />
                                                 </div>
+
+
+
+
+                                                
                                             </div>
+
+                                            {/* <div className="row">
+                                                <div className="col-12 d-flex justify-content-center text-center">
+
+                                                    <div>
+                                                        <span className="fw-bold fs-4">
+                                                            12
+                                                        </span><br />
+                                                        <span className="bold">
+                                                            Clientes
+                                                        </span>
+                                                    </div>
+
+                                                </div>
+                                            </div> */}
                                         </div>
 
                                     </div>
@@ -177,9 +199,9 @@ export default function ClientsCard(props) {
                                                         )
                                                     })}
                                                     <div className="col-12 text-center my-2">
-                    <Link href='/clientsManagement'>
+                                                        <Link href='/clientsManagement'>
 
-                                                        <span className="span" type="button">Visualizar todos</span>
+                                                            <span className="span" type="button">Visualizar todos</span>
                                                         </Link>
                                                     </div>
 

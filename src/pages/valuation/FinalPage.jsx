@@ -2,6 +2,7 @@ import { faStar } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useState } from "react"
 import Icons from "../../components/icons"
+import PdfConfigModal from "./PdfConfigModal"
 
 
 
@@ -14,7 +15,6 @@ export default function FinalPage(props) {
 
     return (
         <div className="col-12 ">
-
 
 
             <div className="row  d-flex justify-content-center align-items-center">
@@ -74,14 +74,15 @@ export default function FinalPage(props) {
                         <div className="col-12 d-flex justify-content-center my-3 mb-5">
                             <div className="col-12 col-lg-8 text-center">
                                 <span className="fs-4">
-                                    Clique o botão abaixo para fazer o download do PDF completo com a avaliação do seu imóvel
+                                    Clique o botão abaixo para fazer o download do PDF completo da avaliação do seu imóvel
                                 </span>
 
                             </div>
                         </div>
                         <div className="col-12 d-flex justify-content-center my-3 mb-5">
                             <div className="col-12 col-lg-8 text-center">
-                                <button className="btn btn-secondary btn-lg">
+                                <button className="btn btn-secondary btn-lg"
+                                    data-bs-toggle="modal" data-bs-target="#pdfConfigModal">
                                     Baixar PDF
                                 </button>
                             </div>

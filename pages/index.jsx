@@ -10,12 +10,15 @@ import { useDispatch } from 'react-redux'
 import { useState } from 'react'
 import Link from 'next/link.js'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHouseUser, faPlus, faUsers } from '@fortawesome/free-solid-svg-icons'
+import { faGear, faHouseUser, faPlus, faShop, faUser, faUsers } from '@fortawesome/free-solid-svg-icons'
 import isMobile from '../utils/isMobile.js'
 import MenuBar from '../src/components/menuBar/index.jsx'
 import ClientsCard from '../src/index/ClientsCard.jsx'
 import axios from 'axios'
 import baseUrl from '../utils/baseUrl.js'
+import ClientsCard_02 from '../src/index/ClientsCard_02.jsx'
+import UsersCard from '../src/index/UsersCard.jsx'
+import LastClientsCard from '../src/index/LastClientsCard.jsx'
 // import Link from 'next/link'
 // import $ from 'jquery'
 // import axios from 'axios'
@@ -90,20 +93,51 @@ export default function Home() {
     return (
         <>
 
-            <div className='fadeItem1s'>
+            <div className='fadeItem1s' style={{backgroundColor: '#6a6a6a', paddingBottom: '75px'}}>
                 {/* <Title title={`Olá, ${token.firstName}!`} subtitle={'O que faremos hoje?'} /> */}
 
 
 
                 {/*<IndexNotifications /> */}
 
-                <div className="row p-3 mb-5">
-                    <div className="col-12 my-2">
-                        <ClientsCard clientsStatus={clientsStatus} clientsArray={clientsArray} loading={loading}/>
+                <div className="row p-3 ">
+                    <div className="col-12 col-md-6 my-2">
+                        <ClientsCard_02 clientsStatus={clientsStatus} clientsArray={clientsArray} loading={loading} />
+                        <LastClientsCard />
                     </div>
-                    <div className="col-12  my-2">
-                    {/* <ClientsCard clientsStatus={clientsStatus} clientsArray={clientsArray} loading={loading}/> */}
+                    <div className="col-12 col-md-6 my-2">
+                        <UsersCard clientsStatus={clientsStatus} clientsArray={clientsArray} loading={loading} />
 
+
+                    </div>
+                </div>
+                <div className="row px-3 pb-5">
+                    <div className="col-12 col-md-4 my-1">
+                        <div className="card shadow cardAnimation" type="button">
+                            <div className="card-body text-center ">
+                                <span className='fs-4 bold text-secondary'>
+                                    <FontAwesomeIcon icon={faUser} className='me-2 small' /> Meu Perfil
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="col-12 col-md-4 my-1">
+                        <div className="card shadow cardAnimation" type="button">
+                            <div className="card-body text-center">
+                                <span className='fs-4 bold text-secondary'>
+                                    <FontAwesomeIcon icon={faShop} className='me-2 small' /> Imobiliária
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="col-12 col-md-4 my-1">
+                        <div className="card shadow cardAnimation" type="button">
+                            <div className="card-body text-center">
+                                <span className='fs-4 bold text-secondary'>
+                                    <FontAwesomeIcon icon={faGear} className='me-2 small' />Configurações
+                                </span>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
