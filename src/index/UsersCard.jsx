@@ -15,9 +15,6 @@ export default function UsersCard(props) {
 
     useEffect(() => {
 
-        console.log("clientsStatus", clientsStatus)
-
-        setTotalStatus(clientsStatus.outdated + clientsStatus.active + clientsStatus.evaluated + clientsStatus.answered)
 
     }, [props])
 

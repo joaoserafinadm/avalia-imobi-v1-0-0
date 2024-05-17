@@ -55,11 +55,11 @@ export default function Home() {
 
     const dispatch = useDispatch()
 
-    const [clientsStatus, setClientsStatus] = useState({
-        outdated: 0,
-        active: 0,
-        evaluated: 0,
-        answered: 0
+    const [userResults, setUserResults] = useState({
+        clientsLength: 0,
+        clientsValuations: 0,
+        clientsRating: 0,
+        averageTicket: 0
     })
 
     const [clientsArray, setClientsArray] = useState([])
@@ -78,10 +78,11 @@ export default function Home() {
 
         await axios.get(`${baseUrl()}/api/indexPage`, {
             params: {
-                company_id
+                company_id,
+                user_id: token.sub
             }
         }).then((res) => {
-            setClientsStatus(res.data.clientsStatus)
+            setUserResults(res.data.userResults)
             setClientsArray(res.data.clientsArray)
             setLoading(false)
         }).catch((e) => {
@@ -102,11 +103,11 @@ export default function Home() {
 
                 <div className="row p-3 ">
                     <div className="col-12 col-md-6 my-2">
-                        <ClientsCard_02 clientsStatus={clientsStatus} clientsArray={clientsArray} loading={loading} />
+                        <ClientsCard_02 userResults={userResults} clientsArray={clientsArray} loading={loading} />
                         <LastClientsCard />
                     </div>
                     <div className="col-12 col-md-6 my-2">
-                        <UsersCard clientsStatus={clientsStatus} clientsArray={clientsArray} loading={loading} />
+                        <UsersCard userResults={userResults} clientsArray={clientsArray} loading={loading} />
 
 
                     </div>

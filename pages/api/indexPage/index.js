@@ -17,7 +17,7 @@ export default authenticated(async (req, res) => {
 
     if (req.method === 'GET') {
 
-        const { company_id } = req.query
+        const { company_id, user_id } = req.query
 
         if (!company_id) {
             res.status(400).json({ error: 'Missing parameters on request body.' })
@@ -26,20 +26,31 @@ export default authenticated(async (req, res) => {
 
             const companyExist = await db.collection('companies').findOne({ _id: ObjectId(company_id) })
 
-            if (!companyExist) {
-                res.status(400).json({ error: 'Company does not exist' })
+            const userExist = await db.collection('users').findOne({ _id: ObjectId(user_id) })
+
+            if (!companyExist || !userExist) {
+                res.status(400).json({ error: 'Company or user does not exist' })
             } else {
 
-                const clientsArray = companyExist.clients.length ? companyExist.clients.slice(0,5) : []
+                const clients = companyExist.clients.length ? companyExist.clients : []
 
-                const clientsStatus = {
-                    outdated: clientsArray.filter(elem => elem.status === 'outdated').length,
-                    active: clientsArray.filter(elem => elem.status === 'active').length,
-                    evaluated: clientsArray.filter(elem => elem.status === 'evaluated').length,
-                    answered: clientsArray.filter(elem => elem.status === 'answered').length,
+                const myClients = clients.filter(elem => elem.user_id === user_id)
+
+                const myValuations = clients.filter(elem => elem?.valuation?.user_id === user_id)
+
+                const clientsArray = clients.slice(0, 5)
+
+
+
+                const userResults = {
+                    clientsLength: myClients.length,
+                    clientsValuations: myValuations.length,
+                    clientsRating: myClients.filter(elem => elem?.valuation?.stars).reduce((a, b) => a + b.valuation?.stars, 0) / clientsArray.filter(elem => elem?.valuation?.stars).length || 0,
+                    averageTicket: myValuations.filter(elem => elem?.valuation?.valueSelected).reduce((a, b) => a + (+b.valuation?.valueSelected.replace('.', '') || 0), 0) / myValuations.filter(elem => elem?.valuation?.valueSelected).length || 0
                 }
 
-                res.status(200).json({ clientsArray, clientsStatus })
+
+                res.status(200).json({ userResults, clientsArray })
 
             }
         }
