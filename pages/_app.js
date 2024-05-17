@@ -53,8 +53,29 @@ import ValuationPage from "../src/pages/valuation/index.jsx";
 
 export default function MyApp({ Component, pageProps }) {
 
+
+    const handleDisableDoubleTap = () => {
+        // Selecione o elemento do corpo (ou outro elemento onde você deseja desabilitar o comportamento)
+        const bodyElement = document.body;
+      
+        // Adicione um listener para o evento de toque duplo
+        bodyElement.addEventListener('touchstart', function(event) {
+          // Verifique se houve um toque duplo
+          if (event.touches.length > 1) {
+            // Se houver, previna o comportamento padrão (sugestão de pesquisa do navegador)
+            event.preventDefault();
+          }
+        }, { passive: false }); // Certifique-se de definir { passive: false } para poder chamar preventDefault() no evento
+      
+        // Lembre-se de remover o listener quando o componente é desmontado para evitar vazamentos de memória
+        return () => {
+          bodyElement.removeEventListener('touchstart', handleDisableDoubleTap);
+        };
+      };
+
     useEffect(() => {
         closeModal()
+        handleDisableDoubleTap()
     }, []);
 
     const token = Cookie.get('auth') ? jwt.decode(Cookie.get('auth')) : false
