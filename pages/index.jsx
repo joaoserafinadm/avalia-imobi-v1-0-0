@@ -93,7 +93,7 @@ export default function Home() {
     return (
         <>
 
-            <div className='fadeItem1s' style={{backgroundColor: '#6a6a6a', paddingBottom: '75px'}}>
+            <div className='fadeItem1s' >
                 {/* <Title title={`Olá, ${token.firstName}!`} subtitle={'O que faremos hoje?'} /> */}
 
 

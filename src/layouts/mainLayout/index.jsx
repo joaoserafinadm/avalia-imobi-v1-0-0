@@ -9,6 +9,7 @@ import { toggleBarOff, toggleBarOn } from "../../../store/ToggleBarStatus/Toggle
 import window2Mobile from "../../../utils/window2Mobile";
 import { closeModal } from "../../../utils/modalControl";
 import MenuBar from "../../components/menuBar";
+import Background from "./Background";
 
 export default function MainLayout({ children }) {
 
@@ -39,14 +40,16 @@ export default function MainLayout({ children }) {
 
 
     return (
-        <body className="app">
+        <body className="app" >
             <Header navbarStatus={toggleStatus} />
             <Navbar />
 
-            <div className={`  pages`} >
-                {children}
-            </div>
+            <Background >
+                <div className={`  pages`} >
+                    {children}
+                </div>
 
+            </Background>
 
             <MenuBar />
 
