@@ -40,7 +40,7 @@ export default function MainLayout({ children }) {
 
 
     return (
-        <body className="app" >
+        <body className="app" id="appBody" >
             <Header navbarStatus={toggleStatus} />
             <Navbar />
 
