@@ -96,7 +96,7 @@ export default function SignUp(props) {
                 authCode,
                 code
             }
-            
+
             const response = await axios.post(`${baseUrl()}/api/login/authCode`, data)
                 .then(res => {
 
@@ -332,27 +332,9 @@ export default function SignUp(props) {
 
                         {window.innerWidth > 990 && (
                             <div className="col-6 d-flex justify-content-center align-items-center p-5">
-                                <div id="carouselExampleFade" className="carousel slide carousel-fade" data-bs-ride="carousel">
-                                    <div className="carousel-inner">
-                                        <div className="carousel-item active" data-bs-interval="10000">
-                                            <img src="LOGO_01.png" className="d-block" alt="..." height={200} />
-                                        </div>
-                                        <div className="carousel-item" data-bs-interval="10000">
-                                            <img src="LOGO_02.png" className="d-block" alt="..." height={200} />
-                                        </div>
-                                    </div>
-                                    <div style={{ display: 'none' }}>
-                                        <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
-                                            <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                                            <span className="visually-hidden">Previous</span>
-                                        </button>
-                                        <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
-                                            <span className="carousel-control-next-icon" aria-hidden="true"></span>
-                                            <span className="visually-hidden">Next</span>
-                                        </button>
-                                    </div>
-                                </div>
+                                <img src="SIGNUP_GIF.gif" className="d-block" alt="..." height={200} />
                             </div>
+
                         )}
                     </div>
                     <div className="row mt-3">

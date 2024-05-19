@@ -158,11 +158,10 @@ export default function DesktopForm(props) {
                             <GeralFeatures type="Terreno" />
                             <Location />
                             <UploadFiles setFiles={array => props.setFiles(array)} />
-                            <FinalizarButton handleSave={() => props.handleSave()} loadingSave={props.loadingSave} />
+                            <FinalizarButton handleSave={() => props.handleSave()} newClientForm={newClientForm} loadingSave={props.loadingSave} />
 
                         </>
                     )}
-
 
                 </div >
             </div>

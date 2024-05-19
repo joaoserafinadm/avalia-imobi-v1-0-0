@@ -21,6 +21,7 @@ import { usersArray } from "../store/Users/Users.actions";
 import Sections from "../src/components/Sections";
 import ViewValuationModal from "../src/clientsManagement/viewValuationModal";
 import MenuBar from "../src/components/menuBar";
+import tippy from "tippy.js";
 
 
 
@@ -118,7 +119,7 @@ export default function clientsManagement() {
                     <div className="col-12 d-flex justify-content-end ">
 
                         <Link href='/clientAdd'>
-                            <button className="btn btn-sm btn-orange">
+                            <button className="btn btn-sm btn-orange" id="teste">
                                 <FontAwesomeIcon icon={faUserPlus} /> Adicionar Cliente
                             </button>
                         </Link>

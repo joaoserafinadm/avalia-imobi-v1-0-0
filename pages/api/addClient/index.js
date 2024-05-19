@@ -57,7 +57,7 @@ export default authenticated(async (req, res) => {
                                         celular: celular,
                                         propertyType: propertyType,
                                         urlToken: urlToken,
-                                        user_id: userExist._id,
+                                        user_id: user_id,
                                         dateAdded: new Date(),
                                         status: 'outdated'
                                     },

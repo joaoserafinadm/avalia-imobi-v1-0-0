@@ -1,5 +1,6 @@
 import { faEdit, faEye, faMoneyCheckDollar, faShare, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { showClientInfo } from "../../utils/showClientInfo";
 
 
 
@@ -11,15 +12,10 @@ export default function ClientFeatures(props) {
 
     const client = props.client
 
-    const handleShowClientInfo = (elem) => {
-
-        if (elem.propertyType) return true
-        else return false
-    }
 
     return (
         <>
-            {handleShowClientInfo(client) ?
+            {showClientInfo(client) ?
                 <>
                     <div className="row small">
 

@@ -29,7 +29,7 @@ export default function Title(props) {
                     )}
 
                 </div>
-                {props.backButton && isMobile() && (
+                {props.backButton  && (
                     <Link href='/'>
                         <span type="button" className={styles.backButton}><AiOutlineLeft className="me-2" />Início</span>
                     </Link>

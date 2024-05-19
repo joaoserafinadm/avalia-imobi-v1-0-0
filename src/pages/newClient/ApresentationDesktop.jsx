@@ -19,9 +19,12 @@ export default function ApresentationDesktop(props) {
 
     useEffect(() => {
 
-        setTimeout(() => {
-            setShowLogo(true)
-        }, 9000)
+        if (newClientForm.logo) {
+
+            setTimeout(() => {
+                setShowLogo(true)
+            }, 9000)
+        }
         setTimeout(() => {
             setShowStartButton(true)
         }, 10000)
@@ -64,29 +67,29 @@ export default function ApresentationDesktop(props) {
                 </div>
             </div>
 
-            <div className="row mt-5">
-                <div className="col-12 d-flex justify-content-center">
+            {showLogo && (
+                <div className="row mt-5">
+                    <div className="col-12 d-flex justify-content-center">
 
-                    {showLogo && (
 
                         <img src={newClientForm.logo} alt="logo" id="logoItem" className={`${styles.logo}  fadeItem1s `} />
-                    )}
 
 
+                    </div>
                 </div>
-            </div>
+            )}
             <div className="row my-5">
                 <div className="col-12 d-flex justify-content-center">
 
                     {showStartButton && (
 
-                        <span
+                        <button
                             type='button'
-                            className="fs-5 text-secondary fadeItem1s cardAnimation"
+                            className="btn btn-light btn-lg fs-4 text-secondary fadeItem"
                             data-bs-target="#clientFormCarouselDesktop"
                             data-bs-slide="next">
                             Começar <FontAwesomeIcon icon={faArrowRight} className="ms-1" />
-                        </span>
+                        </button>
                     )}
 
 

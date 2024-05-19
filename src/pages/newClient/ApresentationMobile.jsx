@@ -19,7 +19,7 @@ export default function ApresentationMobile(props) {
                 </div>
                 <div className="card-body">
                     <div style={{ width: '45vw', height: '90px' }} className="d-flex justify-content-center align-items-center">
-                        {isMobile() && (
+                        {isMobile() && newClientForm.logo && (
 
                             <img src={newClientForm.logo} alt="logo" id="logoItem" className={`${styles.logo} ${styles.logoPosition} fadeItem1s `} />
                         )}
@@ -43,7 +43,7 @@ export default function ApresentationMobile(props) {
                         <div className="col-12 d-flex justify-content-center">
 
 
-                            {!isMobile() && (
+                            {!isMobile() && newClientForm.logo && (
 
                                 <img src={newClientForm.logo} alt="logo" id="logoItem" className={`${styles.logo} ${styles.logoPosition} fadeItem1s `} />
                             )}

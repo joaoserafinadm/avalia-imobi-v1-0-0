@@ -32,6 +32,30 @@ export default authenticated(async (req, res) => {
                 res.status(400).json({ error: 'Company or user does not exist' })
             } else {
 
+                const userCaptures = companyExist.clients.reduce((acc, client) => {
+                    const userId = client.user_id;
+                    if (!acc[userId]) {
+                        acc[userId] = 0;
+                    }
+                    acc[userId]++;
+                    return acc;
+                }, {});
+
+                // 2. Converter o objeto em um array de pares [user_id, count]
+                const userCaptureArray = Object.entries(userCaptures);
+
+                // 3. Ordenar o array de pares com base na contagem de imóveis (count) em ordem decrescente
+                userCaptureArray.sort((a, b) => b[1] - a[1]);
+
+                // 4. Transformar o array ordenado em um array de objetos para melhor visualização
+                const rankedUsers = userCaptureArray.map(([user_id, count]) => ({ user_id, count }))
+
+                
+
+
+
+
+
                 const clients = companyExist.clients.length ? companyExist.clients : []
 
                 const myClients = clients.filter(elem => elem.user_id === user_id)
@@ -39,6 +63,8 @@ export default authenticated(async (req, res) => {
                 const myValuations = clients.filter(elem => elem?.valuation?.user_id === user_id)
 
                 const clientsArray = clients.slice(0, 5)
+
+
 
 
 

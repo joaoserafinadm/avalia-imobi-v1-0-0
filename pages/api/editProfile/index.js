@@ -31,7 +31,7 @@ export default authenticated(async (req, res) => {
 
             const response = await db.collection('users').findOne({ _id: ObjectId(user_id) })
 
-            const headerImg = companyExist.backgroundImages.find(elem => elem._id.toString() === companyExist.backgroundImg_id).imageUrl
+            const headerImg = companyExist.backgroundImages?.find(elem => elem._id.toString() === companyExist.backgroundImg_id)?.imageUrl
 
             const data = {
                 ...response,

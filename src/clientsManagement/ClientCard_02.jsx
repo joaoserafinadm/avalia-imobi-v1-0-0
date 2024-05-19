@@ -13,6 +13,7 @@ import jwt from "jsonwebtoken";
 import { useSelector } from "react-redux"
 import formatDate from "../../utils/formatDate"
 import ClientFeatures from "./ClientFeatures"
+import { showClientInfo } from "../../utils/showClientInfo"
 
 export default function ClientCard_02(props) {
 
@@ -27,27 +28,30 @@ export default function ClientCard_02(props) {
     const client = props.elem
 
     useEffect(() => {
-        tippy("#viewClientButton" + props.elem._id + props.section, {
+
+
+        tippy("#viewClientButton" + props.elem._id, {
             content: "Visualizar",
             placement: 'bottom'
         });
-        tippy("#deleteClientButton" + props.elem._id + props.section, {
+        tippy("#deleteClientButton" + props.elem._id, {
             content: "Deletar",
             placement: 'bottom'
         });
-        tippy("#evaluateClientButton" + props.elem._id + props.section, {
+        tippy("#evaluateClientButton" + props.elem._id, {
             content: "Avaliar",
             placement: 'bottom'
         });
-        tippy("#editClientButton" + props.elem._id + props.section, {
+        tippy("#editClientButton" + props.elem._id, {
             content: "Editar",
             placement: 'bottom'
         });
-        tippy("#shareClientButton" + props.elem._id + props.section, {
+        tippy("#shareClientButton" + props.elem._id, {
             content: "Enviar formulário",
             placement: 'bottom'
         });
-    }, [])
+
+    }, [props.elem, props.section])
 
 
 
@@ -75,11 +79,6 @@ export default function ClientCard_02(props) {
     }
 
 
-    const handleShowClientInfo = (elem) => {
-
-        if (elem.propertyType) return true
-        else return false
-    }
 
 
 
@@ -177,7 +176,7 @@ export default function ClientCard_02(props) {
                 <ClientFeatures client={client} elem={props.elem} />
 
 
-                {handleShowClientInfo(client) ?
+                {showClientInfo(client) ?
                     <div className="row d-flex justify-content-center mt-2">
                         <div className="col-12 d-flex justify-content-center">
 
@@ -185,7 +184,7 @@ export default function ClientCard_02(props) {
                                 <button
                                     type="button"
                                     class="btn btn-light border"
-                                    id={"viewClientButton" + props.elem._id + props.section}
+                                    id={"viewClientButton" + props.elem._id}
                                     data-bs-toggle="modal"
                                     data-bs-target="#viewClientModal"
                                     onClick={() => props.setClientSelected(props.elem)}>
@@ -196,7 +195,7 @@ export default function ClientCard_02(props) {
                                 <button
                                     type="button"
                                     class="btn btn-light border"
-                                    id={"deleteClientButton" + props.elem._id + props.section}
+                                    id={"deleteClientButton" + props.elem._id}
                                     data-bs-toggle="modal"
                                     data-bs-target={"#deleteClientModal"}
                                     onClick={() => props.setClientSelected(props.elem)}>
@@ -213,18 +212,18 @@ export default function ClientCard_02(props) {
                                 <button onClick={() => handleShare(props.elem.urlToken + "&userId=" + token.sub)}
                                     type="button"
                                     class="btn btn-light border"
-                                    id={"shareClientButton" + props.elem._id + props.section}>
+                                    id={"shareClientButton" + props.elem._id}>
                                     <FontAwesomeIcon icon={faShare} className="icon  text-secondary" />
                                 </button>
 
-                                <button type="button" class="btn btn-light border" id={"editClientButton" + props.elem._id + props.section}>
+                                <button type="button" class="btn btn-light border" id={"editClientButton" + props.elem._id}>
                                     <FontAwesomeIcon icon={faEdit} className="icon  text-secondary" />
                                 </button>
 
                                 <button
                                     type="button"
                                     class="btn btn-light border"
-                                    id={"deleteClientButton" + props.elem._id + props.section}
+                                    id={"deleteClientButton" + props.elem._id}
                                     data-bs-toggle="modal"
                                     data-bs-target={"#deleteClientModal"}
                                     onClick={() => props.setClientSelected(props.elem)}>
