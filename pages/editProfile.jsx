@@ -131,7 +131,7 @@ export default function EditProfile() {
 
         removeInputError()
 
-        if ( !workEmail || !firstName || !lastName || !celular || !creci) {
+        if (!workEmail || !firstName || !lastName || !celular || !creci) {
             // if (!profileImageUrl) document.getElementById("profileImageUrlItem").classList.add('inputError')
             if (!workEmail) document.getElementById("workEmailItem").classList.add('inputError')
             if (!firstName) document.getElementById("firstNameItem").classList.add('inputError')
@@ -177,6 +177,9 @@ export default function EditProfile() {
 
             })
 
+        } else {
+            setLoadingSave(false)
+
         }
 
     }
@@ -190,7 +193,7 @@ export default function EditProfile() {
                 :
                 <>
 
-                    <CropperImageModal selectFile={selectFile} setResult={value => setProfileImageUrlReview(value)} aspect={1 / 1}/>
+                    <CropperImageModal selectFile={selectFile} setResult={value => setProfileImageUrlReview(value)} aspect={1 / 1} />
 
 
 
@@ -362,7 +365,7 @@ export default function EditProfile() {
                                         :
                                         <button className="ms-2 btn btn-sm btn-orange" onClick={() => handleSave(token.company_id)}>Salvar</button>
                                     }
-                                     </div>
+                                </div>
                             </div>
 
                         </FixedTopicsBottom>

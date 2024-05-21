@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux"
-import { deleteFeature, setFeatures } from "../../../store/NewClientForm/NewClientForm.actions"
+import { deleteFeature, setComments, setFeatures } from "../../../store/NewClientForm/NewClientForm.actions"
 
 
 
@@ -144,6 +144,15 @@ export default function GeralFeatures(props) {
                         </div>
                     </div>
                 ))}
+            </div>
+
+            <label htmlFor="geralForm" className="form-label fw-bold mt-3">Observações</label>
+            <div className="row">
+                <div className="col-12">
+                    <textarea className="form-control" rows="3"
+                        placeholder="Descreva aqui as particularidades do imóvel"
+                        onChange={e => dispatch(setComments(e.target.value))} value={newClientForm.comments} />
+                </div>
             </div>
         </div>
     )

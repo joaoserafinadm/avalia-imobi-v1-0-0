@@ -33,7 +33,8 @@ const initialValues = {
     latitude: '',
     longitude: '',
     features: [],
-    files: []
+    files: [],
+    comments: ''
 }
 
 export default function inventoryStatesReducer(state = {
@@ -80,7 +81,8 @@ export default function inventoryStatesReducer(state = {
     latitude: '',
     longitude: '',
     features: [],
-    files: []
+    files: [],
+    comments: ''
 }, action) {
     switch (action.type) {
         case 'INITIAL_VALUES':
@@ -223,6 +225,9 @@ export default function inventoryStatesReducer(state = {
 
         case 'DELETE_FEATURE':
             return { ...state, features: action.payload }
+
+        case 'SET_COMMENTS':
+            return { ...state, comments: action.payload }
 
         case 'SET_FILES':
             return { ...state, files: action.payload }

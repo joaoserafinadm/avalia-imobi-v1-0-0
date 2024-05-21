@@ -29,6 +29,8 @@ import DesktopForm from "./DesktopForm";
 import ApresentationDesktop from "./ApresentationDesktop";
 import FinalSlideDesktop from "./FinalSlideDesktop";
 import GeralFeatures from "./GeralFeatures";
+import ActiveClientPage from "./ActiveClientPage";
+import ErrorPage from "./ErrorPage";
 
 
 export default function NewClient() {
@@ -43,7 +45,8 @@ export default function NewClient() {
     const newClientForm = useSelector(state => state.newClientForm)
     const dispatch = useDispatch()
 
-    const initialSlide = newClientForm.slide === -1 ? 0 : newClientForm.slide
+    // const initialSlide = newClientForm.slide === -1 ? 0 : newClientForm.slide
+    const initialSlide = 0
 
     //Loading
     const [loadingPage, setLoadingPage] = useState(true)
@@ -52,9 +55,13 @@ export default function NewClient() {
     const [loadingSave, setLoadingSave] = useState(false)
     const [mobile, setMobile] = useState(false)
 
+    const [errorSection, setErrorSection] = useState('')
+    const [errorData, setErrorData] = useState('')
+
     useEffect(() => {
         dataFunction(queryUserId, queryClientId)
         setMobile(isMobile())
+        dispatch(setSlide(initialSlide))
     }, [])
 
     const dataFunction = async (user_id, client_id) => {
@@ -72,6 +79,8 @@ export default function NewClient() {
                 params: data
             })
                 .then(res => {
+
+                    console.log("res.data", res.data)
 
                     setTimeout(() => {
                         setShowStartBtn(true)
@@ -95,7 +104,14 @@ export default function NewClient() {
                     setLoadingPage(false)
 
                 }).catch(e => {
-                    console.log(e)
+                    setLoadingPage(false)
+
+                    if (e.response.data.error === "Client active") {
+                        setErrorSection('activeClient')
+                        setErrorData(e.response.data.data)
+                    } else {
+                        setErrorSection('error')
+                    }
                 })
         } else {
             setLoadingPage(false)
@@ -164,100 +180,109 @@ export default function NewClient() {
                 </div>
                 :
                 <>
+                    {errorSection === 'activeClient' && (
+                        <ActiveClientPage errorData={errorData} />
+                    )}
 
-                    {mobile ?
+                    {errorSection === 'error' && (
+                        <ErrorPage />
+                    )}
 
-
-                        <div className="fadeItem" style={{ backgroundImage: `linear-gradient(to bottom,#fff0, #fff 80%), ${newClientForm.backgroundImg ? `url(${newClientForm.backgroundImg})` : "#f5874f"}`, backgroundColor: newClientForm.backgroundImg ? '' : "#f5874f", height: '100vh', position: 'fixed', width: '100vw' }}>
-
-
-                            <div
-                                id="clientFormCarousel"
-                                class="carousel slide"
-                                data-bs-touch="false"
-                                data-bs-interval="false">
-                                <div class="carousel-inner">
+                    {!errorSection && (
+                        <>
+                            {mobile ?
 
 
-                                    <div class={`carousel-item  ${initialSlide === 0 && 'active'}`} style={{ height: '100vh' }} >
-
-                                        <ApresentationMobile />
+                                <div className="fadeItem" style={{ backgroundImage: `linear-gradient(to bottom,#fff0, #fff 80%), ${newClientForm.backgroundImg ? `url(${newClientForm.backgroundImg})` : "#f5874f"}`, backgroundColor: newClientForm.backgroundImg ? '' : "#f5874f", height: '100vh', position: 'fixed', width: '100vw' }}>
 
 
+                                    <div
+                                        id="clientFormCarousel"
+                                        class="carousel slide"
+                                        data-bs-touch="false"
+                                        data-bs-interval="false">
+                                        <div class="carousel-inner">
 
-                                    </div>
-                                    <div class={`carousel-item  ${initialSlide === 1 && 'active'}`} style={{ height: '100vh' }} >
-                                        <div className="card m-3 fadeItem1s" style={{ height: "90%", overflowY: 'scroll' }}>
-                                            <div className="card-body pb-5">
 
-                                                <Slide01 />
+                                            <div class={`carousel-item  ${initialSlide === 0 && 'active'}`} style={{ height: '100vh' }} >
+
+                                                <ApresentationMobile />
+
+
 
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class={`carousel-item  ${initialSlide === 2 && 'active'}`} style={{ height: '100vh' }} >
-                                        <div className="card m-3 fadeItem1s" style={{ height: "90%", overflowY: 'scroll' }}>
-                                            <div className="card-body pb-5">
+                                            <div class={`carousel-item  ${initialSlide === 1 && 'active'}`} style={{ height: '100vh' }} >
+                                                <div className="card m-3 fadeItem1s" style={{ height: "90%", overflowY: 'scroll' }}>
+                                                    <div className="card-body pb-5">
 
-                                                <Slide02 />
+                                                        <Slide01 />
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class={`carousel-item  ${initialSlide === 2 && 'active'}`} style={{ height: '100vh' }} >
+                                                <div className="card m-3 fadeItem1s" style={{ height: "90%", overflowY: 'scroll' }}>
+                                                    <div className="card-body pb-5">
+
+                                                        <Slide02 />
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class={`carousel-item  ${initialSlide === 3 && 'active'}`} style={{ height: '100vh' }} >
+                                                <div className="card m-3 fadeItem1s" style={{ height: "90%", overflowY: 'scroll' }}>
+                                                    <div className="card-body pb-5">
+
+                                                        <GeralFeatures type={newClientForm.propertyType} />
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class={`carousel-item  ${initialSlide === 4 && 'active'}`} style={{ height: '100vh' }} >
+                                                <div className="card m-3 fadeItem1s" style={{ height: "90%", overflowY: 'scroll' }}>
+                                                    <div className="card-body pb-5">
+
+                                                        <Slide04 />
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class={`carousel-item  ${initialSlide === 5 && 'active'}`} style={{ height: '100vh' }} >
+                                                <div className="card m-3 fadeItem1s" style={{ height: "90%", overflowY: 'scroll' }}>
+                                                    <div className="card-body pb-5">
+
+                                                        <Slide05 setFiles={array => setFiles(array)} />
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class={`carousel-item  ${initialSlide === 6 && 'active'}`} style={{ height: '100vh' }} >
+                                                <div className="card m-3 fadeItem1s" style={{ height: "90%", overflowY: 'scroll' }}>
+                                                    <div className="card-body pb-5">
+
+                                                        <Slide06 files={files} />
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class={`carousel-item  ${initialSlide === 7 && 'active'}`} style={{ height: '100vh' }} >
+
+
+                                                <Slide07 />
+
 
                                             </div>
+                                            {/* <div class={`carousel-item  ${initialSlide === 6 && 'active'}`} style={{ height: '100vh' }} >
+        <div className="card m-3 fadeItem1s" style={{ height: "90%", overflowY: 'scroll' }}>
+            <div className="card-body">
+                <img src="/JU.jpeg" alt="" height={500}/>
+
+            </div>
+        </div>
+    </div> */}
+
                                         </div>
                                     </div>
-                                    <div class={`carousel-item  ${initialSlide === 3 && 'active'}`} style={{ height: '100vh' }} >
-                                        <div className="card m-3 fadeItem1s" style={{ height: "90%", overflowY: 'scroll' }}>
-                                            <div className="card-body pb-5">
-
-                                                <GeralFeatures type={newClientForm.propertyType} />
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class={`carousel-item  ${initialSlide === 4 && 'active'}`} style={{ height: '100vh' }} >
-                                        <div className="card m-3 fadeItem1s" style={{ height: "90%", overflowY: 'scroll' }}>
-                                            <div className="card-body pb-5">
-
-                                                <Slide04 />
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class={`carousel-item  ${initialSlide === 5 && 'active'}`} style={{ height: '100vh' }} >
-                                        <div className="card m-3 fadeItem1s" style={{ height: "90%", overflowY: 'scroll' }}>
-                                            <div className="card-body pb-5">
-
-                                                <Slide05 setFiles={array => setFiles(array)} />
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class={`carousel-item  ${initialSlide === 6 && 'active'}`} style={{ height: '100vh' }} >
-                                        <div className="card m-3 fadeItem1s" style={{ height: "90%", overflowY: 'scroll' }}>
-                                            <div className="card-body pb-5">
-
-                                                <Slide06 files={files} />
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class={`carousel-item  ${initialSlide === 7 && 'active'}`} style={{ height: '100vh' }} >
-
-
-                                        <Slide07 />
-
-
-                                    </div>
-                                    {/* <div class={`carousel-item  ${initialSlide === 6 && 'active'}`} style={{ height: '100vh' }} >
-                                <div className="card m-3 fadeItem1s" style={{ height: "90%", overflowY: 'scroll' }}>
-                                    <div className="card-body">
-                                        <img src="/JU.jpeg" alt="" height={500}/>
-
-                                    </div>
-                                </div>
-                            </div> */}
-
-                                </div>
-                            </div>
 
 
 
@@ -266,56 +291,60 @@ export default function NewClient() {
 
 
 
-                            {showStartBtn && (
-                                // <div className="fadeItem1s2s">
-                                //     <button className="btn btn-primary">Começar <FontAwesomeIcon icon={faArrowRight} className="icon ms-1" /></button>
-                                // </div>
-                                <>
-                                    {initialSlide !== 7 && (
+                                    {showStartBtn && (
+                                        // <div className="fadeItem1s2s">
+                                        //     <button className="btn btn-primary">Começar <FontAwesomeIcon icon={faArrowRight} className="icon ms-1" /></button>
+                                        // </div>
+                                        <>
+                                            {initialSlide !== 7 && (
 
-                                        <FixedTopicsBottom >
+                                                <FixedTopicsBottom >
 
-                                            <FixedButtons
-                                                handleSave={() => handleSave(newClientForm)}
-                                                loadingSave={loadingSave} />
-                                        </FixedTopicsBottom>
+                                                    <FixedButtons
+                                                        handleSave={() => handleSave(newClientForm)}
+                                                        loadingSave={loadingSave} />
+                                                </FixedTopicsBottom>
+                                            )}
+                                        </>
                                     )}
-                                </>
-                            )}
 
-                        </div>
-                        :
-                        <div className="fadeItem" style={{ backgroundImage: `linear-gradient(to bottom,#fff0, #fff 80%), ${newClientForm.backgroundImg ? `url(${newClientForm.backgroundImg})` : "#f5874f"}`, backgroundColor: newClientForm.backgroundImg ? '' : "#f5874f", height: '100vh', position: 'fixed', width: '100vw' }}>
+                                </div>
+                                :
+                                <div className="fadeItem" style={{ backgroundImage: `linear-gradient(to bottom,#fff0, #fff 80%), ${newClientForm.backgroundImg ? `url(${newClientForm.backgroundImg})` : "#f5874f"}`, backgroundColor: newClientForm.backgroundImg ? '' : "#f5874f", height: '100vh', position: 'fixed', width: '100vw' }}>
 
-                            <div
-                                id="clientFormCarouselDesktop"
-                                class="carousel slide"
-                                data-bs-touch="false"
-                                data-bs-interval="false">
+                                    <div
+                                        id="clientFormCarouselDesktop"
+                                        class="carousel slide"
+                                        data-bs-touch="false"
+                                        data-bs-interval="false">
 
-                                <div class="carousel-inner">
+                                        <div class="carousel-inner">
 
 
-                                    <div class={`carousel-item  active`} style={{ height: '100vh' }} >
+                                            <div class={`carousel-item  active`} style={{ height: '100vh' }} >
 
-                                        <ApresentationDesktop />
-                                    </div>
-                                    <div class={`carousel-item `} style={{ height: '100vh' }} >
+                                                <ApresentationDesktop />
+                                            </div>
+                                            <div class={`carousel-item `} style={{ height: '100vh' }} >
 
-                                        <DesktopForm
-                                            setFiles={array => setFiles(array)}
-                                            handleSave={() => handleSave(newClientForm)}
-                                            loadingSave={loadingSave} />
-                                    </div>
-                                    <div class={`carousel-item `} style={{ height: '100vh' }} >
+                                                <DesktopForm
+                                                    setFiles={array => setFiles(array)}
+                                                    handleSave={() => handleSave(newClientForm)}
+                                                    loadingSave={loadingSave} />
+                                            </div>
+                                            <div class={`carousel-item `} style={{ height: '100vh' }} >
 
-                                        <FinalSlideDesktop />
+                                                <FinalSlideDesktop />
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>
+                            }
+                        </>
+                    )}
 
-                            </div>
-                        </div>
-                    }
+
 
                 </>
 

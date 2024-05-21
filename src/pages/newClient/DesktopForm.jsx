@@ -126,7 +126,7 @@ export default function DesktopForm(props) {
                     {newClientForm.propertyType === "Apartamento" && (
                         <>
                             <TypeApartamento />
-                            <GeralFeatures />
+                            <GeralFeatures  type="Apartamento"/>
                             <Location />
                             <UploadFiles setFiles={array => props.setFiles(array)} />
                             <FinalizarButton handleSave={() => props.handleSave()} loadingSave={props.loadingSave} />

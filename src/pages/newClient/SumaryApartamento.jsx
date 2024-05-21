@@ -111,6 +111,15 @@ export default function SumarryApartamento(props) {
             <div className="px-3">
                 <hr />
             </div>
+            <div className="col-12 mb-2">
+                <label for="geralForm" className=" fw-bold">Observações</label>
+            </div>
+            <div className="col-12 my-2 mb-4">
+                <span>{`${newClientForm.comments.replace(/\r?\n/g, '\\\n')}`}</span>
+            </div>
+            <div className="px-3">
+                <hr />
+            </div>
 
             <div className="col-12 mb-2">
                 <label for="geralForm" className="form-label fw-bold">Localização</label>

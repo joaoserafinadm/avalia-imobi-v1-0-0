@@ -30,22 +30,39 @@ export default async function (req, res) {
                 res.status(400).json({ error: 'User or company or client does not exist' })
             } else {
 
-                const data = {
-                    client_id: client_id,
-                    clientName: clientExist?.clientName,
-                    clientLastName: clientExist?.clientLastName,
-                    email: clientExist?.email,
-                    celular: clientExist?.celular,
-                    styles: companyExist?.styles,
-                    logo: companyExist?.logo,
-                    backgroundImg: companyExist?.backgroundImg_id ? companyExist.backgroundImages.find(elem => elem._id.toString() === companyExist?.backgroundImg_id).imageUrl : '',
-                    companyName: companyExist?.companyName,
-                    user_id: user_id,
-                    userFirstName: userExist?.firstName,
-                    userLastName: userExist?.lastName,
-                    profileImageUrl: userExist?.profileImageUrl
+                if (clientExist.status === "outdated") {
+
+
+                    const data = {
+                        client_id: client_id,
+                        clientName: clientExist?.clientName,
+                        clientLastName: clientExist?.clientLastName,
+                        email: clientExist?.email,
+                        celular: clientExist?.celular,
+                        styles: companyExist?.styles,
+                        logo: companyExist?.logo,
+                        backgroundImg: companyExist?.backgroundImg_id ? companyExist.backgroundImages.find(elem => elem._id.toString() === companyExist?.backgroundImg_id).imageUrl : '',
+                        companyName: companyExist?.companyName,
+                        user_id: user_id,
+                        userFirstName: userExist?.firstName,
+                        userLastName: userExist?.lastName,
+                        profileImageUrl: userExist?.profileImageUrl
+                    }
+                    res.status(200).json(data)
+
+                } else {
+
+                    const data = {
+                        userFirstName: userExist?.firstName,
+                        userLastName: userExist?.lastName,
+                        profileImageUrl: userExist?.profileImageUrl,
+                        celular: clientExist?.celular,
+                        logo: companyExist?.logo,
+                    }
+
+                    res.status(400).json({ error: 'Client active', data: data })
                 }
-                res.status(200).json(data)
+
             }
 
         }

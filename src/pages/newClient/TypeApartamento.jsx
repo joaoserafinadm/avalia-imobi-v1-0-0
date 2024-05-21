@@ -28,7 +28,7 @@ export default function TypeApartamento(props) {
                                 className="form-control"
                                 name="areaTotalItem"
                                 id="areaTotalItem"
-                                value={newClientForm.areaTotal}
+                                value={newClientForm.areaTotal} inputMode="numeric"
                                 onChange={e => dispatch(setAreaTotal(e.target.value))} />
                             <span class="input-group-text" id="basic-addon1">m²</span>
                         </div>
@@ -41,7 +41,7 @@ export default function TypeApartamento(props) {
                                 type="number"
                                 className="form-control"
                                 name="areaTotalPrivativaItem"
-                                id="areaTotalPrivativaItem"
+                                id="areaTotalPrivativaItem" inputMode="numeric"
                                 value={newClientForm.areaTotalPrivativa}
                                 onChange={e => dispatch(setAreaTotalPrivativa(e.target.value))} />
                             <span class="input-group-text" id="basic-addon1">m²</span>

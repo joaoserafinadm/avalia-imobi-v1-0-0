@@ -40,11 +40,12 @@ export default function ApresentationDesktop(props) {
 
 
             <div className="row mt-5">
-                <div className="col-12 d-flex justify-content-center">
+                {newClientForm.profileImageUrl != "https://res.cloudinary.com/joaoserafinadm/image/upload/v1692760589/PUBLIC/user_template_ocrbrg.png" && (
+                    <div className="col-12 d-flex justify-content-center">
 
-                    <img src={newClientForm.profileImageUrl} alt="logo" id="logoItem" className={`${styles.profileImage}  fadeItem1s `} />
-                </div>
-
+                        <img src={newClientForm.profileImageUrl} alt="logo" id="logoItem" className={`${styles.profileImage}  fadeItem1s `} />
+                    </div>
+                )}
             </div>
 
             <div className="row d-flex justify-content-center mt-5">

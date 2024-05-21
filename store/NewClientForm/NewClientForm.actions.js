@@ -39,7 +39,8 @@ export function initialValues() {
             latitude: '',
             longitude: '',
             features: [],
-            files: []
+            files: [],
+            comments: ''
         }
     }
 }
@@ -76,7 +77,8 @@ export function porpertyTypeChange(data) {
             latitude: '',
             longitude: '',
             features: [],
-            files: []
+            files: [],
+            comments: ''
         }
     }
 }
@@ -394,6 +396,13 @@ export function deleteFeature(features, data) {
     return {
         type: 'DELETE_FEATURE',
         payload: features.filter(feature => feature !== data)
+    }
+}
+
+export function setComments(data) {
+    return {
+        type: 'SET_COMMENTS',
+        payload: data
     }
 }
 

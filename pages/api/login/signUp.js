@@ -42,16 +42,16 @@ export default async function (req, res) {
 
 
                 const notifications = [
-                    {
-                        _id: ObjectId(),
-                        dateAdded: new Date(),
-                        subject: 'star',
-                        text: "Bem vindo ao Avalia Imobi! Clique aqui para fazer um tour pela plataforma!",
-                        link: `https://app.avaliaimobi.com.br/companyEdit`,
-                        imageUrl: 'https://res.cloudinary.com/joaoserafinadm/image/upload/v1693963692/PUBLIC/TEMPLATE_IMG_shcaor.png',
-                        user_id: '',
-                        checked: false
-                    },
+                    // {
+                    //     _id: ObjectId(),
+                    //     dateAdded: new Date(),
+                    //     subject: 'star',
+                    //     text: "Bem vindo ao Avalia Imobi! Clique aqui para fazer um tour pela plataforma!",
+                    //     link: `https://app.avaliaimobi.com.br/companyEdit`,
+                    //     imageUrl: 'https://res.cloudinary.com/joaoserafinadm/image/upload/v1693963692/PUBLIC/TEMPLATE_IMG_shcaor.png',
+                    //     user_id: '',
+                    //     checked: false
+                    // },
                     {
                         _id: ObjectId(),
                         dateAdded: new Date(),

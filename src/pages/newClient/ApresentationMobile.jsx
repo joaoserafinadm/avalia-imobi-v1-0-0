@@ -12,11 +12,12 @@ export default function ApresentationMobile(props) {
     return (
         <>
             <div className="card m-3 fadeItem1s" style={{ height: "90%" }}>
-                <div>
+                {newClientForm.profileImageUrl != "https://res.cloudinary.com/joaoserafinadm/image/upload/v1692760589/PUBLIC/user_template_ocrbrg.png" && (
+                    <div>
+                        <img src={newClientForm.profileImageUrl} alt="logo" id="logoItem" className={`${styles.profileImage} ${styles.profileImagePosition} fadeItem1s `} />
 
-                    <img src={newClientForm.profileImageUrl} alt="logo" id="logoItem" className={`${styles.profileImage} ${styles.profileImagePosition} fadeItem1s `} />
-
-                </div>
+                    </div>
+                )}
                 <div className="card-body">
                     <div style={{ width: '45vw', height: '90px' }} className="d-flex justify-content-center align-items-center">
                         {isMobile() && newClientForm.logo && (
