@@ -27,21 +27,26 @@ export default function UploadFiles(props) {
             <div className="col-12">
 
                 <div className="row">
-                    <label htmlFor="" className="form-label">Importe as fotos do seu imóvel:</label>
+                    {filesArray.length < 8 && (
+                        <>
+
+                            <label htmlFor="" className="form-label">Importe as fotos do seu imóvel:</label>
 
 
-                    <StyledDropzone setFiles={array => { setFilesArray(filesArray.concat(array)); setForceUpdate(forceUpdate + 1) }} img baseStyle multiFiles>
-                        <div className="row mt-3 d-flex justify-content-center align-items-center" style={{ height: '100px' }}>
-                            <div className="col-12 d-flex justify-content-center align-items-center" >
-                                <span>
-                                    <small className="text-center">
-                                        Clique aqui ou arraste as imagens
-                                    </small>
-                                </span>
-                            </div>
-                        </div>
-                    </StyledDropzone>
-
+                            <StyledDropzone setFiles={array => { setFilesArray(filesArray.concat(array)); setForceUpdate(forceUpdate + 1) }} img baseStyle multiFiles filesLength={filesArray.length}>
+                                <div className="row mt-3 d-flex justify-content-center align-items-center" style={{ height: '100px' }}>
+                                    <div className="col-12 d-flex justify-content-center align-items-center" >
+                                        <span>
+                                            <small className="text-center small">
+                                                Clique aqui ou arraste as imagens
+                                            </small>
+                                        </span>
+                                    </div>
+                                </div>
+                            </StyledDropzone>
+                            <span className="small text-secondary">Máximo de 8 imagens</span>
+                        </>
+                    )}
                     <div className="col-12 my-2 d-flex align-items-center mb-5" style={{ "overflowX": 'scroll' }}>
 
 

@@ -39,7 +39,7 @@ export default function StyledDropzone(props) {
         outline: 'none',
         transition: 'border .24s ease-in-out'
     } : {
-    
+
     };
 
     const {
@@ -66,7 +66,9 @@ export default function StyledDropzone(props) {
     ]);
 
     useEffect(() => {
-        props.setFiles(acceptedFiles)
+
+        const newFiles = acceptedFiles.slice(0, 8 - +props.filesLength);
+        props.setFiles(newFiles)
     }, [acceptedFiles.length])
 
     return (

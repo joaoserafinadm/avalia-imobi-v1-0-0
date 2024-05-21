@@ -93,16 +93,16 @@ export default function ClientCard_02(props) {
                 :
                 <Swiper className="card-img-top "
                     style={{
-                        '--swiper-navigation-color': '#fff',
-                        '--swiper-pagination-color': '#fff',
-                        '--swiper-navigation-size': '25px',
+                        '--swiper-navigation-color': '#5a5a5a',
+                        '--swiper-pagination-color': '#f0f2f5',
+                        '--swiper-navigation-size': '28px',
                         zIndex: 0
                     }}
                     slidesPerView={1}
                     pagination={{ clickable: false }}
                     navigation>
                     {client?.files?.map((elem, index) => (
-                        <SwiperSlide key={index} className="text-center bg-secondary ">
+                        <SwiperSlide key={index} className="text-center  " style={{backgroundColor: '#f0f2f5'}}>
 
 
                             <img src={elem.url ? elem.url : URL.createObjectURL(elem)} className={`card-img-top  ${styles.clientCardImage}`} alt={`Slide ${index + 1}`} />
