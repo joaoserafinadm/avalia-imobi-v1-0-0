@@ -6,6 +6,7 @@ import { Swiper, SwiperSlide } from "swiper/react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons"
 import { faWhatsapp } from "@fortawesome/free-brands-svg-icons"
+import Link from "next/link"
 
 
 
@@ -18,6 +19,11 @@ export default function ClientInfo(props) {
     return (
         <>
             <div className="row">
+                <div className="col-12 d-flex justify-content-end">
+                    <Link href={`/clientEdit/${client?._id}`} onClick={() => console.log("edit", client)}>
+                        <span className="span">Editar</span>
+                    </Link>
+                </div>
                 <div className="col-12  col-md-6 d-flex  justify-content-center my-2">
                     <PropertyTypeCard type={client?.propertyType} />
                 </div>
@@ -136,6 +142,14 @@ export default function ClientInfo(props) {
                         )
                     })}
                 </div>
+                <div className="col-12 mb-2">
+                    <label for="geralForm" className=" fw-bold">Observações</label>
+
+                </div>
+                <div className="col-12 my-2 mb-4">
+                    <textarea name="" id="" disabled rows={3} className="form-control" value={client?.comments} />
+
+                </div>
                 <div className="px-3">
                     <hr />
                 </div>
@@ -177,7 +191,7 @@ export default function ClientInfo(props) {
 
 
 
-                                        <img src={elem.url} className={`imovel-img`} alt={`Slide ${index + 1}`}/>
+                                        <img src={elem.url} className={`imovel-img`} alt={`Slide ${index + 1}`} />
 
                                     </SwiperSlide>
                                 ))}

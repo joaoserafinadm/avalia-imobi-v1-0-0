@@ -241,7 +241,7 @@ export default function clientAdd() {
                                         <TypeApartamento />
                                         <GeralFeatures type="Apartamento" />
                                         <Location />
-                                        <UploadFiles setFiles={array => setFiles(array)} />
+                                        <UploadFiles setFiles={array => setFiles(array)} files={files} />
                                     </>
                                 )}
                                 {newClientForm.propertyType === "Casa" && (
@@ -249,7 +249,7 @@ export default function clientAdd() {
                                         <TypeCasa />
                                         <GeralFeatures type="Casa" />
                                         <Location />
-                                        <UploadFiles setFiles={array => setFiles(array)} />
+                                        <UploadFiles setFiles={array => setFiles(array)} files={files} />
                                     </>
                                 )}
                                 {newClientForm.propertyType === "Comercial" && (
@@ -257,7 +257,7 @@ export default function clientAdd() {
                                         <TypeComercial />
                                         <GeralFeatures type="Comercial" />
                                         <Location />
-                                        <UploadFiles setFiles={array => setFiles(array)} />
+                                        <UploadFiles setFiles={array => setFiles(array)} files={files} />
                                     </>
                                 )}
                                 {newClientForm.propertyType === "Terreno" && (
@@ -265,7 +265,7 @@ export default function clientAdd() {
                                         <TypeTerreno />
                                         <GeralFeatures type="Terreno" />
                                         <Location />
-                                        <UploadFiles setFiles={array => setFiles(array)} />
+                                        <UploadFiles setFiles={array => setFiles(array)} files={files} />
                                     </>
                                 )}
 

@@ -8,8 +8,6 @@ export default async function (req, res) {
 
         const data = req.body
 
-        console.log(data)
-
         if (!data.user_id) {
 
             res.status(400).json({ error: 'Missing parameters on request body' })

@@ -14,6 +14,7 @@ import { useSelector } from "react-redux"
 import formatDate from "../../utils/formatDate"
 import ClientFeatures from "./ClientFeatures"
 import { showClientInfo } from "../../utils/showClientInfo"
+import Link from "next/link"
 
 export default function ClientCard_02(props) {
 
@@ -102,7 +103,7 @@ export default function ClientCard_02(props) {
                     pagination={{ clickable: false }}
                     navigation>
                     {client?.files?.map((elem, index) => (
-                        <SwiperSlide key={index} className="text-center  " style={{backgroundColor: '#f0f2f5'}}>
+                        <SwiperSlide key={index} className="text-center  " style={{ backgroundColor: '#f0f2f5' }}>
 
 
                             <img src={elem.url ? elem.url : URL.createObjectURL(elem)} className={`card-img-top  ${styles.clientCardImage}`} alt={`Slide ${index + 1}`} />
@@ -215,11 +216,11 @@ export default function ClientCard_02(props) {
                                     id={"shareClientButton" + props.elem._id}>
                                     <FontAwesomeIcon icon={faShare} className="icon  text-secondary" />
                                 </button>
-
-                                <button type="button" class="btn btn-light border" id={"editClientButton" + props.elem._id}>
-                                    <FontAwesomeIcon icon={faEdit} className="icon  text-secondary" />
-                                </button>
-
+                                <Link href={`/clientEdit/${props.elem._id}`} className="btn btn-light border" id={"editClientButton" + props.elem._id}>
+                                    {/* <button type="button" class="btn btn-light border" id={"editClientButton" + props.elem._id}> */}
+                                        <FontAwesomeIcon icon={faEdit} className="icon  text-secondary" />
+                                    {/* </button> */}
+                                </Link>
                                 <button
                                     type="button"
                                     class="btn btn-light border"

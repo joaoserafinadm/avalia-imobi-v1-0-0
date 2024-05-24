@@ -2,7 +2,7 @@ import { faBuilding, faHome, faMapLocation, faStore } from "@fortawesome/free-so
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useDispatch, useSelector } from "react-redux";
 import { porpertyTypeChange, setPropertyType } from "../../store/NewClientForm/NewClientForm.actions";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 
 
@@ -13,8 +13,27 @@ export default function PropertyTypeCard(props) {
 
     const dispatch = useDispatch()
 
+    const prevPropertyTypeRef = useRef();
+
     useEffect(() => {
-        dispatch(porpertyTypeChange())
+
+
+        const prevPropertyType = prevPropertyTypeRef.current;
+
+        if (props.edit) {
+            // Executa propertyTypeChange somente se o valor anterior não for undefined
+            if (prevPropertyType !== undefined) {
+                dispatch(porpertyTypeChange());
+            }
+        } else {
+            dispatch(porpertyTypeChange());
+        }
+
+        // Atualiza o valor anterior de propertyType
+        prevPropertyTypeRef.current = newClientForm.propertyType;
+
+
+
 
     }, [newClientForm.propertyType])
 

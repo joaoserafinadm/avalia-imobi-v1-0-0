@@ -408,11 +408,9 @@ export function setComments(data) {
 
 export function setFiles(files, data) {
 
-    console.log('reduxFiles', files, data)
 
     let newFiles = files.concat(data)
 
-    console.log('newFiles', newFiles)
 
     return {
         type: 'SET_FILES',

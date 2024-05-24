@@ -84,6 +84,7 @@ export default function inventoryStatesReducer(state = {
     files: [],
     comments: ''
 }, action) {
+
     switch (action.type) {
         case 'INITIAL_VALUES':
             return action.payload

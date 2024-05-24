@@ -1,5 +1,21 @@
+import { useEffect } from "react";
 import isMobile from "../../../utils/isMobile";
 export default function Sections(props) {
+
+
+    useEffect(() => {
+
+        setTimeout(() => {
+
+            var myCarousel = document.querySelector("#" + props.idTarget)
+            var carousel = new bootstrap.Carousel(myCarousel)
+            carousel.to(props.sections.indexOf(props.section))
+        }, 200)
+    }, [props.section])
+
+
+
+
     return (
         <div className="row  border-bottom mb-4" >
             <div className="col-12 d-flex align-items-end" style={{ overflowX: isMobile() ? "scroll" : 'auto' }}>

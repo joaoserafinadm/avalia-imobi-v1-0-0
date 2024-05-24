@@ -13,6 +13,7 @@ import ClientFeatures from "../../clientsManagement/ClientFeatures"
 import baseUrl from "../../../utils/baseUrl"
 import { SpinnerSM } from "../../components/loading/Spinners"
 import axios from "axios"
+import { useRouter } from "next/router"
 
 
 
@@ -20,6 +21,10 @@ export default function ValuationViewPage(props) {
 
     const clientData = props.clientData
     // const userData = props.userData
+
+    const router = useRouter()
+
+    const disabled = router.query.disabled
 
 
     const [valueSelected, setValueSelected] = useState('')
@@ -329,7 +334,7 @@ export default function ValuationViewPage(props) {
                                     <div className="text-center">
 
 
-                                        <button type="button" className="btn btn-light btn-lg fs-4" id="continueButton" disabled={!valueSelected} onClick={() => handleSave()}>
+                                        <button type="button"  className="btn btn-light btn-lg fs-4" id="continueButton" disabled={!valueSelected ||disabled} onClick={() => handleSave()}>
                                             {/* <button type="button" className="btn btn-light btn-lg fs-4" data-bs-target="#valuationCarousel" data-bs-slide-to={3} id="continueButton" disabled={!valueSelected}> */}
 
                                             {loadingSave ?

@@ -15,9 +15,12 @@ import baseUrl from '../../../utils/baseUrl'
 import { useEffect, useState } from 'react'
 import { AiOutlineLeft } from '@react-icons/all-files/ai/AiOutlineLeft'
 import isMobile from '../../../utils/isMobile'
+import { useRouter } from 'next/router'
 
 
 export default function Title(props) {
+
+    const router = useRouter()
 
     return (
         <div className={`${styles.headerBox} ${styles.headerBackground} shadow indexBackground`} >
@@ -30,9 +33,9 @@ export default function Title(props) {
 
                 </div>
                 {props.backButton  && (
-                    <Link href='/'>
-                        <span type="button" className={styles.backButton}><AiOutlineLeft className="me-2" />Início</span>
-                    </Link>
+                    // <Link href='/'>
+                        <span type="button" className={styles.backButton} onClick={() => router.back()}><AiOutlineLeft className="me-2" />Voltar</span>
+                    // </Link>
                 )}
                 {props.title && (
 

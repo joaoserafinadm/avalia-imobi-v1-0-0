@@ -5,6 +5,7 @@ export function showModal(id) {
 }
 
 export function closeModal() {
+
     const handleCloseModalOnBack = (event) => {
 
         const backdrop = document.querySelectorAll('.modal-backdrop.show');

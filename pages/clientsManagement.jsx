@@ -46,8 +46,20 @@ export default function clientsManagement() {
     useEffect(() => {
         dataFunction(token.company_id)
         navbarHide(dispatch)
+        const backdrop = document.querySelectorAll('.modal-backdrop.show');
+        const body = document.querySelector('.modal-open');
 
+
+        if (backdrop && body) {
+            event.preventDefault();
+            for (let i = 0; i < backdrop.length; i++) {
+                backdrop[i].remove()
+                body.style.overflow = ''
+            }
+
+        }
     }, [])
+    
 
     useEffect(() => {
 

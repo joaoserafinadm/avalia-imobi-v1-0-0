@@ -1,10 +1,13 @@
 import { useState } from "react";
 import Sections from "../components/Sections";
+import { useRouter } from "next/router";
 
 
 
 
 export default function ShowValuationModal(props) {
+
+    const router = useRouter()
 
     const valuationUrl = props.valuationUrl
 
@@ -20,6 +23,7 @@ export default function ShowValuationModal(props) {
                 url: url
             });
             console.log('Conteúdo compartilhado com sucesso!');
+            router.push('/clientsManagement')
         } catch (error) {
             console.error('Erro ao compartilhar:', error);
         }
@@ -49,7 +53,7 @@ export default function ShowValuationModal(props) {
                             <div className="carousel-inner ">
                                 <div className="carousel-item active">
 
-                                    <iframe src={valuationUrl + '&userId=' + token.sub + '&disabled=true'} width="100%" height="100%" frameborder="0" allowfullscreen></iframe>
+                                    <iframe src={valuationUrl + '&userId=' + token.sub + '&disabled=true'} width="100%" style={{ height: "100vh" }} frameborder="0" allowfullscreen></iframe>
                                 </div>
                             </div>
                             <div className="carousel-inner ">
@@ -60,7 +64,7 @@ export default function ShowValuationModal(props) {
                         </div>
                     </div>
                     <div className="modal-footer">
-                        <button type="button" class="btn btn-secondary btn-sm" >Fechar</button>
+                        <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal" >Fechar</button>
                         <button type="button" class="btn btn-orange btn-sm">Baixar PDF</button>
                         <button type="button" class="btn btn-orange btn-sm" onClick={() => handleShare(valuationUrl + '&userId=' + token.sub)}>Compartilhar apresentação</button>
                     </div>

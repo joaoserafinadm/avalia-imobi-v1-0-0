@@ -6,11 +6,15 @@ import { useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserGear, faUserTie } from "@fortawesome/free-solid-svg-icons";
 import { userStatusName } from "../../utils/permissions";
-
+import Cookies from "js-cookie";
+import jwt from "jsonwebtoken";
 
 
 
 export default function Valuation(props) {
+
+    const token = jwt.decode(Cookies.get("auth"));
+
 
     const client = props.client
 
@@ -19,6 +23,22 @@ export default function Valuation(props) {
     const users = useSelector(state => state.users)
 
     const valuationUser = users?.find(elem => elem._id === client?.valuation?.user_id)
+
+
+
+    const handleShare = async (url) => {
+        try {
+            await navigator.share({
+                title: 'Avaliação do imóvel',
+                text: 'Avaliação do imóvel',
+                url: url
+            });
+            console.log('Conteúdo compartilhado com sucesso!');
+            // router.push('/clientsManagement')
+        } catch (error) {
+            console.error('Erro ao compartilhar:', error);
+        }
+    }
 
 
 
@@ -38,6 +58,17 @@ export default function Valuation(props) {
 
                 :
                 <div className="row">
+                    <div className="col-12 d-flex justify-content-center my-3">
+                        {client?.valuation?.status === 'pending' && (
+                            <button className="btn btn-outline-orange mx-1"
+                                onClick={() => handleShare(client?.valuation?.urlToken + '&userId=' + token.sub)}>
+                                Compartilhar avaliação
+                            </button>
+                        )}
+                        <button className="btn btn-outline-orange mx-1">Baixar PDF</button>
+
+                    </div>
+
                     <div className="col-12 d-flex">
 
 
@@ -46,6 +77,8 @@ export default function Valuation(props) {
                             <ValuationStatus client={client?.valuation?.status} />
                         </div>
                     </div>
+
+
                     <div className="col-12">
 
                         <label htmlFor="" className="fw-bold mb-2">Avaliação feita por:</label>
