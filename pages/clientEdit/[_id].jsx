@@ -196,7 +196,7 @@ export default function clientAdd() {
                 <SpinnerLG />
                 :
                 <>
-                    <Title title={'Adicionar cliente'} backButton />
+                    <Title title={'Editar cliente'} backButton />
                     <div className="pagesContent shadow fadeItem" id="pageTop">
                         <div className="row mt-3">
                             <label for="geralForm" className="form-label fw-bold">Informações de Cadastro</label>

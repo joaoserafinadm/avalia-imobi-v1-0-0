@@ -1,6 +1,6 @@
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { SpinnerLG } from "../../components/loading/Spinners";
+import { SpinnerLG, SpinnerSM } from "../../components/loading/Spinners";
 import validationNewClient from "../../../utils/validationNewClient";
 import { useSelector } from "react-redux";
 
@@ -26,7 +26,7 @@ export default function FinalizarButton(props) {
                 {props.loadingSave ?
                     <span
                         className="fs-3 text-secondary ">
-                        Salvando Informações <SpinnerLG />
+                        Salvando Informações <SpinnerSM className="ms-1" />
                     </span>
                     :
                     <>

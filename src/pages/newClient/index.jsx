@@ -143,24 +143,23 @@ export default function NewClient() {
             files: filesUrl
         }
 
-        // var myCarousel = document.querySelector('#clientFormCarousel')
-        // var carousel = new bootstrap.Carousel(myCarousel)
+
 
         if (!mobile) {
 
             var myCarousel = document.getElementById('clientFormCarouselDesktop');
             var carousel = new bootstrap.Carousel(myCarousel);
+        } else {
+            var myCarousel = document.querySelector('#clientFormCarousel')
+            var carousel = new bootstrap.Carousel(myCarousel)
         }
 
 
         await axios.post(`${baseUrl()}/api/addClient/clientForm`, data)
             .then(res => {
                 setLoadingSave(false)
-                carousel.next()
-                if (!mobile) {
-                    handleSlide('clientFormCarousel')
-                    carousel?.next()
-                }
+                carousel?.next()
+                handleSlide('clientFormCarousel')
             }).catch(e => {
                 setLoadingSave(false)
             })
@@ -251,7 +250,7 @@ export default function NewClient() {
                                                 <div className="card m-3 fadeItem1s" style={{ height: "90%", overflowY: 'scroll' }}>
                                                     <div className="card-body pb-5">
 
-                                                        <Slide05 setFiles={array => setFiles(array)} />
+                                                        <Slide05 setFiles={array => setFiles(array)} files={files} />
 
                                                     </div>
                                                 </div>
@@ -327,7 +326,7 @@ export default function NewClient() {
                                             </div>
                                             <div class={`carousel-item `} style={{ height: '100vh' }} >
 
-                                                <DesktopForm
+                                                <DesktopForm files={files}
                                                     setFiles={array => setFiles(array)}
                                                     handleSave={() => handleSave(newClientForm)}
                                                     loadingSave={loadingSave} />

@@ -52,7 +52,7 @@ export function FixedTopicsBottom({ children }) {
 
 
     return (
-        <div className={` ${fixed && `${styles.fixedTopicsBottom}  shadow `} `}>
+        <div className={` ${fixed && `${styles.fixedTopicsBottom} py-3  shadow `} `}>
             {children}
         </div>
     )

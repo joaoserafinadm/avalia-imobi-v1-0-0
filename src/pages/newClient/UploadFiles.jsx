@@ -18,7 +18,7 @@ export default function UploadFiles(props) {
     useEffect(() => {
         props.setFiles(props.files)
 
-    }, [props.files.length])
+    }, [props.files?.length])
 
 
     return (
@@ -27,13 +27,13 @@ export default function UploadFiles(props) {
             <div className="col-12">
 
                 <div className="row">
-                    {props.files.length < 8 && (
+                    {props.files?.length < 8 && (
                         <>
 
                             <label htmlFor="" className="form-label">Importe as fotos do seu imóvel:</label>
 
 
-                            <StyledDropzone setFiles={array => { props.setFiles(props.files.concat(array)); setForceUpdate(forceUpdate + 1) }} img baseStyle multiFiles filesLength={props.files.length}>
+                            <StyledDropzone setFiles={array => { props.setFiles(props.files?.concat(array)); setForceUpdate(forceUpdate + 1) }} img baseStyle multiFiles filesLength={props.files?.length}>
                                 <div className="row mt-3 d-flex justify-content-center align-items-center" style={{ height: '100px' }}>
                                     <div className="col-12 d-flex justify-content-center align-items-center" >
                                         <span>
@@ -50,12 +50,12 @@ export default function UploadFiles(props) {
                     <div className="col-12 my-2 d-flex align-items-center mb-5" style={{ "overflowX": 'scroll' }}>
 
 
-                        {props.files.map((elem, index) => {
+                        {props.files?.map((elem, index) => {
                             if (elem.url) {
                                 return (
                                     <div className="m-3 d-flex justify-content-center align-items-top">
                                         <img src={elem.url} alt="logo" id="logoItem" className="fileImgs fadeItem" />
-                                        <button type="button" class="btn-close ms-1" aria-label="Close" onClick={() => { props.setFiles([...props.files.slice(0, index), ...props.files.slice(index + 1)]) }}></button>
+                                        <button type="button" class="btn-close ms-1" aria-label="Close" onClick={() => { props.setFiles([...props.files?.slice(0, index), ...props.files?.slice(index + 1)]) }}></button>
                                     </div>
                                 )
                             } else {
@@ -63,7 +63,7 @@ export default function UploadFiles(props) {
                                 return (
                                     <div className="m-3 d-flex justify-content-center align-items-top">
                                         <img src={URL.createObjectURL(elem)} alt="logo" id="logoItem" className="fileImgs fadeItem" />
-                                        <button type="button" class="btn-close ms-1" aria-label="Close" onClick={() => { props.setFiles([...props.files.slice(0, index), ...props.files.slice(index + 1)]) }}></button>
+                                        <button type="button" class="btn-close ms-1" aria-label="Close" onClick={() => { props.setFiles([...props.files?.slice(0, index), ...props.files?.slice(index + 1)]) }}></button>
                                     </div>
                                 )
                             }

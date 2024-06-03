@@ -8,8 +8,11 @@ export default function Sections(props) {
         setTimeout(() => {
 
             var myCarousel = document.querySelector("#" + props.idTarget)
-            var carousel = new bootstrap.Carousel(myCarousel)
-            carousel.to(props.sections.indexOf(props.section))
+            var carousel = myCarousel ? new bootstrap.Carousel(myCarousel) : ''
+            if (carousel) {
+                carousel?.to(props.sections.indexOf(props.section))
+
+            }
         }, 200)
     }, [props.section])
 

@@ -126,9 +126,9 @@ export default function DesktopForm(props) {
                     {newClientForm.propertyType === "Apartamento" && (
                         <>
                             <TypeApartamento />
-                            <GeralFeatures  type="Apartamento"/>
+                            <GeralFeatures type="Apartamento" />
                             <Location />
-                            <UploadFiles setFiles={array => props.setFiles(array)} />
+                            <UploadFiles setFiles={array => props.setFiles(array)} files={props.files} />
                             <FinalizarButton handleSave={() => props.handleSave()} loadingSave={props.loadingSave} />
                         </>
                     )}
@@ -137,7 +137,7 @@ export default function DesktopForm(props) {
                             <TypeCasa />
                             <GeralFeatures type="Casa" />
                             <Location />
-                            <UploadFiles setFiles={array => props.setFiles(array)} />
+                            <UploadFiles setFiles={array => props.setFiles(array)} files={props.files} />
                             <FinalizarButton handleSave={() => props.handleSave()} loadingSave={props.loadingSave} />
 
                         </>
@@ -147,7 +147,7 @@ export default function DesktopForm(props) {
                             <TypeComercial />
                             <GeralFeatures type="Comercial" />
                             <Location />
-                            <UploadFiles setFiles={array => props.setFiles(array)} />
+                            <UploadFiles setFiles={array => props.setFiles(array)} files={props.files} />
                             <FinalizarButton handleSave={() => props.handleSave()} loadingSave={props.loadingSave} />
 
                         </>
@@ -157,7 +157,7 @@ export default function DesktopForm(props) {
                             <TypeTerreno />
                             <GeralFeatures type="Terreno" />
                             <Location />
-                            <UploadFiles setFiles={array => props.setFiles(array)} />
+                            <UploadFiles setFiles={array => props.setFiles(array)} files={props.files} />
                             <FinalizarButton handleSave={() => props.handleSave()} newClientForm={newClientForm} loadingSave={props.loadingSave} />
 
                         </>
