@@ -94,7 +94,7 @@ export default function Home() {
     return (
         <>
 
-            <div className='fadeItem1s' >
+            <div className='fadeItem1s mb-5' >
                 {/* <Title title={`Olá, ${token.firstName}!`} subtitle={'O que faremos hoje?'} /> */}
 
 
