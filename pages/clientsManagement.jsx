@@ -40,6 +40,7 @@ export default function clientsManagement() {
     const [clientSelected, setClientSelected] = useState('')
     const [clientsOrder, setClientsOrder] = useState('newest')
     const [typeSearch, setTypeSearch] = useState('')
+    const [statusSearch, setStatusSearch] = useState('')
 
 
 
@@ -59,13 +60,13 @@ export default function clientsManagement() {
 
         }
     }, [])
-    
+
 
     useEffect(() => {
 
         const newClientsArray = handleClientsArray(allClients, clientsOrder)
         setClientsArray(newClientsArray)
-    }, [searchValue, clientsOrder, typeSearch])
+    }, [searchValue, clientsOrder, typeSearch, statusSearch])
 
     const dataFunction = async (company_id) => {
 
@@ -100,12 +101,12 @@ export default function clientsManagement() {
         if (order === 'oldest') newCLientsArray = clients.slice().sort((a, b) => new Date(a.dateAdded) - new Date(b.dateAdded))
 
 
-        if (searchValue === '' && typeSearch === '') {
+        if (searchValue === '' && typeSearch === '' && statusSearch === '') {
             return newCLientsArray
-        } else if (searchValue !== '' && typeSearch === '') {
-            return newCLientsArray.filter(elem => elem.clientName.toLowerCase().includes(searchValue.toLowerCase()))
         } else {
-            return newCLientsArray.filter(elem => elem.clientName.toLowerCase().includes(searchValue.toLowerCase())).filter(elem => elem.propertyType === typeSearch)
+            return newCLientsArray.filter(elem => (elem.clientName.toLowerCase() + ' ' + elem.clientLastName.toLowerCase()).includes(searchValue.toLowerCase()))
+                .filter(elem => typeSearch ? elem.propertyType === typeSearch : elem)
+                .filter(elem => statusSearch ? elem.status === statusSearch : elem)
         }
 
 
@@ -148,7 +149,7 @@ export default function clientsManagement() {
 
 
                         <div className="row mt-3 fadeItem">
-                            <div className="col-12 col-md-6 col-xl-4 d-flex justify-content-start">
+                            <div className="col-12 col-md-6 col-xl-3 d-flex justify-content-start">
 
                                 <div class="input-group mb-3">
                                     <input type="text"
@@ -162,7 +163,7 @@ export default function clientsManagement() {
                                     <span class="input-group-text" id="basic-addon1"><FontAwesomeIcon icon={faSearch} className="icon" /></span>
                                 </div>
                             </div>
-                            <div className="col-12 col-md-6 col-xl-4">
+                            <div className="col-12 col-md-6 col-xl-3">
                                 <div class="input-group mb-3">
                                     <label class="input-group-text" for="clientsOrderSelect">Ordenar por:</label>
                                     <select class="form-select" id="clientsOrderSelect" value={clientsOrder} onChange={e => setClientsOrder(e.target.value)}>
@@ -171,15 +172,31 @@ export default function clientsManagement() {
                                     </select>
                                 </div>
                             </div>
-                            <div className="col-12 col-md-6 col-xl-4">
+                            <div className="col-12 col-md-6 col-xl-3">
                                 <div class="input-group mb-3">
-                                    <label class="input-group-text" for="clientsOrderSelect">Filtrar por:</label>
-                                    <select class="form-select" id="clientsOrderSelect" value={typeSearch} onChange={e => setTypeSearch(e.target.value)}>
+                                    <label class="input-group-text" for="typeSearchSelect">Filtrar por:</label>
+                                    <select class="form-select" id="typeSearchSelect" value={typeSearch} onChange={e => setTypeSearch(e.target.value)}>
                                         <option value="" selected>Todos</option>
                                         <option value="Apartamento" selected>Apartamento</option>
                                         <option value="Casa" selected>Casa</option>
                                         <option value="Comercial" selected>Comercial</option>
                                         <option value="Terreno" selected>Terreno</option>
+
+                                    </select>
+                                </div>
+                            </div>
+                            <div className="col-12 col-md-6 col-xl-3">
+                                <div class="input-group mb-3">
+                                    <label class="input-group-text" for="statusSearchSelect">Status:</label>
+                                    <select class="form-select" id="statusSearchSelect" value={statusSearch} onChange={e => setStatusSearch(e.target.value)}>
+                                        <option value="" selected>Todos</option>
+                                        <option value="outdated" selected>Aguardando cadastro do imóvel</option>
+                                        <option value="active" selected>Aguardando  avaliação</option>
+                                        <option value="evaluated" selected>Avaliado</option>
+                                        <option value="answered" selected>Respondido</option>
+
+
+
 
                                     </select>
                                 </div>
@@ -190,7 +207,7 @@ export default function clientsManagement() {
 
                         <div className="container carousel  " data-bs-touch="false" data-bs-interval='false' id="clientsManagementSection">
                             <Sections
-                                section={section} idTarget="clientsManagementSection"
+                                section={section} idTarget="clients3ManagementSection"
                                 setSection={value => setSection(value)}
                                 sections={["Meus Clientes", "Todos Clientes"]} />
 

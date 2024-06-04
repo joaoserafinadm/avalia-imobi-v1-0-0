@@ -7,6 +7,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons"
 import { faWhatsapp } from "@fortawesome/free-brands-svg-icons"
 import Link from "next/link"
+import ClientInfoApartamento from "./ClientInfoApartamento"
+import ClientInfoCasa from "./ClientInfoCasa"
+import ClientInfoComercial from "./ClientInfoComercial"
+import ClientInfoTerreno from "./ClientInfoTerreno"
 
 
 
@@ -43,91 +47,19 @@ export default function ClientInfo(props) {
             </div>
 
             <div className="row mt-3">
-                <div className="col-12 col-md-4 my-2 d-flex">
-                    <div className="bold me-1">
-                        Área Total:
-                    </div>
-                    <div>
-                        {client?.areaTotal ? client?.areaTotal : 0} m²
-                    </div>
-                </div>
-                <div className="col-12 col-md-6 my-2 d-flex">
-                    <div className="bold me-1">
-                        Área Total Privativa:
-                    </div>
-                    <div>
-                        {client?.areaTotalPrivativa ? client?.areaTotalPrivativa : 0} m²
-                    </div>
-
-                </div>
-                {client?.quartos >= 0 && (
-                    <div className="col-12 col-md-4 my-2 d-flex">
-                        <div>
-                            {client?.quartos ? client?.quartos : 0}
-
-                        </div>
-                        <div className="ms-1 bold">
-
-                            quarto{client?.quartos != 1 ? 's' : ''}
-                        </div>
-                    </div>
+                {client?.propertyType === 'Apartamento' && (
+                    <ClientInfoApartamento client={client} />
+                )}
+                {client?.propertyType === 'Casa' && (
+                    <ClientInfoCasa client={client} />
+                )}
+                {client?.propertyType === 'Comercial' && (
+                    <ClientInfoComercial client={client} />
+                )}
+                {client?.propertyType === 'Terreno' && (
+                    <ClientInfoTerreno client={client} />
                 )}
 
-
-
-                <div className="col-12 col-md-4 my-2 d-flex">
-                    <div>
-
-                        {client?.suites ? client?.suites : 0}
-                    </div>
-                    <div className="ms-1 bold">
-
-                        suíte{client?.suites != 1 ? 's' : ''}
-                    </div>
-                </div>
-                <div className="col-12 col-md-4 my-2 d-flex">
-                    <div>
-
-                        {client?.banheiros ? client?.banheiros : 0}
-                    </div>
-                    <div className="ms-1 bold">
-
-                        banheiro{client?.banheiros != 1 ? 's' : ''}
-                    </div>
-                </div>
-                <div className="col-12 col-md-4 my-2 d-flex">
-                    <div>
-
-                        {client?.vagasGaragem ? client?.vagasGaragem : 0}
-                    </div>
-                    <div className="ms-1 bold">
-
-                        vaga{client?.vagasGaragem != 1 ? 's' : ''} de garagem
-                    </div>
-                </div>
-                <div className="col-12 col-md-4 my-2 d-flex">
-                    <div>
-
-                        {client?.sacadas ? client?.sacadas : 0}
-                    </div>
-                    <div className="ms-1 bold">
-
-                        sacada{client?.sacadas != 1 ? 's' : ''}
-                    </div>
-                </div>
-                <div className="col-12 col-md-4 my-2 d-flex mb-4">
-
-                    <div>
-
-                        {client?.andar ? client?.andar : 0}º
-                    </div>
-                    <div className="ms-1 bold">
-
-                        andar{client?.sacadas != 1 ? 's' : ''}
-                    </div>
-
-
-                </div>
                 < div className="px-3" >
                     <hr />
                 </div >

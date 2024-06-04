@@ -187,7 +187,7 @@ export default function EditProfile() {
 
     return (
         <div id="pageTop">
-            <Title title={'Editar Cartão'} backButton='/' />
+            <Title title={'Meu perfil'} backButton='/' subtitle="Mantenha sempre suas informações atualizadas" />
             {loadingPage ?
                 <SpinnerLG />
                 :

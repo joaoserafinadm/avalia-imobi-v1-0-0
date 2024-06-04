@@ -54,19 +54,25 @@ export default function NewClient() {
     const [files, setFiles] = useState([])
     const [loadingSave, setLoadingSave] = useState(false)
     const [mobile, setMobile] = useState(false)
+    const [activePage, setActivePage] = useState(false)
 
     const [errorSection, setErrorSection] = useState('')
     const [errorData, setErrorData] = useState('')
 
     useEffect(() => {
-        dataFunction(queryUserId, queryClientId)
         setMobile(isMobile())
         dispatch(setSlide(initialSlide))
     }, [])
 
+    useEffect(() => {
+        if (queryUserId && queryClientId) {
+            dataFunction(queryUserId, queryClientId)
+        }
+    }, [queryUserId, queryClientId])
+
     const dataFunction = async (user_id, client_id) => {
 
-        if (newClientForm.client_id !== client_id) {
+        // if (newClientForm.client_id !== client_id) {
 
             dispatch(initialValues())
 
@@ -101,6 +107,7 @@ export default function NewClient() {
                     dispatch(setUserFirstName(res.data.userFirstName))
                     dispatch(setUserLastName(res.data.userLastName))
                     dispatch(setProfileImageUrl(res.data.profileImageUrl))
+                    setActivePage(res.data.status === 'active' ? true : false)
                     setLoadingPage(false)
 
                 }).catch(e => {
@@ -113,11 +120,11 @@ export default function NewClient() {
                         setErrorSection('error')
                     }
                 })
-        } else {
-            setLoadingPage(false)
-            setShowStartBtn(true)
+        // } else {
+        //     setLoadingPage(false)
+        //     setShowStartBtn(true)
 
-        }
+        // }
 
 
     }

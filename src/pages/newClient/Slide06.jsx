@@ -4,6 +4,7 @@ import PropertyTypeCard from "../../addClient/PropertyTypeCard";
 import SumarryApartamento from "./SumaryApartamento";
 import SumaryCasa from "./SumaryCasa";
 import SumaryTerreno from "./SumaryTerreno";
+import SumaryComercial from "./SumaryComercial";
 
 
 export default function Slide06(props) {
@@ -23,7 +24,7 @@ export default function Slide06(props) {
                 <SumaryCasa files={props.files} />
             )}
             {newClientForm.propertyType === 'Comercial' && (
-                <SumarryApartamento files={props.files} />
+                <SumaryComercial files={props.files} />
             )}
             {newClientForm.propertyType === 'Terreno' && (
                 <SumaryTerreno files={props.files} />

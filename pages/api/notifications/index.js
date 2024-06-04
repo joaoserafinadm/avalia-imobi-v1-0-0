@@ -11,7 +11,8 @@ const authenticated = fn => async (req, res) => {
     })
 }
 
-export default authenticated(async (req, res) => {
+// export default authenticated(async (req, res) => {
+export default async (req, res) => {
 
     if (req.method === 'GET') {
         const { user_id } = req.query
@@ -38,9 +39,11 @@ export default authenticated(async (req, res) => {
 
     if (req.method === "POST") {
 
-        const { company_id, user_id, text, link, } = req.body
+        const { user_id, notification } = req.body
 
-        if (!company_id || !user_id) {
+        console.log("req.bodynot", req.body)
+
+        if (!user_id) {
 
             res.status(400).json({ error: "Missing parameters on request body" })
 
@@ -48,39 +51,45 @@ export default authenticated(async (req, res) => {
 
             const { db } = await connect()
 
-            const companyExists = await db.collection('companies').findOne({ _id: ObjectId(company_id) })
+            const userExist = await db.collection('users').findOne({ _id: ObjectId(user_id) })
 
-            if (!companyExists) {
-                res.status(400).json({ error: "Company does not exist" })
+            console.log("req.userExist", userExist)
+
+
+            if (!userExist) {
+                res.status(400).json({ error: "User does not exist" })
             } else {
 
                 const data = {
-                    _id: ObjectId(),
-                    user_id,
+                    ...notification,
                     dateAdded: new Date(),
                     checked: false,
-                    subject,
-                    text,
-                    link
+                    _id: new ObjectId(),
                 }
-
-                const result = await db.collection('companies').updateOne(
-                    { _id: ObjectId(company_id) },
+                const result = await db.collection('users').updateOne(
+                    { _id: ObjectId(user_id) },
                     {
-                        $addToSet: {
-                            "notifications": data
+                        $push: {
+                            notifications: {
+                                $each: [data],
+                                $position: 0
+                            }
                         }
                     })
 
-                console.log(result)
-
-                if (result) {
-                    res.status(400).json({ error: 'Network error' })
+                if (result.matchedCount) {
+                    res.status(200).json({ message: 'Notifications sent successfully.' });
                 } else {
-                    res.status(200).json({ message: 'Notifications updated' })
+                    res.status(400).json({ error: 'Network error' })
                 }
 
+
+
+
             }
+
+
+
         }
 
     } else if (req.method === "PATCH") {
@@ -127,4 +136,5 @@ export default authenticated(async (req, res) => {
 
 
 
-})
+}
+// )

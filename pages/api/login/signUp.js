@@ -58,7 +58,7 @@ export default async function (req, res) {
                         subject: 'star',
                         text: "Configure a sua imobiliaria.",
                         link: `https://app.avaliaimobi.com.br/companyEdit`,
-                        imageUrl: 'https://res.cloudinary.com/joaoserafinadm/image/upload/v1695601557/PUBLIC/6_otqvgl.png',
+                        imageUrl: 'https://res.cloudinary.com/joaoserafinadm/image/upload/v1717456528/AVALIA%20IMOBI/NOTIFICATION_IMG/kwg5mqypafhmbxnt5sv8.png',
                         user_id: '',
                         checked: false
                     },
@@ -68,7 +68,7 @@ export default async function (req, res) {
                         subject: 'star',
                         text: "Configure o seu perfil.",
                         link: `https://app.avaliaimobi.com.br/editProfile`,
-                        imageUrl: 'https://res.cloudinary.com/joaoserafinadm/image/upload/v1695601556/PUBLIC/2_fbxre3.png',
+                        imageUrl: 'https://res.cloudinary.com/joaoserafinadm/image/upload/v1717456528/AVALIA%20IMOBI/NOTIFICATION_IMG/vnz7fkp5hvfty4hnahcq.png',
                         user_id: '',
                         checked: false
                     }

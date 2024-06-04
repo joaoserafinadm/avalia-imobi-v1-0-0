@@ -49,7 +49,7 @@ export default function FixedButtons(props) {
                     return false
                 }
             } else if (form.propertyType === 'Comercial') {
-                if (!form.areaTotal || !form.areaTotalPrivativa || !form.quartos || !form.suites || !form.banheiros || !form.vagasGaragem) {
+                if (!form.areaTotal || !form.areaTotalPrivativa || !form.pavimentos || !form.salas || !form.banheiros || !form.vagasGaragem) {
                     return true
                 } else {
                     return false

@@ -3,7 +3,7 @@ import Map from "./Map";
 import PropertyTypeCard from "../../addClient/PropertyTypeCard";
 
 
-export default function SumaryTerreno(props) {
+export default function SumaryComercial(props) {
 
     const newClientForm = useSelector(state => state.newClientForm)
 
@@ -14,7 +14,7 @@ export default function SumaryTerreno(props) {
             <div className="col-12 d-flex  justify-content-center my-2">
                 <PropertyTypeCard type={newClientForm.propertyType} />
             </div>
-            <div className="col-12 my-2 d-flex justify-content-center">
+            <div className="col-12 my-2 d-flex">
                 <div className="bold me-1">
                     Área Total:
                 </div>
@@ -22,67 +22,57 @@ export default function SumaryTerreno(props) {
                     {newClientForm.areaTotal} m²
                 </div>
             </div>
-            {newClientForm.terrenoIrregular && (
-                <>
-                    <div className="col-12 my-2 d-flex">
-                        <div className="bold me-1">
-                            Frente:
-                        </div>
-                        <div>
-                            {newClientForm.frente} m
-                        </div>
-                    </div>
-                    <div className="col-12 my-2 d-flex">
-                        <div className="bold me-1">
-                            Fundos:
-                        </div>
-                        <div>
-                            {newClientForm.fundos} m
-                        </div>
-                    </div>
-                    <div className="col-12 my-2 d-flex">
-                        <div className="bold me-1">
-                            Lateral Esquerda:
-                        </div>
-                        <div>
-                            {newClientForm.lateralEsquerda} m
-                        </div>
-                    </div>
-                    <div className="col-12 my-2 d-flex">
-                        <div className="bold me-1">
-                            Lateral Direita:
-                        </div>
-                        <div>
-                            {newClientForm.lateralDireita} m
-                        </div>
-                    </div>
-                </>
+            <div className="col-12 my-2 d-flex">
+                <div className="bold me-1">
+                    Área Total Privativa:
+                </div>
+                <div>
+                    {newClientForm.areaTotalPrivativa} m²
+                </div>
 
-            )}
-            {!newClientForm.terrenoIrregular && (
-                <>
-                    <div className="col-12 my-2 d-flex">
-                        <div className="bold me-1">
-                            Largura:
-                        </div>
-                        <div>
-                            {newClientForm.largura} m
-                        </div>
-                    </div>
-                    <div className="col-12 my-2 d-flex">
-                        <div className="bold me-1">
-                            Comprimento:
-                        </div>
-                        <div>
-                            {newClientForm.comprimento} m
-                        </div>
-                    </div>
-                </>
+            </div>
+            <div className="col-12 my-2 d-flex">
+                <div>
+                    {newClientForm.pavimentos}
 
-            )}
+                </div>
+                <div className="ms-1 bold">
 
+                    pavimento{newClientForm.pavimentos > 1 ? 's' : ''}
+                </div>
+            </div>
+            <div className="col-12 my-2 d-flex">
+                <div>
+                    {newClientForm.salas}
 
+                </div>
+                <div className="ms-1 bold">
 
+                    sala{newClientForm.salas > 1 || newClientForm.salas === "Mais de 5" ? 's' : ''}
+                </div>
+            </div>
+            
+            <div className="col-12 my-2 d-flex">
+                <div>
+
+                    {newClientForm.banheiros}
+                </div>
+                <div className="ms-1 bold">
+
+                    banheiro{newClientForm.banheiros > 1 ? 's' : ''}
+                </div>
+            </div>
+            <div className="col-12 my-2 d-flex">
+                <div>
+
+                    {newClientForm.vagasGaragem}
+                </div>
+                <div className="ms-1 bold">
+
+                    vaga{newClientForm.vagasGaragem > 1 || newClientForm.vagasGaragem === "Mais de 10" ? 's' : ''} de garagem
+                </div>
+            </div>
+            
             < div className="px-3" >
                 <hr />
             </div >
@@ -101,6 +91,7 @@ export default function SumaryTerreno(props) {
                 <hr />
             </div>
 
+
             <div className="col-12 mb-2">
                 <label for="geralForm" className=" fw-bold">Observações</label>
             </div>
@@ -109,7 +100,6 @@ export default function SumaryTerreno(props) {
 
             <textarea className="form-control" rows={3} value={newClientForm.comments} disabled></textarea>
 
-                {/* <span>{`${newClientForm.comments.replace(/\r?\n/g, '\\\n')}`}</span> */}
             </div>
             <div className="px-3">
                 <hr />

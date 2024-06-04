@@ -4,6 +4,7 @@ import { TypeAnimation } from "react-type-animation"
 import { useEffect, useState } from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons"
+import scrollTo from "../../../utils/scrollTo"
 
 
 
@@ -26,6 +27,7 @@ export default function ApresentationDesktop(props) {
             }, 9000)
         }
         setTimeout(() => {
+            scrollTo("startButton")
             setShowStartButton(true)
         }, 10000)
 
@@ -85,7 +87,7 @@ export default function ApresentationDesktop(props) {
                     {showStartButton && (
 
                         <button
-                            type='button'
+                            type='button' id="startButton"
                             className="btn btn-light btn-lg fs-4 text-secondary fadeItem"
                             data-bs-target="#clientFormCarouselDesktop"
                             data-bs-slide="next">

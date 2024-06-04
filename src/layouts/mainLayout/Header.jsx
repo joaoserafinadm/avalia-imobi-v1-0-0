@@ -14,6 +14,9 @@ import { useSelector } from "react-redux";
 import window2Mobile from "../../../utils/window2Mobile";
 import NotificationsSM from "./components/NotificationsSM";
 import Alerts from "../../alerts";
+import api from "../../../utils/api";
+import useSWR from 'swr'
+import useSWRInfinite from "swr/infinite";
 
 export default function Header(props) {
 
@@ -26,6 +29,13 @@ export default function Header(props) {
     const [notifications, setNotifications] = useState([])
     const [dropdownStatus, setDropdownStatus] = useState(true)
     const [showNotification, setShowNotification] = useState(false)
+
+
+    const { data, error, isLoading } = useSWR(`/api/notifications?user_id=${token?.sub}`, api)
+
+    useEffect(() => {
+        setNotifications(data?.data?.data || [])
+    }, [data])
 
     useEffect(() => {
         dataFunction(token.sub)

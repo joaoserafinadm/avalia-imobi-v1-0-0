@@ -26,7 +26,7 @@ export default function FinalizarButton(props) {
                 {props.loadingSave ?
                     <span
                         className="fs-3 text-secondary ">
-                        Salvando Informações <SpinnerSM className="ms-1" />
+                        Salvando as informações <SpinnerSM className="ms-1" />
                     </span>
                     :
                     <>

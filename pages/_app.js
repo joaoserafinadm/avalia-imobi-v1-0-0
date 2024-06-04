@@ -46,7 +46,7 @@ import NewClient from "../src/pages/newClient/index.jsx";
 import { SessionProvider } from "next-auth/react"
 import { closeModal } from "../utils/modalControl.js";
 import ValuationPage from "../src/pages/valuation/index.jsx";
-
+import { SWRConfig } from "swr";
 
 // import SignUp from '../src/components/signUp/SignUp'
 // import PremiumAccount from '../src/components/premiumAccount/PremiumAccount'
@@ -55,7 +55,7 @@ export default function MyApp({ Component, pageProps }) {
 
 
 
-  
+
 
     useEffect(() => {
         closeModal()
@@ -191,23 +191,28 @@ export default function MyApp({ Component, pageProps }) {
             return (
                 <Provider store={store}>
                     <PersistGate persistor={persistedStore}>
-                        <Head>
-                            <title>Avalia Imobi</title>
-                            <meta
-                                name="viewport"
-                                content="width=device-width, initial-scale=1, shrink-to-fit=no"
-                            />
-                            <link rel="icon" href="favicon.ico" />
+                        <SWRConfig
+                            value={{
+                                refreshInterval: 15000,
+                            }}>
+                            <Head>
+                                <title>Avalia Imobi</title>
+                                <meta
+                                    name="viewport"
+                                    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+                                />
+                                <link rel="icon" href="favicon.ico" />
 
-                            <link rel="manifest" href="/manifest.json" />
-                            <link rel="apple-touch-icon" href="/icon.png" />
-                            <meta name="theme-color" content="#5a5a5a" />
-                        </Head>
+                                <link rel="manifest" href="/manifest.json" />
+                                <link rel="apple-touch-icon" href="/icon.png" />
+                                <meta name="theme-color" content="#5a5a5a" />
+                            </Head>
 
-                        <MainLayout>
+                            <MainLayout>
 
-                            <Component  {...pageProps} />
-                        </MainLayout>
+                                <Component  {...pageProps} />
+                            </MainLayout>
+                        </SWRConfig>
                     </PersistGate>
                 </Provider>
             );

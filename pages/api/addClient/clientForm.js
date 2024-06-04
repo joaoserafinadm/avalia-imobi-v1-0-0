@@ -1,6 +1,8 @@
+import axios from 'axios'
 import { connect } from '../../../utils/db'
 import bcrypt from 'bcrypt'
 import { ObjectId } from 'bson'
+import baseUrl from '../../../utils/baseUrl'
 
 export default async function (req, res) {
 
@@ -8,7 +10,6 @@ export default async function (req, res) {
 
         const { user_id, client_id } = req.query
 
-        console.log("req.body", user_id, client_id)
 
         if (!user_id || !client_id) {
 
@@ -46,7 +47,8 @@ export default async function (req, res) {
                         user_id: user_id,
                         userFirstName: userExist?.firstName,
                         userLastName: userExist?.lastName,
-                        profileImageUrl: userExist?.profileImageUrl
+                        profileImageUrl: userExist?.profileImageUrl,
+                        status: clientExist.status
                     }
                     res.status(200).json(data)
 
@@ -71,7 +73,6 @@ export default async function (req, res) {
 
         const data = req.body
 
-        console.log(data)
 
         if (!data.user_id) {
 
@@ -131,7 +132,26 @@ export default async function (req, res) {
                         })
 
 
-                        if (result) {
+
+
+
+                        if (result.matchedCount) {
+
+                            const notification = {
+                                user_id: userExist._id,
+                                subject: "clientUpdated",
+                                title: 'Imóvel atualizado!',
+                                text: `As informações de '${clientExist.clientName}' foram atualizadas! Clique aqui para avaliar o imóvel.`,
+                                imageUrl: "https://res.cloudinary.com/joaoserafinadm/image/upload/v1717456528/AVALIA%20IMOBI/NOTIFICATION_IMG/jh9wkm7dz6xcwvg9u8x8.png",
+                                link: "https://app.avaliaimobi.com.br/clientsManagement/" + data.client_id,
+                            }
+
+                            await axios.post(`${baseUrl()}/api/notifications`, {
+                                user_id: userExist._id,
+                                notification: notification
+                            })
+
+
                             res.status(200).json({ success: 'Client updated successfully' })
                         } else {
                             res.status(400).json({ error: 'Error updating client' })
