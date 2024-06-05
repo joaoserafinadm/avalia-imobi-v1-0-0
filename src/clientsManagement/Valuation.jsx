@@ -58,6 +58,12 @@ export default function Valuation(props) {
 
                 :
                 <div className="row">
+                    <div className="col-12 d-flex justify-content-end">
+
+                        <Link href={"/valuationEdit/" + client?._id}>
+                            <span className="span" data-bs-dismiss="modal">editar</span>
+                        </Link>
+                    </div>
                     <div className="col-12 d-flex justify-content-center my-3">
                         {client?.valuation?.status === 'pending' && (
                             <button className="btn btn-outline-orange mx-1"
@@ -114,7 +120,7 @@ export default function Valuation(props) {
                     </div>
 
                     <ValuationPropertyCalc client={client} />
-                    <div className="col-12">
+                    <div className="col-12 text-center">
                         <label htmlFor="" className="fw-bold mb-2">Imóveis para comparação</label>
 
 

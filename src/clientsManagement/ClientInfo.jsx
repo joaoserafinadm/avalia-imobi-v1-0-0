@@ -1,5 +1,5 @@
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import PropertyTypeCard from "../addClient/PropertyTypeCard"
 import Map from "../pages/newClient/Map"
 import { Swiper, SwiperSlide } from "swiper/react"
@@ -11,6 +11,7 @@ import ClientInfoApartamento from "./ClientInfoApartamento"
 import ClientInfoCasa from "./ClientInfoCasa"
 import ClientInfoComercial from "./ClientInfoComercial"
 import ClientInfoTerreno from "./ClientInfoTerreno"
+import tippy from "tippy.js"
 
 
 
@@ -19,6 +20,37 @@ export default function ClientInfo(props) {
 
     const client = props.client
 
+    useEffect(() => {
+        tippy('#emailButton', {
+            content: "Enviar e-mail",
+            placement: 'bottom'
+        })
+        tippy('#whatsButton', {
+            content: "Conversar pelo Whatsapp",
+            placement: 'bottom'
+        })
+    }, [client])
+
+
+    const handleWhatsapp = (celular) => {
+
+        const formattedPhoneNumber = celular.replace(/\D/g, '')
+        const whatsappURL = `https://api.whatsapp.com/send?phone=${formattedPhoneNumber}`;
+        window.open(whatsappURL, '_blank');
+
+    }
+
+
+    const handleEmail = (email) => {
+        // const email = 'example@example.com';
+        // const subject = 'Assunto do Email';
+        // const body = 'Corpo do email aqui';
+        const mailtoLink = `mailto:${email}`;
+        // const mailtoLink = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+        // Abrir uma nova janela para o link mailto
+        window.location.href = mailtoLink;
+    };
 
     return (
         <>
@@ -37,10 +69,21 @@ export default function ClientInfo(props) {
                             <span className="fs-2">{client?.clientName} {client?.clientLastName}</span>
                         </div>
                         <div className="col-12 text-secondary">
-                            <FontAwesomeIcon icon={faEnvelope} className="me-2" /><span>{client?.email}</span>
+                            <button className="btn btn-sm btn-outline-secondary" style={{ width: '40px' }}
+                             id="emailButton" onClick={() => handleEmail(client?.email)}>
+
+                                <FontAwesomeIcon icon={faEnvelope} className="D" />
+                            </button>
+
+                            <span className="ms-2">{client?.email}</span>
                         </div>
-                        <div className="col-22 text-secondary">
-                            <FontAwesomeIcon icon={faWhatsapp} className="me-1" /><span>{client?.celular}</span>
+                        <div className="col-22 text-secondary mt-1">
+                            <button className="btn btn-sm btn-outline-secondary " style={{ width: '40px' }}
+                                id="whatsButton" onClick={() => handleWhatsapp(client?.celular)}>
+
+                                <FontAwesomeIcon icon={faWhatsapp} className="" />
+                            </button>
+                            <span className="ms-2">{client?.celular}</span>
                         </div>
                     </div>
                 </div>

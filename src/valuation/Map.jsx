@@ -135,10 +135,10 @@ export default function Map(props) {
                     >
                         <Marker position={props.location}
                             label={{
-                                text: 'Seu imóvel',
-                                color: 'black', // Cor do texto do rótulo
-                                fontWeight: 'bold', // Peso da fonte do rótulo
-                                fontSize: '16px',
+                                // text: 'Seu imóvel',
+                                // color: 'black', // Cor do texto do rótulo
+                                // fontWeight: 'bold', // Peso da fonte do rótulo
+                                // fontSize: '16px',
 
                             }}
                         />

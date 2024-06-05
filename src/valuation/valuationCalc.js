@@ -34,9 +34,10 @@ export default function valuationCalc(porpertyArray, client, valorIdealRange, cu
         valorideal = averagePrice * clientAraeTotalPrivativa * (1 + valorIdealRange / 100) / averageAreaTotalPrivativa
     } else {
         valorMetroQuadrado = averagePrice / averageAreaTotal
-        valorAvaliacao = averagePrice * clientAraeTotalPrivativa / averageAreaTotalPrivativa
+        valorAvaliacao = averagePrice * clientAraeTotal / averageAreaTotal
         valorideal = averagePrice * clientAraeTotal * (1 + valorIdealRange / 100) / averageAreaTotal
     }
+
 
     const curtoPrazo = valorideal * (1 - curtoPrazoRange / 100)
     const longoPrazo = valorideal * (1 + longoPrazoRange / 100)

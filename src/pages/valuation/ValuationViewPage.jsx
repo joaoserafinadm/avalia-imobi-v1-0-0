@@ -208,9 +208,9 @@ export default function ValuationViewPage(props) {
                                         <div className="card">
 
                                             <div className="card-body text-center">
-                                                <span className="bold fs-5">Área privativa</span>
+                                                <span className="bold fs-5">{clientData?.valuation?.valuationCalc?.areaPrivativa ? "Área privativa": "Área total"}</span>
                                                 <div className="d-flex justify-content-center align-items-center">
-                                                    <span className="text-secondary fs-3 fw-bold">{clientData?.areaTotalPrivativa}</span>
+                                                    <span className="text-secondary fs-3 fw-bold">{clientData?.valuation?.valuationCalc?.areaPrivativa ? clientData?.areaTotalPrivativa :clientData?.areaTotal }</span>
                                                     <span className="text-success ms-1 fs-5">m²</span>
                                                 </div>
                                             </div>
@@ -348,7 +348,7 @@ export default function ValuationViewPage(props) {
                                         </button> <br />
                                         {!valueSelected && (
 
-                                            <span className="small text-danger">Para continuar você deve selecionar o valor do imóvel </span>
+                                            <span className="small text-danger text-center">Para continuar você deve selecionar o valor do imóvel </span>
                                         )}
 
                                     </div>

@@ -10,13 +10,13 @@ export default function PropertyUrlModal(props) {
                 <div class="modal-content ">
                     <div class="modal-header">
                         <h5 class="modal-title" id="propertyUrlModalLabel">Visualizar imóvel</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={() => props.setPropertyUrl('')}></button>
                     </div>
                     <div class="modal-body-lg" style={{ height: '75vh' }}>
                         <iframe src={props.propertyUrl} style={{ width: '100%', height: '100%' }}></iframe>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onClick={() => props.setPropertyUrl('')}>Fechar</button>
                     </div>
                 </div>
             </div>

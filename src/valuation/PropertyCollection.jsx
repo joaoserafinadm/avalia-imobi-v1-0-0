@@ -50,8 +50,8 @@ export default function PropertyCollection(props) {
 
 
                                 <div className="card cardAnimation shadow mx-1 my-2" type="button" data-bs-toggle="modal" data-bs-target="#propertyAddModal" style={{ height: '100%' }} >
-                                    <div className="card-body" style={{ height: '550px ' }} >
-                                        <div className="row" style={{ height: "100%" }}>
+                                    <div className="card-body"  >
+                                        <div className="row my-5" style={{ height: "100%" }}>
                                             <div className="col-12 d-flex justify-content-center align-items-center text-center">
                                                 <div>
 

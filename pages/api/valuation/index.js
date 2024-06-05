@@ -52,7 +52,6 @@ export default authenticated(async (req, res) => {
 
         const { company_id, user_id, client_id, propertyArray, calcVariables, valuationCalc } = req.body
 
-        console.log(req.body)
 
 
         if (!company_id || !user_id || !client_id || !propertyArray?.length || !calcVariables || !valuationCalc) {
@@ -99,7 +98,6 @@ export default authenticated(async (req, res) => {
                         urlToken
                     }
 
-                    console.log(data)
 
                     const result = await db.collection('companies').updateOne(
                         { _id: ObjectId(company_id), "clients._id": ObjectId(client_id) },

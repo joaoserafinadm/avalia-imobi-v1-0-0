@@ -1,16 +1,51 @@
 import { faStar } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Icons from "../../components/icons"
 import PdfConfigModal from "./PdfConfigModal"
+import axios from "axios"
+import baseUrl from "../../../utils/baseUrl"
+import { SpinnerSM } from "../../components/loading/Spinners"
 
 
 
 
 export default function FinalPage(props) {
 
+    const { queryClientId, queryUserId, clientData } = props
+
     const [comment, setCommet] = useState('')
     const [stars, setStars] = useState(0)
+
+    const [loadingSave, setLoadingSave] = useState(false)
+
+
+
+    const handleSave = async () => {
+
+        setLoadingSave(true)
+
+        await axios.patch(`${baseUrl()}/api/valuation/valuationAvaliation`, {
+            user_id: queryUserId,
+            client_id: queryClientId,
+            stars: stars,
+            comment: comment
+        }).then(res => {
+
+            var myCarousel = document.querySelector('#valuationCarousel')
+            var carousel = new bootstrap.Carousel(myCarousel)
+            carousel.next()
+            setLoadingSave(false)
+
+        }).catch(e => {
+            console.log('e', e)
+
+        })
+
+
+    }
+
+
 
 
     return (
@@ -35,7 +70,10 @@ export default function FinalPage(props) {
                         <div className="col-12 d-flex justify-content-center ">
                             <div className="col-12 col-lg-8 text-center">
 
-                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="4"></textarea>
+                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="4"
+                                    value={comment} onChange={(e) => { setCommet(e.target.value) }}    >
+
+                                </textarea>
                             </div>
 
                         </div>
@@ -71,24 +109,33 @@ export default function FinalPage(props) {
 
                         </div>
 
-                        <div className="col-12 d-flex justify-content-center my-3 mb-5">
-                            <div className="col-12 col-lg-8 text-center">
-                                <span className="fs-4">
-                                    Clique o botão abaixo para fazer o download do PDF completo da avaliação do seu imóvel
-                                </span>
+
+                        <div className="col-12 d-flex justify-content-center my-5 mb-5">
+                            <div className="text-center">
+                                <button type="button" className="btn btn-light btn-lg fs-4" id="continueButton" disabled={!stars} onClick={() => handleSave()}>
+                                    {/* <button type="button" className="btn btn-light btn-lg fs-4" data-bs-target="#valuationCarousel" data-bs-slide-to={3} id="continueButton" disabled={!valueSelected}> */}
+
+                                    {loadingSave ?
+
+                                        <SpinnerSM className="mx-5" />
+                                        :
+                                        <>
+                                            Continuar < Icons icon="a-r" />
+                                        </>
+                                    }
+                                </button> <br />
+                                {!stars && (
+
+                                    <span className="small text-danger text-center">Para continuar você deve dar uma nota para a avaliação </span>
+                                )}
+
+
+
+
+
 
                             </div>
                         </div>
-                        <div className="col-12 d-flex justify-content-center my-3 mb-5">
-                            <div className="col-12 col-lg-8 text-center">
-                                <button className="btn btn-secondary btn-lg"
-                                    data-bs-toggle="modal" data-bs-target="#pdfConfigModal">
-                                    Baixar PDF
-                                </button>
-                            </div>
-                        </div>
-
-
                     </div>
                 </div>
             </div>

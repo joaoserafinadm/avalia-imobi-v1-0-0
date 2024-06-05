@@ -11,6 +11,8 @@ import PropertyUrlModal from "./PropertyUrlModal";
 import FinalPage from "./FinalPage";
 import tippy from "tippy.js";
 import ContentPage from "./ContentPage";
+import DownloadPage from "./DownloadPage";
+import ErrorPage from "./ErrorPage";
 
 
 export default function ValuationPage() {
@@ -29,12 +31,37 @@ export default function ValuationPage() {
 
     const [isOpen, setIsOpen] = useState(false);
 
+    const [slide, setSlide] = useState(0)
+
 
 
 
     useEffect(() => {
         dataFunction(queryUserId, queryClientId)
     }, [])
+
+    useEffect(() => {
+        if (!loadingPage) {
+
+            const answeredStatus = clientData?.valuation?.status === 'answered' ? true : false
+            const avaliationStatus = clientData?.valuation?.stars > 0 ? true : false
+
+
+            if (avaliationStatus) {
+                setSlide("downloadPage")
+            }
+            else if (!avaliationStatus && answeredStatus) {
+                setSlide("finalPage")
+
+            } else if(clientData) {
+                setSlide("start")
+            } else {
+                setSlide("errorPage")
+            }
+        }
+
+
+    }, [loadingPage])
 
 
     const dataFunction = async (user_id, client_id) => {
@@ -48,9 +75,11 @@ export default function ValuationPage() {
             params: data
         }).then(res => {
             console.log(res)
-            setLoadingPage(false)
             setClientData(res.data.client)
             setUserData(res.data.user)
+            setLoadingPage(false)
+
+
         }).catch(e => {
             setLoadingPage(false)
             console.log('e', e)
@@ -72,7 +101,7 @@ export default function ValuationPage() {
 
                     <div id="valuationCarousel" className="col-12 carousel slide " data-bs-touch="false" data-bs-interval='false' style={{ zIndex: 1 }}>
                         <div class="carousel-inner">
-                            <div class="carousel-item active">
+                            <div class={`carousel-item ${slide === 'start' ? 'active' : ''}`}>
                                 <StartPage
                                     userData={userData}
                                     clientData={clientData} />
@@ -94,12 +123,27 @@ export default function ValuationPage() {
 
 
                             </div>
-                            <div class="carousel-item ">
+                            <div class={`carousel-item ${slide === 'finalPage' ? 'active' : ''}`}>
 
                                 <FinalPage
+                                    queryClientId={queryClientId}
+                                    queryUserId={queryUserId}
                                     clientData={clientData}
-                                    setPropertyUrl={value => setPropertyUrl(value)} />
+                                />
 
+
+                            </div>
+                            <div class={`carousel-item ${slide === 'downloadPage' ? 'active' : ''}`}>
+
+                                <DownloadPage
+                                    userData={userData}
+                                />
+
+
+                            </div>
+                            <div class={`carousel-item ${slide === 'errorPage' ? 'active' : ''}`}>
+
+                                <ErrorPage/>
 
                             </div>
                         </div>
@@ -107,7 +151,7 @@ export default function ValuationPage() {
                     </div>
 
 
-                    <PropertyUrlModal propertyUrl={porpertyUrl} />
+                    <PropertyUrlModal propertyUrl={porpertyUrl} setPropertyUrl={value => setPropertyUrl(value)} />
 
 
 

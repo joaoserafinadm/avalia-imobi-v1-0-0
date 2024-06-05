@@ -27,6 +27,7 @@ import Info from "../components/info"
 import { maskMoney } from "../../utils/mask"
 import htmlInfo from "../../utils/htmlInfo"
 import LocationValuation from "./LocationValuation"
+import TypeTerrenoValuation from "../pages/valuation/TypeTerrenoValuation"
 
 export default function PropertyAddModal(props) {
 
@@ -268,7 +269,7 @@ export default function PropertyAddModal(props) {
                                 )}
                                 {newClientForm.propertyType === "Terreno" && (
                                     <>
-                                        <TypeTerreno />
+                                        <TypeTerrenoValuation />
                                         <LocationValuation />
                                         {/* <UploadFilesValuation setFiles={array => setFiles(array)} files={files} /> */}
                                     </>

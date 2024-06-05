@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import { FixedTopicsBottom } from "../../src/components/fixedTopics"
 import Link from "next/link"
 import { SpinnerLG, SpinnerSM } from "../../src/components/loading/Spinners"
-import { initialValues, setAndar, setAreaTotal, setAreaTotalPrivativa, setBairro, setBanheiros, setCelular, setCep, setCidade, setClientLastName, setClientName, setComments, setEmail, setFeatures, setLatitude, setLogradouro, setLongitude, setNumero, setPavimentos, setPropertyType, setQuartos, setSacadas, setSalas, setSuites, setUf, setVagasGaragem } from "../../store/NewClientForm/NewClientForm.actions"
+import { initialValues, setAndar, setAreaTotal, setAreaTotalPrivativa, setBairro, setBanheiros, setCelular, setCep, setCidade, setClientLastName, setClientName, setComments, setComprimento, setEmail, setFeatures, setFrente, setFundos, setLargura, setLateralDireita, setLateralEsquerda, setLatitude, setLogradouro, setLongitude, setNumero, setPavimentos, setPropertyType, setQuartos, setSacadas, setSalas, setSuites, setTerrenoIrregular, setUf, setVagasGaragem } from "../../store/NewClientForm/NewClientForm.actions"
 import TypeApartamento from "../../src/pages/newClient/TypeApartamento"
 import GeralFeatures from "../../src/pages/newClient/GeralFeatures"
 import UploadFiles from "../../src/pages/newClient/UploadFiles"
@@ -101,6 +101,13 @@ export default function clientAdd() {
             dispatch(setVagasGaragem(client.vagasGaragem))
             dispatch(setPavimentos(client.pavimentos))
             dispatch(setSalas(client.salas))
+            dispatch(setTerrenoIrregular(client.terrenoIrregular))
+            dispatch(setLargura(client.largura))
+            dispatch(setComprimento(client.comprimento))
+            dispatch(setFrente(client.frente))
+            dispatch(setFundos(client.fundos))
+            dispatch(setLateralEsquerda(client.lateralEsquerda))
+            dispatch(setLateralDireita(client.lateralDireita))
             dispatch(setCep(client.cep))
             dispatch(setCidade(client.cidade))
             dispatch(setUf(client.uf))
@@ -310,7 +317,7 @@ export default function clientAdd() {
                                 )}
                                 {newClientForm.propertyType === "Terreno" && (
                                     <>
-                                        <TypeTerreno />
+                                        <TypeTerreno edit />
                                         <GeralFeatures type="Terreno" />
                                         <Location />
                                         <UploadFiles setFiles={array => setFiles(array)} files={files} />

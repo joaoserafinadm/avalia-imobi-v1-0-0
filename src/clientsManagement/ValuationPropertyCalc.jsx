@@ -13,11 +13,76 @@ export default function ValuationPropertyCalc(props) {
     return (
         <div className="col-12 my-5 fadeItem">
 
-            <label htmlFor="" className="fw-bold mb-2">Cálculo</label>
             {/*  */}
 
             <div className="row">
-                <div className="col-12">
+                <div className="col-12 d-flex justify-content-center">
+                    <span htmlFor="" className="fw-bold mb-2">Valor de Avaliação</span>
+
+                </div>
+
+            </div>
+            <div className="row d-flex justify-content-center mb-5">
+                <div className="col-12 col-lg-12 ">
+                    <div className="row d-flex px-1">
+                        <div className="col-12  col-md-6 p-2">
+                            <div className="card">
+
+                                <div className="card-body text-center">
+                                    <span className="bold fs-5">Valor do m²</span>
+                                    <div className="d-flex justify-content-center align-items-center">
+                                        <span className="text-success me-1 fs-5">R$</span>
+                                        <span className="text-secondary fs-3 fw-bold">{valuation?.valuationCalc?.valorMetroQuadrado},00</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col-12  col-md-6 p-2">
+                            <div className="card">
+
+                                <div className="card-body text-center">
+                                    <span className="bold fs-5">{valuation?.calcVariables?.calcPrivativa ? "Área privativa" : "Área total"}</span>
+                                    <div className="d-flex justify-content-center align-items-center">
+                                        <span className="text-secondary fs-3 fw-bold">{valuation?.calcVariables?.calcPrivativa ? client?.areaTotalPrivativa : client?.areaTotal}</span>
+                                        <span className="text-success ms-1 fs-5">m²</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col-12  col-md-6 p-2">
+                            <div className="card">
+
+                                <div className="card-body text-center">
+                                    <span className="bold fs-5">Fórmula</span>
+                                    <div className="d-flex justify-content-center align-items-center">
+                                        <span className="text-secondary fs-3 fw-bold"><b>AT</b> x <b>Vm²</b></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col-12  col-md-6 p-2">
+                            <div className="card">
+
+                                <div className="card-body text-center">
+                                    <span className="bold fs-5">Valor</span>
+                                    <div className="d-flex justify-content-center align-items-center">
+                                        <span className="text-success me-1 fs-5">R$</span>
+                                        <span className="text-secondary fs-3 fw-bold">{valuation?.valuationCalc?.valorAvaliacao},00</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div className="col-12 d-flex justify-content-center">
+                <span htmlFor="" className="fw-bold mb-2">Valor de anúncio</span>
+            </div>
+
+            <div className="row">
+                <div className="col-12 text-center">
                     <span>{valuation?.calcVariables?.calcPrivativa ? 'Baseado na área privativa' : 'baseado na área total'}</span>
                 </div>
             </div>

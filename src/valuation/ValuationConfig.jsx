@@ -44,7 +44,9 @@ export default function ValuationConfig(props) {
 
                 <PropertyCalc
                     setCalcVariables={value => props.setCalcVariables(value)}
+                    calcVariables={props.calcVariables}
                     setValuationCalc={value => props.setValuationCalc(value)}
+                    valuationCalc={props.valuationCalc}
                     client={client}
                     propertyArray={props.propertyArray} />
             )}

@@ -12,13 +12,19 @@ export default function TypeTerreno(props) {
 
     useEffect(() => {
 
-        dispatch(setLargura(''))
-        dispatch(setComprimento(''))
-        dispatch(setFrente(''))
-        dispatch(setFundos(''))
-        dispatch(setLateralEsquerda(''))
-        dispatch(setLateralDireita(''))
-        dispatch(setAreaTotal(''))
+        if (!props.edit) {
+
+            console.log("nao foi")
+
+
+            dispatch(setLargura(''))
+            dispatch(setComprimento(''))
+            dispatch(setFrente(''))
+            dispatch(setFundos(''))
+            dispatch(setLateralEsquerda(''))
+            dispatch(setLateralDireita(''))
+            dispatch(setAreaTotal(''))
+        }
 
     }, [newClientForm.terrenoIrregular])
 
@@ -31,9 +37,9 @@ export default function TypeTerreno(props) {
             } else {
                 dispatch(setAreaTotal(''))
             }
-            
+
         } else {
-            
+
             if (newClientForm.frente && newClientForm.fundos && newClientForm.lateralEsquerda && newClientForm.lateralDireita) {
                 dispatch(setAreaTotal(((+newClientForm.frente + +newClientForm.fundos) / 2) * ((+newClientForm.lateralEsquerda + +newClientForm.lateralDireita) / 2)))
             } else {
@@ -41,7 +47,7 @@ export default function TypeTerreno(props) {
                 dispatch(setAreaTotal(''))
             }
 
-        } 
+        }
     }, [newClientForm.largura, newClientForm.comprimento, newClientForm.frente, newClientForm.fundos, newClientForm.lateralEsquerda, newClientForm.lateralDireita])
 
 
@@ -57,7 +63,7 @@ export default function TypeTerreno(props) {
 
                     <div className="col-12 mt-2">
                         <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" role="switch" id="terrenoIrregularCheck" onChange={e => dispatch(setTerrenoIrregular(e.target.checked))} />
+                            <input class="form-check-input" type="checkbox" role="switch" id="terrenoIrregularCheck" onChange={e => dispatch(setTerrenoIrregular(e.target.checked))} checked={newClientForm.terrenoIrregular}/>
                             <label class="form-label" for="terrenoIrregularCheck">Terreno irregular</label>
                         </div>
                     </div>

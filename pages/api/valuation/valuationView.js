@@ -25,24 +25,24 @@ export default async (req, res) => {
 
             const clientExist = companyExist?.clients?.find(elem => elem._id.toString() === client_id)
 
-            const userData = {
-                firstName: userExist?.firstName,
-                lastName: userExist?.lastName,
-                workEmail: userExist?.workEmail,
-                creci: userExist?.creci,
-                telefone: userExist?.telefone,
-                celular: userExist?.celular,
-                profileImageUrl: userExist?.profileImageUrl,
-                companyName: companyExist?.companyName,
-                logo: companyExist?.logo,
-                backgroundImageUrl: companyExist.backgroundImages.find(elem => elem._id.toString() === companyExist.backgroundImg_id)?.imageUrl,
-            }
-
+            
             if (!userExist || !companyExist || !clientExist) {
-
+                
                 res.status(400).json({ error: 'User or company or client does not exist' })
-
+                
             } else {
+                const userData = {
+                    firstName: userExist?.firstName,
+                    lastName: userExist?.lastName,
+                    workEmail: userExist?.workEmail,
+                    creci: userExist?.creci,
+                    telefone: userExist?.telefone,
+                    celular: userExist?.celular,
+                    profileImageUrl: userExist?.profileImageUrl,
+                    companyName: companyExist?.companyName,
+                    logo: companyExist?.logo,
+                    backgroundImageUrl: companyExist.backgroundImages.find(elem => elem._id.toString() === companyExist.backgroundImg_id)?.imageUrl,
+                }
 
                 res.status(200).json({ client: clientExist, user: userData })
 
@@ -82,7 +82,8 @@ export default async (req, res) => {
                         $set: {
                             "clients.$.valuation.valueSelected": valueSelected,
                             "clients.$.valuation.valueComment": valueComment,
-                            "clients.$.status": 'answered'
+                            "clients.$.status": 'answered',
+                            "clients.$.valuation.status": 'answered'
                         },
 
 

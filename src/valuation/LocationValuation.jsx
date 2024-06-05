@@ -22,7 +22,7 @@ export default function LocationValuation(props) {
 
     useEffect(() => {
 
-        if (newClientForm.bairro && newClientForm.cidade && newClientForm.uf) {
+        if ( newClientForm.cidade && newClientForm.uf) {
             getCoordinates()
         }
 

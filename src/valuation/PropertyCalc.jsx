@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import valuationCalc from "./valuationCalc";
+import valuationCalcResult from "./valuationCalc";
 
 
 
@@ -7,37 +7,35 @@ export default function PropertyCalc(props) {
 
     const propertyArray = props.propertyArray
     const client = props.client
+    const calcVariables = props.calcVariables
+    const valuationCalc = props.valuationCalc
 
     const [valorIdealRange, setValorIdealRange] = useState(0)
     const [curtoPrazoRange, setCurtoPrazoRange] = useState(7)
     const [longoPrazoRange, setLongoPrazoRange] = useState(7)
-    const [valuationCalcResult, setValuationCalcResult] = useState('')
 
-    const [calcPrivativa, setCalcPrivativa] = useState(true)
+    // const [calcPrivativa, setCalcPrivativa] = useState(true)
 
     useEffect(() => {
-        const result = valuationCalc(propertyArray, client, valorIdealRange, curtoPrazoRange, longoPrazoRange, calcPrivativa)
+        const result = valuationCalcResult(propertyArray, client, calcVariables?.valorIdealRange, calcVariables?.curtoPrazoRange, calcVariables?.longoPrazoRange, calcVariables?.calcPrivativa)
+
+        props.setValuationCalc(result)
+
+    }, [propertyArray.length, client, calcVariables?.valorIdealRange, calcVariables?.curtoPrazoRange, calcVariables?.longoPrazoRange, calcVariables?.calcPrivativa])
+
+
+    const resetCalc = () => {
 
         const calcVariables = {
-            valorIdealRange,
-            curtoPrazoRange,
-            longoPrazoRange,
-            calcPrivativa
+            valorIdealRange: 0,
+            curtoPrazoRange: 7,
+            longoPrazoRange: 7,
+            calcPrivativa: true
         }
 
         props.setCalcVariables(calcVariables)
 
-        setValuationCalcResult(result)
-        props.setValuationCalc(result)
 
-    }, [propertyArray.length, client, valorIdealRange, curtoPrazoRange, longoPrazoRange, calcPrivativa])
-
-
-    const resetCalc = () => {
-        setValorIdealRange(0)
-        setCurtoPrazoRange(7)
-        setLongoPrazoRange(7)
-        setCalcPrivativa(true)
     }
 
     return (
@@ -50,16 +48,16 @@ export default function PropertyCalc(props) {
 
                     <div class="form-check">
                         <input class="form-check-input" type="radio"
-                            name="calcPrivativaCheck" onClick={() => setCalcPrivativa(true)}
-                            id="calcPrivativaTrue" checked={calcPrivativa} />
+                            name="calcPrivativaCheck" onClick={() => props.setCalcVariables({ ...props.calcVariables, calcPrivativa: true })}
+                            id="calcPrivativaTrue" checked={calcVariables?.calcPrivativa} />
                         <label class="form-check-label" for="calcPrivativaTrue">
                             Cálculo baseado na <b>área privativa</b>
                         </label>
                     </div>
                     <div class="form-check">
                         <input class="form-check-input" type="radio"
-                            name="calcPrivativaCheck" onClick={() => setCalcPrivativa(false)}
-                            id="calcPrivativaFalse" checked={!calcPrivativa} />
+                            name="calcPrivativaCheck" onClick={() => props.setCalcVariables({ ...props.calcVariables, calcPrivativa: false })}
+                            id="calcPrivativaFalse" checked={!calcVariables?.calcPrivativa} />
                         <label class="form-check-label" for="calcPrivativaFalse">
                             Cálculo baseado na <b>área total</b>
                         </label>
@@ -76,10 +74,10 @@ export default function PropertyCalc(props) {
                         <div className="card-body text-center ">
                             <span className="text-secondary fw-bold me-1 ">Venda curto prazo</span> <br />
                             <span className="text-orange me-1 fs-5">R$</span>
-                            <span className="text-secondary fs-4 bold">{valuationCalcResult?.curtoPrazoValue !== 'NaN' ? valuationCalcResult?.curtoPrazoValue + ',00' : 0}</span>
+                            <span className="text-secondary fs-4 bold">{valuationCalc?.curtoPrazoValue !== 'NaN' ? valuationCalc?.curtoPrazoValue + ',00' : 0}</span>
                             <div className="d-flex mt-3">
-                                <input type="range" class="form-range" min="0" max="50" step="1" id="longoPrazoRange" value={curtoPrazoRange} onChange={(e) => setCurtoPrazoRange(e.target.value)} style={{ transform: 'rotate(180deg)' }} />
-                                <span class="badge bg-secondary ms-1">-{curtoPrazoRange}%</span>
+                                <input type="range" class="form-range" min="0" max="50" step="1" id="longoPrazoRange" value={calcVariables?.curtoPrazoRange} onChange={(e) => props.setCalcVariables({ ...calcVariables, curtoPrazoRange: e.target.value })} style={{ transform: 'rotate(180deg)' }} />
+                                <span class="badge bg-secondary ms-1">-{calcVariables?.curtoPrazoRange}%</span>
                             </div>
                         </div>
                     </div>
@@ -90,10 +88,10 @@ export default function PropertyCalc(props) {
                         <div className="card-body text-center ">
                             <span className="text-secondary fw-bold me-1 ">Valor ideal</span> <br />
                             <span className="text-orange me-1 fs-5">R$</span>
-                            <span className="text-secondary fs-4 bold">{valuationCalcResult?.valorIdealValue !== 'NaN' ? valuationCalcResult?.valorIdealValue + ',00' : 0}</span>
+                            <span className="text-secondary fs-4 bold">{valuationCalc?.valorIdealValue !== 'NaN' ? valuationCalc?.valorIdealValue + ',00' : 0}</span>
                             <div className="d-flex mt-3">
-                                <input type="range" class="form-range" min="-50" max="50" step="1" id="valorIdealRange" value={valorIdealRange} onChange={(e) => setValorIdealRange(e.target.value)} />
-                                <span class="badge bg-secondary ms-1">{valorIdealRange}%</span>
+                                <input type="range" class="form-range" min="-50" max="50" step="1" id="valorIdealRange" value={calcVariables?.valorIdealRange} onChange={(e) => props.setCalcVariables({ ...calcVariables, valorIdealRange: e.target.value })}/>
+                                <span class="badge bg-secondary ms-1">{calcVariables?.valorIdealRange}%</span>
                             </div>
                         </div>
                     </div>
@@ -104,10 +102,10 @@ export default function PropertyCalc(props) {
                         <div className="card-body text-center ">
                             <span className="text-secondary fw-bold me-1 ">Venda longo prazo</span> <br />
                             <span className="text-orange me-1 fs-5">R$</span>
-                            <span className="text-secondary fs-4 bold">{valuationCalcResult?.longoPrazoValue !== 'NaN' ? valuationCalcResult?.longoPrazoValue + ',00' : 0}</span>
+                            <span className="text-secondary fs-4 bold">{valuationCalc?.longoPrazoValue !== 'NaN' ? valuationCalc?.longoPrazoValue + ',00' : 0}</span>
                             <div className="d-flex mt-3">
-                                <input type="range" class="form-range" min="0" max="50" step="1" id="longoPrazoRange" value={longoPrazoRange} onChange={(e) => setLongoPrazoRange(e.target.value)} />
-                                <span class="badge bg-secondary ms-1">+{longoPrazoRange}%</span>
+                                <input type="range" class="form-range" min="0" max="50" step="1" id="longoPrazoRange" value={calcVariables?.longoPrazoRange} onChange={(e) => props.setCalcVariables({ ...calcVariables, longoPrazoRange: e.target.value })} />
+                                <span class="badge bg-secondary ms-1">+{calcVariables?.longoPrazoRange}%</span>
                             </div>
                         </div>
                     </div>
