@@ -57,7 +57,7 @@ export default function ClientInfo(props) {
             <div className="row">
                 <div className="col-12 d-flex justify-content-end">
                     <Link href={`/clientEdit/${client?._id}`} onClick={() => console.log("edit", client)}>
-                        <span className="span">Editar</span>
+                        <span className="span">editar</span>
                     </Link>
                 </div>
                 <div className="col-12  col-md-6 d-flex  justify-content-center my-2">
@@ -68,23 +68,29 @@ export default function ClientInfo(props) {
                         <div className="col-12 ">
                             <span className="fs-2">{client?.clientName} {client?.clientLastName}</span>
                         </div>
-                        <div className="col-12 text-secondary">
-                            <button className="btn btn-sm btn-outline-secondary" style={{ width: '40px' }}
-                             id="emailButton" onClick={() => handleEmail(client?.email)}>
+                        {client?.email && (
 
-                                <FontAwesomeIcon icon={faEnvelope} className="D" />
-                            </button>
+                            <div className="col-12 text-secondary">
+                                <button className="btn btn-sm btn-outline-secondary" style={{ width: '40px' }}
+                                    id="emailButton" onClick={() => handleEmail(client?.email)}>
 
-                            <span className="ms-2">{client?.email}</span>
-                        </div>
-                        <div className="col-22 text-secondary mt-1">
-                            <button className="btn btn-sm btn-outline-secondary " style={{ width: '40px' }}
-                                id="whatsButton" onClick={() => handleWhatsapp(client?.celular)}>
+                                    <FontAwesomeIcon icon={faEnvelope} className="D" />
+                                </button>
 
-                                <FontAwesomeIcon icon={faWhatsapp} className="" />
-                            </button>
-                            <span className="ms-2">{client?.celular}</span>
-                        </div>
+                                <span className="ms-2">{client?.email}</span>
+                            </div>
+                        )}
+                        {client?.celular && (
+
+                            <div className="col-22 text-secondary mt-1">
+                                <button className="btn btn-sm btn-outline-secondary " style={{ width: '40px' }}
+                                    id="whatsButton" onClick={() => handleWhatsapp(client?.celular)}>
+
+                                    <FontAwesomeIcon icon={faWhatsapp} className="" />
+                                </button>
+                                <span className="ms-2">{client?.celular}</span>
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>

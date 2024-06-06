@@ -8,6 +8,8 @@ import { faUserGear, faUserTie } from "@fortawesome/free-solid-svg-icons";
 import { userStatusName } from "../../utils/permissions";
 import Cookies from "js-cookie";
 import jwt from "jsonwebtoken";
+import SelectedValue from "./SelectedValue";
+import ServiceAvaliation from "./ServiceAvaliation";
 
 
 
@@ -58,14 +60,18 @@ export default function Valuation(props) {
 
                 :
                 <div className="row">
-                    <div className="col-12 d-flex justify-content-end">
+                    {client?.status === 'evaluated' && (
 
-                        <Link href={"/valuationEdit/" + client?._id}>
-                            <span className="span" data-bs-dismiss="modal">editar</span>
-                        </Link>
-                    </div>
-                    <div className="col-12 d-flex justify-content-center my-3">
-                        {client?.valuation?.status === 'pending' && (
+                        <div className="col-12 d-flex justify-content-end">
+
+                            <Link href={"/valuationEdit/" + client?._id}>
+                                <span className="span" data-bs-dismiss="modal">editar</span>
+                            </Link>
+                        </div>
+                    )}
+
+                    <div className="col-12 d-flex justify-content-center my-5">
+                        {client?.status === 'evaluated' && (
                             <button className="btn btn-outline-orange mx-1"
                                 onClick={() => handleShare(client?.valuation?.urlToken + '&userId=' + token.sub)}>
                                 Compartilhar avaliação
@@ -75,17 +81,28 @@ export default function Valuation(props) {
 
                     </div>
 
+
+
+
+
                     <div className="col-12 d-flex">
 
 
                         <label htmlFor="" className="fw-bold mb-2">Status: </label>
                         <div>
-                            <ValuationStatus client={client?.valuation?.status} />
+                            <ValuationStatus status={client?.status} />
                         </div>
                     </div>
 
+                    {client?.status === 'answered' && (
+                        <>
+                        <SelectedValue client={client} />
+                        <ServiceAvaliation client={client} />
+                        </>
+                    )}
 
-                    <div className="col-12">
+
+                    <div className="col-12 mt-5">
 
                         <label htmlFor="" className="fw-bold mb-2">Avaliação feita por:</label>
 

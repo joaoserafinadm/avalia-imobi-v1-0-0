@@ -88,11 +88,11 @@ export default function ValuationPropertyCalc(props) {
             </div>
 
 
-            <div className="row d-flex px-2">
+            <div className="row d-flex px-2 px-lg-5 px-4">
 
                 <div className="col-12 col-lg-4 px-1 my-1">
 
-                    <div className="card ">
+                    <div className={`card ${valuation?.valueSelected === 'curtoPrazoValue' && 'pulse border border-success border-2'}`}>
                         <div className="card-body text-center ">
                             <span className="text-secondary fw-bold me-1 ">Venda curto prazo</span> <br />
                             <span className="text-orange me-1 fs-5">R$</span>
@@ -106,7 +106,7 @@ export default function ValuationPropertyCalc(props) {
                 </div>
                 <div className="col-12 col-lg-4 px-1 my-1">
 
-                    <div className="card">
+                    <div className={`card ${valuation?.valueSelected === 'valorIdealValue' && 'pulse border border-success border-2'}`}>
                         <div className="card-body text-center ">
                             <span className="text-secondary fw-bold me-1 ">Valor ideal</span> <br />
                             <span className="text-orange me-1 fs-5">R$</span>
@@ -120,7 +120,7 @@ export default function ValuationPropertyCalc(props) {
                 </div>
                 <div className="col-12 col-lg-4 px-1 my-1">
 
-                    <div className="card ">
+                    <div className={`card ${valuation?.valueSelected === 'longoPrazoValue' && 'pulse border border-success border-2'}`}>
                         <div className="card-body text-center ">
                             <span className="text-secondary fw-bold me-1 ">Venda longo prazo</span> <br />
                             <span className="text-orange me-1 fs-5">R$</span>

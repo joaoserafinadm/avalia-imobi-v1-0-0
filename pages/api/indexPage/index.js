@@ -50,7 +50,7 @@ export default authenticated(async (req, res) => {
                 // 4. Transformar o array ordenado em um array de objetos para melhor visualização
                 const rankedUsers = userCaptureArray.map(([user_id, count]) => ({ user_id, count }))
 
-                
+
 
 
 
@@ -72,7 +72,8 @@ export default authenticated(async (req, res) => {
                     clientsLength: myClients.length,
                     clientsValuations: myValuations.length,
                     clientsRating: myClients.filter(elem => elem?.valuation?.stars).reduce((a, b) => a + b.valuation?.stars, 0) / clientsArray.filter(elem => elem?.valuation?.stars).length || 0,
-                    averageTicket: myValuations.filter(elem => elem?.valuation?.valueSelected).reduce((a, b) => a + (+b.valuation?.valueSelected.replace('.', '') || 0), 0) / myValuations.filter(elem => elem?.valuation?.valueSelected).length || 0
+                    averageTicket: handleAverageTicket(myValuations)
+                    // averageTicket: myValuations.filter(elem => elem?.valuation?.valueSelected).reduce((a, b) => a + (+b.valuation?.valueSelected.replace('.', '') || 0), 0) / myValuations.filter(elem => elem?.valuation?.valueSelected).length || 0
                 }
 
 
@@ -92,3 +93,35 @@ export default authenticated(async (req, res) => {
 
 
 })
+
+
+const handleAverageTicket = (valuation) => {
+
+    let result = 0
+
+    const valuationsAnswered = valuation.filter(elem => elem?.valuation?.valueSelected)
+
+    if (valuationsAnswered.length === 0) return result
+    else {
+
+        const totalValue = valuationsAnswered.reduce((a, b) => {
+
+            let value = +(b.valuation?.valuationCalc[b.valuation.valueSelected]?.replace('.', ''))
+
+            return a + value
+
+        }, 0)
+
+
+        result = totalValue / valuationsAnswered.length
+        console.log('result', result)
+
+
+        return result
+
+    }
+
+
+
+
+}

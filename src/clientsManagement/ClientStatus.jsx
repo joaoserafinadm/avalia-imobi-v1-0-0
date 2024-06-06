@@ -7,17 +7,6 @@ import tippy from "tippy.js";
 
 export default function ClientStatus(props) {
 
-    // useEffect(() => {
-    //     tippy("#clientStatus" + props.id, {
-    //         content:
-    //             props.status === 'outdated' ? 'Aguardando \n cadastro' :
-    //                 props.status === 'active' ? 'Aguardando \n avaliação' :
-    //                     props.status === 'evaluated' ? 'Avaliado' :
-    //                         props.status === 'sold' ? 'Vendido' :
-    //                             '',
-    //         placement: 'bottom'
-    //     })
-    // })
 
 
 

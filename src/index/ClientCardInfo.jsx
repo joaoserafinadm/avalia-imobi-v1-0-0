@@ -6,18 +6,18 @@ import { faEdit, faEye, faMoneyCheckDollar, faShare, faTrashAlt } from "@fortawe
 import { useEffect, useState } from "react"
 import tippy from "tippy.js";
 import { Swiper, SwiperSlide } from 'swiper/react';
-import ClientStatus from "./ClientStatus"
+import ClientStatus from "../clientsManagement/ClientStatus"
 import { replaceAmpersand } from "../../utils/replaceAmpersand"
 import Cookies from "js-cookie";
 import jwt from "jsonwebtoken";
 import { useSelector } from "react-redux"
 import formatDate from "../../utils/formatDate"
-import ClientFeatures from "./ClientFeatures"
+import ClientFeatures from "../clientsManagement/ClientFeatures"
 import { showClientInfo } from "../../utils/showClientInfo"
 import Link from "next/link"
-import HandleButtons from "./HandleButtons"
+import HandleButtons from "../clientsManagement/HandleButtons"
 
-export default function ClientCard_02(props) {
+export default function ClientCardInfo(props) {
 
     const token = jwt.decode(Cookies.get('auth'))
 
@@ -93,33 +93,22 @@ export default function ClientCard_02(props) {
 
 
     return (
-        <div class="card my-2 cardAnimation shadow" style={{ width: "100%" }} >
+        <div class="card my-2 cardAnimation shadow h-100" style={{ width: "100%" }} >
 
 
             {!client?.files?.length ?
-                <div className=" d-flex card-img-top justify-content-center align-items-center bg-light bg-gradient" style={{ height: '170px' }}>
+                <div className=" d-flex card-img-top justify-content-center align-items-center bg-light bg-gradient" style={{ height: '120px' }}>
                     <span className="text-secondary">Sem fotos</span>
                 </div>
                 :
-                <Swiper className="card-img-top "
-                    style={{
-                        '--swiper-navigation-color': '#5a5a5a',
-                        '--swiper-pagination-color': '#f0f2f5',
-                        '--swiper-navigation-size': '28px',
-                        zIndex: 0
-                    }}
-                    slidesPerView={1}
-                    pagination={{ clickable: false }}
-                    navigation>
-                    {client?.files?.map((elem, index) => (
-                        <SwiperSlide key={index} className="text-center  " style={{ backgroundColor: '#f0f2f5' }}>
+                <>
+                    <div className="text-center card-img-top  " style={{ backgroundColor: '#f0f2f5' }}>
 
 
-                            <img src={elem.url ? elem.url : URL.createObjectURL(elem)} className={`card-img-top  ${styles.clientCardImage}`} alt={`Slide ${index + 1}`} />
+                        <img src={client?.files[0]?.url ? client?.files[0]?.url : URL.createObjectURL(client?.files[0])} className={`card-img-top  ${styles.clientCardImage}`} />
 
-                        </SwiperSlide>
-                    ))}
-                </Swiper>
+                    </div>
+                </>
 
             }
 
@@ -164,25 +153,18 @@ export default function ClientCard_02(props) {
                 <div className="row ">
                     <div className="col-12">
 
-                        <h5 class="mb-0"> {client?.clientName} {client.clientLastName} </h5>
+                        <h6 class="mb-0 text-start"> {client?.clientName} {client.clientLastName} </h6>
                         <div className="d-flex align-items-center">
                             <div>
 
-
                                 <ClientStatus status={client?.status} id={client?._id} />
-
-
-
-
 
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <ClientFeatures client={client} elem={props.elem} />
-
-                <HandleButtons client={client} setClientSelected={value => props.setClientSelected(value)} elem={props.elem} />
+                <ClientFeatures client={client} elem={props.elem} small/>
 
 
 

@@ -104,7 +104,8 @@ export default function Home() {
                 <div className="row p-3 ">
                     <div className="col-12 col-md-6 my-2">
                         <ClientsCard_02 userResults={userResults} clientsArray={clientsArray} loading={loading} />
-                        <LastClientsCard />
+
+                            <LastClientsCard clientsArray={clientsArray} loading={loading}/>
                     </div>
                     <div className="col-12 col-md-6 my-2">
                         <UsersCard userResults={userResults} clientsArray={clientsArray} loading={loading} />
