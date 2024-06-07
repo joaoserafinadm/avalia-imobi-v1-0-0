@@ -170,8 +170,10 @@ export default function ValuationPage(props) {
                             <div className="carousel-item active">
                                 <ValuationConfig client={client} propertyArrayError={propertyArrayError}
                                     setCalcVariables={value => setCalcVariables(value)}
+                                    calcVariables={calcVariables}
                                     propertyArray={propertyArray} setPropertyArray={value => setPropertyArray(value)}
                                     setValuationCalc={value => setValuationCalc(value)}
+                                    valuationCalc={valuationCalc}
                                 />
 
                             </div>
