@@ -15,32 +15,32 @@
 
 
   --color-primary: #333333;
-	--color-secondary: #4D88BB;
-	--color-tertiary: #95aac9;
-	--color-success: #0c9;
-	--color-danger: #f2545b;
-	--color-warning: #f7bc06;
+  --color-secondary: #4D88BB;
+  --color-tertiary: #95aac9;
+  --color-success: #0c9;
+  --color-danger: #f2545b;
+  --color-warning: #f7bc06;
 
 
-	--color-primary-hover: #02347b;
-	--color-secondary-hover: #4579a6;
-	--color-tertiary-hover: #75859d;
-	--color-success-hover: rgb(1, 165, 124);
-	--color-danger-hover: #ce464d;
-	--color-warning-hover: #d5a001;
+  --color-primary-hover: #02347b;
+  --color-secondary-hover: #4579a6;
+  --color-tertiary-hover: #75859d;
+  --color-success-hover: rgb(1, 165, 124);
+  --color-danger-hover: #ce464d;
+  --color-warning-hover: #d5a001;
 
 
-	--color-primary-disabled: #02347baf;
-	--color-secondary-disabled: #4579a6af;
-	--color-tertiary-disabled: #75859daf;
-	--color-success-disabled: #01a57caf;
-	--color-danger-disabled: #ce464daf;
-	--color-warning-disabled: #d5a001af;
+  --color-primary-disabled: #02347baf;
+  --color-secondary-disabled: #4579a6af;
+  --color-tertiary-disabled: #75859daf;
+  --color-success-disabled: #01a57caf;
+  --color-danger-disabled: #ce464daf;
+  --color-warning-disabled: #d5a001af;
 
 
 
 
-  
+
 
 
   --cv-primary: #182538;
@@ -3297,7 +3297,7 @@ h1 {
 }
 
 
-.text-main { 
+.text-main {
   color: #454545;
 }
 
@@ -3305,11 +3305,30 @@ h1 {
 @media (max-width: 768px) {
 
   body * {
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
   }
 
+}
+
+
+.companyLogo {
+  max-height: 150px;
+  max-width: 250px;
+  width: auto;
+  height: auto;
+}
+
+.image-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.image-wrapper {
+  position: relative;
+  display: inline-block;
 }

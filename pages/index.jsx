@@ -63,6 +63,11 @@ export default function Home() {
     })
 
     const [clientsArray, setClientsArray] = useState([])
+    const [companyData, setCompanyData] = useState({})
+
+
+    const [rankedUserResults, setRankedUserResults] = useState({})
+    const [rankedUserValuationResults, setRankedUserValuationResults] = useState({})
 
     const [loading, setLoading] = useState(true)
 
@@ -84,6 +89,9 @@ export default function Home() {
         }).then((res) => {
             setUserResults(res.data.userResults)
             setClientsArray(res.data.clientsArray)
+            setRankedUserResults(res.data.rankedUserResults)
+            setRankedUserValuationResults(res.data.rankedUserValuationResults)
+            setCompanyData(res.data.companyData)
             setLoading(false)
         }).catch((e) => {
             setLoading(false)
@@ -105,41 +113,56 @@ export default function Home() {
                     <div className="col-12 col-md-6 my-2">
                         <ClientsCard_02 userResults={userResults} clientsArray={clientsArray} loading={loading} />
 
-                            <LastClientsCard clientsArray={clientsArray} loading={loading}/>
+                        <LastClientsCard clientsArray={clientsArray} loading={loading} />
                     </div>
                     <div className="col-12 col-md-6 my-2">
-                        <UsersCard userResults={userResults} clientsArray={clientsArray} loading={loading} />
+                        <UsersCard userResults={userResults}
+                            clientsArray={clientsArray}
+                            loading={loading}
+                            rankedUserResults={rankedUserResults}
+                            rankedUserValuationResults={rankedUserValuationResults}
+                            companyData={companyData} />
 
 
                     </div>
                 </div>
                 <div className="row px-3 pb-5">
-                    <div className="col-12 col-md-4 my-1">
-                        <div className="card shadow cardAnimation" type="button">
-                            <div className="card-body text-center ">
-                                <span className='fs-4 bold text-secondary'>
-                                    <FontAwesomeIcon icon={faUser} className='me-2 small' /> Meu Perfil
-                                </span>
+                    <div className="col-12 col-md-4 my-2">
+                        <Link href="/editProfile">
+                            <div className="card shadow cardAnimation" type="button">
+                                <div className="card-body text-center ">
+                                    <span className='fs-4 bold text-secondary'>
+                                        <FontAwesomeIcon icon={faUser} className='me-2 small' /> Meu Perfil
+                                    </span>
+                                </div>
                             </div>
-                        </div>
+                        </Link>
                     </div>
-                    <div className="col-12 col-md-4 my-1">
-                        <div className="card shadow cardAnimation" type="button">
-                            <div className="card-body text-center">
-                                <span className='fs-4 bold text-secondary'>
-                                    <FontAwesomeIcon icon={faShop} className='me-2 small' /> Imobiliária
-                                </span>
+                    <div className="col-12 col-md-4 my-2">
+                        <Link href="/companyEdit">
+
+                            <div className="card shadow cardAnimation" type="button">
+                                <div className="card-body text-center">
+                                    <span className='fs-4 bold text-secondary'>
+                                        <FontAwesomeIcon icon={faShop} className='me-2 small' /> Imobiliária
+                                    </span>
+                                </div>
                             </div>
-                        </div>
+                        </Link>
+
                     </div>
-                    <div className="col-12 col-md-4 my-1">
-                        <div className="card shadow cardAnimation" type="button">
-                            <div className="card-body text-center">
-                                <span className='fs-4 bold text-secondary'>
-                                    <FontAwesomeIcon icon={faGear} className='me-2 small' />Configurações
-                                </span>
+                    <div className="col-12 col-md-4 my-2">
+                        <Link href="/accountSetup">
+
+                            <div className="card shadow cardAnimation" type="button">
+                                <div className="card-body text-center">
+                                    <span className='fs-4 bold text-secondary'>
+                                        <FontAwesomeIcon icon={faGear} className='me-2 small' />Configurações
+                                    </span>
+                                </div>
                             </div>
-                        </div>
+                        </Link>
+
                     </div>
                 </div>
 

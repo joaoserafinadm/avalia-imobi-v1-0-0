@@ -164,7 +164,26 @@ export default function ClientCardInfo(props) {
                     </div>
                 </div>
 
-                <ClientFeatures client={client} elem={props.elem} small/>
+                <ClientFeatures client={client} elem={props.elem} small />
+
+                {client?.status !== 'outdated' && (
+                    <div className="row d-flex justify-content-center mt-2">
+                        <div className="col-12 d-flex justify-content-center">
+
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                                <Link href={`/clientsManagement/${client._id}`} passHref>
+                                    <button
+                                        type="button"
+                                        class="btn btn-light border"
+                                        id={"viewClientButton" + client._id}                               >
+                                        <FontAwesomeIcon icon={faEye} className="icon  text-secondary" />
+                                    </button>
+                                </Link>
+
+                            </div>
+                        </div>
+                    </div>
+                )}
 
 
 
