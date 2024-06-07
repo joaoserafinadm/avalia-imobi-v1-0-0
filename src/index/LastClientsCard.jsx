@@ -27,19 +27,22 @@ export default function LastClientsCard(props) {
                     {clientsArray?.length > 0 ?
                         <Swiper className="fadeItem"
                             style={{
-                                '--swiper-navigation-color': '#f0f2f5',
+                                // '--swiper-navigation-color': '#f0f2f5',
                                 '--swiper-pagination-color': '#5a5a5a',
-                                '--swiper-navigation-size': '28px',
+                                // '--swiper-navigation-size': '28px',
                                 zIndex: 0
                             }}
                             slidesPerView={isMobile() ? 1 : 2}
-                            navigation>
+                            // navigation
+                            pagination={{ clickable: false }}
+
+                            >
 
                             {clientsArray?.map((elem, index) => {
                                 return (
                                     <SwiperSlide key={index} className="text-center  " >
 
-                                        <div className="col-12  px-4 h-100 pb-3">
+                                        <div className="col-12  px-2 h-100 pb-3">
                                             <ClientCardInfo elem={elem} />
                                         </div>
                                     </SwiperSlide>
@@ -48,7 +51,7 @@ export default function LastClientsCard(props) {
                             })}
                             <SwiperSlide key={'final'} className="text-center  " >
 
-                                <div className="col-12  px-4 h-100 pb-3">
+                                <div className="col-12  px-2 h-100 pb-3">
                                     <div className="card bg-light h-100 my-2">
                                         <div className="card-body">
                                             <div className="row h-100 d-flex justify-content-center align-items-center">

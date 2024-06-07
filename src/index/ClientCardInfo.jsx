@@ -29,40 +29,6 @@ export default function ClientCardInfo(props) {
 
     const client = props.elem
 
-    useEffect(() => {
-
-
-        tippy("#viewClientButton" + props.elem._id, {
-            content: "Visualizar",
-            placement: 'bottom'
-        });
-        tippy("#deleteClientButton" + props.elem._id, {
-            content: "Deletar",
-            placement: 'bottom'
-        });
-        tippy("#evaluateClientButton" + props.elem._id, {
-            content: "Avaliar",
-            placement: 'bottom'
-        });
-        tippy("#editClientButton" + props.elem._id, {
-            content: "Editar",
-            placement: 'bottom'
-        });
-        tippy("#shareClientButton" + props.elem._id, {
-            content: "Enviar formulário",
-            placement: 'bottom'
-        });
-        tippy("#shareValuationButton" + props.elem._id, {
-            content: "Compartilhar avaliação",
-            placement: 'bottom'
-        });
-        tippy("#downloadValuationButton" + props.elem._id, {
-            content: "Baixar PDF",
-            placement: 'bottom'
-        });
-
-    }, [props.elem, props.section])
-
 
 
     const [activeIndex, setActiveIndex] = useState(0);

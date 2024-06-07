@@ -199,8 +199,24 @@ export default function UsersCard(props) {
                         </div>
                     }
 
+                    {companyData?.usersArray?.length > 1 ?
+                        <div className="col-12 mt-5 d-flex justify-content-center">
+                            <Link href='/usersManagement'>
+                                <button className="btn btn-outline-orange">Visualizar todos os usuários</button>
+                            </Link>
+                        </div>
+                        :
 
-                    {rankedUserResults.firstName && rankedUserValuationResults.firstName && !isMobile() && (
+                        <div className="col-12 mt-5 d-flex justify-content-center">
+                            <Link href='/userAdd'>
+                                <button className="btn btn-outline-orange">Adicionar usuários</button>
+                            </Link>
+                        </div>
+
+                    }
+
+
+                    {rankedUserResults.firstName && rankedUserValuationResults.firstName && false && !isMobile() && (
 
                         <div className="col-12  my-5 ">
 

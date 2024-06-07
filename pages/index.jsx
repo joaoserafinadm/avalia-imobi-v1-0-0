@@ -1,6 +1,4 @@
-// import Head from 'next/head'
-// import Image from 'next/image'
-// import { useState, useEffect } from 'react'
+
 import Title from '../src/components/title/Title2'
 import Cookie from 'js-cookie'
 import jwt from 'jsonwebtoken'
@@ -19,37 +17,14 @@ import baseUrl from '../utils/baseUrl.js'
 import ClientsCard_02 from '../src/index/ClientsCard_02.jsx'
 import UsersCard from '../src/index/UsersCard.jsx'
 import LastClientsCard from '../src/index/LastClientsCard.jsx'
-// import Link from 'next/link'
-// import $ from 'jquery'
-// import axios from 'axios'
-// import baseUrl from '../utils/baseUrl'
-// import sidebarHide from "../utils/sidebarHide";
-// import { useSelector } from 'react-redux'
-// import { Accordion } from 'react-bootstrap'
-// import { useDispatch } from 'react-redux'
-// import { resetStates } from '../store/InventoryManagement/InventoryManagement.actions'
-// import IndexNotifications from '../src/components/index/indexNotifications'
-// import IndexCards from '../src/components/index/IndexCards_02'
-// import IndexCardsTools from '../src/components/index/IndexCardsTools'
+import useSWR from 'swr'
+import api from "../utils/api";
 
-
-// if (typeof window !== "undefined") {
-//     const bootstrap = require("bootstrap");
-// }
-
-
-// import { IonContent, IonFab, IonFabButton, IonFabList, IonHeader, IonIcon, IonTitle, IonToolbar } from '@ionic/react';
-// import {
-//     chevronDownCircle,
-//     chevronForwardCircle,
-//     chevronUpCircle,
-//     colorPalette,
-//     document,
-//     globe,
-// } from 'ionicons/icons';
 
 
 export default function Home() {
+
+
 
     const token = jwt.decode(Cookie.get('auth'))
 
@@ -71,6 +46,23 @@ export default function Home() {
 
     const [loading, setLoading] = useState(true)
 
+    const { data, error, isLoading } = useSWR(`/api/indexPage?company_id=${token?.company_id}&user_id=${token?.sub}`, api)
+
+
+    useEffect(() => {
+        if(data) {
+
+
+        console.log(data)
+        setUserResults(data?.data?.userResults)
+        setClientsArray(data?.data?.clientsArray)
+        setRankedUserResults(data?.data?.rankedUserResults)
+        setRankedUserValuationResults(data?.data?.rankedUserValuationResults)
+        setCompanyData(data?.data?.companyData)
+        setLoading(false)
+    }
+
+    }, [data])
 
     useEffect(() => {
         navbarHide(dispatch)
