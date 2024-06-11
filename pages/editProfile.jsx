@@ -113,6 +113,8 @@ export default function EditProfile() {
 
     const handleFileChange = file => {
 
+        console.log("file", file)
+
 
         if (file) {
             setSelectFile(URL.createObjectURL(file))
