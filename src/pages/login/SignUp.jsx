@@ -201,6 +201,7 @@ export default function SignUp(props) {
                                 </div>
                                 <div className="row mb-3">
                                     <span style={{ fontSize: "15px" }}>É rápido e fácil.</span>
+                                    <span style={{ fontSize: "15px" }}>Teste o Avalia Imobi por 7 dias!</span>
                                 </div>
 
                                 <div className="d-flex mb-2">
