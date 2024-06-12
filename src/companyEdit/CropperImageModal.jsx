@@ -31,7 +31,7 @@ export default function CropperImageModal(props) {
             crop.height,
         );
 
-        const base64Image = canvas.toDataURL('image/jpeg');
+        const base64Image = canvas.toDataURL('image/png');
         props.setResult(base64Image)
     }
 

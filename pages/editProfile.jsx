@@ -24,6 +24,7 @@ import scrollTo from "../utils/scrollTo";
 import removeInputError from "../utils/removeInputError";
 import { createImageUrl } from "../utils/createImageUrl";
 import { useRouter } from "next/router";
+import { closeModal, modalClose } from "../utils/modalControl.js";
 
 
 
@@ -59,6 +60,8 @@ export default function EditProfile() {
     const [loadingSave, setLoadingSave] = useState(false)
 
     useEffect(() => {
+        modalClose()
+
         navbarHide(dispatch)
         dataFunction(token.company_id, token.sub)
 

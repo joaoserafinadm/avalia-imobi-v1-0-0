@@ -30,3 +30,20 @@ export function closeModal() {
         window.removeEventListener('popstate', handleCloseModalOnBack);
     };
 }
+
+
+export function modalClose  ()  {
+
+    const backdrop = document.querySelectorAll('.modal-backdrop.show');
+    const body = document.querySelector('.modal-open');
+
+
+    if (backdrop && body) {
+        event.preventDefault();
+        for (let i = 0; i < backdrop.length; i++) {
+            backdrop[i].remove()
+            body.style.overflow = ''
+        }
+
+    }
+}

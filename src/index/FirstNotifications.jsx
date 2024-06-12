@@ -2,6 +2,7 @@ import { faGear, faStore, faUser } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import Link from "next/link"
 import { useEffect } from "react"
+import isMobile from "../../utils/isMobile"
 
 
 
@@ -51,10 +52,10 @@ export default function FirstNotifications(props) {
 
     return (
 
-        <div class="position-fixed end-0 px-3 mb-lg-0 mb-5" style={{ "z-index": "", bottom: "15px" }}>
-            {firstNotifications?.companyEdit && (
+        <div class="position-fixed end-0 px-3 mb-lg-0 mb-5" style={{ "z-index": "", bottom: "17px" }}>
+            {!isMobile() && firstNotifications?.companyEdit && (
 
-                <div class="toast my-2 bg-light" role="alert" data-bs-autohide="false" aria-live="assertive" aria-atomic="true">
+                <div class={`toast my-2 bg-light ${firstNotifications?.companyEdit ? 'pulse' : ''}`} role="alert" data-bs-autohide="false" aria-live="assertive" aria-atomic="true">
                     <div class="toast-header">
                         {/* <img src="..." class="rounded me-2" alt="..."> */}
                         <span class="me-auto text-orange fw-bold">Cadastre sua imobiliária</span>
@@ -73,9 +74,9 @@ export default function FirstNotifications(props) {
                 </div>
             )}
 
-            {firstNotifications?.profileEdit && (
+            {!isMobile() && firstNotifications?.profileEdit && (
 
-                <div class="toast my-2 bg-light" role="alert" data-bs-autohide="false" aria-live="assertive" aria-atomic="true">
+                <div class={`toast my-2 bg-light ${!firstNotifications?.companyEdit ? 'pulse' : ''}`} role="alert" data-bs-autohide="false" aria-live="assertive" aria-atomic="true">
                     <div class="toast-header">
                         {/* <img src="..." class="rounded me-2" alt="..."> */}
                         <span class="me-auto text-orange fw-bold">Atualize seu perfil</span>
@@ -96,7 +97,7 @@ export default function FirstNotifications(props) {
 
             {firstNotifications?.dateLimit && (
 
-                <div class="toast my-2 bg-light" role="alert" data-bs-autohide="false" aria-live="assertive" aria-atomic="true">
+                <div class={`toast my-2 bg-light ${(!firstNotifications?.companyEdit && !firstNotifications?.profileEdit) ? 'pulse' : ''}`} role="alert" data-bs-autohide="false" aria-live="assertive" aria-atomic="true">
                     <div class="toast-header">
                         {/* <img src="..." class="rounded me-2" alt="..."> */}
                         <span class="me-auto text-orange fw-bold">Restam {handleDateLimit(firstNotifications?.dateLimit)} dias para acabar seu teste gratuíto!</span>

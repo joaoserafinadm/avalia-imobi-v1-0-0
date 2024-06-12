@@ -21,6 +21,7 @@ import useSWR from 'swr'
 import api from "../utils/api";
 import GeralButtons from '../src/index/GeralButtons.jsx'
 import FirstNotifications from '../src/index/FirstNotifications.jsx'
+import FirstNotificationsModal from '../src/index/FirstNotificationsModal.jsx'
 
 
 
@@ -129,6 +130,12 @@ export default function Home() {
 
 
                 <FirstNotifications firstNotifications={firstNotifications} />
+
+                {isMobile() && (
+
+                    <FirstNotificationsModal firstNotifications={firstNotifications} />
+                )}
+
 
 
 

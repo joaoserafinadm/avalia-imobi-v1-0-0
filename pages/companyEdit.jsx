@@ -19,6 +19,7 @@ import ImageHeaderModal from "../src/companyEdit/ImageHeaderModal";
 import { FixedTopicsBottom } from "../src/components/fixedTopics";
 import removeInputError from "../utils/removeInputError";
 import CropperImageModal from "../src/companyEdit/CropperImageModal";
+import { closeModal, modalClose } from "../utils/modalControl";
 
 
 
@@ -55,6 +56,8 @@ export default function companyEdit() {
     const [loadingSave, setLoadingSave] = useState(false)
 
     useEffect(() => {
+        modalClose()
+
 
         dataFunction(token.company_id)
         navbarHide(dispatch)
