@@ -149,8 +149,8 @@ export default function Header(props) {
             <div className={`d-flex ${styles.configIcons}`}>
 
                 <div className={` dropdown`} ref={dropdownRef}>
-                    <span type="button" className="" role="button" data-bs-toggle={window2Mobile() ? "dropdown" : ''} aria-expanded="false" onClick={() => setShowNotification(!showNotification)}>
-                        <FontAwesomeIcon icon={faBell} className={` icon px-3`} style={{ color: showNotification && !window2Mobile() ? "#e8d3b9" : "#fff" }} />
+                    <span type="button" className={`px-2 cardAnimation ${!!handleShowNotifications() ? 'pulse' : ''}`} role="button" data-bs-toggle={window2Mobile() ? "dropdown" : ''} aria-expanded="false" onClick={() => setShowNotification(!showNotification)}>
+                        <FontAwesomeIcon icon={faBell} className={` fs-4 px-3`} style={{ color: showNotification && !window2Mobile() ? "#e8d3b9" : "#fff" }} />
                         {!!handleShowNotifications() && (
                             <div className={`${styles.notificationIcon} fadeItem`}>
                                 <p className='text-light d-flex justify-content-center align-items-center'>{handleShowNotifications()}</p>
@@ -166,7 +166,7 @@ export default function Header(props) {
                         <>
                             {showNotification && (
 
-                                <NotificationsSM notifications={notifications} notificationOff={() => setShowNotification(false)} handleNotificationCheck={handleNotificationCheck}/>
+                                <NotificationsSM notifications={notifications} notificationOff={() => setShowNotification(false)} handleNotificationCheck={handleNotificationCheck} />
                             )}
                         </>
 

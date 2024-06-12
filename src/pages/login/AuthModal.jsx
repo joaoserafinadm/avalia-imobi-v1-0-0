@@ -9,8 +9,10 @@ export default function AuthModal(props) {
     const [code, setCode] = useState('')
     const [resendEmailError, setResendEmailError] = useState('')
     const [resendEmailCheck, setResendEmailCheck] = useState('')
+    const [loadingEmail, setLoadingEmail] = useState(false)
 
     const resendEmail = async (email, firstName) => {
+        setLoadingEmail(true)
         cleanStatus()
         setResendEmailCheck('')
         setResendEmailError('')
@@ -24,9 +26,13 @@ export default function AuthModal(props) {
                 props.setAuthCode(res.data.secureCode)
                 setResendEmailError('')
                 setResendEmailCheck('Verifique seu e-mail')
+                setLoadingEmail(false)
+
             }).catch(e => {
                 setResendEmailCheck('')
                 setResendEmailError('Verifique seus dados de cadastro')
+                setLoadingEmail(false)
+
             })
     }
 
@@ -45,7 +51,7 @@ export default function AuthModal(props) {
             id="authModal"
             tabindex="-1"
             aria-labelledby="authModalLabel"
-            aria-hidden="true"data-bs-backdrop="static" 
+            aria-hidden="true" data-bs-backdrop="static"
             data-bs-keyboard="false"
         >
 
@@ -85,9 +91,15 @@ export default function AuthModal(props) {
                         </div>
                         <div className="row">
                             <div className="col-12 d-flex justify-content-center">
-                                <span className="small span" type="button" onClick={() => resendEmail(props.email, props.firstName)}>
-                                    Enviar código novamente
-                                </span>
+                                {!loadingEmail ?
+                                    <span className="small span fadeItem" type="button" onClick={() => resendEmail(props.email, props.firstName)} >
+                                        Enviar código novamente
+                                    </span>
+                                    :
+                                    <span className="small text-muted fadeItem" >
+                                        Enviando código...
+                                    </span>
+                                }
                             </div>
                         </div>
                         <div className="row">

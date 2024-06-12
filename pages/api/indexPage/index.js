@@ -86,7 +86,7 @@ export default authenticated(async (req, res) => {
                 const usersArray = await db.collection('users').find({ company_id: company_id })
                     .project({ firstName: 1, lastName: 1, profileImageUrl: 1 }).toArray()
 
-                    console.log('usersArray', usersArray)
+                console.log('usersArray', usersArray)
 
                 const rankedUserFind = usersArray.find(elem => elem._id.toString() === rankedUser?.user_id)
 
@@ -100,7 +100,7 @@ export default authenticated(async (req, res) => {
                     profileImageUrl: rankedUserFind?.profileImageUrl
                 }
 
-            console.log('rankedUserResults', rankedUserResults)
+                console.log('rankedUserResults', rankedUserResults)
 
 
                 rankedUserValuationResults = {
@@ -154,8 +154,14 @@ export default authenticated(async (req, res) => {
                     usersArray: usersArray
                 }
 
+                const firstNotifications = {
+                    companyEdit: !companyExist?.companyName || !companyExist?.logo || !companyExist?.backgroundImg_id,
+                    profileEdit: !userExist?.firstName || !userExist?.lastName || !userExist?.profileImageUrl || !userExist?.celular,
+                    dateLimit: userExist?.dateLimit
+                }
 
-                res.status(200).json({ userResults, clientsArray, rankedUserResults, rankedUserValuationResults, companyData })
+
+                res.status(200).json({ userResults, clientsArray, rankedUserResults, rankedUserValuationResults, companyData, firstNotifications })
 
             }
         }

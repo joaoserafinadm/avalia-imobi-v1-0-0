@@ -19,6 +19,8 @@ import UsersCard from '../src/index/UsersCard.jsx'
 import LastClientsCard from '../src/index/LastClientsCard.jsx'
 import useSWR from 'swr'
 import api from "../utils/api";
+import GeralButtons from '../src/index/GeralButtons.jsx'
+import FirstNotifications from '../src/index/FirstNotifications.jsx'
 
 
 
@@ -43,6 +45,7 @@ export default function Home() {
 
     const [rankedUserResults, setRankedUserResults] = useState({})
     const [rankedUserValuationResults, setRankedUserValuationResults] = useState({})
+    const [firstNotifications, setFirstNotifications] = useState({})
 
     const [loading, setLoading] = useState(true)
 
@@ -50,17 +53,17 @@ export default function Home() {
 
 
     useEffect(() => {
-        if(data) {
+        if (data) {
 
 
-        console.log(data)
-        setUserResults(data?.data?.userResults)
-        setClientsArray(data?.data?.clientsArray)
-        setRankedUserResults(data?.data?.rankedUserResults)
-        setRankedUserValuationResults(data?.data?.rankedUserValuationResults)
-        setCompanyData(data?.data?.companyData)
-        setLoading(false)
-    }
+            console.log(data)
+            setUserResults(data?.data?.userResults)
+            setClientsArray(data?.data?.clientsArray)
+            setRankedUserResults(data?.data?.rankedUserResults)
+            setRankedUserValuationResults(data?.data?.rankedUserValuationResults)
+            setCompanyData(data?.data?.companyData)
+            setLoading(false)
+        }
 
     }, [data])
 
@@ -84,6 +87,7 @@ export default function Home() {
             setRankedUserResults(res.data.rankedUserResults)
             setRankedUserValuationResults(res.data.rankedUserValuationResults)
             setCompanyData(res.data.companyData)
+            setFirstNotifications(res.data.firstNotifications)
             setLoading(false)
         }).catch((e) => {
             setLoading(false)
@@ -118,45 +122,13 @@ export default function Home() {
 
                     </div>
                 </div>
-                <div className="row px-3 pb-5">
-                    <div className="col-12 col-md-4 my-2">
-                        <Link href="/editProfile">
-                            <div className="card shadow cardAnimation" type="button">
-                                <div className="card-body text-center ">
-                                    <span className='fs-4 bold text-secondary'>
-                                        <FontAwesomeIcon icon={faUser} className='me-2 small' /> Meu Perfil
-                                    </span>
-                                </div>
-                            </div>
-                        </Link>
-                    </div>
-                    <div className="col-12 col-md-4 my-2">
-                        <Link href="/companyEdit">
 
-                            <div className="card shadow cardAnimation" type="button">
-                                <div className="card-body text-center">
-                                    <span className='fs-4 bold text-secondary'>
-                                        <FontAwesomeIcon icon={faShop} className='me-2 small' /> Imobiliária
-                                    </span>
-                                </div>
-                            </div>
-                        </Link>
 
-                    </div>
-                    <div className="col-12 col-md-4 my-2">
-                        <Link href="/accountSetup">
+                <GeralButtons />
 
-                            <div className="card shadow cardAnimation" type="button">
-                                <div className="card-body text-center">
-                                    <span className='fs-4 bold text-secondary'>
-                                        <FontAwesomeIcon icon={faGear} className='me-2 small' />Configurações
-                                    </span>
-                                </div>
-                            </div>
-                        </Link>
 
-                    </div>
-                </div>
+
+                <FirstNotifications firstNotifications={firstNotifications} />
 
 
 

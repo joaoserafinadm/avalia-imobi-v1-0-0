@@ -27,12 +27,14 @@ export default function AccountSetup() {
 
     const router = useRouter()
 
+    const { status } = router.query
+
 
     const [userData, setUserData] = useState('')
     const [companyData, setCompanyData] = useState('')
 
 
-    const [section, setSection] = useState('Detalhes da conta')
+    const [section, setSection] = useState( 'Detalhes da conta')
     const [loadingPage, setLoadingPage] = useState(true)
 
 
@@ -46,7 +48,18 @@ export default function AccountSetup() {
 
         // dataFunction(token.sub, token.company_id)
 
+
     }, [])
+
+    useEffect(() => {
+
+        if (status) {
+
+            setSection(status)
+
+        }
+
+    }, [status])
 
     const tooltipFunction = () => {
 
@@ -100,7 +113,7 @@ export default function AccountSetup() {
                         <Sections
                             section={section} idTarget="accoutSetupPages"
                             setSection={value => setSection(value)}
-                            sections={["Detalhes da conta", "Produtos", "Pagamento"]} />
+                            sections={["Detalhes da conta", "Produtos", "Pagamentos"]} />
 
                         <div className="carousel-inner ">
 

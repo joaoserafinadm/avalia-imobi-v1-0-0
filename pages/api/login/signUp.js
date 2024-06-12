@@ -161,7 +161,7 @@ export default async function (req, res) {
                     password: securePassword,
                     permissions: false,
                     dateAdd: new Date(),
-                    dateLimit: date.addDays(8),
+                    dateLimit: date.addDays(7),
                     dateUpdated: '',
                     passwordResetToken: '',
                     passwordResetExpires: '',
