@@ -100,7 +100,7 @@ export default function FirstNotifications(props) {
                 <div class={`toast my-2 bg-light ${(!firstNotifications?.companyEdit && !firstNotifications?.profileEdit) ? 'pulse' : ''}`} role="alert" data-bs-autohide="false" aria-live="assertive" aria-atomic="true">
                     <div class="toast-header">
                         {/* <img src="..." class="rounded me-2" alt="..."> */}
-                        <span class="me-auto text-orange fw-bold">Restam {handleDateLimit(firstNotifications?.dateLimit)} dias para acabar seu teste gratuíto!</span>
+                        <span class="me-auto text-orange fw-bold">Restam {handleDateLimit(firstNotifications?.dateLimit)} dias para acabar seu teste gratuito!</span>
                         <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
                     </div>
                     <div class="toast-body">
