@@ -1,26 +1,26 @@
 import { useEffect, useState } from "react";
-import { SpinnerLG } from "../../src/components/loading/Spinners";
-import Title from "../../src/components/title/Title2";
+import { SpinnerLG } from "../src/components/loading/Spinners";
+import Title from "../src/components/title/Title2";
 import axios from "axios";
 import Cookies from "js-cookie";
 import jwt from "jsonwebtoken";
-import baseUrl from "../../utils/baseUrl";
-import ClientCard from "../../src/clientsManagement/ClientCard";
+import baseUrl from "../utils/baseUrl";
+import ClientCard from "../src/clientsManagement/ClientCard";
 import Link from "next/link";
-import ClientsManagementSections from "../../src/clientsManagement/ClientsManagementSections";
-import Pagination from "../../src/clientsManagement/Pagination";
-import ClientsPage from "../../src/clientsManagement/ClientsPage";
+import ClientsManagementSections from "../src/clientsManagement/ClientsManagementSections";
+import Pagination from "../src/clientsManagement/Pagination";
+import ClientsPage from "../src/clientsManagement/ClientsPage";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faUserPlus } from "@fortawesome/free-solid-svg-icons";
-import navbarHide from "../../utils/navbarHide";
+import navbarHide from "../utils/navbarHide";
 import { useDispatch } from "react-redux";
-import DeleteClientModal from "../../src/clientsManagement/DeleteClientModal";
-import ViewClientModal from "../../src/clientsManagement/ViewClientModal";
-import { showModal } from "../../utils/modalControl";
-import { usersArray } from "../../store/Users/Users.actions";
-import Sections from "../../src/components/Sections";
-import ViewValuationModal from "../../src/clientsManagement/viewValuationModal";
-import MenuBar from "../../src/components/menuBar";
+import DeleteClientModal from "../src/clientsManagement/DeleteClientModal";
+import ViewClientModal from "../src/clientsManagement/ViewClientModal";
+import { showModal } from "../utils/modalControl";
+import { usersArray } from "../store/Users/Users.actions";
+import Sections from "../src/components/Sections";
+import ViewValuationModal from "../src/clientsManagement/viewValuationModal";
+import MenuBar from "../src/components/menuBar";
 import tippy from "tippy.js";
 import { useRouter } from "next/router";
 
@@ -31,6 +31,10 @@ export default function clientsManagement() {
 
     const token = jwt.decode(Cookies.get("auth"));
     const dispatch = useDispatch()
+
+    const router = useRouter()
+
+    const client_id = router.query.client_id
 
 
     const [loadingPage, setLoadingPage] = useState(true)
@@ -62,6 +66,15 @@ export default function clientsManagement() {
         }
     }, [])
 
+    useEffect(() => {
+        if (client_id && allClients.length) {
+
+            setClientSelected(allClients.find(elem => elem._id === client_id))
+            showModal('viewClientModal')
+        }
+    }, [client_id, allClients.length])
+
+
 
     useEffect(() => {
 
@@ -84,6 +97,9 @@ export default function clientsManagement() {
             setClientsArray(newUnitsArray)
             dispatch(usersArray(res.data.users))
             setLoadingPage(false)
+
+
+
 
 
 

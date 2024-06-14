@@ -12,7 +12,7 @@ export default function SelectedValue(props) {
                 <label htmlFor="" className="fw-bold mb-2">Valor escolhido </label>
                 <div className="col-12 d-flex justify-content-center ">
 
-                    <div className="col-12 col-lg-4 px-1 my-1">
+                    <div className="col-12 col-lg-6 px-1 my-1">
                         {client?.valuation?.valueSelected === 'curtoPrazoValue' && (
                             <div className="card pulse border border-success border-2">
                                 <div className="card-body text-center ">

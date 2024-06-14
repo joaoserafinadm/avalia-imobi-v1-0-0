@@ -36,41 +36,46 @@ export default function Location(props) {
 
 
     const getCoordinates = async () => {
-        try {
-            // Construa o endereço a partir das partes disponíveis (logradouro, número, bairro, cidade, uf)
-            const address = `${newClientForm.logradouro} ${newClientForm.numero}, ${newClientForm.bairro}, ${newClientForm.cidade}, ${newClientForm.uf}`;
 
-            if (newClientForm.numero) {
-
-                // Execute a geocodificação usando a API de Geocodificação do Google Maps
-                const response = await fetch(
-                    `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(
-                        address
-                    )}&key=AIzaSyAU54iwv20-0BDGcVzMcMrVZpmZRPJDDic`
-                );
+        if (newClientForm.cidade && newClientForm.uf && newClientForm.logradouro) {
 
 
-                // Verifique se a resposta da API é bem-sucedida
-                if (response.ok) {
-                    const data = await response.json();
+            try {
+                // Construa o endereço a partir das partes disponíveis (logradouro, número, bairro, cidade, uf)
+                const address = `${newClientForm.logradouro} ${newClientForm.numero}, ${newClientForm.bairro}, ${newClientForm.cidade}, ${newClientForm.uf}`;
+
+                if (newClientForm.numero) {
+
+                    // Execute a geocodificação usando a API de Geocodificação do Google Maps
+                    const response = await fetch(
+                        `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(
+                            address
+                        )}&key=AIzaSyAU54iwv20-0BDGcVzMcMrVZpmZRPJDDic`
+                    );
 
 
-                    // Extraia as coordenadas da resposta
-                    const location = data.results[0].geometry.location;
+                    // Verifique se a resposta da API é bem-sucedida
+                    if (response.ok) {
+                        const data = await response.json();
 
-                    dispatch(setLatitude(location.lat))
-                    dispatch(setLongitude(location.lng))
 
-                    setZoom(16)
+                        // Extraia as coordenadas da resposta
+                        const location = data.results[0].geometry.location;
 
-                    console.log(location)
-                } else {
-                    console.error('Erro ao obter coordenadas');
+                        dispatch(setLatitude(location.lat))
+                        dispatch(setLongitude(location.lng))
+
+                        setZoom(16)
+
+                        console.log(location)
+                    } else {
+                        console.error('Erro ao obter coordenadas');
+                    }
                 }
-            }
 
-        } catch (error) {
-            console.error('Erro ao obter coordenadas', error);
+            } catch (error) {
+                console.error('Erro ao obter coordenadas', error);
+            }
         }
     };
 
@@ -90,7 +95,7 @@ export default function Location(props) {
                         id="clientNameItem"
                         value={newClientForm.cep}
                         onChange={e => dispatch(setCep(maskCep(e.target.value)))}
-                        onBlur={e => onBlurCep(e)} />
+                        onBlur={e => { onBlurCep(e); getCoordinates() }} />
                 </div>
                 <div className="col-12 col-md-7 col-xl-4 my-2  pe-1">
 
@@ -100,6 +105,7 @@ export default function Location(props) {
                         className="form-control"
                         name="clientLastNameItem"
                         id="clientLastNameItem"
+                        onBlur={() => getCoordinates()}
                         value={newClientForm.logradouro}
                         onChange={e => dispatch(setLogradouro(e.target.value))} />
                 </div>
@@ -124,6 +130,7 @@ export default function Location(props) {
                         name="celularItem"
                         id="celularItem"
                         value={newClientForm.bairro}
+                        onBlur={() => getCoordinates()}
                         onChange={e => dispatch(setBairro(e.target.value))} />
                 </div>
                 <div className="col-12 col-md-5 col-xl-2 my-2  pe-1">
@@ -134,6 +141,7 @@ export default function Location(props) {
                         className="form-control"
                         name="celularItem"
                         id="celularItem"
+                        onBlur={() => getCoordinates()}
                         value={newClientForm.cidade}
                         onChange={e => dispatch(setCidade(e.target.value))} />
                 </div>
@@ -144,7 +152,10 @@ export default function Location(props) {
 
                     <label for="geralForm" className="form-label">Uf<b>*</b></label>
 
-                    <select className="form-select" placeholder="Estado" value={newClientForm.uf} onChange={(e) => dispatch(setUf(e.target.value))}>
+                    <select className="form-select" placeholder="Estado"
+                        value={newClientForm.uf}
+                        onBlur={() => getCoordinates()}
+                        onChange={(e) => dispatch(setUf(e.target.value))}>
                         <EstadosList />
                     </select>
                 </div>
@@ -152,7 +163,7 @@ export default function Location(props) {
                 <div className="col-12 my-2 mb-4">
                     {newClientForm.latitude && newClientForm.longitude && (
 
-                        <Map location={{ lat: newClientForm.latitude, lng: newClientForm.longitude }} zoom={18} height="300px"/>
+                        <Map location={{ lat: newClientForm.latitude, lng: newClientForm.longitude }} zoom={18} height="300px" />
                     )}
 
                 </div>

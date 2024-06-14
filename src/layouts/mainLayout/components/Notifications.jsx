@@ -35,7 +35,7 @@ export default function Notifications(props) {
                                         </div>
                                     </div>
                                     <div className="col-10 d-flex justify-content-start align-items-center">
-                                        <span className={`${styles.p}`}>
+                                        <span className={`${styles.p} ${!elem.checked ? 'fw-bold' : ''}`}>
                                             {elem.text}
                                         </span>
                                     </div>

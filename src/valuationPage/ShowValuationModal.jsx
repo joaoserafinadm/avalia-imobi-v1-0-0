@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Sections from "../components/Sections";
 import { useRouter } from "next/router";
+import handleShare from "../../utils/handleShare";
 
 
 
@@ -15,19 +16,7 @@ export default function ShowValuationModal(props) {
 
     const [section, setSection] = useState('Apresentação')
 
-    const handleShare = async (url) => {
-        try {
-            await navigator.share({
-                title: 'Avaliação do imóvel',
-                text: 'Avaliação do imóvel',
-                url: url
-            });
-            console.log('Conteúdo compartilhado com sucesso!');
-            router.push('/clientsManagement')
-        } catch (error) {
-            console.error('Erro ao compartilhar:', error);
-        }
-    }
+
 
 
 

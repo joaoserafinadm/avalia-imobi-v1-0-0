@@ -27,7 +27,7 @@ export default function PortraitCard(props) {
                 <div className="col-12 mt-2 d-flex justify-content-center">
                     <span className='small bold'>
 
-                        Creci: {props.creci} | {props.celular}
+                        Creci: {props.creci}{!props.whatsLink && ' | ' + props.celular}
                     </span>
                 </div>
                 <div className="col-12 mt-2 d-flex justify-content-center">
@@ -43,6 +43,12 @@ export default function PortraitCard(props) {
                         width: "auto"
                     }} />
                 </div>
+                {props.whatsLink && (
+
+                    <div className="col-12">
+
+                    </div>
+                )}
             </div>
         </div>
     )

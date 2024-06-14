@@ -154,14 +154,14 @@ export default function StyledDropzone(props) {
 
     useEffect(() => {
 
-        if (props.filesLength) {
+        // if (props.filesLength) {
 
-            const newFiles = acceptedFiles.slice(0, 8 - +props.filesLength);
-            props.setFiles(newFiles)
-        } else {
+        //     const newFiles = acceptedFiles.slice(0, 8 - +props.filesLength);
+        //     props.setFiles(newFiles)
+        // } else {
 
             props.setFiles(acceptedFiles)
-        }
+        // }
 
     }, [acceptedFiles.length])
 

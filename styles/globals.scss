@@ -3332,3 +3332,10 @@ h1 {
   position: relative;
   display: inline-block;
 }
+
+.zIndexMax {
+  z-index: 1000000000001;
+}
+.zIndexMin {
+  z-index: -1000001;
+}

@@ -30,7 +30,7 @@ export default function StartPage(props) {
 
 
                     <div className=" my-2 col-12 col-lg-6 text-lg-end text-center">
-                        <img src={userData?.profileImageUrl} alt="" className="rounded-circle border border-3 border-white" />
+                        <img src={userData?.profileImageUrl} alt="" className="rounded-circle border border-3 border-white" height={"180px"}/>
                     </div>
                     <div className=" my-2 col-12 col-lg-6  text-lg-start text-center text-white">
                         <div className="row mt-3 fs-5 px-1">

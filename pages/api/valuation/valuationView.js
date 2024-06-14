@@ -3,6 +3,8 @@ import { connect } from '../../../utils/db'
 import { ObjectID, ObjectId } from 'bson'
 import { sign } from 'jsonwebtoken'
 import cookie from 'cookie'
+import axios from 'axios'
+import baseUrl from '../../../utils/baseUrl'
 
 export default async (req, res) => {
 
@@ -90,6 +92,21 @@ export default async (req, res) => {
                     })
 
                 if (result.matchedCount > 0) {
+
+                    const notification = {
+                        user_id: userExist._id,
+                        subject: "clientUpdated",
+                        title: 'Avaliação respondida!',
+                        text: `A avaliação de '${clientExist.clientName}' foi respondida! Clique aqui para visualizá-la`,
+                        imageUrl: "https://res.cloudinary.com/joaoserafinadm/image/upload/v1718336973/AVALIA%20IMOBI/NOTIFICATION_IMG/jtfhhsqrgg5xar3nnhvh.png",
+                        link: "https://app.avaliaimobi.com.br/clientsManagement?client_id=" + client_id,
+                    }
+
+                    await axios.post(`${baseUrl()}/api/notifications`, {
+                        user_id: userExist._id,
+                        notification: notification
+                    })
+
 
                     res.status(200).json({ message: "valuation updated" })
                 } else {

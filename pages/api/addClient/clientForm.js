@@ -60,6 +60,18 @@ export default async function (req, res) {
                         profileImageUrl: userExist?.profileImageUrl,
                         celular: clientExist?.celular,
                         logo: companyExist?.logo,
+                        //                         creci: userExist?.creci,
+                        //                         email: userExist?.email,
+                        //                         celular: userExist?.celular,
+                        //                         telefone: userExist?.telefone,
+                        //                         headerImg: companyExist?.headerImg_id ? companyExist.headerImages.find(elem => elem._id.toString() === companyExist?.headerImg_id).imageUrl : '',
+                        // creci
+                        // email
+                        // celular
+                        // telefone
+                        // profileImageUrl
+                        // headerImg
+                        // logo
                     }
 
                     res.status(400).json({ error: 'Client active', data: data })
@@ -143,7 +155,7 @@ export default async function (req, res) {
                                 title: 'Imóvel atualizado!',
                                 text: `As informações de '${clientExist.clientName}' foram atualizadas! Clique aqui para avaliar o imóvel.`,
                                 imageUrl: "https://res.cloudinary.com/joaoserafinadm/image/upload/v1717456528/AVALIA%20IMOBI/NOTIFICATION_IMG/jh9wkm7dz6xcwvg9u8x8.png",
-                                link: "https://app.avaliaimobi.com.br/clientsManagement/" + data.client_id,
+                                link: "https://app.avaliaimobi.com.br/clientsManagement?client_id=" + data.client_id,
                             }
 
                             await axios.post(`${baseUrl()}/api/notifications`, {

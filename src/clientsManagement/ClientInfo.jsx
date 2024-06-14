@@ -55,6 +55,55 @@ export default function ClientInfo(props) {
     return (
         <>
             <div className="row">
+
+                {
+                    client?.files?.length === 0 ?
+                        <div className="col-12 my-2 d-flex justify-content-center ">
+                            <span className="small">Nenhuma imagem carregada</span>
+                        </div>
+                        :
+                        <div className="col-12 my-2 d-flex align-items-center " >
+
+                            {/* {client?.files?.map(elem => {
+                                            return (
+                                                <div>
+                                                    <img src={elem.url} alt="" className="fileImgs mx-2 fadeItem" />
+                                                </div>
+                                            )
+                                        })} */}
+
+
+
+                            <Swiper
+                                style={{
+                                    '--swiper-navigation-color': '#fff',
+                                    '--swiper-pagination-color': '#fff',
+                                    '--swiper-navigation-size': '25px',
+                                    zIndex: 0
+                                }}
+                                slidesPerView={1}
+                                pagination={{ clickable: false }}
+                                navigation>
+                                {client?.files?.map((elem, index) => (
+                                    <SwiperSlide key={index} className="text-center bg-secondary ">
+
+
+
+                                        <img src={elem.url} className={`imovel-img`} alt={`Slide ${index + 1}`} />
+
+                                    </SwiperSlide>
+                                ))}
+                            </Swiper>
+
+
+
+                        </div>
+
+
+
+
+                }
+
                 <div className="col-12 d-flex justify-content-end">
                     <Link href={`/clientEdit/${client?._id}`} onClick={() => console.log("edit", client)}>
                         <span className="span">editar</span>
@@ -135,61 +184,14 @@ export default function ClientInfo(props) {
                     <hr />
                 </div>
 
-                <div className="col-12 mb-2">
+                {/* <div className="col-12 mb-2">
                     <label for="geralForm" className="form-label fw-bold">Imagens</label>
                 </div>
 
-                {
-                    client?.files?.length === 0 ?
-                        <div className="col-12 my-2 d-flex justify-content-center mb-5">
-                            <span className="small">Nenhuma imagem carregada</span>
-                        </div>
-                        :
-                        <div className="col-12 my-2 d-flex align-items-center mb-5" >
-
-                            {/* {client?.files?.map(elem => {
-                                            return (
-                                                <div>
-                                                    <img src={elem.url} alt="" className="fileImgs mx-2 fadeItem" />
-                                                </div>
-                                            )
-                                        })} */}
-
-
-
-                            <Swiper
-                                style={{
-                                    '--swiper-navigation-color': '#fff',
-                                    '--swiper-pagination-color': '#fff',
-                                    '--swiper-navigation-size': '25px',
-                                    zIndex: 0
-                                }}
-                                slidesPerView={1}
-                                pagination={{ clickable: false }}
-                                navigation>
-                                {client?.files?.map((elem, index) => (
-                                    <SwiperSlide key={index} className="text-center bg-secondary ">
-
-
-
-                                        <img src={elem.url} className={`imovel-img`} alt={`Slide ${index + 1}`} />
-
-                                    </SwiperSlide>
-                                ))}
-                            </Swiper>
-
-
-
-                        </div>
-
-
-
-
-                }
 
                 <div className="px-3">
                     <hr />
-                </div>
+                </div> */}
 
                 <div className="col-12 mb-2">
                     <label for="geralForm" className="form-label fw-bold">Localização</label>

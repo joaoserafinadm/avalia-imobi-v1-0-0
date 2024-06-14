@@ -77,7 +77,7 @@ export default function ValuationViewPage(props) {
 
 
             <div className="row  d-flex justify-content-center align-items-center">
-                <div className="card " style={{ height: '98vh', width: '98vw', overflowY: 'scroll' }} >
+                <div className="card " style={{ height: '98vh', width: '98vw', overflowY: 'scroll', overflowX: 'hidden' }}  >
                     <div className="row d-flex">
 
                         <div className="row mt-5">
@@ -255,7 +255,7 @@ export default function ValuationViewPage(props) {
                             <div className="row d-flex justify-content-center px-2">
                                 <div className="col-12 col-xxl-4 px-1 my-1">
 
-                                    <span className={`card rounded-pill shadow cardAnimation ${valueSelected === 'curtoPrazoValue' ? 'border border-3 border-success shadow' : ''}`} type="button" onClick={() => setValueSelected('curtoPrazoValue')}>
+                                    <span className={`card rounded-pill shadow cardAnimation ${valueSelected === 'curtoPrazoValue' ? 'border border-3 border-success shadow pulse zIndexMax ' : ''}`} type="button" onClick={() => setValueSelected('curtoPrazoValue')}>
                                         <div className={"card-body text-center "}>
                                             <div className={`${styles.cardIcon}`}>
                                                 <div style={{
@@ -276,7 +276,7 @@ export default function ValuationViewPage(props) {
                                 </div>
                                 <div className="col-12 col-xxl-4 px-1 my-1">
 
-                                    <span className={`card rounded-pill shadow cardAnimation ${valueSelected === 'valorIdealValue' ? 'border border-3 border-success shadow' : ''}`} type="button" onClick={() => setValueSelected('valorIdealValue')}>
+                                    <span className={`card rounded-pill shadow cardAnimation ${valueSelected === 'valorIdealValue' ? 'border border-3 border-success shadow pulse zIndexMax' : ''}`} type="button" onClick={() => setValueSelected('valorIdealValue')}>
                                         <div className={"card-body text-center "}>
                                             <div className={`${styles.cardIcon}`}>
 
@@ -296,7 +296,7 @@ export default function ValuationViewPage(props) {
                                 </div>
                                 <div className="col-12 col-xxl-4 px-1 my-1">
 
-                                    <span className={`card  rounded-pill shadow  cardAnimation ${valueSelected === 'longoPrazoValue' ? 'border border-3 border-success shadow' : ''}`} type="button" onClick={() => setValueSelected('longoPrazoValue')}>
+                                    <span className={`card  rounded-pill shadow  cardAnimation ${valueSelected === 'longoPrazoValue' ? 'border border-3 border-success shadow pulse zIndexMax' : ''}`} type="button" onClick={() => setValueSelected('longoPrazoValue')}>
                                         <div className={"card-body text-center "}>
 
                                             <div className={`${styles.cardIcon}`}>

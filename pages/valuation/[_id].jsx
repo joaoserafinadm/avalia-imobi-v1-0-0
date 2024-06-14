@@ -32,7 +32,12 @@ export default function ValuationPage(props) {
     const [client, setClient] = useState()
     const [propertyArray, setPropertyArray] = useState([])
     const [valuationCalc, setValuationCalc] = useState('')
-    const [calcVariables, setCalcVariables] = useState('')
+    const [calcVariables, setCalcVariables] = useState({
+        valorIdealRange: 0,
+        curtoPrazoRange: 7,
+        longoPrazoRange: 7,
+        calcPrivativa: true
+    })
 
     const [propertyArrayError, setPropertyArrayError] = useState('')
 

@@ -10,6 +10,7 @@ import Cookies from "js-cookie";
 import jwt from "jsonwebtoken";
 import SelectedValue from "./SelectedValue";
 import ServiceAvaliation from "./ServiceAvaliation";
+import handleShare from "../../utils/handleShare";
 
 
 
@@ -28,19 +29,7 @@ export default function Valuation(props) {
 
 
 
-    const handleShare = async (url) => {
-        try {
-            await navigator.share({
-                title: 'Avaliação do imóvel',
-                text: 'Avaliação do imóvel',
-                url: url
-            });
-            console.log('Conteúdo compartilhado com sucesso!');
-            // router.push('/clientsManagement')
-        } catch (error) {
-            console.error('Erro ao compartilhar:', error);
-        }
-    }
+
 
 
 
@@ -70,8 +59,8 @@ export default function Valuation(props) {
                         </div>
                     )}
 
-                    <div className="col-12 d-flex justify-content-center my-5">
-                        {client?.status === 'evaluated' && (
+                    <div className="col-12 d-flex justify-content-end mb-3">
+                        {client?.status !== 'evaluated' && (
                             <button className="btn btn-outline-orange mx-1"
                                 onClick={() => handleShare(client?.valuation?.urlToken + '&userId=' + token.sub)}>
                                 Compartilhar avaliação

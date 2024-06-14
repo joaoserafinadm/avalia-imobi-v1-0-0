@@ -1,10 +1,13 @@
 import { faEdit, faEye, faFileDownload, faShare, faShareAlt, faTrashAlt } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import Link from "next/link"
-
-
+import handleShare from "../../utils/handleShare"
+import Cookies from "js-cookie";
+import jwt from "jsonwebtoken";
 
 export default function HandleButtons(props) {
+
+    const token = jwt.decode(Cookies.get('auth'))
 
     const { client, setClientSelected, elem } = props
 

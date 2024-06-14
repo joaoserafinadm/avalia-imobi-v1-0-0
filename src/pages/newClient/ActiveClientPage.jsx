@@ -1,5 +1,6 @@
 import { faWhatsapp } from "@fortawesome/free-brands-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import PortraitCard from "../../components/userCard/PortraitCard"
 
 
 
@@ -69,6 +70,21 @@ export default function ActiveClientPage(props) {
                         </div>
                     </span >
                 </div >
+                {/* <div className="col-12 d-flex justify-content-center text-center mt-3">
+
+                    <PortraitCard
+                        firstName={errorData?.firstName}
+                        lastName={errorData?.lastName}
+                        creci={errorData?.creci}
+                        email={errorData?.workEmail}
+                        celular={errorData?.celular}
+                        telefone={errorData?.telefone}
+                        profileImageUrl={errorData?.profileImageUrl}
+                        headerImg={errorData?.backgroundImageUrl}
+                        logo={errorData?.logo}
+                        whatsLink
+                    />
+                </div> */}
             </div>
 
         </div >
