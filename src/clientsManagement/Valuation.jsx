@@ -60,12 +60,10 @@ export default function Valuation(props) {
                     )}
 
                     <div className="col-12 d-flex justify-content-end mb-3">
-                        {client?.status !== 'evaluated' && (
-                            <button className="btn btn-outline-orange mx-1"
-                                onClick={() => handleShare(client?.valuation?.urlToken + '&userId=' + token.sub)}>
-                                Compartilhar avaliação
-                            </button>
-                        )}
+                        <button className="btn btn-outline-orange mx-1"
+                            onClick={() => handleShare(client?.valuation?.urlToken + '&userId=' + token.sub)}>
+                            Compartilhar avaliação
+                        </button>
                         <button className="btn btn-outline-orange mx-1">Baixar PDF</button>
 
                     </div>
@@ -85,8 +83,8 @@ export default function Valuation(props) {
 
                     {client?.status === 'answered' && (
                         <>
-                        <SelectedValue client={client} />
-                        <ServiceAvaliation client={client} />
+                            <SelectedValue client={client} />
+                            <ServiceAvaliation client={client} />
                         </>
                     )}
 

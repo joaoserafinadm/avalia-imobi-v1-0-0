@@ -34,7 +34,7 @@ export default function ViewClientModal(props) {
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={() => setSection('Informações')}></button>
                     </div>
                     <div className="modal-body-lg">
-                        <div className="container carousel  " data-bs-touch="false" data-bs-interval='false' id="clientManage">
+                        <div className="container carousel slide " data-bs-touch="false" data-bs-interval='false' id="clientManage">
 
                             <Sections
                                 section={section} idTarget="clientManage"
