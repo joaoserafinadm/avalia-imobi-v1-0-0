@@ -86,7 +86,6 @@ export default authenticated(async (req, res) => {
                 const usersArray = await db.collection('users').find({ company_id: company_id })
                     .project({ firstName: 1, lastName: 1, profileImageUrl: 1 }).toArray()
 
-                console.log('usersArray', usersArray)
 
                 const rankedUserFind = usersArray.find(elem => elem._id.toString() === rankedUser?.user_id)
 
@@ -100,7 +99,6 @@ export default authenticated(async (req, res) => {
                     profileImageUrl: rankedUserFind?.profileImageUrl
                 }
 
-                console.log('rankedUserResults', rankedUserResults)
 
 
                 rankedUserValuationResults = {
@@ -142,7 +140,7 @@ export default authenticated(async (req, res) => {
                 const userResults = {
                     clientsLength: myClients.length,
                     clientsValuations: myValuations.length,
-                    clientsRating: myClients.filter(elem => elem?.valuation?.stars).reduce((a, b) => a + b.valuation?.stars, 0) / clientsArray.filter(elem => elem?.valuation?.stars).length || 0,
+                    clientsRating: (myClients.filter(elem => elem?.valuation?.stars).reduce((a, b) => a + b.valuation?.stars, 0) / clientsArray.filter(elem => elem?.valuation?.stars).length) || 0,
                     averageTicket: handleAverageTicket(myValuations)
                     // averageTicket: myValuations.filter(elem => elem?.valuation?.valueSelected).reduce((a, b) => a + (+b.valuation?.valueSelected.replace('.', '') || 0), 0) / myValuations.filter(elem => elem?.valuation?.valueSelected).length || 0
                 }
@@ -190,7 +188,7 @@ const handleAverageTicket = (valuation) => {
 
         const totalValue = valuationsAnswered.reduce((a, b) => {
 
-            let value = +(b.valuation?.valuationCalc[b.valuation.valueSelected]?.replace('.', ''))
+            let value = +(b.valuation?.valuationCalc[b.valuation.valueSelected]?.replaceAll('.', ''))
 
             return a + value
 
@@ -198,7 +196,6 @@ const handleAverageTicket = (valuation) => {
 
 
         result = totalValue / valuationsAnswered.length
-        console.log('result', result)
 
 
         return result

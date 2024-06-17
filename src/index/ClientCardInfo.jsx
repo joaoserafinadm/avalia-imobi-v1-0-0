@@ -137,7 +137,7 @@ export default function ClientCardInfo(props) {
                         <div className="col-12 d-flex justify-content-center">
 
                             <div class="btn-group" role="group" aria-label="Basic example">
-                                <Link href={`/clientsManagement/${client._id}`} passHref>
+                                <Link href={`/clientsManagement?client_id=${client._id}`} passHref>
                                     <button
                                         type="button"
                                         class="btn btn-light border"

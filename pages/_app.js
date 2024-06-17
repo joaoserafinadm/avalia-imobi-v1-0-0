@@ -44,26 +44,17 @@ import PasswordRecover from "../src/pages/login/PasswordRecovery";
 import jwt from "jsonwebtoken";
 import NewClient from "../src/pages/newClient/index.jsx";
 import { SessionProvider } from "next-auth/react"
-import { closeModal } from "../utils/modalControl.js";
+import { closeModal, showModal } from "../utils/modalControl.js";
 import ValuationPage from "../src/pages/valuation/index.jsx";
 import { SWRConfig } from "swr";
+import PaymentModal from "../src/app/PaymentModal.jsx";
 
 // import SignUp from '../src/components/signUp/SignUp'
 // import PremiumAccount from '../src/components/premiumAccount/PremiumAccount'
 
 export default function MyApp({ Component, pageProps }) {
 
-
-
-
-
-    useEffect(() => {
-        closeModal()
-    }, []);
-
     const token = Cookie.get('auth') ? jwt.decode(Cookie.get('auth')) : false
-
-
     const router = useRouter();
     const newRoute = router.asPath;
     const premiumAccount = newRoute === "/premiumAccount";
@@ -74,6 +65,28 @@ export default function MyApp({ Component, pageProps }) {
 
     const [passwordRecoverRoute, setPasswordRecoverRoute] = useState(false);
     const [presentationRoute, setPresentationRoute] = useState(false);
+
+    useEffect(() => {
+        closeModal()
+    }, []);
+
+
+    useEffect(() => {
+        // if (token && router.asPath !== '/accountSetup?section=Pagamentos') {
+
+        //     // const validToken = validateToken(token)
+        //     if (!token.active && !token.dateLimit) {
+        //         setTimeout(() => {
+        //             showModal('paymentModal')
+        //         }, 1000)
+        //     }
+        // }
+
+    }, [token, router])
+
+
+
+
 
     useEffect(() => {
         hrefVerify();
@@ -211,6 +224,8 @@ export default function MyApp({ Component, pageProps }) {
                             <MainLayout>
 
                                 <Component  {...pageProps} />
+
+                                <PaymentModal />
                             </MainLayout>
                         </SWRConfig>
                     </PersistGate>
