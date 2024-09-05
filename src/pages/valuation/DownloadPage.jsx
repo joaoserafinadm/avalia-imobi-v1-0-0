@@ -1,8 +1,14 @@
 
-
+import styles from './valuation.module.scss'
 
 
 export default function DownloadPage(props) {
+
+    const handleRestartValuation = () => {
+        var myCarousel = document.querySelector('#valuationCarousel')
+        var carousel = new bootstrap.Carousel(myCarousel)
+        carousel.to(1)
+    }
 
     return (
         <div className="col-12 ">
@@ -12,15 +18,22 @@ export default function DownloadPage(props) {
                         <div className="col-12 col-lg-6">
                             <div className="row text-center">
                                 <div className="col-12 mt-3">
-                                    <img src={props.userData?.logo ? props.userData?.logo : ""} alt="" height={"100px"} />
+                                    <img src={props.userData?.logo ? props.userData?.logo : ""} alt="" className={styles.companyLogo} />
                                 </div>
                                 <div className="col-12 mt-3">
                                     <span className="fs-4">
                                         Muito obrigado pela preferência!
                                     </span>
                                 </div>
-
                                 <div className="col-12 mt-3">
+                                    <button className="btn btn-outline-secondary btn-lg" onClick={() => handleRestartValuation()}>
+                                        Visualizar novamente
+                                    </button>
+                                </div>
+
+
+
+                                {/* <div className="col-12 mt-3">
                                     <span className="fs-4">
                                         Clique o botão abaixo para fazer o download do PDF completo da avaliação do seu imóvel
                                     </span>
@@ -32,7 +45,7 @@ export default function DownloadPage(props) {
                                     <button className="btn btn-outline-secondary btn-lg">
                                         Baixar PDF
                                     </button>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
 

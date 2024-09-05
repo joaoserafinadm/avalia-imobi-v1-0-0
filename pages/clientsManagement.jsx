@@ -224,7 +224,7 @@ export default function clientsManagement() {
 
                         <div className="container carousel  " data-bs-touch="false" data-bs-interval='false' id="clientsManagementSection">
                             <Sections
-                                section={section} idTarget="clients3ManagementSection"
+                                section={section} idTarget="clientsManagementSection"
                                 setSection={value => setSection(value)}
                                 sections={["Meus Clientes", "Todos Clientes"]} />
 
@@ -244,7 +244,6 @@ export default function clientsManagement() {
                                 <div className="carousel-item">
                                     <div className="row d-flex justify-content-center">
                                         <div className="col-12" >
-
                                             <ClientsPage
                                                 clients={clientsArray}
                                                 section='Todos Clientes'

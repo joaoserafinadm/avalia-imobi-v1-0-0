@@ -216,7 +216,7 @@ export default function ValuationViewPage(props) {
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="col-12  col-md-6 p-2">
+                                    {/* <div className="col-12  col-md-6 p-2">
                                         <div className="card">
 
                                             <div className="card-body text-center">
@@ -226,8 +226,8 @@ export default function ValuationViewPage(props) {
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div className="col-12  col-md-6 p-2">
+                                    </div> */}
+                                    <div className="col-12   p-2">
                                         <div className="card">
 
                                             <div className="card-body text-center">
