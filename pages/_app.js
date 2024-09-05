@@ -137,7 +137,7 @@ export default function MyApp({ Component, pageProps }) {
                 <Provider store={store}>
                     <PersistGate persistor={persistedStore}>
 
-                        <Head>
+                        <Head >
                             <title>Cadastro do imóvel</title>
                             <meta property="og:title" content="Formulário de cadastro do imóvel" />
                             <meta property="og:description" content="Cadastre seu imóvel para avaliação" />
@@ -156,7 +156,7 @@ export default function MyApp({ Component, pageProps }) {
                 <Provider store={store}>
                     <PersistGate persistor={persistedStore}>
 
-                        <Head>
+                        <Head >
                             <title>Avaliação do imóvel</title>
                             <meta property="og:title" content="Avaliação do imóvel" />
                             <meta property="og:description" content="Avaliação do seu imóvel está pronta!" />
@@ -177,7 +177,7 @@ export default function MyApp({ Component, pageProps }) {
                     <PersistGate persistor={persistedStore}>
                         <SessionProvider>
 
-                            <Head>
+                            <Head >
                                 <title>Avalia Imobi</title>
                                 <meta
                                     name="viewport"
@@ -208,7 +208,7 @@ export default function MyApp({ Component, pageProps }) {
                             value={{
                                 refreshInterval: 15000,
                             }}>
-                            <Head>
+                            <Head >
                                 <title>Avalia Imobi</title>
                                 <meta
                                     name="viewport"
