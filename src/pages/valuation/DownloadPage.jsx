@@ -22,7 +22,12 @@ export default function DownloadPage(props) {
                                 </div>
                                 <div className="col-12 mt-3">
                                     <span className="fs-4">
-                                        Muito obrigado pela preferência!
+                                        A equipe <b>{props.userData.companyName}</b> agradece a preferência!
+                                    </span>
+                                </div>
+                                <div className="col-12 mt-3">
+                                    <span className="fs-4">
+                                        Em breve entrararemos em contato.
                                     </span>
                                 </div>
                                 <div className="col-12 mt-3">

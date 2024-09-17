@@ -42,7 +42,10 @@ export default function ViewValuationModal(props) {
 
                             <Sections section={section} idTarget="showValuationSection"
                                 setSection={value => setSection(value)}
-                                sections={["Apresentação", "PDF"]} />
+                                sections={["Apresentação"]} />
+                            {/* <Sections section={section} idTarget="showValuationSection"
+                                setSection={value => setSection(value)}
+                                sections={["Apresentação", "PDF"]} /> */}
 
 
 

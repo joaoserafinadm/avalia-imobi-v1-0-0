@@ -92,6 +92,8 @@ export default function clientsManagement() {
 
             const newUnitsArray = handleClientsArray(res.data.clients, clientsOrder)
 
+            if(client_id) setClientSelected(newUnitsArray.find(elem => elem._id === client_id))
+
 
             setAllClients(newUnitsArray)
             setClientsArray(newUnitsArray)
@@ -261,7 +263,7 @@ export default function clientsManagement() {
 
 
 
-                        <ViewClientModal clientSelected={clientSelected} />
+                        <ViewClientModal clientSelected={clientSelected} dataFunction={() => dataFunction(token.company_id)} />
                         <DeleteClientModal clientSelected={clientSelected} dataFunction={() => dataFunction(token.company_id)} />
                         <ViewValuationModal clientSelected={clientSelected} token={token} setClientSelected={value => setClientSelected(value)} />
                     </>

@@ -83,7 +83,7 @@ export default function Valuation(props) {
 
                     {client?.status === 'answered' && (
                         <>
-                            <SelectedValue client={client} />
+                            <SelectedValue client={client} dataFunction={props.dataFunction} />
                             <ServiceAvaliation client={client} />
                         </>
                     )}

@@ -27,11 +27,11 @@ export default async (req, res) => {
 
             const clientExist = companyExist?.clients?.find(elem => elem._id.toString() === client_id)
 
-            
+
             if (!userExist || !companyExist || !clientExist) {
-                
+
                 res.status(400).json({ error: 'User or company or client does not exist' })
-                
+
             } else {
                 const userData = {
                     firstName: userExist?.firstName,
@@ -53,7 +53,7 @@ export default async (req, res) => {
 
     } else if (req.method === "POST") {
 
-        const { user_id, client_id, valueSelected, valueComment } = req.body
+        const { user_id, client_id, valueSelected, customValue, valueComment } = req.body
 
         if (!user_id || !client_id || !valueSelected) {
 
@@ -77,6 +77,11 @@ export default async (req, res) => {
 
             } else {
 
+                const valuationCalc = {
+                    ...clientExist?.valuation?.valuationCalc,
+                    customValue: valueSelected === "customValue" ? customValue : ''
+                }
+
                 const result = await db.collection('companies').updateOne(
                     { _id: ObjectId(company_id), "clients._id": ObjectId(client_id) },
                     {
@@ -84,6 +89,7 @@ export default async (req, res) => {
                         $set: {
                             "clients.$.valuation.valueSelected": valueSelected,
                             "clients.$.valuation.valueComment": valueComment,
+                            "clients.$.valuation.valuationCalc": valuationCalc,
                             "clients.$.status": 'answered',
                             "clients.$.valuation.status": 'answered'
                         },

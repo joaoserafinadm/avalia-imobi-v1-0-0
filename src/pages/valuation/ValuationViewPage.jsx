@@ -3,7 +3,7 @@ import Map from "../../valuation/Map"
 import PropertyCard from "../../valuation/PropertyCard"
 import PropertyUrlModal from "./PropertyUrlModal"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faShoppingCart, faStar, faWarning } from "@fortawesome/free-solid-svg-icons"
+import { faChevronRight, faShoppingCart, faStar, faWarning } from "@fortawesome/free-solid-svg-icons"
 import Icons from "../../components/icons"
 import tippy from "tippy.js"
 import scrollTo from "../../../utils/scrollTo"
@@ -14,6 +14,7 @@ import baseUrl from "../../../utils/baseUrl"
 import { SpinnerSM } from "../../components/loading/Spinners"
 import axios from "axios"
 import { useRouter } from "next/router"
+import { maskMoney } from "../../../utils/mask"
 
 
 
@@ -29,12 +30,15 @@ export default function ValuationViewPage(props) {
 
     const [valueSelected, setValueSelected] = useState('')
     const [valueComment, setValueComment] = useState('')
+    const [customValue, setCustomValue] = useState('')
+
 
     const [loadingSave, setLoadingSave] = useState(false)
 
     useEffect(() => {
         if (valueSelected) scrollTo('continueButton')
     }, [valueSelected])
+
 
 
     const handleSave = async () => {
@@ -47,6 +51,7 @@ export default function ValuationViewPage(props) {
                 user_id: props.queryUserId,
                 client_id: props.queryClientId,
                 valueSelected,
+                customValue,
                 valueComment
             }
 
@@ -208,9 +213,9 @@ export default function ValuationViewPage(props) {
                                         <div className="card">
 
                                             <div className="card-body text-center">
-                                                <span className="bold fs-5">{clientData?.valuation?.valuationCalc?.areaPrivativa ? "Área privativa": "Área total"}</span>
+                                                <span className="bold fs-5">{clientData?.valuation?.valuationCalc?.areaPrivativa ? "Área privativa" : "Área total"}</span>
                                                 <div className="d-flex justify-content-center align-items-center">
-                                                    <span className="text-secondary fs-3 fw-bold">{clientData?.valuation?.valuationCalc?.areaPrivativa ? clientData?.areaTotalPrivativa :clientData?.areaTotal }</span>
+                                                    <span className="text-secondary fs-3 fw-bold">{clientData?.valuation?.valuationCalc?.areaPrivativa ? clientData?.areaTotalPrivativa : clientData?.areaTotal}</span>
                                                     <span className="text-success ms-1 fs-5">m²</span>
                                                 </div>
                                             </div>
@@ -316,6 +321,28 @@ export default function ValuationViewPage(props) {
                                         </div>
                                     </span>
                                 </div>
+                                <div className="col-12 mt-5 d-flex justify-content-center">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="customValueCheck" onClick={() => setValueSelected("customValue")} checked={valueSelected === "customValue"} />
+                                        <label class="form-check-label" for="customValueCheck">
+                                            Os valores acima não atendem a minha necessidade
+                                        </label>
+                                    </div>
+                                </div>
+                                {valueSelected === "customValue" && (
+                                    <div className="col-12 d-flex justify-content-center mt-3">
+                                        <div>
+
+                                            <label htmlFor="">Qual é o seu valor ideal?</label>
+                                            <div className="input-group">
+                                                <span className="input-group-text">R$</span>
+
+                                                <input type="text" className="form-control text-end" id="customValueInput" onChange={e => setCustomValue(maskMoney(e.target.value))} value={customValue} />
+                                                <span className="input-group-text">,00</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
                                 {valueSelected && (
 
                                     <div className=" col-12 col-xxl-8 px-1 my-5 fadeItem">
@@ -334,7 +361,7 @@ export default function ValuationViewPage(props) {
                                     <div className="text-center">
 
 
-                                        <button type="button"  className="btn btn-light btn-lg fs-4" id="continueButton" disabled={!valueSelected ||disabled} onClick={() => handleSave()}>
+                                        <button type="button" className="btn btn-light btn-lg fs-4" id="continueButton" disabled={!valueSelected || disabled} onClick={() => handleSave()}>
                                             {/* <button type="button" className="btn btn-light btn-lg fs-4" data-bs-target="#valuationCarousel" data-bs-slide-to={3} id="continueButton" disabled={!valueSelected}> */}
 
                                             {loadingSave ?
@@ -342,7 +369,7 @@ export default function ValuationViewPage(props) {
                                                 <SpinnerSM className="mx-5" />
                                                 :
                                                 <>
-                                                    Continuar < Icons icon="a-r" />
+                                                    Continuar <FontAwesomeIcon icon={faChevronRight} className="ms-2" />
                                                 </>
                                             }
                                         </button> <br />
