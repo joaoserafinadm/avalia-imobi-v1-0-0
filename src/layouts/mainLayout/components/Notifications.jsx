@@ -1,6 +1,8 @@
 import styles from './Notifications.module.scss'
 import Icons from '../../../components/icons'
 import Link from 'next/link'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faAngleRight } from '@fortawesome/free-solid-svg-icons'
 
 export default function Notifications(props) {
 
@@ -44,7 +46,7 @@ export default function Notifications(props) {
                         </Link>
                     )
                 })}
-                
+
             </div>
 
             <hr />
@@ -52,7 +54,7 @@ export default function Notifications(props) {
             <div className="row mb-2">
                 <div className="col-12 d-flex justify-content-center align-itens-center">
 
-                    <span type='button' className='span p'>Visualizar todas as notificações <Icons icon='a-l' /></span>
+                    <span type='button' className='span p'>Visualizar todas as notificações <FontAwesomeIcon icon={faAngleRight} /></span>
                 </div>
             </div>
 

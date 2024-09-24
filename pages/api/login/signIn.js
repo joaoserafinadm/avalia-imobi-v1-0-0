@@ -25,7 +25,8 @@ export default async (req, res) => {
 
             bcrypt.compare(password, userExists.password, async function (err, result) {
                 if (!err && result) {
-                    if (userExists.active && (!userExists.dateLimit || userExists.dateLimit.toJSON().slice(0, 10) > new Date().toJSON().slice(0, 10))) {
+                    if (userExists.active) {
+                        // if (userExists.active && (!userExists.dateLimit || userExists.dateLimit.toJSON().slice(0, 10) > new Date().toJSON().slice(0, 10))) {
                         const clains = {
                             sub: userExists._id,
                             firstName: userExists.firstName,

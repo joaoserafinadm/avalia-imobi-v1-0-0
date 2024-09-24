@@ -76,14 +76,14 @@ export default function ClientsCard_02(props) {
 
                                             {/* <span className="fw-bold fs-3 ">{userResults.clientsLength}</span><br /> */}
                                             <span className="fw-bold fs-3 "><CountUp end={userResults.clientsLength} separator="." duration={2} /></span><br />
-                                            <span className="bold text-orange ">Clientes</span>
+                                            <span className="bold text-orange ">{userResults.clientsLength > 1 ? "Clientes" : "Cliente"}</span>
                                         </div>
                                     </div>
                                     <div className="col-6 d-flex justify-content-center align-items-end my-2 text-center text-secondary">
                                         <div>
 
                                             <span className="fw-bold fs-3"><CountUp end={userResults.clientsValuations} separator="." duration={2} /></span><br />
-                                            <span className="bold text-orange">Avaliações</span>
+                                            <span className="bold text-orange">{userResults.clientsValuations > 1 ? 'Avaliações' : 'Avaliação'}</span>
                                         </div>
                                     </div>
                                     <div className="col-6 d-flex justify-content-center align-items-end my-2 text-center text-secondary">

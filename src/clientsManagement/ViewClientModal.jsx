@@ -21,7 +21,7 @@ export default function ViewClientModal(props) {
 
     useEffect(() => {
         setSection('Informações')
-    }, [client])
+    }, [client._id])
 
 
 

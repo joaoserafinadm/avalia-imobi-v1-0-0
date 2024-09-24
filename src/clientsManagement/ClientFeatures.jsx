@@ -1,6 +1,7 @@
 import { faEdit, faEye, faMoneyCheckDollar, faShare, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { showClientInfo } from "../../utils/showClientInfo";
+import { valueShow } from "../../utils/valueShow";
 
 
 
@@ -17,6 +18,20 @@ export default function ClientFeatures(props) {
         <>
             {showClientInfo(client) ?
                 <>
+                    {valueShow(client?.valuation?.valueSelected, client?.valuation?.valuationCalc) && (
+
+                        <div className="row">
+                            <div className="col-12 mt-2">
+                                <div className="card">
+                                    <div className="card-body px-0 text-center py-2">
+                                        <span className="text-orange me-1 fs-5 ">R$</span>
+                                        <span className="text-secondary fs-5 bold">{valueShow(client?.valuation?.valueSelected, client?.valuation?.valuationCalc)}</span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    )}
                     <div className="row small">
 
                         <div className="col-12 my-2">

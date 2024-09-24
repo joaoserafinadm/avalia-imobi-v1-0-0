@@ -16,6 +16,7 @@ import navbarHide from "../utils/navbarHide";
 import tippy from "tippy.js";
 import { useRouter } from "next/router";
 import ExitAccountModal from "../src/accountSetup/ExitAccountModal";
+import AccountDetailsPage from "../src/accountSetup/AccountDetailsPage";
 
 
 
@@ -34,7 +35,7 @@ export default function AccountSetup() {
     const [companyData, setCompanyData] = useState('')
 
 
-    const [section, setSection] = useState( 'Detalhes da conta')
+    const [section, setSection] = useState('Detalhes da conta')
     const [loadingPage, setLoadingPage] = useState(true)
 
 
@@ -113,20 +114,17 @@ export default function AccountSetup() {
                         <Sections
                             section={section} idTarget="accoutSetupPages"
                             setSection={value => setSection(value)}
-                            sections={["Detalhes da conta", "Produtos", "Pagamentos"]} />
+                            sections={["Detalhes da conta", "Pagamentos"]} />
 
                         <div className="carousel-inner ">
 
-                            <div className="row mt-2">
-                                <div className="col-12 d-flex justify-content-end">
-                                    <button data-bs-toggle="modal" data-bs-target="#exitAccountModal" className="btn btn-sm btn-outline-danger">Sair da conta</button>
-                                </div>
-                            </div>
+                       
 
 
-                            {/* <div className="carousel-item active">
+                            <div className="carousel-item active">
                                 <AccountDetailsPage userData={userData} companyData={companyData} />
                             </div>
+                            {/* 
                             <div className="carousel-item">
                                 <AccountProductsPage companyData={companyData} />
                             </div>

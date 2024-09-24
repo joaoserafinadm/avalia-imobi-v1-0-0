@@ -16,6 +16,7 @@ import ClientFeatures from "./ClientFeatures"
 import { showClientInfo } from "../../utils/showClientInfo"
 import Link from "next/link"
 import HandleButtons from "./HandleButtons"
+import { valueShow } from "../../utils/valueShow"
 
 export default function ClientCard_02(props) {
 
@@ -28,6 +29,8 @@ export default function ClientCard_02(props) {
 
 
     const client = props.elem
+
+    console.log("client", client)
 
     useEffect(() => {
 
@@ -167,17 +170,11 @@ export default function ClientCard_02(props) {
                         <h5 class="mb-0"> {client?.clientName} {client.clientLastName} </h5>
                         <div className="d-flex align-items-center">
                             <div>
-
-
                                 <ClientStatus status={client?.status} id={client?._id} />
-
-
-
-
-
                             </div>
                         </div>
                     </div>
+                   
                 </div>
 
                 <ClientFeatures client={client} elem={props.elem} />

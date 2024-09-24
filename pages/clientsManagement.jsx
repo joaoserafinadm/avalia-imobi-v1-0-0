@@ -92,9 +92,9 @@ export default function clientsManagement() {
 
             const newUnitsArray = handleClientsArray(res.data.clients, clientsOrder)
 
-            if(client_id) setClientSelected(newUnitsArray.find(elem => elem._id === client_id))
+            if (client_id) setClientSelected(newUnitsArray.find(elem => elem._id === client_id))
 
-
+            if (clientSelected) setClientSelected(res.data.clients.find(elem => elem._id === clientSelected._id))
             setAllClients(newUnitsArray)
             setClientsArray(newUnitsArray)
             dispatch(usersArray(res.data.users))

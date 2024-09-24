@@ -95,7 +95,7 @@ export default function UsersCard(props) {
                                                     <div className="col-6 d-flex justify-content-center align-items-center my-2 text-center text-secondary">
                                                         <div>
                                                             <span className="fw-bold fs-3 "><CountUp end={rankedUserResults?.clientsLength} separator="." duration={2} /></span><br />
-                                                            <span className="bold text-orange ">Clientes</span>
+                                                            <span className="bold text-orange ">{rankedUserResults?.clientsLength === 1 ? 'Cliente' : 'Cliente'}</span>
                                                         </div>
                                                     </div>
 
@@ -167,7 +167,7 @@ export default function UsersCard(props) {
                                                         <div>
 
                                                             <span className="fw-bold fs-3"><CountUp end={rankedUserValuationResults?.clientsValuations} separator="." duration={2} /></span><br />
-                                                            <span className="bold text-orange">Avaliações</span>
+                                                            <span className="bold text-orange">{rankedUserValuationResults?.clientsValuations > 1 ? 'Avaliações' : 'Avaliação'}</span>
                                                         </div>
                                                     </div>
 

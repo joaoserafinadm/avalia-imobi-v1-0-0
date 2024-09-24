@@ -149,3 +149,19 @@ export function permissionShow(userStatus, elem_id, user_id, noShowToUser) {
 
 
 }
+
+
+
+
+
+
+export function isAdmin(userStatus) {
+
+    if (userStatus === "admGlobal" || userStatus === "admLocal") {
+        return true
+    } else {
+        return false
+    }
+
+
+}
