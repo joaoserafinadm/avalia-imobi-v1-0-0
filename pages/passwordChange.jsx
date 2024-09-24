@@ -6,7 +6,14 @@ import Title from "../src/components/title/Title2"
 import Link from "next/link"
 import { FixedTopicsBottom } from "../src/components/fixedTopics"
 import navbarHide from "../utils/navbarHide"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
+// import RecoveryPasswordModal from "../src/passwordChange/RecoveryPasswordModal"
+import removeInputError from "../utils/removeInputError"
+import baseUrl from "../utils/baseUrl"
+import { SpinnerSM } from "../src/components/loading/Spinners"
+import { useRouter } from "next/router"
+import { addAlert } from "../store/Alerts/Alerts.actions";
+
 
 
 
@@ -15,7 +22,12 @@ export default function passwordChange() {
 
     const token = jwt.decode(Cookie.get('auth'))
 
+    const router = useRouter()
+
     const dispatch = useDispatch()
+
+    const alertsArray = useSelector(state => state.alerts)
+
 
     //Form variables
     const [oldPassword, setOldPassword] = useState('')
@@ -27,9 +39,7 @@ export default function passwordChange() {
     const [newPasswordError, setNewPasswordError] = useState('')
 
     //Render Elements
-    const [loading, setLoading] = useState(false)
-    const [loadingModal, setLoadingModal] = useState(false)
-    const [emailSent, setEmailSent] = useState(false)
+    const [loadingSave, setLoadingSave] = useState(false)
 
 
     useEffect(() => {
@@ -41,6 +51,8 @@ export default function passwordChange() {
 
     const validate = () => {
 
+        removeInputError();
+
         let oldPasswordError = ''
         let newPasswordError = ''
 
@@ -50,6 +62,16 @@ export default function passwordChange() {
         if (!newPassword) newPasswordError = 'Digite uma senha'
 
         if (oldPasswordError || newPasswordError) {
+            if (oldPasswordError) {
+                document.getElementById("oldPasswordInput").classList.add("inputError");
+                setOldPasswordError(oldPasswordError)
+            }
+            if (newPasswordError) {
+                document.getElementById("newPasswordInput").classList.add("inputError");
+                document.getElementById("confirmPasswordInput").classList.add("inputError");
+                setNewPasswordError(newPasswordError)
+            }
+
             setOldPasswordError(oldPasswordError)
             setNewPasswordError(newPasswordError)
             return false
@@ -57,6 +79,44 @@ export default function passwordChange() {
             return true
         }
     }
+
+
+    const handleSave = (company_id) => {
+
+        const isValid = validate()
+
+        if (isValid) {
+            setLoadingSave(true)
+            const data = {
+                user_id: token.sub,
+                oldPassword,
+                newPassword
+            }
+            axios.patch(`${baseUrl()}/api/passwordChange`, data)
+                .then(res => {
+
+                    const alert = {
+                        type: 'alert',
+                        message: 'Senha alterada com sucesso.',
+                    }
+
+                    dispatch(addAlert(alertsArray, [alert]))
+
+                    setLoadingSave(false)
+
+                    router.push('/')
+
+
+                })
+                .catch(e => {
+                    setLoadingSave(false)
+                    setOldPasswordError('Senha inválida')
+                })
+        }
+    }
+
+
+
 
 
     return (
@@ -68,19 +128,19 @@ export default function passwordChange() {
                 <div className="form-group row mb-2">
                     <div className="col-12 col-lg-6 ">
                         <label className=" ">Senha atual</label>
-                        <input type="password" className="form-control akvo_form_control_sm "
-                            required
+                        <input type="password" className="form-control "
+                            required id="oldPasswordInput"
                             name="email" value={oldPassword}
                             onChange={e => setOldPassword(e.target.value)} />
-                        <small className="text-danger error_font_size">{oldPasswordError}</small>
+                        <small className="text-danger ">{oldPasswordError}</small>
 
                     </div>
                 </div>
                 <div className="form-group row mb-2">
                     <div className="col-12 col-lg-6 ">
                         <label className="">Nova senha</label>
-                        <input type="password" className="form-control form-control-sm"
-                            required
+                        <input type="password" className="form-control"
+                            required id="newPasswordInput"
                             name="email" value={newPassword}
                             onChange={e => setNewPassword(e.target.value)} />
                     </div>
@@ -88,13 +148,24 @@ export default function passwordChange() {
                 <div className="form-group row mb-2">
                     <div className="col-12 col-lg-6 ">
                         <label className="">Confirmar nova senha</label>
-                        <input type="password" className="form-control form-control-sm"
-                            required
+                        <input type="password" className="form-control"
+                            required id="confirmPasswordInput"
                             name="email" value={confirmPassaword}
                             onChange={e => setConfirmPassword(e.target.value)} />
-                        <small className="text-danger error_font_size">{newPasswordError}</small>
+                        <small className="text-danger ">{newPasswordError}</small>
                     </div>
                 </div>
+
+                {/* <div className="row mt-3">
+                    <div className="col-12">
+                        <span type="button" className="span"
+                            data-bs-toggle="modal"
+                            data-bs-target="#forgotPasswordModal"
+                        >Esqueceu a senha?
+                        </span>
+                    </div>
+                </div> */}
+
 
                 <hr />
 
@@ -105,63 +176,18 @@ export default function passwordChange() {
                             <Link href="/">
                                 <button className="btn btn-sm btn-secondary">Cancelar</button>
                             </Link>
-                            {/* {loadingSave ?
+                            {loadingSave ?
                                 <button className="ms-2 btn btn-sm btn-orange px-4" disabled><SpinnerSM /></button>
                                 :
                                 <button className="ms-2 btn btn-sm btn-orange" onClick={() => handleSave(token.company_id)}>Salvar</button>
-                            } */}
-                            <button className="ms-2 btn btn-sm btn-orange" onClick={() => handleSave(token.company_id)}>Salvar</button>
+                            }
                         </div>
                     </div>
                 </FixedTopicsBottom>
-                <div className="row mt-3">
-                    <div className="col-12">
-                        <span type="button"
-                            data-bs-toggle="modal"
-                            data-bs-target="#forgotPasswordModal"
-                        >
-                            <small className="text-primary">Esqueceu a senha?</small>
-                        </span>
-                    </div>
-                </div>
+
 
                 {/* Modal */}
-                <div className="modal fade" id="forgotPasswordModal" tabIndex="-1" aria-labelledby="forgotPasswordModal" aria-hidden="true">
-                    <div className="modal-dialog">
-                        <div className="modal-content">
-                            <div className="modal-header text-start">
-                                <h5 className={`h5_modal modal-title`} id="exampleModalLabel">Esqueceu a senha?</h5>
-                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div className="modal-body">
-                                {/* Alert */}
-                                {emailSent && (
-                                    <div className="alert alert-success fadeItem" role="alert">
-                                        Verifique seu email!
-                                    </div>
-                                )}
-                                <p className="p">
-                                    Um link para recuperação de senha será enviado para o seu e-mail.
-                                </p>
-                            </div>
-                            <div className="modal-footer">
-                                {loadingModal ?
-                                    <button className="akvo_btn akvo_btn_primary btn-sm" type="button" disabled>
-                                        <span className="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true"></span>
-                                        Enviando...
-                                    </button>
-                                    :
-                                    <button type="button" className="akvo_btn akvo_btn_primary btn-sm" onClick={e => handleResetPassword(e)}>Enviar</button>
-                                }
-                                <button
-                                    type="button"
-                                    className="akvo_btn akvo_btn_secondary btn-sm ms-2"
-                                    data-bs-dismiss="modal"
-                                    onClick={() => { setEmailSent(false); setLoadingModal(false) }}>Cancelar</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                {/* <RecoveryPasswordModal /> */}
 
             </div>
         </div>
