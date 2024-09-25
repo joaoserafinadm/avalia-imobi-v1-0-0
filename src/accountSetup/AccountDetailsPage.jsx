@@ -29,8 +29,13 @@ export default function AccountDetailsPage(props) {
                             <div>
 
                                 <small>{props.userData.firstName} {props.userData.lastName}</small><br />
+                                <small>Creci: {props.userData.creci} </small><br />
                                 <small>{props.userData.email}</small><br />
+                                <small>{props.userData.workEmail} <span style={{ fontSize: "10px" }}>(Email de Trabalho)</span></small> <br />
                                 <small>{props.userData.celular}</small>
+                                {props.userData.telefone && (
+                                    <small> / {props.userData.telefone}</small>
+                                )}
                             </div>
                             <div className="d-flex justify-content-end">
                                 <Link href={`/editProfile/${token.sub}`}>
@@ -75,7 +80,11 @@ export default function AccountDetailsPage(props) {
                             Nome
                         </div>
                         <div className="col-12 col-md-9 mt-2 d-flex justify-content-between">
-                            <small>{props.companyData.companyName}</small>
+                            <div>
+
+                                <small>{props.companyData.companyName}</small><br />
+                                <small>Creci: {props.companyData.companyCreci}</small>
+                            </div>
                             {isAdmin(props.userData.userStatus) ?
                                 <Link href={`/companyEdit`}>
                                     <span type="button" className="text-orange"><FontAwesomeIcon icon={faPencil} className="editIcon" /></span>
@@ -110,43 +119,21 @@ export default function AccountDetailsPage(props) {
 
                         </div>
                     </div>
-                    {/* <div className="row border-bottom py-4">
-                        <div className="col-12 col-md-3 text-bold">
-                            Estrutura da plataforma
-                        </div>
-                        <div className="col-12 col-md-9 mt-2  d-flex justify-content-between">
-                            <small>{props.companyData.userConfig === 'basico' ? 'Categoria 1'  === 'avancado' ? 'Categoria 2' : ''}</small>
-                            {isAdmin(props.userData.userStatus) ?
-                                <Link href={`/companyStructure`}>
-                                    <span type="button" className="text-orange"><FontAwesomeIcon icon={faPencil} /></span>
-                                </Link>
-                                :
-                                <span className="text-orange"><FontAwesomeIcon icon={faLock} /></span>
-                            }
-                        </div>
-                    </div> */}
-                    <div className="row border-bottom py-4">
-                        <div className="col-12 col-md-3 text-bold">
-                            Responsável pelo Inventário
-                        </div>
-                        <div className="col-12 col-md-9 mt-2 d-flex justify-content-between">
-                            <small>{props.companyData.responsavel}</small>
-                            {isAdmin(props.userData.userStatus) ?
-                                <Link href={`/companyEdit`}>
-                                    <span type="button" className="text-orange"><FontAwesomeIcon icon={faPencil} className="editIcon" /></span>
-                                </Link>
-                                :
-                                <span className="text-orange"><FontAwesomeIcon icon={faLock} /></span>
-                            }
 
-                        </div>
-                    </div>
+
                     <div className="row py-4">
                         <div className="col-12 col-md-3 text-bold">
-                            E-mail para Contato
+                            Contato
                         </div>
                         <div className="col-12 col-md-9 mt-2 d-flex justify-content-between">
-                            <small>{props.companyData.email}</small>
+                            <div>
+
+                                <small>{props.companyData.email}</small><br />
+                                <small>{props.companyData.celular}</small>
+                                {props.companyData.telefone && (
+                                    <small> / {props.companyData.telefone}</small>
+                                )}
+                            </div>
                             {isAdmin(props.userData.userStatus) ?
                                 <Link href={`/companyEdit`}>
                                     <span type="button" className="text-orange"><FontAwesomeIcon icon={faPencil} className="editIcon" /></span>

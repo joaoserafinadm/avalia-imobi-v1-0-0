@@ -146,65 +146,63 @@ export default function clientAdd() {
         <div >
             <Title title={'Adicionar cliente'} backButton />
             <div className="pagesContent shadow fadeItem" id="pageTop">
-                <div className="row mt-3">
-                    <label for="geralForm" className="form-label fw-bold">Informações de Cadastro</label>
+                <div className="row d-flex  mt-3">
+                    <div className="col-12">
 
-
-                    <div className="col-12 fadeItem">
-                        <div className="row">
-
-                            <div className="col-6 my-2  pe-1">
-
-                                <label for="geralForm" className="form-label">Nome<b>*</b></label>
-                                <input
-                                    type="text"
-                                    className="form-control"
-                                    name="clientNameItem"
-                                    id="clientNameItem"
-                                    value={newClientForm.clientName}
-                                    onChange={e => dispatch(setClientName(e.target.value))} />
-                            </div>
-                            <div className="col-6 my-2  pe-1">
-
-                                <label for="geralForm" className="form-label">Sobrenome</label>
-                                <input
-                                    type="text"
-                                    className="form-control"
-                                    name="clientLastNameItem"
-                                    id="clientLastNameItem"
-                                    value={newClientForm.clientLastName}
-                                    onChange={e => dispatch(setClientLastName(e.target.value))} />
-                            </div>
-                            {manualRegister && (
-                                <>
-                                    <div className="col-6 my-2 fadeItem pe-1">
-
-                                        <label for="geralForm" className="form-label">Celular<b>*</b></label>
-                                        <input
-                                            type="text"
-                                            className="form-control"
-                                            name="celularItem"
-                                            id="celularItem"
-                                            value={newClientForm.celular}
-                                            onChange={e => maskTelefone(e.target.value)} />
-                                    </div>
-                                    <div className="col-6 my-2 fadeItem pe-1">
-
-                                        <label for="geralForm" className="form-label">E-mail</label>
-                                        <input
-                                            type="text"
-                                            className="form-control"
-                                            name="emailItem"
-                                            id="emailItem"
-                                            value={newClientForm.email}
-                                            onChange={e => dispatch(setEmail(e.target.value))} />
-                                    </div>
-
-                                </>
-                            )}
-                        </div>
-
+                        <label for="geralForm" className="form-label fw-bold">Informações de Cadastro</label>
                     </div>
+
+
+                    <div className="col-6 my-2 ">
+
+                        <label for="geralForm" className="form-label">Nome<b>*</b></label>
+                        <input
+                            type="text"
+                            className="form-control"
+                            name="clientNameItem"
+                            id="clientNameItem"
+                            value={newClientForm.clientName}
+                            onChange={e => dispatch(setClientName(e.target.value))} />
+                    </div>
+                    <div className="col-6 my-2 ">
+
+                        <label for="geralForm" className="form-label">Sobrenome</label>
+                        <input
+                            type="text"
+                            className="form-control"
+                            name="clientLastNameItem"
+                            id="clientLastNameItem"
+                            value={newClientForm.clientLastName}
+                            onChange={e => dispatch(setClientLastName(e.target.value))} />
+                    </div>
+                    {manualRegister && (
+                        <>
+                            <div className="col-6 my-2 fadeItem">
+
+                                <label for="geralForm" className="form-label">Celular<b>*</b></label>
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    name="celularItem"
+                                    id="celularItem"
+                                    value={newClientForm.celular}
+                                    onChange={e => maskTelefone(e.target.value)} />
+                            </div>
+                            <div className="col-6 my-2 fadeItem">
+
+                                <label for="geralForm" className="form-label">E-mail</label>
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    name="emailItem"
+                                    id="emailItem"
+                                    value={newClientForm.email}
+                                    onChange={e => dispatch(setEmail(e.target.value))} />
+                            </div>
+
+                        </>
+                    )}
+
                     <span className="small mt-3">*Campos obrigatórios</span>
 
 

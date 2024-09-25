@@ -66,7 +66,7 @@ export default function TypeApartamento(props) {
                         </select>
                     </div>
                     <div className="col-12 col-lg-4 my-3">
-                        <label for="suitesItem" className="form-label">Número de suítes</label>
+                        <label for="suitesItem" className="form-label">Quantos quartos são suites?</label>
 
                         <select id="suitesItem"
                             class="form-select"

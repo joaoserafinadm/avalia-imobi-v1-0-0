@@ -47,7 +47,7 @@ export default function AccountSetup() {
 
         setLoadingPage(false)
 
-        // dataFunction(token.sub, token.company_id)
+        dataFunction(token.sub, token.company_id)
 
 
     }, [])
@@ -114,7 +114,7 @@ export default function AccountSetup() {
                         <Sections
                             section={section} idTarget="accoutSetupPages"
                             setSection={value => setSection(value)}
-                            sections={["Detalhes da conta", "Pagamentos"]} />
+                            sections={["Detalhes da conta", "Assinatura"]} />
 
                         <div className="carousel-inner ">
 
