@@ -88,7 +88,7 @@ export default function ClientInfoApartamento(props) {
                 </div>
                 <div className="ms-1 bold">
 
-                    andar{client?.sacadas != 1 ? 's' : ''}
+                    andar
                 </div>
 
 

@@ -97,7 +97,7 @@ export default function FirstNotifications(props) {
 
             {firstNotifications?.dateLimit && (
 
-                <div class={`toast my-2 bg-light ${(!firstNotifications?.companyEdit && !firstNotifications?.profileEdit) ? 'pulse' : ''}`} role="alert" data-bs-autohide="false" aria-live="assertive" aria-atomic="true">
+                <div style={{maxWidth: '90vw'}} class={`toast my-2 bg-light ${(!firstNotifications?.companyEdit && !firstNotifications?.profileEdit) ? '' : ''}`} role="alert" data-bs-autohide="false" aria-live="assertive" aria-atomic="true">
                     <div class="toast-header">
                         {/* <img src="..." class="rounded me-2" alt="..."> */}
                         <span class="me-auto text-orange fw-bold">Restam {handleDateLimit(firstNotifications?.dateLimit)} dias para acabar seu teste gratuito!</span>
@@ -109,7 +109,7 @@ export default function FirstNotifications(props) {
                             Clique no botão abaixo para conhecer nossos planos e vantagens.
                         </span >
                         <div className=" mt-2">
-                            <Link href="/accountSetup?status=Pagamentos">
+                            <Link href="/accountSetup?status=Assinatura">
 
                                 <button className="btn btn-outline-orange btn-sm"><FontAwesomeIcon icon={faGear} className="me-2" />Configurações</button>
                             </Link>

@@ -10,8 +10,54 @@ import window2Mobile from "../../../utils/window2Mobile";
 import { closeModal } from "../../../utils/modalControl";
 import MenuBar from "../../components/menuBar";
 import Background from "./Background";
+import Cookie from 'js-cookie'
+import jwt from 'jsonwebtoken'
+import useSWR from 'swr'
+import api from "../../../utils/api";
+import DateLimitModal from "./components/dateLimitModal";
+import { useRouter } from "next/router";
+
 
 export default function MainLayout({ children }) {
+
+    const token = jwt.decode(Cookie.get('auth'))
+
+    const router = useRouter()
+
+
+    const { data, error, isLoading } = useSWR(
+        `/api/token/tokenUpdate?company_id=${token?.company_id}&user_id=${token?.sub}`,
+        api,
+        {
+            // refreshInterval: 5000, // 5000ms = 5 segundos
+            refreshInterval: 1000 * 60 * 5, // 5000ms = 5 segundos
+        }
+    );
+
+
+    useEffect(() => {
+
+        if (data && !data?.active) {
+
+            if (data.errorStatus === 1) {
+
+
+            }
+        }
+
+        if (error) {
+            Cookie.remove('auth')
+            localStorage.removeItem('auth')
+            router.replace('/')
+            router.reload()
+        }
+
+    }, [data, error])
+
+
+
+
+
 
     const toggleStatus = useSelector(state => state.toggleStatus)
 
@@ -54,7 +100,7 @@ export default function MainLayout({ children }) {
             <MenuBar />
 
 
-
+            <DateLimitModal />
 
 
         </body>

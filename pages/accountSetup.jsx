@@ -17,6 +17,9 @@ import tippy from "tippy.js";
 import { useRouter } from "next/router";
 import ExitAccountModal from "../src/accountSetup/ExitAccountModal";
 import AccountDetailsPage from "../src/accountSetup/AccountDetailsPage";
+import SubscriptionPage from "../src/accountSetup/subscriptionPage";
+import NoSubscriptionPage from "../src/accountSetup/noSubscriptionPage";
+import CreditCardEditModal from "../src/accountSetup/creditCardEditModal";
 
 
 
@@ -100,6 +103,11 @@ export default function AccountSetup() {
 
     return (
         <div>
+
+            <CreditCardEditModal companyData={companyData} />
+
+
+
             <Title title={`Configuração da conta`} subtitle={''} backButton />
 
             {loadingPage ?
@@ -109,30 +117,37 @@ export default function AccountSetup() {
 
 
                 <div className="pagesContent shadow fadeItem mb-5">
-                    <div className=" carousel  " data-bs-touch="false" data-bs-interval='false' id="accoutSetupPages">
+                    <div className="row">
+                        <div className="col-12">
+                            <div className="container carousel  " data-bs-touch="false" data-bs-interval='false' id="accoutSetupPages">
 
-                        <Sections
-                            section={section} idTarget="accoutSetupPages"
-                            setSection={value => setSection(value)}
-                            sections={["Detalhes da conta", "Assinatura"]} />
+                                <Sections
+                                    section={section} idTarget="accoutSetupPages"
+                                    setSection={value => setSection(value)}
+                                    sections={["Detalhes da conta", "Assinatura"]} />
 
-                        <div className="carousel-inner ">
-
-                       
+                                <div className="carousel-inner ">
 
 
-                            <div className="carousel-item active">
-                                <AccountDetailsPage userData={userData} companyData={companyData} />
+
+
+                                    <div className="carousel-item active">
+                                        <AccountDetailsPage userData={userData} companyData={companyData} />
+                                    </div>
+
+                                    <div className="carousel-item">
+                                        {companyData?.paymentData ?
+                                            <SubscriptionPage companyData={companyData} />
+                                            :
+                                            <NoSubscriptionPage companyData={companyData} />
+                                        }
+
+                                    </div>
+                                </div>
                             </div>
-                            {/* 
-                            <div className="carousel-item">
-                                <AccountProductsPage companyData={companyData} />
-                            </div>
-                            <div className="carousel-item">
-                                <BillingPage />
-                            </div> */}
                         </div>
                     </div>
+
 
                 </div >
             }

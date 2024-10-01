@@ -25,47 +25,40 @@ export default async (req, res) => {
 
             bcrypt.compare(password, userExists.password, async function (err, result) {
                 if (!err && result) {
-                    if (userExists.active) {
-                        // if (userExists.active && (!userExists.dateLimit || userExists.dateLimit.toJSON().slice(0, 10) > new Date().toJSON().slice(0, 10))) {
-                        const clains = {
-                            sub: userExists._id,
-                            firstName: userExists.firstName,
-                            lastName: userExists.lastName,
-                            company_id: userExists.company_id,
-                            companyName: companyExist.companyName,
-                            profileImageUrl: userExists.profileImageUrl,
-                            userStatus: userExists.userStatus,
-                            dateLimit: userExists.dateLimit,
-                            headerImg: companyExist.headerImg,
-                            logo: companyExist.logo,
-                            active: userExists.active
-                        }
 
-                        const jwt = sign(clains, process.env.JWT_SECRET, {})
-
-                        const response = res.setHeader('Set-Cookie', cookie.serialize('auth', jwt, {
-                            httpOnly: false,
-                            secure: process.env.NODE_ENV !== 'production', //em produção usar true
-                            sameSite: 'strict',
-                            path: '/',
-                            maxAge: 31536000
-                        }))
-
-                        await db.collection('users').updateOne({ _id: ObjectID(userExists._id) },
-                            {
-                                $inc: {
-                                    accessCount: 1
-                                }
-                            })
-                        res.status(200).json({ message: 'Ok' })
-                    } else {
-                        await db.collection('users').updateOne(
-                            { "_id": ObjectID(userExists._id) },
-                            {
-                                $set: { "active": false }
-                            })
-                        res.status(404).json({ error: 'conta expirou.' })
+                    // if (userExists.active && (!userExists.dateLimit || userExists.dateLimit.toJSON().slice(0, 10) > new Date().toJSON().slice(0, 10))) {
+                    const clains = {
+                        sub: userExists._id,
+                        firstName: userExists.firstName,
+                        lastName: userExists.lastName,
+                        company_id: userExists.company_id,
+                        companyName: companyExist.companyName,
+                        profileImageUrl: userExists.profileImageUrl,
+                        userStatus: userExists.userStatus,
+                        dateLimit: companyExist.dateLimit,
+                        headerImg: companyExist.headerImg,
+                        logo: companyExist.logo,
+                        active: companyExist.active,
+                        errorStatus: companyExist.errorStatus
                     }
+
+                    const jwt = sign(clains, process.env.JWT_SECRET, {})
+
+                    const response = res.setHeader('Set-Cookie', cookie.serialize('auth', jwt, {
+                        httpOnly: false,
+                        secure: process.env.NODE_ENV !== 'production', //em produção usar true
+                        sameSite: 'strict',
+                        path: '/',
+                        maxAge: 31536000
+                    }))
+
+                    await db.collection('users').updateOne({ _id: ObjectID(userExists._id) },
+                        {
+                            $inc: {
+                                accessCount: 1
+                            }
+                        })
+                    res.status(200).json({ message: 'Ok' })
 
                 } else {
                     res.status(400).json({ error: 'Wrong e-mail or password.' })

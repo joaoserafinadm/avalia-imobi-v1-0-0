@@ -41,7 +41,8 @@ export default authenticated(async (req, res) => {
                         email: 1,
                         celular: 1,
                         telefone: 1,
-                        companyCreci: 1
+                        companyCreci: 1,
+                        paymentData: 1
                     }
                 }
             )

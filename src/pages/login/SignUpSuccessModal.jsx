@@ -1,3 +1,4 @@
+import { useRouter } from "next/router"
 
 
 
@@ -6,6 +7,7 @@
 
 export default function SignUpSuccessModal(props) {
 
+    const router = useRouter()
 
 
 
@@ -40,7 +42,7 @@ export default function SignUpSuccessModal(props) {
                             type="button"
                             className="btn btn-orange btn-sm"
                             data-bs-dismiss="modal"
-                            onClick={() => props.setSection('signIn')}>
+                            onClick={() => router.reload()}>
                             Entrar!
                         </button>
                     </div>

@@ -155,7 +155,7 @@ export default authenticated(async (req, res) => {
                 const firstNotifications = {
                     companyEdit: !companyExist?.companyName || !companyExist?.logo || !companyExist?.backgroundImg_id,
                     profileEdit: !userExist?.firstName || !userExist?.lastName || !userExist?.profileImageUrl || !userExist?.celular,
-                    dateLimit: userExist?.dateLimit
+                    dateLimit: companyExist?.dateLimit
                 }
 
 

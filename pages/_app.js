@@ -71,18 +71,18 @@ export default function MyApp({ Component, pageProps }) {
     }, []);
 
 
-    useEffect(() => {
-        // if (token && router.asPath !== '/accountSetup?section=Pagamentos') {
+    // useEffect(() => {
+    //     if (!token && !router.asPath.includes( '/accountSetup')) {
 
-        //     // const validToken = validateToken(token)
-        //     if (!token.active && !token.dateLimit) {
-        //         setTimeout(() => {
-        //             showModal('paymentModal')
-        //         }, 1000)
-        //     }
-        // }
+    //         // const validToken = validateToken(token)
+    //         if (!token.active && !token.dateLimit) {
+    //             setTimeout(() => {
+    //                 showModal('paymentModal')
+    //             }, 1000)
+    //         }
+    //     }
 
-    }, [token, router])
+    // }, [token, router.asPath])
 
 
 

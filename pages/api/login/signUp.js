@@ -1,36 +1,35 @@
-import { connect } from '../../../utils/db'
-import bcrypt from 'bcrypt'
-import { ObjectId } from 'bson'
+import { connect } from '../../../utils/db';
+import bcrypt from 'bcrypt';
+import { ObjectId } from 'bson';
+import { sign } from 'jsonwebtoken';
+import cookie from 'cookie';
 
 export default async function (req, res) {
 
     if (req.method === 'POST') {
-
-        const { firstName, lastName, email, password } = req.body
+        const { firstName, lastName, email, password } = req.body;
 
         if (!firstName || !lastName || !email || !password) {
-            res.status(400).json({ error: 'Missing body parameters.' })
+            res.status(400).json({ error: 'Missing body parameters.' });
         } else {
+            const { db } = await connect();
 
-            const { db } = await connect()
-
-            const userExists = await db.collection('users').findOne({ email: email })
+            const userExists = await db.collection('users').findOne({ email: email });
 
             if (userExists) {
-                res.status(400).json({ error: 'User already exists.' })
+                res.status(400).json({ error: 'User already exists.' });
             } else {
+                const saltPassword = await bcrypt.genSalt(10);
+                const securePassword = await bcrypt.hash(password, saltPassword);
 
-                const saltPassword = await bcrypt.genSalt(10)
-                const securePassword = await bcrypt.hash(password, saltPassword)
-
+                // Função para adicionar dias a uma data
                 Date.prototype.addDays = function (days) {
-
                     var date = new Date(this.valueOf());
                     date.setDate(date.getDate() + days);
                     return date;
-                }
+                };
 
-                let date = new Date()
+                let date = new Date();
 
                 const styles = {
                     primaryColor: '',
@@ -38,20 +37,9 @@ export default async function (req, res) {
                     terciaryColor: '',
                     backgroundImage: '',
                     logo: ''
-                }
-
+                };
 
                 const notifications = [
-                    // {
-                    //     _id: ObjectId(),
-                    //     dateAdded: new Date(),
-                    //     subject: 'star',
-                    //     text: "Bem vindo ao Avalia Imobi! Clique aqui para fazer um tour pela plataforma!",
-                    //     link: `https://app.avaliaimobi.com.br/companyEdit`,
-                    //     imageUrl: 'https://res.cloudinary.com/joaoserafinadm/image/upload/v1693963692/PUBLIC/TEMPLATE_IMG_shcaor.png',
-                    //     user_id: '',
-                    //     checked: false
-                    // },
                     {
                         _id: ObjectId(),
                         dateAdded: new Date(),
@@ -72,8 +60,7 @@ export default async function (req, res) {
                         user_id: '',
                         checked: false
                     }
-                ]
-
+                ];
 
                 const backgroundImages = [
                     {
@@ -116,10 +103,10 @@ export default async function (req, res) {
                         imageUrl: 'https://res.cloudinary.com/joaoserafinadm/image/upload/v1696809593/AVALIA%20IMOBI/BACKGROUND_IMAGES/5_bxgph5.png',
                         user_id: ''
                     },
-                ]
+                ];
 
-
-                const newCompany = await db.collection('companies').insertOne({
+                // Insere a nova companhia e armazena o ID inserido
+                const { insertedId: companyId } = await db.collection('companies').insertOne({
                     companyName: '',
                     companyCreci: '',
                     email: '',
@@ -135,13 +122,16 @@ export default async function (req, res) {
                     logo: '',
                     active: true,
                     dateAdded: new Date(),
+                    dateLimit: date.addDays(7),
                     dateUpdate: '',
+                    active: true,
+                    errorStatus: false,
                     styles: styles,
                     clients: [],
-                })
+                });
 
-
-                const newUser = await db.collection('users').insertOne({
+                // Insere o novo usuário e armazena o ID inserido
+                const { insertedId: userId } = await db.collection('users').insertOne({
                     firstName: firstName,
                     lastName: lastName,
                     cpf: '',
@@ -155,13 +145,12 @@ export default async function (req, res) {
                     numero: '',
                     cidade: '',
                     estado: '',
-                    company_id: newCompany.insertedId.toString(),
+                    company_id: companyId.toString(),
                     userStatus: 'admGlobal',
                     profileImageUrl: 'https://res.cloudinary.com/joaoserafinadm/image/upload/v1692760589/PUBLIC/user_template_ocrbrg.png',
                     password: securePassword,
                     permissions: false,
                     dateAdd: new Date(),
-                    dateLimit: date.addDays(7),
                     dateUpdated: '',
                     passwordResetToken: '',
                     passwordResetExpires: '',
@@ -170,25 +159,49 @@ export default async function (req, res) {
                     deleted: false,
                     notifications: notifications,
                     history: []
-                })
+                });
 
-                if (newCompany.insertedId && newUser.insertedId) {
-                    res.status(200).json({ message: "User registered" })
+                // Recupera o documento da companhia recém-criada
+                const newCompany = await db.collection('companies').findOne({ _id: companyId });
+
+                // Recupera o documento do usuário recém-criado
+                const newUser = await db.collection('users').findOne({ _id: userId });
+
+                if (companyId && userId) {
+
+                    // Constrói os claims com os dados completos
+                    const clains = {
+                        sub: newUser._id,
+                        firstName: newUser.firstName,
+                        lastName: newUser.lastName,
+                        company_id: newUser.company_id,
+                        companyName: newCompany.companyName,
+                        profileImageUrl: newUser.profileImageUrl,
+                        userStatus: newUser.userStatus,
+                        dateLimit: newCompany.dateLimit,
+                        headerImg: newCompany.headerImg,
+                        logo: newCompany.logo,
+                        active: newCompany.active,
+                        errorStatus: newCompany.errorStatus
+                    }
+
+                    const jwt = sign(clains, process.env.JWT_SECRET, {})
+
+                    const response = res.setHeader('Set-Cookie', cookie.serialize('auth', jwt, {
+                        httpOnly: false,
+                        secure: process.env.NODE_ENV !== 'production', //em produção usar true
+                        sameSite: 'strict',
+                        path: '/',
+                        maxAge: 31536000
+                    }))
+
+                    res.status(200).json({ message: "User registered" });
                 } else {
-                    res.status(400).json({ error: "Trouble in connect to database" })
-
+                    res.status(400).json({ error: "Trouble in connecting to the database" });
                 }
-
-
-
             }
-
         }
-
-
-
+    } else {
+        res.status(405).json({ error: 'Method not allowed' });
     }
-
 }
-
-
