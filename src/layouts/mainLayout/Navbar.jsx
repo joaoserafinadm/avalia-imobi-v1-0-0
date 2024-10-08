@@ -10,7 +10,7 @@ import { Accordion } from "react-bootstrap";
 import { useAccordionButton } from "react-bootstrap/AccordionButton";
 import { AccordionContext } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleRight, faComment, faCommentAlt, faGear, faHome, faHouseUser, faShop, faUser, faUserGear, faUserTie, faUsers } from "@fortawesome/free-solid-svg-icons";
+import { faAngleRight, faBook, faBookOpenReader, faComment, faCommentAlt, faGear, faHome, faHouseUser, faShop, faUser, faUserGear, faUserTie, faUsers } from "@fortawesome/free-solid-svg-icons";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
@@ -240,6 +240,16 @@ export default function Nav(props) {
 
                                     <li>
                                         <ContextAwareToggle eventKey="6" collapse="InicioItem">
+                                            <div className="d-flex justify-content-start " type='button' onClick={() => router.push('/tutorials')}>
+                                                <div className="col-1 d-flex justify-content-center align-items-center me-3">
+                                                    <FontAwesomeIcon icon={faBook} className="me-2 icon" />
+                                                </div>
+                                                <div className="col-9">Tutoriais</div>
+                                            </div>
+                                        </ContextAwareToggle>
+                                    </li>
+                                    <li>
+                                        <ContextAwareToggle eventKey="7" collapse="InicioItem">
                                             <div className="d-flex justify-content-start " type='button' onClick={() => router.push('/')}>
                                                 <div className="col-1 d-flex justify-content-center align-items-center me-3">
                                                     <FontAwesomeIcon icon={faCommentAlt} className="me-2 icon" />

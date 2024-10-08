@@ -22,3 +22,86 @@ export function maskMoney(value) {
         return ''
     }
 };
+
+
+export function maskCreditCard(value) {
+    // Remove todos os caracteres que não são dígitos
+    let cleanedValue = value.replace(/\D/g, '');
+
+    // Limita o valor a 16 dígitos
+    if (cleanedValue.length > 16) {
+        cleanedValue = cleanedValue.substring(0, 16);
+    }
+
+    // Formata o valor em blocos de 4 dígitos
+    cleanedValue = cleanedValue.match(/.{1,4}/g)?.join(' ') || '';
+
+    return cleanedValue;
+}
+
+
+
+export function maskMonthDate(value) {
+    // Remove todos os caracteres que não são dígitos
+    let cleanedValue = value.replace(/\D/g, '');
+
+    // Limita o valor a 4 dígitos (MMYY)
+    if (cleanedValue.length > 4) {
+        cleanedValue = cleanedValue.substring(0, 4);
+    }
+
+    // Verifica se o mês é válido (entre 01 e 12)
+    if (cleanedValue.length >= 2) {
+        let month = parseInt(cleanedValue.substring(0, 2));
+        if (month < 1) {
+            month = '01';
+        } else if (month > 12) {
+            month = '12';
+        }
+        cleanedValue = month.toString().padStart(2, '0') + cleanedValue.substring(2);
+    }
+
+    // Adiciona a barra para o formato MM/YY
+    if (cleanedValue.length > 2) {
+        cleanedValue = cleanedValue.substring(0, 2) + '/' + cleanedValue.substring(2);
+    }
+
+    return cleanedValue;
+}
+
+
+export function maskCpf(value) {
+    // Remove todos os caracteres que não são dígitos
+    let cleanedValue = value.replace(/\D/g, '');
+
+    // Limita o valor a 11 dígitos (CPF)
+    if (cleanedValue.length > 11) {
+        cleanedValue = cleanedValue.substring(0, 11);
+    }
+
+    // Adiciona os pontos e o traço conforme o formato de CPF
+    cleanedValue = cleanedValue.replace(/(\d{3})(\d)/, '$1.$2');
+    cleanedValue = cleanedValue.replace(/(\d{3})(\d)/, '$1.$2');
+    cleanedValue = cleanedValue.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+
+    return cleanedValue;
+}
+
+export function maskCnpj(value) {
+    // Remove todos os caracteres que não são dígitos
+    let cleanedValue = value.replace(/\D/g, '');
+
+    // Limita o valor a 14 dígitos (CNPJ)
+    if (cleanedValue.length > 14) {
+        cleanedValue = cleanedValue.substring(0, 14);
+    }
+
+    // Adiciona os pontos, a barra e o traço conforme o formato de CNPJ
+    cleanedValue = cleanedValue.replace(/(\d{2})(\d)/, '$1.$2');
+    cleanedValue = cleanedValue.replace(/(\d{3})(\d)/, '$1.$2');
+    cleanedValue = cleanedValue.replace(/(\d{3})(\d)/, '$1/$2');
+    cleanedValue = cleanedValue.replace(/(\d{4})(\d)/, '$1-$2');
+
+    return cleanedValue;
+}
+
