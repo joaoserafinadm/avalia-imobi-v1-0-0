@@ -250,7 +250,7 @@ export default function Nav(props) {
                                     </li>
                                     <li>
                                         <ContextAwareToggle eventKey="7" collapse="InicioItem">
-                                            <div className="d-flex justify-content-start " type='button' onClick={() => router.push('/')}>
+                                            <div className="d-flex justify-content-start " type='button' onClick={() => router.push('/sac')}>
                                                 <div className="col-1 d-flex justify-content-center align-items-center me-3">
                                                     <FontAwesomeIcon icon={faCommentAlt} className="me-2 icon" />
                                                 </div>
